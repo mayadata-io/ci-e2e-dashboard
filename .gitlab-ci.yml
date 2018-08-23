@@ -31,5 +31,4 @@ build:
   script :
   - export REPO=mayadata/dashboard-ci
   - export COMMIT=${CI_COMMIT_SHA:0:8}
-  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:$COMMIT . && docker push $REPO
- 
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build --no-cache -t $REPO:$COMMIT . && docker push $REPO
