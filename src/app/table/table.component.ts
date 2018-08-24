@@ -1,25 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.css"]
 })
 export class TableComponent implements OnInit {
-
   id: any;
   restItems: any;
-  restItemsUrl = 'https://openebs.ci/api/';
+  restItemsUrl = "https://openebs.ci/api/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getRestItems();
     this.id = setInterval(() => {
       this.getRestItems();
-
     }, 5000);
   }
   ngOnDestroy() {
@@ -29,55 +27,37 @@ export class TableComponent implements OnInit {
   }
   // Read all REST Items
   getRestItems(): void {
-    this.restItemsServiceGetRestItems()
-      .subscribe(
-        restItems => {
-          this.restItems = restItems;
-          console.log(this.restItems);
-        }
-      )
+    this.restItemsServiceGetRestItems().subscribe(restItems => {
+      this.restItems = restItems;
+      console.log(this.restItems);
+    });
   }
 
   // Rest Items Service: Read all REST Items
   restItemsServiceGetRestItems() {
-    return this.http
-      .get<any[]>(this.restItemsUrl)
-      .pipe(map(data => data));
+    return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
   }
   // Button Class Name a/c to the status
   buttonClass(status) {
-    if (status == "success")
-      return "btn btn-sqr btn-outline-success";
-    else if (status == "pending")
-      return "btn btn-sqr btn-outline-warning";
-    else if (status == "canceled")
-      return "btn btn-sqr btn-outline-secondary";
-    else if (status == "failed")
-      return "btn btn-sqr btn-outline-danger";
-    else if (status == "running")
-      return "btn btn-sqr btn-outline-primary";
-    else if (status == "N/A")
-      return "btn btn-sqr btn-cancel";
+    if (status == "success") return "btn btn-sqr btn-outline-success";
+    else if (status == "pending") return "btn btn-sqr btn-outline-warning";
+    else if (status == "canceled") return "btn btn-sqr btn-outline-secondary";
+    else if (status == "failed") return "btn btn-sqr btn-outline-danger";
+    else if (status == "running") return "btn btn-sqr btn-outline-primary";
+    else if (status == "N/A") return "btn btn-sqr btn-cancel";
   }
 
   // Fa Icon a/c to the status
   iconClass(status) {
-    if (status == "success")
-      return "fa fa-check-circle";
-    if (status == "canceled")
-      return "fa fa-ban";
-    else if (status == "pending")
-      return "fa fa-clock-o";
-    else if (status == "failed")
-      return "fa fa-exclamation-triangle";
-    else if (status == "running")
-      return "fa fa-circle-o-notch fa-spin"
-    console.log('test');
-
+    if (status == "success") return "fa fa-check-circle";
+    if (status == "canceled") return "fa fa-ban";
+    else if (status == "pending") return "fa fa-clock-o";
+    else if (status == "failed") return "fa fa-exclamation-triangle";
+    else if (status == "running") return "fa fa-circle-o-notch fa-spin";
+    console.log("test");
   }
   buttonStatusClass(status) {
-    if (status == "success")
-      return "btn btn-txt btn-outline-success disabled";
+    if (status == "success") return "btn btn-txt btn-outline-success disabled";
     else if (status == "pending")
       return "btn btn-txt btn-outline-warning disabled";
     else if (status == "canceled")
@@ -86,61 +66,38 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-danger disabled";
     else if (status == "running")
       return "btn btn-txt btn-outline-primary disabled";
-    else if (status == "N/A")
-      return "btn btn-txt btn-cancel disabled";
+    else if (status == "N/A") return "btn btn-txt btn-cancel disabled";
   }
 
   clickit(url) {
-    window.open(
-      url,
-      '_blank'
-    )
+    window.open(url, "_blank");
   }
 
   goTo(url) {
     return url;
   }
 
-  test(commit) {
-    // var count =0;
-    for (var key in this.restItems.dashboard['pipelines'][1]) {
-      // console.log(x);
-      // count = count ++;
-      console.log(this.restItems.dashboard['pipelines'][1][key].sha);
-      if (this.restItems.dashboard['pipelines'][1][key].sha == commit) {
-        return commit;
-      }
-      else {
-        return 'N/A'
-      }
-
-    }
-    // console.log(this.restItems.dashboard['pipelines'][0]);
-    // console.log("count:"+count);
-  }
   length(obj) {
     // console.log(obj.length);
 
-    var size = 0, key;
+    var size = 0,
+      key;
     for (key in obj) {
       if (obj.hasOwnProperty(key)) size++;
     }
     console.log("objectLength=" + size);
     return size;
     // return obj.length;
-
   }
   gcpStatus(index, gcpItems) {
     try {
       if (gcpItems[index].status) {
         return gcpItems[index].status;
+      } else {
+        return "N/A";
       }
-      else {
-        return 'N/A';
-      }
-    }
-    catch (e) {
-      return 'N/A';
+    } catch (e) {
+      return "N/A";
     }
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));
@@ -149,13 +106,11 @@ export class TableComponent implements OnInit {
     try {
       if (gcpItems[index].web_url) {
         return gcpItems[index].web_url;
+      } else {
+        return "#";
       }
-      else {
-        return '#';
-      }
-    }
-    catch (e) {
-      return '#';
+    } catch (e) {
+      return "#";
     }
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));
@@ -165,13 +120,11 @@ export class TableComponent implements OnInit {
     try {
       if (gcpItems[index].log_link) {
         return gcpItems[index].log_link;
+      } else {
+        return "#";
       }
-      else {
-        return '#';
-      }
-    }
-    catch (e) {
-      return '#';
+    } catch (e) {
+      return "#";
     }
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));
@@ -181,13 +134,11 @@ export class TableComponent implements OnInit {
     try {
       if (commits[index].short_id) {
         return "Cron/#" + commits[index].short_id;
+      } else {
+        return "N/A";
       }
-      else {
-        return 'N/A';
-      }
-    }
-    catch (e) {
-      return 'N/A';
+    } catch (e) {
+      return "N/A";
     }
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));
@@ -197,13 +148,11 @@ export class TableComponent implements OnInit {
     try {
       if (commits[index].short_id) {
         return commits[index].commit_url;
+      } else {
+        return "N/A";
       }
-      else {
-        return 'N/A';
-      }
-    }
-    catch (e) {
-      return 'N/A';
+    } catch (e) {
+      return "N/A";
     }
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));

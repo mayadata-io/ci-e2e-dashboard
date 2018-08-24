@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6" style="text-align: right; padding-right: 150px;">
       <span class="badge badge-secondary bdg">
-        <b>Last Updated:</b> {{restItems.dashboard.late_updated}} ago</span>
+        <b>Last Updated:</b> {{restItems.dashboard.last_updated}} ago</span>
     </div>
   </div>
 </div>
@@ -29,7 +29,7 @@
     <tr *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
       <td scope="row" class="text-center">
         <span class="text">
-          <a href="{{ getCommitUrl(i, restItems.dashboard['commits']) }}" target="_blank">
+          <a href="{{ getCommitUrl(i, restItems.dashboard['commits']) }}" style="color: #4B00DD;" target="_blank">
             <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} -->{{ getCommit(i, restItems.dashboard['commits']) }}
           </a>
         </span>
@@ -44,7 +44,7 @@
         <!-- Buttons Linking to Litmus -->
 
         <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);">
-          <i class="fa fa-gitlab" style="font-size:14px"></i> GITLAB
+          <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
         </button>
         <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
           <i class="fa fa-eye" style="font-size:14px"></i> LOGS
@@ -62,7 +62,7 @@
         </button>
 
         <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));">
-          <i class="fa fa-gitlab" style="font-size:14px"></i> GITLAB
+          <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
         </button>
 
         <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
