@@ -3,5 +3,4 @@ html {
   overflow-x: hidden;
 }
 body {
-  overscroll-behavior-y: contain;
 }
