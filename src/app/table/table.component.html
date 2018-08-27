@@ -4,8 +4,8 @@
       <span class="badge badge-secondary bdg">v0.7-RC1</span>
     </div>
     <div class="col-md-6" style="text-align: right; padding-right: 150px;">
-      <span class="badge badge-secondary bdg">
-        <b>Last Updated:</b> {{restItems.dashboard.last_updated}} ago</span>
+      <span class="badge badge-secondary bdg" *ngIf="undefined !== restItems">
+        <b>Last Updated:</b> {{ getLastUpdated() }} ago</span>
     </div>
   </div>
 </div>
@@ -35,7 +35,7 @@
         </span>
       </td>
       <!-- AWS Buttons -->
-      <td class="text-center">
+      <td class="text-center ">
         <button type="button" [ngClass]='buttonStatusClass(post.status)'>
           <i [ngClass]='iconClass(post.status)' style="font-size:14px"></i> {{post.status.toUpperCase()}}
         </button>
@@ -43,9 +43,14 @@
 
         <!-- Buttons Linking to Litmus -->
 
-        <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);">
+        <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);" data-toggle="tooltip" data-html="true"
+          data-placement="bottom" title="{{getJobStatus(post.jobs)}}">
           <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
         </button>
+        <div class="tooltip-custom">
+
+
+        </div>
         <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
           <i class="fa fa-eye" style="font-size:14px"></i> LOGS
         </button>
@@ -61,7 +66,8 @@
           <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:14px"></i> {{ gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }}
         </button>
 
-        <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));">
+        <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));"
+          data-toggle="tooltip" title="{{getJobStatus(restItems.dashboard['pipelines'][1][i].jobs)}}">
           <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
         </button>
 
@@ -74,7 +80,3 @@
     </tr>
   </tbody>
 </table>
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
