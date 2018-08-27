@@ -157,4 +157,27 @@ export class TableComponent implements OnInit {
 
     // console.log("index is "+ JSON.stringify(gcpItems.status));
   }
+  getLastUpdated() {
+    return this.restItems.dashboard.last_updated;
+  }
+
+  getJobStatus(jobs) {
+    // console.log(post.web_url);
+    // Total Chaos Jobs
+    var totalChaos = 0;
+    var passedChaos = 0;
+    for (var job in jobs) {
+      console.log(JSON.stringify(jobs[job].id));
+      var allJobs = jobs[job];
+      if (allJobs.stage === "chaos-test") {
+        totalChaos += 1;
+        if (allJobs.status === "success") {
+          passedChaos += 1;
+        }
+      }
+    }
+    var toolTipMessage =
+      passedChaos + "/" + totalChaos + " Litmus Chaos passed";
+    return toolTipMessage;
+  }
 }

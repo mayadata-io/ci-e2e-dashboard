@@ -22,9 +22,7 @@
     "@angular/router": "^6.1.0",
     "angular-ui-carousel": "^0.1.10",
     "core-js": "^2.5.4",
-    "ng2-smooth-scroll": "^1.0.1",
     "rxjs": "^6.0.0",
-    "smooth-scrollbar": "^8.3.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
