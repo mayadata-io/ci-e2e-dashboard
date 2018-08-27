@@ -18,7 +18,7 @@ export class TableComponent implements OnInit {
     this.getRestItems();
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 50000000);
+    }, 5000);
   }
   ngOnDestroy() {
     if (this.id) {
