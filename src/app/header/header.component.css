@@ -15,23 +15,31 @@
   color: white;
   vertical-align: text-top;
   font-size: 22px;
-  -webkit-transition: color 0.5s;
-  -moz-transition: color 0.5s;
-  -o-transition: color 0.5s;
-  transition: color 0.5s;
+  -webkit-transition: color 1s ease-out;
+  -moz-transition: color 1s ease-out;
+  -o-transition: color 1s ease-out;
+  transition: color 1s ease-out;
 
-  -webkit-animation: font-size 0.5s;
-  -moz-transition: font-size 0.5s;
-  -o-transition: font-size 0.5s;
-  transition: font-size 0.5s;
+  -webkit-transition: font-size 1s ease-out;
+  -moz-transition: font-size 1s ease-out;
+  -o-transition: font-size 1s ease-out;
+  transition: font-size 1s ease-out;
 }
 
 .heart:hover {
   color: red;
   font-size: 25px;
-  -webkit-transition: color 1s;
-  -moz-transition: color 1s;
-  -o-transition: color 1s;
-  transition: color 1s;
+  cursor: pointer;
+}
+
+.header-nav-link {
+  -webkit-transition: color 1s ease-out;
+  -moz-transition: color 1s ease-out;
+  -o-transition: color 1s ease-out;
+  transition: color 1s ease-out;
+}
+
+.header-nav-link:hover {
+  color: rgb(51, 48, 48);
   cursor: pointer;
 }
