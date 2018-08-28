@@ -532,7 +532,7 @@ a {
 
 .flag {
   text-align: left;
-  margin-left: 35px;
+  /* padding-left: 35px; */
   /* margin-bottom: -25px; */
   /* padding-bottom: 20px; */
 }
@@ -561,4 +561,9 @@ hr {
   background: #eee;
   width: 300px;
   text-align: center;
+}
+.word-wrap {
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
