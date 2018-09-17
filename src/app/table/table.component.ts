@@ -44,7 +44,7 @@ export class TableComponent implements OnInit {
     else if (status == "canceled") return "btn btn-sqr btn-outline-secondary";
     else if (status == "failed") return "btn btn-sqr btn-outline-danger";
     else if (status == "running") return "btn btn-sqr btn-outline-primary";
-    else if (status == "N/A") return "btn btn-sqr btn-cancel disabled";
+    else if (status == "N/A") return "btn btn-sqr btn-outline-cancel disabled";
   }
 
   // Fa Icon a/c to the status
@@ -66,7 +66,8 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-danger disabled";
     else if (status == "running")
       return "btn btn-txt btn-outline-primary disabled";
-    else if (status == "N/A") return "btn btn-txt btn-cancel disabled";
+    else if (status == "N/A")
+      return "btn btn-txt btn-cancel btn-outline-dark disabled";
   }
 
   clickit(url) {
