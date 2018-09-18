@@ -274,16 +274,13 @@ export class TableComponent implements OnInit {
     var totalChaos = 0;
     var passedChaos = 0;
     try {
-
-      if(platformItems[i].status == 'running') {
-        return "RUNNING"
-     }
-      else if (platformItems[i].status == 'canceled') {
-        return "CANCELED"
-     }
-     else if (platformItems[i].status == 'pending') {
-      return "PENDING"
-     }
+      if (platformItems[i].status == "running") {
+        return "RUNNING";
+      } else if (platformItems[i].status == "canceled") {
+        return "CANCELED";
+      } else if (platformItems[i].status == "pending") {
+        return "PENDING";
+      }
       for (var job in platformItems[i].jobs) {
         // console.log(JSON.stringify(platformItems[job].id));
         var allplatformItems = platformItems[i].jobs[job];
@@ -300,9 +297,8 @@ export class TableComponent implements OnInit {
     } catch {
       return "N/A";
     }
-    var passPercent = (passedChaos/totalChaos) * 100 
-      // passedChaos + "/" + totalChaos + " Litmus Chaos passed";
+    var passPercent = (passedChaos / totalChaos) * 100;
+    // passedChaos + "/" + totalChaos + " Litmus Chaos passed";
     return passPercent + "%" + " PASSING";
-  }
   }
 }
