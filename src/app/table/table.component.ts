@@ -274,6 +274,16 @@ export class TableComponent implements OnInit {
     var totalChaos = 0;
     var passedChaos = 0;
     try {
+
+      if(platformItems[i].status == 'running') {
+        return "RUNNING"
+     }
+      else if (platformItems[i].status == 'canceled') {
+        return "CANCELED"
+     }
+     else if (platformItems[i].status == 'pending') {
+      return "PENDING"
+     }
       for (var job in platformItems[i].jobs) {
         // console.log(JSON.stringify(platformItems[job].id));
         var allplatformItems = platformItems[i].jobs[job];
