@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="d-inline p-2" style="text-align: start">
-      <span class="badge badge-secondary bdg">v0.7-RC2</span>
+      <span class="badge badge-secondary bdg">v0.7</span>
     </div>
     <!-- <div class="col-md-2"></div> -->
     <div class="d-inline p-2 float-right" style="text-align: end; margin-left: auto;">
@@ -45,7 +45,11 @@
         <td class="text-center ">
 
           <button type="button" [ngClass]='buttonStatusClass(post.status)'>
-            <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i> {{post.status.toUpperCase()}}
+            <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i>
+            <span class="passingText">
+              {{passPercentage(i, restItems.dashboard['pipelines'][0])}}
+            </span>
+            <!-- {{post.status.toUpperCase()}} -->
           </button>
 
           <div class="btn-group btn-group-justified">
@@ -67,8 +71,9 @@
 
           <button type="button" [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))">
             <!--gcpItems[post.length].status-->
-            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:12px"></i> {{
-            gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }}
+            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:12px"></i>
+            <!-- {{gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][1])}}
           </button>
           <div class="btn-group btn-group-justified">
             <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));"
@@ -87,8 +92,8 @@
 
           <button type="button" [ngClass]="buttonStatusClass(packetStatus(i, restItems.dashboard['pipelines'][2]))">
             <i [ngClass]="iconClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" style="font-size:12px"></i>
-            {{
-            packetStatus(i, restItems.dashboard['pipelines'][2]).toUpperCase() }}
+            <!-- {{packetStatus(i, restItems.dashboard['pipelines'][2]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][2])}}
           </button>
           <div class="btn-group btn-group-justified">
             <button type="button" [ngClass]="buttonClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" (click)="clickit(packetWeburl(i, restItems.dashboard['pipelines'][2]));"
@@ -107,8 +112,8 @@
 
           <button type="button" [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3]))">
             <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" style="font-size:12px"></i>
-            {{
-            azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }}
+            <!-- {{azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][3])}}
           </button>
           <div class="btn-group btn-group-justified">
             <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureWeburl(i, restItems.dashboard['pipelines'][3]));"
