@@ -243,21 +243,21 @@ export class TableComponent implements OnInit {
     return this.restItems.dashboard.last_updated;
   }
 
-  getJobStatus(i, azureItems) {
+  getJobStatus(i, platformItems) {
     // Total Chaos Jobs
 
     var totalChaos = 0;
     var passedChaos = 0;
     try {
-      for (var job in azureItems[i].jobs) {
-        // console.log(JSON.stringify(azureItems[job].id));
-        var allazureItems = azureItems[i].jobs[job];
+      for (var job in platformItems[i].jobs) {
+        // console.log(JSON.stringify(platformItems[job].id));
+        var allplatformItems = platformItems[i].jobs[job];
         if (
-          allazureItems.stage === "chaos-test" ||
-          allazureItems.stage === "Litmus-chaos-testing"
+          allplatformItems.stage === "chaos-test" ||
+          allplatformItems.stage === "Litmus-chaos-testing"
         ) {
           totalChaos += 1;
-          if (allazureItems.status === "success") {
+          if (allplatformItems.status === "success") {
             passedChaos += 1;
           }
         }
@@ -268,5 +268,31 @@ export class TableComponent implements OnInit {
     var toolTipMessage =
       passedChaos + "/" + totalChaos + " Litmus Chaos passed";
     return toolTipMessage;
+  }
+
+  passPercentage(i, platformItems) {
+    var totalChaos = 0;
+    var passedChaos = 0;
+    try {
+      for (var job in platformItems[i].jobs) {
+        // console.log(JSON.stringify(platformItems[job].id));
+        var allplatformItems = platformItems[i].jobs[job];
+        if (
+          allplatformItems.stage === "chaos-test" ||
+          allplatformItems.stage === "Litmus-chaos-testing"
+        ) {
+          totalChaos += 1;
+          if (allplatformItems.status === "success") {
+            passedChaos += 1;
+          }
+        }
+      }
+    } catch {
+      return "N/A";
+    }
+    var passPercent = (passedChaos/totalChaos) * 100 
+      // passedChaos + "/" + totalChaos + " Litmus Chaos passed";
+    return passPercent + "%" + " PASSING";
+  }
   }
 }
