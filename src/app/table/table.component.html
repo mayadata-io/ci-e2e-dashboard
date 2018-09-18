@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="d-inline p-2" style="text-align: start">
-      <span class="badge badge-secondary bdg">v0.7-RC2</span>
+      <span class="badge badge-secondary bdg">v0.7</span>
     </div>
     <!-- <div class="col-md-2"></div> -->
     <div class="d-inline p-2 float-right" style="text-align: end; margin-left: auto;">
@@ -23,10 +23,12 @@
     <thead class="thead-dark">
       <tr>
         <th class="text-center">
-          <i class="fa fa-code-fork "></i> Commits
+          Commits
         </th>
-        <th class="text-center"> AWS Pipeline</th>
-        <th class="text-center"> GCP Pipeline</th>
+        <th class="text-center"> AWS</th>
+        <th class="text-center"> GCP</th>
+        <th class="text-center"> Packet</th>
+        <th class="text-center"> Azure</th>
       </tr>
     </thead>
     <tbody *ngIf="undefined !== restItems">
@@ -34,32 +36,34 @@
         <td scope="row" class="text-center word-wrap">
           <span class="text">
             <a href="{{ getCommitUrl(i, restItems.dashboard['commits']) }}" style="color: #4B00DD;" target="_blank">
-              <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} -->{{ getCommit(i, restItems.dashboard['commits']) }}
+              <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} -->{{ getCommit(i,
+              restItems.dashboard['commits']) }}
             </a>
           </span>
         </td>
         <!-- AWS Buttons -->
         <td class="text-center ">
+
           <button type="button" [ngClass]='buttonStatusClass(post.status)'>
-            <i [ngClass]='iconClass(post.status)' style="font-size:14px"></i> {{post.status.toUpperCase()}}
+            <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i>
+            <span class="passingText">
+              {{passPercentage(i, restItems.dashboard['pipelines'][0])}}
+            </span>
+            <!-- {{post.status.toUpperCase()}} -->
           </button>
 
-
-          <!-- Buttons Linking to Litmus -->
-
-          <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);" data-toggle="tooltip" data-html="true"
-            data-placement="bottom" title="{{getJobStatus(post.jobs)}}">
-            <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
-          </button>
-          <div class="tooltip-custom">
-
-
+          <div class="btn-group btn-group-justified">
+            <!-- Buttons Linking to Litmus -->
+            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);" data-toggle="tooltip"
+              data-html="true" data-placement="bottom" title="{{getJobStatus(i, restItems.dashboard['pipelines'][0])}}">
+              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
+            </button>
+            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
+              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
+            </button>
           </div>
-          <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
-            <i class="fa fa-eye" style="font-size:14px"></i> LOGS
-          </button>
-
           <!-- </div> -->
+
         </td>
 
         <!-- GCP Buttons -->
@@ -67,19 +71,62 @@
 
           <button type="button" [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))">
             <!--gcpItems[post.length].status-->
-            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:14px"></i> {{ gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }}
+            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:12px"></i>
+            <!-- {{gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][1])}}
           </button>
+          <div class="btn-group btn-group-justified">
+            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));"
+              data-toggle="tooltip" title="{{getJobStatus(i, restItems.dashboard['pipelines'][1])}}">
+              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
+            </button>
 
-          <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));"
-            data-toggle="tooltip" title="{{getJobStatus(restItems.dashboard['pipelines'][1][i].jobs)}}">
-            <i class="fab fa-gitlab" style="font-size:14px"></i> GITLAB
-          </button>
-
-          <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
-            <i class="fa fa-eye" style="font-size:14px"></i> LOGS
-          </button>
-
+            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
+              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
+            </button>
+          </div>
         </td>
+
+        <!-- Packet Buttons -->
+        <td>
+
+          <button type="button" [ngClass]="buttonStatusClass(packetStatus(i, restItems.dashboard['pipelines'][2]))">
+            <i [ngClass]="iconClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" style="font-size:12px"></i>
+            <!-- {{packetStatus(i, restItems.dashboard['pipelines'][2]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][2])}}
+          </button>
+          <div class="btn-group btn-group-justified">
+            <button type="button" [ngClass]="buttonClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" (click)="clickit(packetWeburl(i, restItems.dashboard['pipelines'][2]));"
+              data-toggle="tooltip" title="{{getJobStatus(i, restItems.dashboard['pipelines'][2])}}">
+              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
+            </button>
+
+            <button type="button" [ngClass]="buttonClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" (click)="clickit(packetLogurl(i, restItems.dashboard['pipelines'][2]));">
+              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
+            </button>
+          </div>
+        </td>
+
+        <!-- Azure Buttons -->
+        <td>
+
+          <button type="button" [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3]))">
+            <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" style="font-size:12px"></i>
+            <!-- {{azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }} -->
+            {{passPercentage(i, restItems.dashboard['pipelines'][3])}}
+          </button>
+          <div class="btn-group btn-group-justified">
+            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureWeburl(i, restItems.dashboard['pipelines'][3]));"
+              data-toggle="tooltip" title="{{getJobStatus(i, restItems.dashboard['pipelines'][3])}}">
+              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
+            </button>
+
+            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureLogurl(i, restItems.dashboard['pipelines'][3]));">
+              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
+            </button>
+          </div>
+        </td>
+
 
       </tr>
     </tbody>

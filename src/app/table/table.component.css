@@ -37,16 +37,18 @@
 }
 .btn-sqr {
   width: 100px;
-  margin: 5px 5px 5px 5px;
+  margin: 3px 3px 3px 3px;
 }
 .btn-txt {
   border-width: 0px;
+  width: 150px;
 }
 .btn-txt:hover {
   color: white;
 }
 .disabled {
   opacity: 1;
+  pointer-events: none;
   cursor: default;
 }
 .btn-cancel {
@@ -567,3 +569,7 @@ hr {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+/* .passingText {
+  font-size: 12px;
+} */
