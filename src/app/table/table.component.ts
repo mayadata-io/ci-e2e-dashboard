@@ -44,7 +44,7 @@ export class TableComponent implements OnInit {
     else if (status == "canceled") return "btn btn-sqr btn-outline-secondary";
     else if (status == "failed") return "btn btn-sqr btn-outline-danger";
     else if (status == "running") return "btn btn-sqr btn-outline-primary";
-    else if (status == "N/A") return "btn btn-sqr btn-cancel";
+    else if (status == "N/A") return "btn btn-sqr btn-outline-cancel disabled";
   }
 
   // Fa Icon a/c to the status
@@ -66,7 +66,8 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-danger disabled";
     else if (status == "running")
       return "btn btn-txt btn-outline-primary disabled";
-    else if (status == "N/A") return "btn btn-txt btn-cancel disabled";
+    else if (status == "N/A")
+      return "btn btn-txt btn-cancel btn-outline-dark disabled";
   }
 
   clickit(url) {
@@ -89,6 +90,9 @@ export class TableComponent implements OnInit {
     return size;
     // return obj.length;
   }
+
+  // GCP Pipeline
+  // This function extracts the Run status in GCP pipeline using current index
   gcpStatus(index, gcpItems) {
     try {
       if (gcpItems[index].status) {
@@ -99,9 +103,9 @@ export class TableComponent implements OnInit {
     } catch (e) {
       return "N/A";
     }
-
-    // console.log("index is "+ JSON.stringify(gcpItems.status));
   }
+
+  // gcpWeburl returns the URL of the gitlab pipeline for GCP using current index
   gcpWeburl(index, gcpItems) {
     try {
       if (gcpItems[index].web_url) {
@@ -112,10 +116,9 @@ export class TableComponent implements OnInit {
     } catch (e) {
       return "#";
     }
-
-    // console.log("index is "+ JSON.stringify(gcpItems.status));
   }
 
+  // gcpLogurl returns the URL of the Kibana Dashboard, EYE, for GCP using current index
   gcpLogurl(index, gcpItems) {
     try {
       if (gcpItems[index].log_link) {
@@ -126,10 +129,51 @@ export class TableComponent implements OnInit {
     } catch (e) {
       return "#";
     }
+  }
+  // END of GCP
 
-    // console.log("index is "+ JSON.stringify(gcpItems.status));
+  // azure Pipeline
+  // This function extracts the Run status in azure pipeline using current index
+  azureStatus(index, azureItems) {
+    try {
+      if (azureItems[index].status) {
+        return azureItems[index].status;
+      } else {
+        return "N/A";
+      }
+    } catch (e) {
+      return "N/A";
+    }
   }
 
+  // azureWeburl returns the URL of the gitlab pipeline for azure using current index
+  azureWeburl(index, azureItems) {
+    try {
+      if (azureItems[index].web_url) {
+        return azureItems[index].web_url;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+
+  // azureLogurl returns the URL of the Kibana Dashboard, EYE, for azure using current index
+  azureLogurl(index, azureItems) {
+    try {
+      if (azureItems[index].log_link) {
+        return azureItems[index].log_link;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+  // END of azure
+
+  // getCommit returns commit id
   getCommit(index, commits) {
     try {
       if (commits[index].short_id) {
@@ -140,10 +184,9 @@ export class TableComponent implements OnInit {
     } catch (e) {
       return "N/A";
     }
-
-    // console.log("index is "+ JSON.stringify(gcpItems.status));
   }
 
+  // getCommitUrl returns link to the commit on Github
   getCommitUrl(index, commits) {
     try {
       if (commits[index].short_id) {
@@ -154,30 +197,67 @@ export class TableComponent implements OnInit {
     } catch (e) {
       return "N/A";
     }
-
-    // console.log("index is "+ JSON.stringify(gcpItems.status));
   }
   getLastUpdated() {
     return this.restItems.dashboard.last_updated;
   }
 
-  getJobStatus(jobs) {
-    // console.log(post.web_url);
+  getJobStatus(i, platformItems) {
     // Total Chaos Jobs
+
     var totalChaos = 0;
     var passedChaos = 0;
-    for (var job in jobs) {
-      console.log(JSON.stringify(jobs[job].id));
-      var allJobs = jobs[job];
-      if (allJobs.stage === "chaos-test") {
-        totalChaos += 1;
-        if (allJobs.status === "success") {
-          passedChaos += 1;
+    try {
+      for (var job in platformItems[i].jobs) {
+        // console.log(JSON.stringify(platformItems[job].id));
+        var allplatformItems = platformItems[i].jobs[job];
+        if (
+          allplatformItems.stage === "chaos-test" ||
+          allplatformItems.stage === "Litmus-chaos-testing"
+        ) {
+          totalChaos += 1;
+          if (allplatformItems.status === "success") {
+            passedChaos += 1;
+          }
         }
       }
+    } catch {
+      return "N/A";
     }
     var toolTipMessage =
       passedChaos + "/" + totalChaos + " Litmus Chaos passed";
     return toolTipMessage;
+  }
+
+  passPercentage(i, platformItems) {
+    var totalChaos = 0;
+    var passedChaos = 0;
+    try {
+      if (platformItems[i].status == "running") {
+        return "RUNNING";
+      } else if (platformItems[i].status == "canceled") {
+        return "CANCELED";
+      } else if (platformItems[i].status == "pending") {
+        return "PENDING";
+      }
+      for (var job in platformItems[i].jobs) {
+        // console.log(JSON.stringify(platformItems[job].id));
+        var allplatformItems = platformItems[i].jobs[job];
+        if (
+          allplatformItems.stage === "chaos-test" ||
+          allplatformItems.stage === "Litmus-chaos-testing"
+        ) {
+          totalChaos += 1;
+          if (allplatformItems.status === "success") {
+            passedChaos += 1;
+          }
+        }
+      }
+    } catch {
+      return "N/A";
+    }
+    var passPercent = (passedChaos / totalChaos) * 100;
+    // passedChaos + "/" + totalChaos + " Litmus Chaos passed";
+    return passPercent + "%" + " PASSING";
   }
 }
