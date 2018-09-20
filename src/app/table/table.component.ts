@@ -202,62 +202,47 @@ export class TableComponent implements OnInit {
     return this.restItems.dashboard.last_updated;
   }
 
-  getJobStatus(i, platformItems) {
-    // Total Chaos Jobs
-
-    var totalChaos = 0;
-    var passedChaos = 0;
+  tooltipStatus(i, platformItems) {
+    var totalJobs = 0;
+    var passedjobs = 0;
     try {
       for (var job in platformItems[i].jobs) {
-        // console.log(JSON.stringify(platformItems[job].id));
         var allplatformItems = platformItems[i].jobs[job];
-        if (
-          allplatformItems.stage === "chaos-test" ||
-          allplatformItems.stage === "Litmus-chaos-testing"
-        ) {
-          totalChaos += 1;
-          if (allplatformItems.status === "success") {
-            passedChaos += 1;
-          }
+        totalJobs += 1;
+        if (allplatformItems.status === "success") {
+          passedjobs += 1;
         }
       }
     } catch {
       return "N/A";
     }
-    var toolTipMessage =
-      passedChaos + "/" + totalChaos + " Litmus Chaos passed";
+    var toolTipMessage = passedjobs + " out of " + totalJobs + " Jobs Passed ";
     return toolTipMessage;
   }
 
-  passPercentage(i, platformItems) {
-    var totalChaos = 0;
-    var passedChaos = 0;
+  passStatus(i, platformItems) {
+    var totaljobs = 0;
+    var passedjobs = 0;
     try {
-      if (platformItems[i].status == "running") {
-        return "RUNNING";
-      } else if (platformItems[i].status == "canceled") {
-        return "CANCELED";
-      } else if (platformItems[i].status == "pending") {
-        return "PENDING";
+      // if (platformItems[i].status == "running") {
+      //   return;
+      // }
+      //  if (platformItems[i].status == "canceled") {
+      //   return;
+      // }
+       if (platformItems[i].status == "pending") {
+        return;
       }
       for (var job in platformItems[i].jobs) {
-        // console.log(JSON.stringify(platformItems[job].id));
         var allplatformItems = platformItems[i].jobs[job];
-        if (
-          allplatformItems.stage === "chaos-test" ||
-          allplatformItems.stage === "Litmus-chaos-testing"
-        ) {
-          totalChaos += 1;
-          if (allplatformItems.status === "success") {
-            passedChaos += 1;
-          }
+        totaljobs += 1;
+        if (allplatformItems.status === "success") {
+          passedjobs += 1;
         }
       }
     } catch {
       return "N/A";
     }
-    var passPercent = (passedChaos / totalChaos) * 100;
-    // passedChaos + "/" + totalChaos + " Litmus Chaos passed";
-    return passPercent + "%" + " PASSING";
+    return passedjobs + "/" + totaljobs;
   }
 }

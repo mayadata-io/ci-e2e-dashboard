@@ -41,14 +41,14 @@
 }
 .btn-txt {
   border-width: 0px;
-  width: 150px;
+  width: 70px;
 }
-.btn-txt:hover {
+/* .btn-txt:hover {
   color: white;
-}
+} */
 .disabled {
   opacity: 1;
-  pointer-events: none;
+  /* pointer-events: none; */
   cursor: default;
 }
 .btn-cancel {
