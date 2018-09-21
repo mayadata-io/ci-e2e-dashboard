@@ -27,7 +27,7 @@ h1,
 h2 {
   margin-top: 10px;
   font-family: "Muli", sans-serif;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 300;
   color: #555;
   line-height: 56px;
@@ -172,7 +172,7 @@ ul.navbar-nav {
 /***** Top content *****/
 
 .top-content {
-  padding: 85px 0 85px 0;
+  padding: 25px 0 25px 0;
   /* height: 353px; */
   /* background: url("../img/background.svg"); */
 }
