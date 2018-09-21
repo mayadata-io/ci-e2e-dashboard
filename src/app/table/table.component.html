@@ -67,13 +67,13 @@
         <!-- GCP Buttons -->
         <td>
 
-          <button type="button" [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))"
+          <span [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))"
             data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][1])}}">
             <!--gcpItems[post.length].status-->
             <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:12px"></i>
             <!-- {{gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }} -->
             {{passStatus(i, restItems.dashboard['pipelines'][1])}}
-          </button>
+        </span>
           <div class="btn-group btn-group-justified">
             <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));">
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
@@ -86,12 +86,12 @@
 
         <!-- Azure Buttons -->
         <td>
-          <button type="button" [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3]))"
+          <span [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3]))"
             data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][3])}}">
             <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" style="font-size:12px"></i>
             <!-- {{azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }} -->
             {{passStatus(i, restItems.dashboard['pipelines'][3])}}
-          </button>
+        </span>
           <div class="btn-group btn-group-justified">
             <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureWeburl(i, restItems.dashboard['pipelines'][3]));">
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
