@@ -38,13 +38,38 @@ export class TableComponent implements OnInit {
     return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
   }
   // Button Class Name a/c to the status
-  buttonClass(status) {
-    if (status == "success") return "btn btn-sqr btn-outline-success";
-    else if (status == "pending") return "btn btn-sqr btn-outline-warning";
-    else if (status == "canceled") return "btn btn-sqr btn-outline-secondary";
-    else if (status == "failed") return "btn btn-sqr btn-outline-danger";
-    else if (status == "running") return "btn btn-sqr btn-outline-primary";
-    else if (status == "N/A") return "btn btn-sqr btn-outline-cancel disabled";
+  buttonClass(post) {
+    if (post.status == "success") return "btn btn-sqr btn-outline-success";
+    else if (post.status == "pending") return "btn btn-sqr btn-outline-warning";
+    else if (post.status == "canceled") return "btn btn-sqr btn-outline-secondary";
+    else if (post.status == "failed") {
+      var status = this.pipelinePercentage(post)
+      if (status > 50) {
+        return "btn btn-sqr btn-outline-success";
+      } else {
+        return "btn btn-sqr btn-outline-danger";
+      }
+    }
+    else if (post.status == "running") return "btn btn-sqr btn-outline-primary";
+    else if (post.status == "N/A") return "btn btn-sqr btn-outline-cancel disabled";
+  }
+
+  pipelinePercentage(post) {
+    var totaljobs = 0;
+    var passedjobs = 0;
+    try {
+      for (var job in post.jobs) {
+        var allpost = post.jobs[job];
+        totaljobs += 1;
+        if (allpost.status === "success") {
+          passedjobs += 1;
+        }
+      }
+    } catch {
+      return "N/A";
+    }
+    var totalPercentage = (passedjobs/totaljobs) * 100;
+    return totalPercentage;
   }
 
   // Fa Icon a/c to the status
@@ -54,7 +79,6 @@ export class TableComponent implements OnInit {
     else if (status == "pending") return "fa fa-clock-o";
     else if (status == "failed") return "fa fa-exclamation-triangle";
     else if (status == "running") return "fa fa-circle-o-notch fa-spin";
-    console.log("test");
   }
   buttonStatusClass(status) {
     if (status == "success") return "btn btn-txt btn-outline-success disabled";
@@ -93,10 +117,14 @@ export class TableComponent implements OnInit {
 
   // GCP Pipeline
   // This function extracts the Run status in GCP pipeline using current index
-  gcpStatus(index, gcpItems) {
+  gcpStatus(index, gcpItems, type) {
     try {
       if (gcpItems[index].status) {
-        return gcpItems[index].status;
+        if (type == 'statusbutton') {
+          return gcpItems[index].status;
+        } else {
+          return gcpItems[index];
+        }
       } else {
         return "N/A";
       }
@@ -134,10 +162,14 @@ export class TableComponent implements OnInit {
 
   // azure Pipeline
   // This function extracts the Run status in azure pipeline using current index
-  azureStatus(index, azureItems) {
+  azureStatus(index, azureItems, type) {
     try {
       if (azureItems[index].status) {
-        return azureItems[index].status;
+        if (type == 'statusbutton') {
+          return azureItems[index].status;
+        } else {
+          return azureItems[index];
+        }
       } else {
         return "N/A";
       }

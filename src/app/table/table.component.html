@@ -43,7 +43,7 @@
         <!-- AWS Buttons -->
         <td class="text-center ">
 
-          <span [ngClass]='buttonStatusClass(post.status)' data-toggle="tooltip" data-html="true" data-placement="bottom"
+          <span style ="margin-right:6px" [ngClass]='buttonStatusClass(post.status)' data-toggle="tooltip" data-html="true" data-placement="bottom"
             title="{{tooltipStatus(i, restItems.dashboard['pipelines'][0])}}">
             <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i>
             <span class="passingText">
@@ -53,10 +53,10 @@
           </span>
           <div class="btn-group btn-group-justified">
             <!-- Buttons Linking to Litmus -->
-            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);">
+            <button type="button" [ngClass]='buttonClass(post)' (click)="clickit(post.web_url);">
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
             </button>
-            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
+            <button type="button" [ngClass]='buttonClass(post)' (click)="clickit(post.log_link);">
               <i class="fa fa-eye" style="font-size:12px"></i> LOGS
             </button>
           </div>
@@ -67,10 +67,10 @@
         <!-- GCP Buttons -->
         <td>
 
-          <span [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))"
+          <span style ="margin-right:6px" [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1], 'statusbutton'))"
             data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][1])}}">
             <!--gcpItems[post.length].status-->
-            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" style="font-size:12px"></i>
+            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1], 'statusbutton'))" style="font-size:12px"></i>
             <!-- {{gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }} -->
             {{passStatus(i, restItems.dashboard['pipelines'][1])}}
         </span>
@@ -86,9 +86,9 @@
 
         <!-- Azure Buttons -->
         <td>
-          <span [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3]))"
+          <span style ="margin-right:6px" [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3], 'statusbutton'))"
             data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][3])}}">
-            <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" style="font-size:12px"></i>
+            <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3], 'statusbutton'))" style="font-size:12px"></i>
             <!-- {{azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }} -->
             {{passStatus(i, restItems.dashboard['pipelines'][3])}}
         </span>
