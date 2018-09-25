@@ -10,7 +10,7 @@ import { map } from "rxjs/operators";
 export class TableComponent implements OnInit {
   id: any;
   restItems: any;
-  restItemsUrl = "https://openebs.ci/api/";
+  restItemsUrl = "https://staging.openebs.ci/api/";
 
   constructor(private http: HttpClient) {}
 
@@ -204,6 +204,51 @@ export class TableComponent implements OnInit {
     }
   }
   // END of azure
+
+  // packet Pipeline
+  // This function extracts the Run status in packet pipeline using current index
+  packetStatus(index, packetItems, type) {
+    try {
+      if (packetItems[index].status) {
+        if (type == 'statusbutton') {
+          return packetItems[index].status;
+        } else {
+          return packetItems[index];
+        }
+      } else {
+        return "N/A";
+      }
+    } catch (e) {
+      return "N/A";
+    }
+  }
+
+  // packetWeburl returns the URL of the gitlab pipeline for packet using current index
+  packetWeburl(index, packetItems) {
+    try {
+      if (packetItems[index].web_url) {
+        return packetItems[index].web_url;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+
+  // packetLogurl returns the URL of the Kibana Dashboard, EYE, for packet using current index
+  packetLogurl(index, packetItems) {
+    try {
+      if (packetItems[index].log_link) {
+        return packetItems[index].log_link;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+  // END of packet
 
   // getCommit returns commit id
   getCommit(index, commits) {
