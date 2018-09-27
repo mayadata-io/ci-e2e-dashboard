@@ -46,6 +46,11 @@
 /* .btn-txt:hover {
   color: white;
 } */
+
+.avoid-clicks {
+  pointer-events: none;
+}
+
 .disabled {
   opacity: 1;
   /* pointer-events: none; */
@@ -569,7 +574,3 @@ hr {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-
-/* .passingText {
-  font-size: 12px;
-} */

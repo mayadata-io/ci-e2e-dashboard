@@ -46,7 +46,7 @@
           <span style ="margin-right:6px" [ngClass]='buttonStatusClass(post.status)' data-toggle="tooltip" data-html="true" data-placement="bottom"
             title="{{tooltipStatus(i, restItems.dashboard['pipelines'][0])}}">
             <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i>
-            <span class="passingText">{{passStatus(i, restItems.dashboard['pipelines'][0])}}</span>
+            {{passStatus(i, restItems.dashboard['pipelines'][0])}}
           </span>
           <div class="btn-group btn-group-justified">
             <!-- Buttons Linking to Gitlab -->
@@ -54,7 +54,7 @@
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
             </button>
             <!-- Buttons Linking to Logs -->
-            <button type="button" [ngClass]='buttonClass(post)' (click)="clickit(post.log_link);">
+            <button type="button" [ngClass]='buttonClass(post, "log")' (click)="clickit(post.log_link);">
               <i class="fa fa-eye" style="font-size:12px"></i> LOGS
             </button>
           </div>
@@ -74,7 +74,7 @@
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
             </button>
             <!-- Buttons Linking to Logs -->
-            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
+            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]), 'log')" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
               <i class="fa fa-eye" style="font-size:12px"></i> LOGS
             </button>
           </div>
@@ -94,7 +94,7 @@
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
             </button>
             <!-- Buttons Linking to Logs -->
-            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureLogurl(i, restItems.dashboard['pipelines'][3]));">
+            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]), 'log')" (click)="clickit(azureLogurl(i, restItems.dashboard['pipelines'][3]));">
               <i class="fa fa-eye" style="font-size:12px"></i> LOGS
             </button>
           </div>
@@ -114,7 +114,7 @@
               <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
             </button>
             <!-- Buttons Linking to Logs -->
-            <button type="button" [ngClass]="buttonClass(packetStatus(i, restItems.dashboard['pipelines'][2]))" (click)="clickit(packetLogurl(i, restItems.dashboard['pipelines'][2]));">
+            <button type="button" [ngClass]="buttonClass(packetStatus(i, restItems.dashboard['pipelines'][2]), 'log')" (click)="clickit(packetLogurl(i, restItems.dashboard['pipelines'][2]));">
               <i class="fa fa-eye" style="font-size:12px"></i> LOGS
             </button>
           </div>

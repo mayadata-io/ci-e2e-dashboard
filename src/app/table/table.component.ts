@@ -38,7 +38,7 @@ export class TableComponent implements OnInit {
     return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
   }
   // Button Class Name a/c to the status
-  buttonClass(post) {
+  buttonClass(post, type) {
     if (post.status == "success") return "btn btn-sqr btn-outline-success";
     else if (post.status == "pending") return "btn btn-sqr btn-outline-warning";
     else if (post.status == "canceled") return "btn btn-sqr btn-outline-secondary";
@@ -47,6 +47,11 @@ export class TableComponent implements OnInit {
       if (status > 50) {
         return "btn btn-sqr btn-outline-success";
       } else {
+        if(type == "log") {
+          if(post.jobs != undefined && post.jobs[1].status != "success") {
+            return "btn btn-sqr btn-outline-secondary avoid-clicks";
+          }
+        }
         return "btn btn-sqr btn-outline-danger";
       }
     }
