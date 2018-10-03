@@ -29,6 +29,7 @@
         <th class="text-center"> GCP</th>
         <th class="text-center"> Azure</th>
         <th class="text-center"> Packet</th>
+        <th class="text-center"> GKE</th>
       </tr>
     </thead>
     <tbody *ngIf="undefined !== restItems">
@@ -120,6 +121,26 @@
           </div>
         </td>
         <!-- End Packet Buttons -->
+
+        <!-- GKE Buttons -->
+        <td>
+          <span style ="margin-right:6px" [ngClass]="buttonStatusClass(gkeStatus(i, restItems.dashboard['pipelines'][4], 'statusbutton'))"
+            data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][4])}}">
+            <i [ngClass]="iconClass(gkeStatus(i, restItems.dashboard['pipelines'][4], 'statusbutton'))" style="font-size:12px"></i>
+            {{passStatus(i, restItems.dashboard['pipelines'][4])}}
+          </span>
+          <div class="btn-group btn-group-justified">
+            <!-- Buttons Linking to Gitlab -->
+            <button type="button" [ngClass]="buttonClass(gkeStatus(i, restItems.dashboard['pipelines'][4]))" (click)="clickit(gkeWeburl(i, restItems.dashboard['pipelines'][4]));">
+              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
+            </button>
+            <!-- Buttons Linking to Logs -->
+            <button type="button" [ngClass]="buttonClass(gkeStatus(i, restItems.dashboard['pipelines'][4]), 'log')" (click)="clickit(gkeLogurl(i, restItems.dashboard['pipelines'][4]));">
+              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
+            </button>
+          </div>
+        </td>
+        <!-- End GKE Buttons -->
       </tr>
     </tbody>
   </table>

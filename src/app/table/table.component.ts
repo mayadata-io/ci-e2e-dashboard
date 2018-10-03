@@ -255,6 +255,51 @@ export class TableComponent implements OnInit {
   }
   // END of packet
 
+    // GKE Pipeline
+  // This function extracts the Run status in GKE pipeline using current index
+  gkeStatus(index, gkeItems, type) {
+    try {
+      if (gkeItems[index].status) {
+        if (type == 'statusbutton') {
+          return gkeItems[index].status;
+        } else {
+          return gkeItems[index];
+        }
+      } else {
+        return "N/A";
+      }
+    } catch (e) {
+      return "N/A";
+    }
+  }
+
+  // GKEWeburl returns the URL of the gitlab pipeline for GKE using current index
+  gkeWeburl(index, gkeItems) {
+    try {
+      if (gkeItems[index].web_url) {
+        return gkeItems[index].web_url;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+
+  // GKELogurl returns the URL of the Kibana Dashboard, EYE, for GKE using current index
+  gkeLogurl(index, gkeItems) {
+    try {
+      if (gkeItems[index].log_link) {
+        return gkeItems[index].log_link;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+  // END of GKE
+
   // getCommit returns commit id
   getCommit(index, commits) {
     try {
