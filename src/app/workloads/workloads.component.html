@@ -1,0 +1,185 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row bg-white my-2">
+        <div class="col-md-12">
+          <p class="text-center"> K8s 1.10.11</p>
+        </div>
+        <div class="col-md-6">
+          <img src="/assets/images/workloads-logos/{{workloadName}}.svg" alt="" style="height:40px">
+          {{workloadImage}}
+          <p>{{applicationType}} {{numberstatefullSets}} Replica {{numberstatefullSets}} Zones</p>
+          <p>Namespace {{namespace}}</p>
+        </div>
+        <div class="col-md-6">
+          <img src="/assets/images/company-logos/mule-without-tagline.png" alt="" style="height:40px">
+          OpenEBS {{openebsEngine | titlecase}} {{openebsversion}}
+          <p>Contoller {{numberController}} Replica {{numberController}} Zones</p>
+        </div>
+      </div>
+      <div class="row bg-white my-2 py-2">
+        <div class="col-md-6">
+
+          <a href="{{namespaceyaml}}" target="_blank"> <button class="btn btn-primary">view</button> </a>  Namespaces
+          YAML
+        </div>
+        <div class="col-md-6">
+          <div>
+            <a href="{{workloadyaml}}" target="_blank"> <button class="btn btn-primary">view</button> </a>
+             {{workloadName |titlecase}} YAML</div>
+        </div>
+      </div>
+      <div class="row bg-white my-2">
+        <div class="col-md-12 d-flex justify-content-around workloads my-5">
+          <div class="workload-deatils" *ngFor="let pvc of pvcarray">
+            <div *ngFor="let statefulset of statefullSets">
+              <p *ngIf="statefulset.pvc === pvc.name ">
+                <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="30" alt=""><span placement="bottom">
+                  {{workloadName}}</span> on <span placement="bottom">{{statefulset.node}}</span>
+                <i style="margin-left:5px" class="float-right fas" [ngClass]="{
+                'fa-check text-success':statefulset.status === 'Running',   
+                'fa-times text-danger':statefulset.status === 'Pending' || statefulset.status === 'Failed',
+                'fa-exclamation-triangle text-warning':statefulset.status === 'Unknown'
+              }"></i>
+              </p>
+            </div>
+            <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
+              <p *ngIf="jivaContrller.pvc === pvc.name">
+                <img src="/assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span
+                  placement="bottom">target</span> on <span placement="bottom">{{jivaContrller.node}}</span><i style="margin-left:5px"
+                  class="float-right fas" [ngClass]="{
+              'fa-check text-success':jivaContrller.status === 'Running',   
+              'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
+              'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
+            }"></i>
+              </p>
+            </div>
+            <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
+              <p *ngIf="jivaReplica.pvc === pvc.name">
+                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span
+                  placement="bottom">Replica</span>-{{j}} on <span placement="bottom">{{jivaReplica.node}}</span><i
+                  style="margin-left:5px" class="float-right fas" [ngClass]="{
+                'fa-check text-success':jivaReplica.status === 'Running',
+                'fa-times text-danger':jivaReplica.status === 'Pending' || jivaReplica.status === 'Failed' || jivaReplica.status === 'Terminating',
+                'fa-exclamation-triangle text-warning':jivaReplica.status === 'Unknown'
+              }"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="row my-2">
+        <div class="col-md-12 pr-0">
+          <p class="mb-0 p-2 bg-white pr-0">Load Generation</p>
+          <div class="d-flex align-items-end justify-content-between p-2 bg-white">
+            <div class="d-flex align-items-end justify-content-between" style="width:60%">
+              <p class="mb-0">Write Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm"
+                (click)="save()">Go</button>
+            </div>
+            <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" [ngClass]="{
+              'btn-success':poststatus===200,
+              'btn-danger':poststatus===500
+            }">{{poststatus}}
+            </div>
+          </div>
+          <div class="d-flex align-items-end justify-content-between p-2 bg-white">
+            <div class="d-flex align-items-end justify-content-between" style="width:60%">
+              <p class="mb-0">Read Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm"
+                (click)="read()">Go</button>
+            </div>
+            <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" [ngClass]="{
+              'btn-success':getstatus===200,
+              'btn-danger':getstatus===500
+            }">{{getstatus}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-12 pr-0">
+          <table class="table action-table bg-white">
+            <tbody>
+              <tr>
+                <td class="p-2 pr-0" style="padding:0.10px;border-top:none"> Induce Chaos </td>
+              </tr>
+              <tr>
+                <td style="border-top:none">
+                  <div class="row justify-content-around">
+                    <div style="width:70%">
+                      <select class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)"
+                        style="width:100%">
+                        <option selected value="">Select Chaos..</option>
+                        <option *ngFor="let chaosTest of chaosTests;" value="{{chaosTest}} "> {{chaosTest}}
+                        </option>
+                      </select>
+                    </div>
+                    <div>
+                      <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="runChaosTest(selectedChaos, selectedApplication) ">
+                        Go </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-top:none">
+                  <div class="row justify-content-around">
+                    <div style="width:70%">
+                      <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)">
+                        <option selected value="">Select Application..</option>
+                        <option *ngFor="let statefulset of litmuspod" value="{{statefulset.pvc}} ">
+                          {{statefulset.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 pr-0">
+          <div class="bg-white p-2 configuration-header ">
+            <div class="d-flex justify-content-between ">
+              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary btn-sm float-right "
+                (click)="listVolume() ">Execute</button>
+            </div>
+
+          </div>
+
+          <div class=" my-2 ">
+            <div class="py-1 ">
+              <div class=" d-flex justify-content-between py-1 ">
+                <table class="table " *ngFor="let volume of jivas ">
+                  <tr>
+                    <td>Volume Name:</td>
+                    <td>{{volume.name}}</td>
+                  </tr>
+                  <tr>
+                    <td>Status:</td>
+                    <td>{{volume.status}}</td>
+                  </tr>
+                  <tr>
+                    <td>Replica Count:</td>
+                    <td>{{volume.replicas}}</td>
+                  </tr>
+                  <tr>
+                    <td>Capacity:</td>
+                    <td>{{volume.size}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

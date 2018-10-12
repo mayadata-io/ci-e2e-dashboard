@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="35px" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>success icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Workloads-Dashboard" transform="translate(-622.000000, -469.000000)">
+            <g id="Group-13" transform="translate(291.863580, 429.836319)">
+                <g id="success-icon" transform="translate(330.593379, 39.304796)">
+                    <circle id="Oval-3" fill="#80AE3B" cx="17.0893306" cy="17.1263575" r="17.0893306"></circle>
+                    <polyline id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="28.116799 9.37743353 11.6396301 25.8558049 6.69649741 20.9123491"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

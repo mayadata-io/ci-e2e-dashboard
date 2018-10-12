@@ -1,375 +1,515 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Pipe } from '@angular/core';
+import Chart from 'chart.js'
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 @Component({
-  selector: "app-table",
-  templateUrl: "./table.component.html",
-  styleUrls: ["./table.component.css"]
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-  id: any;
-  restItems: any;
-  restItemsUrl = "https://staging.openebs.ci/api/";
 
-  constructor(private http: HttpClient) {}
+  id: any;
+  host: any;
+  items = [];
+  restItems: any;
+  restItemsUrl: string;
+  // restItemsUrl = "http://localhost:3000/";
+
+  constructor(private http: HttpClient) {
+    this.host = window.location.host;
+    if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
+        this.restItemsUrl = "http://localhost:3000/";
+    } else {
+        this.restItemsUrl = "https://staging.openebs.ci/api/";
+    }
+  }
 
   ngOnInit() {
+
+    // This need to be change 
+    var index = 1;
     this.getRestItems();
     this.id = setInterval(() => {
       this.getRestItems();
+      var data = this.getRestItems();
+      if (index == 1) {
+        this.detailPannel('GKE', 0, data)
+      }
+      index = 0;
     }, 5000);
+
+    // var data = this.getRestItems();
+    // this.detailPannel('GKE', 0, data)
+
+    // var chBar = document.getElementById("chBar");
+    // var chartData = {
+    //   labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    //   datasets: [{
+    //     data: [589, 445, 483, 503, 689, 692, 634, 732, 579, 806],
+    //     backgroundColor: 'blue' 
+    //   },
+    //   { data: [409, 245, 383, 403, 589, 692, 580, 532, 879, 406],
+    //     backgroundColor: '#000000'
+    //   }]
+    // };
+    // if (chBar) {
+    //   new Chart(chBar, {
+    //   type: 'bar',data: chartData,
+    //   options: {
+    //     scales: {
+    //       xAxes: [{ barPercentage: 0.7,categoryPercentage: 0.5 }],
+    //       yAxes: [{ ticks: { beginAtZero: false } }]
+    //     },
+    //     legend: { display: false }
+    //   }
+    //   });
+    // }
+
+    // // var colors = ['#007bff','#000000'];      
+    // var donutOptions = {
+    //   cutoutPercentage: 50
+    // };
+    // var chDonutData1 = {
+    //     datasets: [
+    //       {
+    //         backgroundColor: ['#007bff','#000000'],
+    //         borderWidth: 0,
+    //         data: [70,30]
+    //       }
+    //     ]
+    // };
+    // var chDonut1 = document.getElementById("graph");
+    // if (chDonut1) {
+    //   new Chart(chDonut1, {
+    //       type: 'pie',
+    //       data: chDonutData1,
+    //       options: donutOptions
+    //   });
+
+    // }
   }
+
+    // Read all REST Items
+    getRestItems() {
+      this.restItemsServiceGetRestItems().subscribe(restItems => {
+        this.restItems = restItems;
+        this.items = JSON.parse(JSON.stringify(restItems));
+      });
+      var data = JSON.parse(JSON.stringify(this.items));
+      return data.dashboard;
+    }
+
+    // Rest Items Service: Read all REST Items
+    restItemsServiceGetRestItems() {
+      return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
+    }
+
   ngOnDestroy() {
     if (this.id) {
       clearInterval(this.id);
     }
   }
-  // Read all REST Items
-  getRestItems(): void {
-    this.restItemsServiceGetRestItems().subscribe(restItems => {
-      this.restItems = restItems;
-      console.log(this.restItems);
-    });
-  }
 
-  // Rest Items Service: Read all REST Items
-  restItemsServiceGetRestItems() {
-    return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
-  }
-  // Button Class Name a/c to the status
-  buttonClass(post, type) {
-    if (post.status == "success") return "btn btn-sqr btn-outline-success";
-    else if (post.status == "pending") return "btn btn-sqr btn-outline-warning";
-    else if (post.status == "canceled") return "btn btn-sqr btn-outline-secondary";
-    else if (post.status == "failed") {
-      var status = this.pipelinePercentage(post)
-      if (status > 50) {
-        return "btn btn-sqr btn-outline-success";
-      } else {
-        if(type == "log") {
-          if(post.jobs != undefined && post.jobs[1].status != "success") {
-            return "btn btn-sqr btn-outline-secondary avoid-clicks";
-          }
-        }
-        return "btn btn-sqr btn-outline-danger";
-      }
-    }
-    else if (post.status == "running") return "btn btn-sqr btn-outline-primary";
-    else if (post.status == "N/A") return "btn btn-sqr btn-outline-cancel disabled";
-  }
-
-  pipelinePercentage(post) {
-    var totaljobs = 0;
-    var passedjobs = 0;
+  // getCommitName returns commit name
+  getCommitName(index, commits) {
     try {
-      for (var job in post.jobs) {
-        var allpost = post.jobs[job];
-        totaljobs += 1;
-        if (allpost.status === "success") {
-          passedjobs += 1;
-        }
-      }
-    } catch {
+        return commits[index].name;
+    } catch (e) {
       return "N/A";
     }
-    var totalPercentage = (passedjobs/totaljobs) * 100;
-    return totalPercentage;
   }
 
+  // getCommit returns commit id
+  getCommit(index, commits) {
+    try {
+      if (commits[index].short_id) {
+        return commits[index].short_id;
+      } else {
+        return "N/A";
+      }
+    } catch (e) {
+      return "N/A";
+    }
+  }
+
+  // getCommit returns commit url
+  commitUrl(index, commits) {
+    try {
+      if (commits[index].commit_url) {
+        return commits[index].commit_url;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+
+      // Updated returns commit id
+  updated(index, commits) {
+    try {
+        return commits[index].updated + ' ago';
+    } catch (e) {
+      return "N/A";
+    }
+  }
   // Fa Icon a/c to the status
   iconClass(status) {
     if (status == "success") return "fa fa-check-circle";
-    if (status == "canceled") return "fa fa-ban";
+    else if (status == "canceled") return "fa fa-ban";
     else if (status == "pending") return "fa fa-clock-o";
     else if (status == "failed") return "fa fa-exclamation-triangle";
     else if (status == "running") return "fa fa-circle-o-notch fa-spin";
   }
+
   buttonStatusClass(status) {
-    if (status == "success") return "btn btn-txt btn-outline-success disabled";
+    if (status == "success") return "btn btn-txt btn-outline-success";
     else if (status == "pending")
-      return "btn btn-txt btn-outline-warning disabled";
+      return "btn btn-txt btn-outline-warning";
     else if (status == "canceled")
-      return "btn btn-txt btn-outline-secondary disabled";
+      return "btn btn-txt btn-outline-secondary";
     else if (status == "failed")
-      return "btn btn-txt btn-outline-danger disabled";
+      return "btn btn-txt btn-outline-danger";
     else if (status == "running")
-      return "btn btn-txt btn-outline-primary disabled";
+      return "btn btn-txt btn-outline-primary";
     else if (status == "N/A")
-      return "btn btn-txt btn-cancel btn-outline-dark disabled";
+      return "btn btn-txt btn-cancel btn-outline-dark";
+  }
+
+  // buildStatus(i, platformItems) {
+  //   try {
+  //     if (platformItems[i].status == "running") {
+  //       return "running";
+  //     }
+  //     else if (platformItems[i].status == "canceled") {
+  //       return "cancel";
+  //     }
+  //     else if (platformItems[i].status == "pending") {
+  //       return "pending";
+  //     }
+  //     else if (platformItems[i].status == "success") {
+  //       return "success";
+  //     }
+  //     else if (platformItems[i].status == "failed") {
+  //       return "failed";
+  //     }
+  //   } catch {
+  //     return "n/a";
+  //   }
+  // }
+
+    // GCP Pipeline
+  // This function extracts the Run status in GCP pipeline using current index
+  buildStatus(index, buildItems) {
+    try {
+      if (buildItems[index].status) {
+        return buildItems[index].status;
+      }
+      else {
+        return "n/a"
+      }
+    } catch (e) {
+      return "n/a";
+    }
+  }
+
+  buildWeburl(index, buildItems) {
+    try {
+      if (buildItems[index].web_url) {
+        return buildItems[index].web_url;
+      } else {
+        return "#";
+      }
+    } catch (e) {
+      return "#";
+    }
+  }
+
+  gkestatus(i, pipelines) {
+    try {
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
+      }
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
+      return "N/A";
+    }
+  }
+  aksstatus(i, pipelines) {
+    try {
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
+      }
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
+      return "N/A";
+    }
+  }
+  eksstatus(i, pipelines) {
+    try {
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
+      }
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
+      return "N/A";
+    }
+  }
+  packetstatus(i, pipelines) {
+    try {
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
+      }
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
+      return "N/A";
+    }
+  }
+  gcpstatus(i, pipelines) {
+    try {
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
+      }
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
+      return "N/A";
+    }
   }
 
   clickit(url) {
     window.open(url, "_blank");
   }
 
-  goTo(url) {
-    return url;
-  }
+  public name:any;
+  public image:any;
+  public gitlab_url:any;
+  public log_url:any;
+  public totalJobs:any;
+  public executedJobs:any;
+  public passedJobs:any;
+  public failedJobs:any;
+  public commitMessage:any;
+  public commitUser:any;
+  public baseline:any;
+  public litmus:any;
 
-  length(obj) {
-    // console.log(obj.length);
-
-    var size = 0,
-      key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) size++;
+  detailPannel(cloud, index, data) {
+    if (cloud == 'GKE') {
+      // console.log(data);
+      var pipelineData = data['pipelines'][0]
+      this.image = 'gke.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = ""
+      this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
     }
-    console.log("objectLength=" + size);
-    return size;
-    // return obj.length;
+    else if (cloud == 'AKS') {
+      var pipelineData = data['pipelines'][1]
+      this.image = 'aks.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.commits[index])
+      this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
+    }
+    else if (cloud == 'EKS') {
+      var pipelineData = data['pipelines'][2]
+      this.image = 'eks.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.commits[index])
+      this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
+    }
+    else if (cloud == 'Packet') {
+      var pipelineData = data['pipelines'][3]
+      this.image = 'packet.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.commits[index])
+      this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
+    }
+    else if (cloud == 'GCP') {
+      var pipelineData = data['pipelines'][4]
+      this.image = 'gcp.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.commits[index])
+      this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
+    }
+    else if (cloud == 'AWS') {
+      var pipelineData = data['pipelines'][5]
+      this.image = 'aws.svg'
+      this.name = cloud;
+      this.gitlab_url = pipelineData[index].web_url;
+      this.log_url = pipelineData[index].log_link;
+      this.totalJobs = pipelineData[index].jobs.length;
+      this.executedJobs = this.executed(pipelineData[index].jobs)
+      this.passedJobs = this.passed(pipelineData[index].jobs)
+      this.failedJobs = this.failed(pipelineData[index].jobs)
+      this.commitMessage = this.commitMess(data.commits[index])
+      this.commitUser = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.commits[index])
+      this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
+    }
   }
 
-  // GCP Pipeline
-  // This function extracts the Run status in GCP pipeline using current index
-  gcpStatus(index, gcpItems, type) {
+  awsstatus(i, pipelines) {
     try {
-      if (gcpItems[index].status) {
-        if (type == 'statusbutton') {
-          return gcpItems[index].status;
-        } else {
-          return gcpItems[index];
-        }
-      } else {
-        return "N/A";
+      if (pipelines[i].status == "success") {
+        return "fa fa-check-circle btn-txt btn-outline-success";
       }
-    } catch (e) {
+      else if (pipelines[i].status == "canceled") {
+        return "fa fa-ban btn-txt btn-outline-secondary";
+      }
+      else if (pipelines[i].status == "pending") {
+        return "fa fa-clock-o btn-txt btn-outline-warning";
+      }
+      else if (pipelines[i].status == "failed") {
+        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+      }
+      else if (pipelines[i].status == "running") {
+        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      }
+    }
+    catch {
       return "N/A";
     }
   }
 
-  // gcpWeburl returns the URL of the gitlab pipeline for GCP using current index
-  gcpWeburl(index, gcpItems) {
-    try {
-      if (gcpItems[index].web_url) {
-        return gcpItems[index].web_url;
-      } else {
-        return "#";
+  executed(data) {
+    var executed = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status === ("success" || "failed")) {
+        executed = executed +1;
       }
-    } catch (e) {
-      return "#";
     }
+    return executed;
   }
 
-  // gcpLogurl returns the URL of the Kibana Dashboard, EYE, for GCP using current index
-  gcpLogurl(index, gcpItems) {
-    try {
-      if (gcpItems[index].log_link) {
-        return gcpItems[index].log_link;
-      } else {
-        return "#";
+  passed(data) {
+    var passed = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status === ("success")) {
+        passed = passed +1;
       }
-    } catch (e) {
-      return "#";
     }
-  }
-  // END of GCP
-
-  // azure Pipeline
-  // This function extracts the Run status in azure pipeline using current index
-  azureStatus(index, azureItems, type) {
-    try {
-      if (azureItems[index].status) {
-        if (type == 'statusbutton') {
-          return azureItems[index].status;
-        } else {
-          return azureItems[index];
-        }
-      } else {
-        return "N/A";
-      }
-    } catch (e) {
-      return "N/A";
-    }
+    return passed;
   }
 
-  // azureWeburl returns the URL of the gitlab pipeline for azure using current index
-  azureWeburl(index, azureItems) {
-    try {
-      if (azureItems[index].web_url) {
-        return azureItems[index].web_url;
-      } else {
-        return "#";
+  failed(data) {
+    var failed = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status === ("failed")) {
+        failed = failed +1;
       }
-    } catch (e) {
-      return "#";
     }
+    return failed;
   }
 
-  // azureLogurl returns the URL of the Kibana Dashboard, EYE, for azure using current index
-  azureLogurl(index, azureItems) {
-    try {
-      if (azureItems[index].log_link) {
-        return azureItems[index].log_link;
-      } else {
-        return "#";
-      }
-    } catch (e) {
-      return "#";
-    }
-  }
-  // END of azure
-
-  // packet Pipeline
-  // This function extracts the Run status in packet pipeline using current index
-  packetStatus(index, packetItems, type) {
-    try {
-      if (packetItems[index].status) {
-        if (type == 'statusbutton') {
-          return packetItems[index].status;
-        } else {
-          return packetItems[index];
-        }
-      } else {
-        return "N/A";
-      }
-    } catch (e) {
-      return "N/A";
-    }
+  commitUsr(data) {
+    var commitId = data.short_id;
+    var username = data.author_name;
+    return commitId + '  @' + username;
   }
 
-  // packetWeburl returns the URL of the gitlab pipeline for packet using current index
-  packetWeburl(index, packetItems) {
-    try {
-      if (packetItems[index].web_url) {
-        return packetItems[index].web_url;
-      } else {
-        return "#";
-      }
-    } catch (e) {
-      return "#";
-    }
-  }
-
-  // packetLogurl returns the URL of the Kibana Dashboard, EYE, for packet using current index
-  packetLogurl(index, packetItems) {
-    try {
-      if (packetItems[index].log_link) {
-        return packetItems[index].log_link;
-      } else {
-        return "#";
-      }
-    } catch (e) {
-      return "#";
-    }
-  }
-  // END of packet
-
-    // GKE Pipeline
-  // This function extracts the Run status in GKE pipeline using current index
-  gkeStatus(index, gkeItems, type) {
-    try {
-      if (gkeItems[index].status) {
-        if (type == 'statusbutton') {
-          return gkeItems[index].status;
-        } else {
-          return gkeItems[index];
-        }
-      } else {
-        return "N/A";
-      }
-    } catch (e) {
-      return "N/A";
-    }
-  }
-
-  // GKEWeburl returns the URL of the gitlab pipeline for GKE using current index
-  gkeWeburl(index, gkeItems) {
-    try {
-      if (gkeItems[index].web_url) {
-        return gkeItems[index].web_url;
-      } else {
-        return "#";
-      }
-    } catch (e) {
-      return "#";
-    }
-  }
-
-  // GKELogurl returns the URL of the Kibana Dashboard, EYE, for GKE using current index
-  gkeLogurl(index, gkeItems) {
-    try {
-      if (gkeItems[index].log_link) {
-        return gkeItems[index].log_link;
-      } else {
-        return "#";
-      }
-    } catch (e) {
-      return "#";
-    }
-  }
-  // END of GKE
-
-  // getCommit returns commit id
-  getCommit(index, commits) {
-    try {
-      if (commits[index].short_id) {
-        return "Cron/#" + commits[index].short_id;
-      } else {
-        return "N/A";
-      }
-    } catch (e) {
-      return "N/A";
-    }
-  }
-
-  // getCommitUrl returns link to the commit on Github
-  getCommitUrl(index, commits) {
-    try {
-      if (commits[index].short_id) {
-        return commits[index].commit_url;
-      } else {
-        return "N/A";
-      }
-    } catch (e) {
-      return "N/A";
-    }
-  }
-  getLastUpdated() {
-    return this.restItems.dashboard.last_updated;
-  }
-
-  tooltipStatus(i, platformItems) {
-    var totalJobs = 0;
-    var passedjobs = 0;
-    try {
-      for (var job in platformItems[i].jobs) {
-        var allplatformItems = platformItems[i].jobs[job];
-        totalJobs += 1;
-        if (allplatformItems.status === "success") {
-          passedjobs += 1;
-        }
-      }
-    } catch {
-      return "N/A";
-    }
-    var toolTipMessage = passedjobs + " out of " + totalJobs + " Jobs Passed ";
-    return toolTipMessage;
-  }
-
-  passStatus(i, platformItems) {
-    var totaljobs = 0;
-    var passedjobs = 0;
-    try {
-      // if (platformItems[i].status == "running") {
-      //   return;
-      // }
-      //  if (platformItems[i].status == "canceled") {
-      //   return;
-      // }
-       if (platformItems[i].status == "pending") {
-        return;
-      }
-      for (var job in platformItems[i].jobs) {
-        var allplatformItems = platformItems[i].jobs[job];
-        totaljobs += 1;
-        if (allplatformItems.status === "success") {
-          passedjobs += 1;
-        }
-      }
-    } catch {
-      return "N/A";
-    }
-    return passedjobs + "/" + totaljobs;
+  commitMess(data) {
+    var message = data.message;
+    return message;
   }
 }

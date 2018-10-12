@@ -1,0 +1,147 @@
+.body {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.detail {
+    background-color: white;
+    height: 885px;
+    overflow-x: scroll;
+    border-radius: 5px;
+}
+
+.details {
+    padding: 25px;
+}
+ul .active {
+    // background-color: #5EB3E0;
+    background-image: linear-gradient(#5FB5E1, #4F9AD2);
+    h3 {
+        color: #d3d3d3;
+    }
+}
+h1 {
+    font-size: 1.2em;
+    font-family: lato;
+    font-weight: bold;
+    color: #54576B;
+}
+h2 {
+    font-size: 0.7em;
+    font-family: lato;
+    font-weight: bold;
+    color: #949BB3;
+}
+h3 {
+    font-size: 0.8em;
+    text-align: left;
+    font-family: lato;
+    padding-left: 20px;
+    font-weight: bold;
+    color: #949BB3;
+}
+h4 {
+    font-size: 2.6em;
+    font-family: lato;
+    text-align: left;
+    padding-left: 20px;
+    color: #3A3D54;
+}
+h5 {
+    font-size: 1.2em;
+    font-family: lato;
+    color: #54576B;
+    display: block;
+    text-align: center;
+}
+h6 {
+    position:inherit;
+    word-break: normal;
+    font-size: 0.9em;
+    font-family: lato;
+    font-weight: bold;
+    color: #949BB3;
+    text-align: center;
+}
+
+p {
+    // position:inherit;
+    // word-break: normal;
+    font-size: 15px;
+    font-family: lato;
+    font-weight: bold;
+    color: #949BB3;
+    text-align: center;
+}
+tr {
+    font-size: 0.8em;
+    font-family: lato;
+    font-weight: bold;
+    color: #949BB3;
+    border-bottom:1px solid #d3d3d3;
+}
+.btn-txt {
+    padding: 0px;
+    border-width: 0px;
+  }
+  
+.btn-txt:hover {
+    background-color: inherit;
+    color: inherit;
+}
+
+// .btn-txt:focus {
+//     background-color: initial;
+//     color: inherit;
+// }
+
+.pointer {
+    pointer-events: none;
+}
+.table {
+    margin-top:40px;
+    overflow-y: auto;
+    max-height:600px;
+}
+.button {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.checked {
+    color: orange;
+}
+
+img {
+    padding: 15px;
+}
+
+// star rating
+.star-ratings-css {
+    unicode-bidi: bidi-override;
+    color: #c5c5c5;
+    font-size: 20px;
+    height: 25px;
+    width: 100px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+    // text-shadow: 0px 1px 0 #a2a2a2;
+    
+    &-top {
+      color: orange;
+      padding: 0;
+      position: absolute;
+      z-index: 1;
+      display: block;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
+    &-bottom {
+      padding: 0;
+      display: block;
+      z-index: 0;
+    }
+  }

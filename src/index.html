@@ -1,160 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
+  <meta charset="utf-8">
+  <title>CI & E2E Dashboard of OpenEBS</title>
+  <base href="/">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92076314-8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-92076314-8');
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CI & E2E dashboard of OpenEBS</title>
-
-    <!-- CSS -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500"> -->
-    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
-    <!-- <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-    <!-- Favicon and touch icons -->
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/openebs/openebs/master/documentation/source/_static/favicon.ico">
-    <style>
-        /* CSS Loader */
-
-        body,
-        html {
-            height: 95%;
-
-        }
-
-        .app-loading {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .app-loading .spinner {
-            height: 200px;
-            width: 200px;
-            animation: rotate 2s linear infinite;
-            transform-origin: center center;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        .app-loading .spinner .path {
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-            animation: dash 1.5s ease-in-out infinite;
-            stroke-linecap: round;
-            stroke: #2286C1;
-
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes dash {
-            0% {
-                stroke-dasharray: 1, 200;
-                stroke-dashoffset: 0;
-            }
-            50% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -35px;
-            }
-            100% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -124px;
-            }
-        }
-
-        /* CSS lOader Ends */
-    </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+<body class="body">
+  <app-root></app-root>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-<body>
-    <app-root>
-
-        <!-- loading layout replaced by app after startupp -->
-        <div class="app-loading">
-            <div class="logo">
-                <img src="./assets/img/logo.png" height="100px" width="100px">
-            </div>
-            <svg class="spinner" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </app-root>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124604938-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-124604938-1');
-    </script>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVPMXS6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-
-    <!-- Javascript -->
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <!-- <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="assets/js/jquery.backstretch.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/retina-1.1.0.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
-    </script>
-    <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
 </body>
-
 </html>
