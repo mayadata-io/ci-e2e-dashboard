@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="35px" viewBox="0 0 36 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>error icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Workloads-Dashboard" transform="translate(-1034.000000, -767.000000)">
+            <g id="error-icon" transform="translate(1036.063773, 768.596963)">
+                <path d="M31.8939782,15.948417 C31.8939782,24.7566269 24.754107,31.896834 15.9470731,31.896834 C7.1398376,31.896834 0,24.7566269 0,15.948417 C0,7.14022398 7.1398376,7.44013038e-14 15.9470731,7.44013038e-14 C24.754107,7.44013038e-14 31.8939782,7.14022398 31.8939782,15.948417 Z" id="Shape" stroke="#E91B1B" stroke-width="3"></path>
+                <g id="Group-2" transform="translate(14.020416, 5.352263)" fill="#E91B1B" fill-rule="nonzero">
+                    <rect id="Rectangle-path" x="0.519750576" y="0.342982603" width="2.59594923" height="13.7109516" rx="1.29797462"></rect>
+                    <ellipse id="Oval" cx="1.81769159" cy="19.1634607" rx="1.65102136" ry="1.65116297"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

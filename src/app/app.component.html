@@ -1,3 +1,20 @@
+<!-- <div class="container-fluid"> -->
 <app-header></app-header>
-<app-table></app-table>
-<app-footer></app-footer>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-white">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-md-10" style="max-width:auto">
+            <div style="padding-top:10px;">
+                <!-- <app-table></app-table> -->
+                <!-- <app-workload-dashboard></app-workload-dashboard> -->
+                <!-- <app-workloads></app-workloads> -->
+
+
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
