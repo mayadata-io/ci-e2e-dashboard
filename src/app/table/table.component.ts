@@ -475,7 +475,7 @@ export class TableComponent implements OnInit {
   executed(data) {
     var executed = 0;
     for (var i = 0; i < data.length; i++) {
-      if (data[i].status === ("success" || "failed")) {
+      if (data[i].status === "success" || data[i].status === "failed") {
         executed = executed +1;
       }
     }
