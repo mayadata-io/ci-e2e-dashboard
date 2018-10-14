@@ -27,17 +27,18 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // This need to be change 
     var index = 1;
     this.getRestItems();
+    setInterval(() => {
+       if (index == 1) {
+        var data = this.getRestItems();
+        this.detailPannel('GKE', 0, data);
+        index = 0;
+      }
+    }, 500);
     this.id = setInterval(() => {
       this.getRestItems();
-      var data = this.getRestItems();
-      if (index == 1) {
-        this.detailPannel('GKE', 0, data)
-      }
-      index = 0;
     }, 5000);
 
     // var data = this.getRestItems();
@@ -475,7 +476,7 @@ export class TableComponent implements OnInit {
   executed(data) {
     var executed = 0;
     for (var i = 0; i < data.length; i++) {
-      if (data[i].status === ("success" || "failed")) {
+      if (data[i].status === "success" || data[i].status === "failed") {
         executed = executed +1;
       }
     }
