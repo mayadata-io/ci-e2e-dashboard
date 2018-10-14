@@ -13,7 +13,6 @@ export class SidebarComponent implements OnInit {
   constructor(private kubernetsServices: KubernetsService) { }
 
   ngOnInit() {
-    console.log("res");
     // this.kubernetsServices.getListNamespaces().subscribe(res => {
     //   this.jivas = res.jiva
     //   this.cstor = res.cstor
