@@ -27,17 +27,18 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // This need to be change 
     var index = 1;
     this.getRestItems();
+    setInterval(() => {
+       if (index == 1) {
+        var data = this.getRestItems();
+        this.detailPannel('GKE', 0, data);
+        index = 0;
+      }
+    }, 500);
     this.id = setInterval(() => {
       this.getRestItems();
-      var data = this.getRestItems();
-      if (index == 1) {
-        this.detailPannel('GKE', 0, data)
-      }
-      index = 0;
     }, 5000);
 
     // var data = this.getRestItems();
