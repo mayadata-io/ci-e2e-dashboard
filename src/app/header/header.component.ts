@@ -14,7 +14,7 @@ import {
 })
 export class HeaderComponent implements OnInit {
   private currentRoute: any;
-  private header: string;
+  public header: string;
   constructor(private router: Router) {
     router.events.subscribe(val => {
       this.currentRoute = this.router.url;
