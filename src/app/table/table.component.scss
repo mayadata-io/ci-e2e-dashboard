@@ -1,9 +1,16 @@
 .body {
     background-color: white;
+    font-family: lato;
+    // text-rendering: optimizeLegibility;
+    // -webkit-font-feature-settings: "kern" 1;
+    // -webkit-font-smoothing: subpixel-antialiased;
     border-radius: 5px;
+    // -webkit-font-smoothing: antialiased;
+    // font-feature-settings: "kern" 1;
 }
 
 .detail {
+    font-family: lato;
     background-color: white;
     height: 885px;
     overflow-x: scroll;
@@ -22,34 +29,34 @@ ul .active {
 }
 h1 {
     font-size: 1.2em;
-    font-family: lato;
+    // font-family: lato;
     font-weight: bold;
     color: #54576B;
 }
 h2 {
     font-size: 0.7em;
-    font-family: lato;
+    // font-family: lato;
     font-weight: bold;
     color: #949BB3;
 }
 h3 {
     font-size: 0.8em;
     text-align: left;
-    font-family: lato;
+    // font-family: lato;
     padding-left: 20px;
     font-weight: bold;
     color: #949BB3;
 }
 h4 {
     font-size: 2.6em;
-    font-family: lato;
+    // font-family: lato;
     text-align: left;
     padding-left: 20px;
     color: #3A3D54;
 }
 h5 {
     font-size: 1.2em;
-    font-family: lato;
+    // font-family: lato;
     color: #54576B;
     display: block;
     text-align: center;
@@ -58,7 +65,7 @@ h6 {
     position:inherit;
     word-break: normal;
     font-size: 0.9em;
-    font-family: lato;
+    // font-family: lato;
     font-weight: bold;
     color: #949BB3;
     text-align: center;
@@ -68,14 +75,14 @@ p {
     // position:inherit;
     // word-break: normal;
     font-size: 15px;
-    font-family: lato;
+    // font-family: lato;
     font-weight: bold;
     color: #949BB3;
     text-align: center;
 }
 tr {
     font-size: 0.8em;
-    font-family: lato;
+    // font-family: lato;
     font-weight: bold;
     color: #949BB3;
     border-bottom:1px solid #d3d3d3;

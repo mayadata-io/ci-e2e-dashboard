@@ -20,9 +20,11 @@ export class TableComponent implements OnInit {
   constructor(private http: HttpClient) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-        this.restItemsUrl = "http://localhost:3000/";
+      this.restItemsUrl = "http://localhost:3000/";
+    } else if (this.host == "openebs.ci") {
+        this.restItemsUrl = "http://openebs.ci/api/";
     } else {
-        this.restItemsUrl = "https://staging.openebs.ci/api/";
+      this.restItemsUrl = "https://staging.openebs.ci/api/";
     }
   }
 
@@ -31,7 +33,7 @@ export class TableComponent implements OnInit {
     var index = 1;
     this.getRestItems();
     setInterval(() => {
-       if (index == 1) {
+      if (index == 1) {
         var data = this.getRestItems();
         this.detailPannel('GKE', 0, data);
         index = 0;
@@ -39,7 +41,7 @@ export class TableComponent implements OnInit {
     }, 500);
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 5000);
+    }, 10000);
 
     // var data = this.getRestItems();
     // this.detailPannel('GKE', 0, data)
@@ -92,20 +94,20 @@ export class TableComponent implements OnInit {
     // }
   }
 
-    // Read all REST Items
-    getRestItems() {
-      this.restItemsServiceGetRestItems().subscribe(restItems => {
-        this.restItems = restItems;
-        this.items = JSON.parse(JSON.stringify(restItems));
-      });
-      var data = JSON.parse(JSON.stringify(this.items));
-      return data.dashboard;
-    }
+  // Read all REST Items
+  getRestItems() {
+    this.restItemsServiceGetRestItems().subscribe(restItems => {
+      this.restItems = restItems;
+      this.items = JSON.parse(JSON.stringify(restItems));
+    });
+    var data = JSON.parse(JSON.stringify(this.items));
+    return data.dashboard;
+  }
 
-    // Rest Items Service: Read all REST Items
-    restItemsServiceGetRestItems() {
-      return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
-    }
+  // Rest Items Service: Read all REST Items
+  restItemsServiceGetRestItems() {
+    return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
+  }
 
   ngOnDestroy() {
     if (this.id) {
@@ -116,10 +118,15 @@ export class TableComponent implements OnInit {
   // getCommitName returns commit name
   getCommitName(index, commits) {
     try {
-        return commits[index].name;
+      return commits[index].name;
     } catch (e) {
       return "N/A";
     }
+  }
+
+  masterCommitsCount(index,data) {
+    console.log(index);
+    console.log(data);
   }
 
   // getCommit returns commit id
@@ -148,10 +155,10 @@ export class TableComponent implements OnInit {
     }
   }
 
-      // Updated returns commit id
+  // Updated returns commit id
   updated(index, commits) {
     try {
-        return commits[index].updated + ' ago';
+      return commits[index].updated + ' ago';
     } catch (e) {
       return "N/A";
     }
@@ -179,6 +186,19 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-cancel btn-outline-dark";
   }
 
+  tooltipData(index, commits, build) {
+    try {
+      if (build[index].status == "success") {
+        return "Docker Image : " + commits[index].name + "-" + commits[index].short_id
+      } else if (build[index].status == "failed") {
+        return "Build failed";
+      }
+
+    } catch (e) {
+      return "n/a"
+    }
+  }
+
   // buildStatus(i, platformItems) {
   //   try {
   //     if (platformItems[i].status == "running") {
@@ -201,7 +221,7 @@ export class TableComponent implements OnInit {
   //   }
   // }
 
-    // GCP Pipeline
+  // GCP Pipeline
   // This function extracts the Run status in GCP pipeline using current index
   buildStatus(index, buildItems) {
     try {
@@ -343,18 +363,18 @@ export class TableComponent implements OnInit {
     window.open(url, "_blank");
   }
 
-  public name:any;
-  public image:any;
-  public gitlab_url:any;
-  public log_url:any;
-  public totalJobs:any;
-  public executedJobs:any;
-  public passedJobs:any;
-  public failedJobs:any;
-  public commitMessage:any;
-  public commitUser:any;
-  public baseline:any;
-  public litmus:any;
+  public name: any;
+  public image: any;
+  public gitlab_url: any;
+  public log_url: any;
+  public totalJobs: any;
+  public executedJobs: any;
+  public passedJobs: any;
+  public failedJobs: any;
+  public commitMessage: any;
+  public commitUser: any;
+  public baseline: any;
+  public litmus: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -477,7 +497,7 @@ export class TableComponent implements OnInit {
     var executed = 0;
     for (var i = 0; i < data.length; i++) {
       if (data[i].status === "success" || data[i].status === "failed") {
-        executed = executed +1;
+        executed = executed + 1;
       }
     }
     return executed;
@@ -487,7 +507,7 @@ export class TableComponent implements OnInit {
     var passed = 0;
     for (var i = 0; i < data.length; i++) {
       if (data[i].status === ("success")) {
-        passed = passed +1;
+        passed = passed + 1;
       }
     }
     return passed;
@@ -497,7 +517,7 @@ export class TableComponent implements OnInit {
     var failed = 0;
     for (var i = 0; i < data.length; i++) {
       if (data[i].status === ("failed")) {
-        failed = failed +1;
+        failed = failed + 1;
       }
     }
     return failed;
