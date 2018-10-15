@@ -27,4 +27,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {}
+  
+  clickit(url) {
+    window.open(url, "_blank");
+  }
 }
