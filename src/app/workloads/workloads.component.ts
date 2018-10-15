@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router'
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
@@ -7,7 +7,8 @@ import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
 import { Subscription, Observable, timer, from } from "rxjs";
 import {
-  getResponse, postResponse,
+  getResponse,
+  postResponse,
   statefulSet,
   jivaReplica,
   jivaController,
@@ -15,16 +16,17 @@ import {
   overAllStatus,
   pvc,
   personDetail,
-  yaml,
+  yaml
 } from "../model/data.model";
-
+import { ISubscription } from "rxjs/Subscription";
 @Component({
-  selector: 'app-workloads',
-  templateUrl: './workloads.component.html',
-  styleUrls: ['./workloads.component.scss']
+  selector: "app-workloads",
+  templateUrl: "./workloads.component.html",
+  styleUrls: ["./workloads.component.scss"]
 })
 export class WorkloadsComponent implements OnInit, OnDestroy {
-
+  private podUnsub: ISubscription;
+  private timeUnsub: ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
@@ -100,12 +102,16 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public currentRoute: any;
   public applicationType: any;
 
-
-  constructor(private router: Router, private personService: PersonService, private kubernetsServices: KubernetsService, private litmusServies: LitmusService) {
+  constructor(
+    private router: Router,
+    private personService: PersonService,
+    private kubernetsServices: KubernetsService,
+    private litmusServies: LitmusService
+  ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
     this.openebsEngine = this.router.url.split("-")[1];
-    if (this.openebsEngine == 'cstor') {
+    if (this.openebsEngine == "cstor") {
       this.chaosTests = [
         "Kill OpenEBS Target",
         "Increase Latency Between App and Replicas"
@@ -117,11 +123,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         "Increase Latency Between App and Replicas"
       ];
     }
-
   }
 
   ngOnInit() {
-
     this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
@@ -151,52 +155,59 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       $(".hide-custom").hide();
     }
 
-
-    timer(0, 5000).subscribe(x => {
-      this.kubernetsServices.getPodDetails(this.currentRoute[1], this.currentRoute[1]).subscribe(res => {
-        this.statefullSets = res.statefulSet;
-        this.applicationPods = res.applicationPod;
-        this.jivaContrllers = res.jivaController;
-        this.jivaReplicas = res.jivaReplica;
-        this.pvc = res.pvc;
-        this.pvctemp = res.pvc;
-        this.pvcarray = this.pvctemp.pvc;
-        this.workloadImage = this.statefullSets[0].dockerImage;
-        this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
-        this.openebsversion = this.jivaContrllers[0].openebsjivaversion.split(":")[1];
-        this.namespace = this.statefullSets[0].namespace;
-        this.overallStatus = res.status;
-        this.numberstatefullSets = this.statefullSets.length;
-        this.numberController = this.jivaContrllers.length;
-        if (this.overallStatus == "Running") {
-          this.runningStatus = true;
-        } else if (
-          this.overallStatus == "Pending" ||
-          this.overallStatus == "Failed"
-        ) {
-          this.failledStatus = true;
-        } else {
-          this.unknownStatus = true;
-        }
-        error => {
-          this.unknownStatus = true;
-        };
+    this.timeUnsub = timer(0, 5000000).subscribe(x => {
+      this.podUnsub = this.kubernetsServices
+        .getPodDetails(this.currentRoute[1], this.currentRoute[1])
+        .subscribe(res => {
+          this.statefullSets = res.statefulSet;
+          this.applicationPods = res.applicationPod;
+          this.jivaContrllers = res.jivaController;
+          this.jivaReplicas = res.jivaReplica;
+          this.pvc = res.pvc;
+          this.pvctemp = res.pvc;
+          this.pvcarray = this.pvctemp.pvc;
+          this.workloadImage = this.statefullSets[0].dockerImage;
+          this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
+          this.openebsversion = this.jivaContrllers[0].openebsjivaversion.split(
+            ":"
+          )[1];
+          this.namespace = this.statefullSets[0].namespace;
+          this.overallStatus = res.status;
+          this.numberstatefullSets = this.statefullSets.length;
+          this.numberController = this.jivaContrllers.length;
+          if (this.overallStatus == "Running") {
+            this.runningStatus = true;
+          } else if (
+            this.overallStatus == "Pending" ||
+            this.overallStatus == "Failed"
+          ) {
+            this.failledStatus = true;
+          } else {
+            this.unknownStatus = true;
+          }
+          error => {
+            this.unknownStatus = true;
+          };
+        });
+    });
+    this.kubernetsServices
+      .getPodDetails(this.currentRoute[1], this.currentRoute[1])
+      .subscribe(res => {
+        this.litmuspod = res.statefulSet;
       });
-    });
-    this.kubernetsServices.getPodDetails(this.currentRoute[1], this.currentRoute[1]).subscribe(res => {
-      this.litmuspod = res.statefulSet;
-      console.log(JSON.stringify(this.litmuspod))
-    });
   }
 
   ngOnDestroy() {
-    this.ngOnInit();
+    this.podUnsub.unsubscribe();
+    this.timeUnsub.unsubscribe();
   }
   public listVolume() {
-    this.kubernetsServices.getJivaVolumeDetails(this.workloadName, this.openebsEngine).subscribe(res => {
-      this.jivaDetail = res;
-      this.jivas = this.jivaDetail;
-    });
+    this.kubernetsServices
+      .getJivaVolumeDetails(this.workloadName, this.openebsEngine)
+      .subscribe(res => {
+        this.jivaDetail = res;
+        this.jivas = this.jivaDetail;
+      });
   }
 
   public save() {
@@ -210,16 +221,17 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       });
   }
   public read() {
-    this.personService.get100personDetails(this.rnumber, this.currentRoute[1]).subscribe(res => {
-      this.getResponses[0] = res;
-      this.getstatus = this.getResponses[0].status;
-      this.getmessage = this.getResponses[0].message;
-      this.readStatus = true;
-    });
+    this.personService
+      .get100personDetails(this.rnumber, this.currentRoute[1])
+      .subscribe(res => {
+        this.getResponses[0] = res;
+        this.getstatus = this.getResponses[0].status;
+        this.getmessage = this.getResponses[0].message;
+        this.readStatus = true;
+      });
   }
 
   public onChaosSelect(chaosValue) {
-    // console.log(chaosValue);
     this.selectedChaos = chaosValue;
     if (this.selectedChaos != "") {
       $(".hide-custom").show();
@@ -243,13 +255,25 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         }
       }
       console.log(volume.trim());
-      console.log(this.namespace)
+      console.log(this.namespace);
       console.log(this.openebsEngine);
       console.log(type);
       if (this.openebsEngine == "cstor") {
-        this.litmusServies.runChaosTestService(type, volume.trim(), this.namespace, 'openebs', this.workloadName);
+        this.litmusServies.runChaosTestService(
+          type,
+          volume.trim(),
+          this.namespace,
+          "openebs",
+          this.workloadName
+        );
       } else {
-        this.litmusServies.runChaosTestService(type, volume.trim(), this.namespace, this.namespace, this.workloadName);
+        this.litmusServies.runChaosTestService(
+          type,
+          volume.trim(),
+          this.namespace,
+          this.namespace,
+          this.workloadName
+        );
       }
       this.runAlert();
       this.setSelectToDefault();
@@ -258,12 +282,12 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public runAlert() {
     this.isAlert = true;
     setTimeout(
-      function () {
+      function() {
         $(".alert")
           .animate({ opacity: 0, bottom: "40px" }, 500)
           .hide("slow");
         setTimeout(
-          function () {
+          function() {
             this.isAlert = false;
           }.bind(this),
           600
@@ -285,5 +309,3 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .change();
   }
 }
-
-

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { Routing } from './app.routing';
 
@@ -33,7 +33,8 @@ import { WorkloadsComponent } from './workloads/workloads.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    Routing
+    Routing,
+    NgbModule
   ],
   providers: [PersonService,KubernetsService, LitmusService,HttpClient],
   bootstrap: [AppComponent],
