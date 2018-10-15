@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,Meta, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
@@ -36,7 +36,7 @@ import { WorkloadsComponent } from './workloads/workloads.component';
     Routing,
     NgbModule
   ],
-  providers: [PersonService,KubernetsService, LitmusService,HttpClient],
+  providers: [PersonService,KubernetsService, LitmusService,HttpClient,Meta,Title],
   bootstrap: [AppComponent],
   exports: [RouterModule,RouterLinkActive]
 })

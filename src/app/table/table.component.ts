@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe } from '@angular/core';
 import Chart from 'chart.js'
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { Meta,Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-table',
@@ -17,7 +18,7 @@ export class TableComponent implements OnInit {
   restItemsUrl: string;
   // restItemsUrl = "http://localhost:3000/";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.restItemsUrl = "http://localhost:3000/";
@@ -26,6 +27,9 @@ export class TableComponent implements OnInit {
     } else {
       this.restItemsUrl = "https://staging.openebs.ci/api/";
     }
+    this.meta.addTag({ name: 'description', content: 'CI/E2E Dashboard For Master branch of OpenEBS' });
+    this.meta.addTag({ name: 'keywords', content: 'Openebs,EBS,workload,mongo,jiva,cstor' });
+    this.titleService.setTitle( "CI/E2E Dashboard " );
   }
 
   ngOnInit() {

@@ -155,7 +155,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       $(".hide-custom").hide();
     }
 
-    this.timeUnsub = timer(0, 5000000).subscribe(x => {
+    this.timeUnsub = timer(0, 5000).subscribe(x => {
       this.podUnsub = this.kubernetsServices
         .getPodDetails(this.currentRoute[1], this.currentRoute[1])
         .subscribe(res => {
