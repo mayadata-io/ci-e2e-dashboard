@@ -1,5 +1,9 @@
-.bd{
+.line{
     border-right: 2px solid #EFF2F6;
+}
+
+.navbar {
+    padding: 0px;;
 }
 
 .header-text {
@@ -8,17 +12,36 @@
     font-weight: bold;
     color: #54576B;
 }
-
 a {
-    // margin-top: 5px;
-    // margin-bottom: 0px;
     font-size: 14px;
     color: #8890A9;
+    cursor: pointer;
 }
 
 span {
-    // font-size: 20px;
-    padding-top:20px;
-    margin-top:50px;
-    // margin-bottom: 0px;
+    padding-left: 12px;
+    padding-bottom: 0px;
+    color: #9896B3;
+}
+
+.heart {
+    color: #F35400;
+    vertical-align: text-top;
+    font-size: 15px;
+    padding: 5px 5px 5px 5px;
+  }
+
+.heart:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.btn-outline-danger:hover {
+    background-color: #F35400;
+    border-color: #F35400;
+}
+
+img {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
