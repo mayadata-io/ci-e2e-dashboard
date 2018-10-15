@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="41px" height="41px" viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Workloads-Dashboard" transform="translate(-905.000000, -18.000000)">
+            <g id="Group-3" transform="translate(905.000000, 18.000000)">
+                <g id="favorite-heart-button" transform="translate(9.201928, 9.048697)" fill="#D0021B" fill-rule="nonzero">
+                    <path d="M11.1754307,21.6217464 L9.61087037,19.9780149 C3.79964643,14.5771825 0,10.9374912 0,6.47593407 C0,2.83624272 2.68210336,0.0184171605 6.14648687,0.0184171605 C8.04631008,0.0184171605 9.94613329,0.957692347 11.1754307,2.48401452 C12.404728,0.957692347 14.3045513,0.0184171605 16.2043745,0.0184171605 C19.668758,0.0184171605 22.3508613,2.83624272 22.3508613,6.47593407 C22.3508613,10.9374912 18.5512149,14.5771825 12.739991,19.9780149 L11.1754307,21.6217464 Z" id="Shape"></path>
+                </g>
+                <rect id="Rectangle-11" stroke="#F3F5F6" x="1.20192788" y="0.53465235" width="39" height="39.0280899" rx="5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

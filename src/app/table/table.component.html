@@ -1,110 +1,197 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-inline p-2" style="text-align: start">
-      <span class="badge badge-secondary bdg">v0.7</span>
-    </div>
-    <!-- <div class="col-md-2"></div> -->
-    <div class="d-inline p-2 float-right" style="text-align: end; margin-left: auto;">
-      <span class="badge badge-secondary bdg" *ngIf="undefined !== restItems">
-        <b>
-          <i class="fa fa-clock"></i> Last Updated:</b> {{ getLastUpdated() }} ago</span>
+<div class="row">
+  <!-- table pannel start -->
+  <div class="col-sm-8">
+    <div class="body border">
+      <div class="container">
+        <div class="details">
+          <h1>CI and E2E summary for commits</h1>
+          <h2>Summary of build status and E2E pipeline status on OpenEBS repository</h2>
+        </div>
+      </div>
+    <!-- <div class="container">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" role="tab" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" href="#menu1">Menu 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" href="#menu2">Menu 2</a>
+          </li>
+        </ul>
+      
+        <div class="tab-content">
+          <div role="tabpanel" id="home" class="container tab-pane active"><br>
+            <h3>HOME</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div role="tabpanel" id="menu1" class="container tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div role="tabpanel" id="menu2" class="container tab-pane fade"><br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          </div>
+        </div>
+      </div> -->
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
+            <h3>BRANCH</h3>
+            <h4>Master</h4>
+            <h3>Commit in last one week: 4</h3>
+            <!-- <h3>{{ masterCommitsCount(i, restItems.dashboard) }}</h3> -->
+          </a>
+        </li>
+        <li style="pointer-events:none;" class="nav-item">
+          <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
+            <h3>BRANCH</h3>
+            <h4>v 0.7</h4>
+            <h3>Commit in last one week: 4</h3>
+          </a>
+        </li>
+        <li style="pointer-events:none; cursor:pointer;" class="nav-item">
+        <a class="nav-link" href="#references" role="tab" data-toggle="tab">
+          <h3>BRANCH</h3>
+          <h4>v 0.7.1</h4>
+          <h3>Commit in last one week: 4</h3>
+        </a>
+        </li>
+      </ul>
+        <!-- Tab panes -->
+        <div class="table container tab-content">
+          <div role="tabpanel" class="tab-pane active" id="profile">
+            <table class="table table-borderless" onload="detailPannel('GKE', i, restItems.dashboard);">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Trigger</th>
+                  <th>Commit</th>
+                  <th>Updated</th>
+                  <th>Build</th>
+                  <th style="text-align:center">E2E Pipeline</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="undefined !== restItems">
+                <tr class="text-center">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>GKE | AKS | EKS | PACKET | GCP | AWS</td>
+                </tr>
+                <tr *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
+                  <td>{{  i+1 }}</td>
+                  <td>{{ getCommitName(i,restItems.dashboard['commits']) }}</td>
+                  <td>
+                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['commits']))">{{ getCommit(i,restItems.dashboard['commits']) }}</a>
+                  </td> 
+                  <td>{{ updated(i,restItems.dashboard['commits']) }}</td>
+                  <td>
+                    <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['commits'], restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
+                      <i [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
+                      {{buildStatus(i, restItems.dashboard['build'])}}
+                    </button>
+                    <!-- <button>
+                        <i [ngClass]="iconClass(buildStatus(i, restItems.dashboard['pipelines'][6]))"></i>
+                        {{buildStatus(i, restItems.dashboard['pipelines'][6])}}
+                      </button> -->
+                  </td>
+                  <td class="text-center">
+                    <i onclick="test()" (click)="detailPannel('GKE', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard["pipelines"][0])'></i> | 
+                    <i (click)="detailPannel('AKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard["pipelines"][1])'></i> | 
+                    <i (click)="detailPannel('EKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard["pipelines"][2])'></i> | 
+                    <i (click)="detailPannel('Packet', i, restItems.dashboard)" style="padding:10px; cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard["pipelines"][3])'></i> | 
+                    <i (click)="detailPannel('GCP', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard["pipelines"][4])'></i> | 
+                    <i (click)="detailPannel('AWS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard["pipelines"][5])'></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
+          <div role="tabpanel" class="tab-pane fade" id="references">ccc</div>
+        </div>
     </div>
   </div>
-</div>
-<!-- <hr> -->
-<!-- <div class="container-fluid"> -->
-<!-- <div class="container white"> -->
-<!-- </div> -->
-<!-- <div class="tab-content" id="myTabContent"> -->
-<!-- <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab"> -->
-<!-- <div class="container white"> -->
-<div class="table-responsive-sm">
-  <table class="table table-hover table-sm header-fixed">
-    <thead class="thead-dark">
-      <tr>
-        <th class="text-center">
-          Commits
-        </th>
-        <th class="text-center"> AWS</th>
-        <th class="text-center"> GCP</th>
-        <th class="text-center"> Azure</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="undefined !== restItems">
-      <tr *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
-        <td scope="row" class="text-center word-wrap">
-          <span class="text">
-            <a href="{{ getCommitUrl(i, restItems.dashboard['commits']) }}" style="color: #4B00DD;" target="_blank">
-              <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} -->{{ getCommit(i,
-              restItems.dashboard['commits']) }}
-            </a>
-          </span>
-        </td>
-        <!-- AWS Buttons -->
-        <td class="text-center ">
+<!-- table pannel End -->
 
-          <span style ="margin-right:6px" [ngClass]='buttonStatusClass(post.status)' data-toggle="tooltip" data-html="true" data-placement="bottom"
-            title="{{tooltipStatus(i, restItems.dashboard['pipelines'][0])}}">
-            <i [ngClass]='iconClass(post.status)' style="font-size:12px"></i>
-            <span class="passingText">
-              {{passStatus(i, restItems.dashboard['pipelines'][0])}}
-            </span>
-            <!-- {{post.status.toUpperCase()}} -->
-          </span>
-          <div class="btn-group btn-group-justified">
-            <!-- Buttons Linking to Litmus -->
-            <button type="button" [ngClass]='buttonClass(post)' (click)="clickit(post.web_url);">
-              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
-            </button>
-            <button type="button" [ngClass]='buttonClass(post)' (click)="clickit(post.log_link);">
-              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
-            </button>
+
+<!-- Detaile pannel start -->
+  <div class="col-sm-4 px-0">
+    <div class="detail container border">
+        <div class="text-center">
+        <img src="../assets/images/cloud/{{ image }}">
+        <h5>{{ name }}</h5>
+        <h6>Kubernetes 1.10.0</h6> 
+          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:15px; padding-right:15px; font-size:15px">GITLAB STAGES</span></button>
+          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:25px; padding-right:25px; font-size:15px">LITMUS EYE</span></button>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-4">
+            <div style="padding-left:40px; padding-top:30px;">
+                <div style="margin-left:5px;" class="star-ratings-css">
+                    <div class="star-ratings-css-top" style="width: 70%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <h6 style="font-size:13px; padding-top:10px;">SCORE</h6>
+                  </div>
+            </div>
           </div>
-          <!-- </div> -->
-
-        </td>
-
-        <!-- GCP Buttons -->
-        <td>
-
-          <span style ="margin-right:6px" [ngClass]="buttonStatusClass(gcpStatus(i, restItems.dashboard['pipelines'][1], 'statusbutton'))"
-            data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][1])}}">
-            <!--gcpItems[post.length].status-->
-            <i [ngClass]="iconClass(gcpStatus(i, restItems.dashboard['pipelines'][1], 'statusbutton'))" style="font-size:12px"></i>
-            <!-- {{gcpStatus(i, restItems.dashboard['pipelines'][1]).toUpperCase() }} -->
-            {{passStatus(i, restItems.dashboard['pipelines'][1])}}
-        </span>
-          <div class="btn-group btn-group-justified">
-            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpWeburl(i, restItems.dashboard['pipelines'][1]));">
-              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
-            </button>
-            <button type="button" [ngClass]="buttonClass(gcpStatus(i, restItems.dashboard['pipelines'][1]))" (click)="clickit(gcpLogurl(i, restItems.dashboard['pipelines'][1]));">
-              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
-            </button>
+          <div class="col-sm-4">
+            <h5 style="color:black;font-size:15px;">{{ totalJobs }}</h5>
+            <h6 style="font-size:13px;">TOTAL</h6>
+            <h5 style="color:green;font-size:15px;">{{ passedJobs }}</h5>
+            <h6 style="font-size:13px;">PASSED</h6>
           </div>
-        </td>
-
-        <!-- Azure Buttons -->
-        <td>
-          <span style ="margin-right:6px" [ngClass]="buttonStatusClass(azureStatus(i, restItems.dashboard['pipelines'][3], 'statusbutton'))"
-            data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{tooltipStatus(i, restItems.dashboard['pipelines'][3])}}">
-            <i [ngClass]="iconClass(azureStatus(i, restItems.dashboard['pipelines'][3], 'statusbutton'))" style="font-size:12px"></i>
-            <!-- {{azureStatus(i, restItems.dashboard['pipelines'][3]).toUpperCase() }} -->
-            {{passStatus(i, restItems.dashboard['pipelines'][3])}}
-        </span>
-          <div class="btn-group btn-group-justified">
-            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureWeburl(i, restItems.dashboard['pipelines'][3]));">
-              <i class="fab fa-gitlab" style="font-size:12px"></i> GITLAB
-            </button>
-
-            <button type="button" [ngClass]="buttonClass(azureStatus(i, restItems.dashboard['pipelines'][3]))" (click)="clickit(azureLogurl(i, restItems.dashboard['pipelines'][3]));">
-              <i class="fa fa-eye" style="font-size:12px"></i> LOGS
-            </button>
+          <div class="col-sm-4">
+            <h5 style="color:blue;font-size:15px;">{{ executedJobs }}</h5>
+            <h6 style="font-size:13px;">EXECUTED</h6>
+            <h5 style="color:red;font-size:15px;">{{ failedJobs }}</h5>
+            <h6 style="font-size:13px;">FAILED</h6>
           </div>
-        </td>
-
-
-      </tr>
-    </tbody>
-  </table>
-</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-4">
+              <h6><img height=50px; src="../assets/images/icons/pull-request.svg"></h6>
+              <h6>Pull Request</h6>
+            </div>
+            <div class="col-sm-8">
+              <!-- <h6>jiva/#1975 @username</h6> -->
+              <h6 style="margin-top:10px;">{{ commitUser }}</h6>
+              <h6 style="font-size:14px; height:50px; overflow-y:auto">{{ commitMessage }}</h6>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+              <div class="col-sm-6">
+                  <a style="margin-left:40px;" href="#">Baseline Images</a>
+                <p style="margin-top:20px;" >Container images used to run this pipeline</p>
+              </div>
+              <div class="col-sm-6">
+                <a style="margin-left:40px;" href="{{ litmus }}">litmus tests</a>
+                <p style="margin-top:20px;">litmus tests run in this pipeline</p>
+              </div>
+            </div>
+      </div>
+      <!-- <br> -->
+      <!-- <div class="detail">
+          <div class="card">
+              <div class="card-body">
+                  <canvas id="chBar"></canvas>
+              </div>
+          </div>
+        </div> -->
+    </div>
+    <!-- detail pannel End -->
+  </div>
+  
+  <script>
+    function test() {
+      console.log('test');
+    }
+  </script>
