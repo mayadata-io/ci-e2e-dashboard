@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import {
+  Router,
+  RouterEvent,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError
+} from "@angular/router";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  private currentRoute: any;
+  private header: string;
+  constructor(private router: Router) {
+    router.events.subscribe(val => {
+      this.currentRoute = this.router.url;
+      if (this.currentRoute === "/") {
+        this.header = "CI/E2E Dashboard For Master branch of OpenEBS";
+      } else {
+        this.header = "Workloads Dashboard";
+      }
+    });
   }
 
+  ngOnInit() {}
 }
