@@ -46,6 +46,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public workloadyaml: any;
   public workloadName: any;
   public openebsEngine: any;
+  public dashboardurl: any;
   public pvc: pvc[] = [];
   public pvctemp;
   public pvcarray;
@@ -131,6 +132,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.namespaceyaml = res.nameSpaceyaml;
       this.workloadyaml = res.workloadyaml;
       this.applicationType = res.applicationType;
+      this.dashboardurl = res.dashboardurl;
+      console.log(this.dashboardurl);
     });
 
     for (let j = 0; j < 100; j++) {
