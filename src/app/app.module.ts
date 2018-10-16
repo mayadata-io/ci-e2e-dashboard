@@ -18,6 +18,7 @@ import { ChartComponent } from './components/chart/chart.component';
 import { WorkloadDashboardComponent } from './workload-dashboard/workload-dashboard.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { WorkloadsComponent } from './workloads/workloads.component';
     ChartComponent,
     WorkloadDashboardComponent,
     BannerComponent,
-    WorkloadsComponent
+    WorkloadsComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

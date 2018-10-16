@@ -34,7 +34,8 @@ export interface yaml {
     nameSpaceyaml: string,
     workloadName: string,
     openebsEngine: string,
-    applicationType:string
+    applicationType:string,
+    dashboardurl:string
 }
 export interface statefulSet {
     kind: string,

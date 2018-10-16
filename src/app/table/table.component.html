@@ -41,22 +41,22 @@
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3>BRANCH</h3>
             <h4>Master</h4>
-            <h3>Commit in last one week: 4</h3>
+            <h3>Commit in last one week: _</h3>
             <!-- <h3>{{ masterCommitsCount(i, restItems.dashboard) }}</h3> -->
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
           <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
             <h3>BRANCH</h3>
-            <h4>v 0.7</h4>
-            <h3>Commit in last one week: 4</h3>
+            <h4>v0.7</h4>
+            <h3>Commit in last one week: _</h3>
           </a>
         </li>
         <li style="pointer-events:none; cursor:pointer;" class="nav-item">
         <a class="nav-link" href="#references" role="tab" data-toggle="tab">
           <h3>BRANCH</h3>
-          <h4>v 0.7.1</h4>
-          <h3>Commit in last one week: 4</h3>
+          <h4>v0.7.1</h4>
+          <h3>Commit in last one week: _</h3>
         </a>
         </li>
       </ul>
@@ -71,7 +71,7 @@
                   <th>Commit</th>
                   <th>Updated</th>
                   <th>Build</th>
-                  <th style="text-align:center">E2E Pipeline</th>
+                  <th style="text-align:center">E2E Pipelines</th>
                 </tr>
               </thead>
               <tbody *ngIf="undefined !== restItems">
@@ -127,8 +127,8 @@
         <img src="../assets/images/cloud/{{ image }}">
         <h5>{{ name }}</h5>
         <h6>Kubernetes 1.10.0</h6> 
-          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:15px; padding-right:15px; font-size:15px">GITLAB STAGES</span></button>
-          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:25px; padding-right:25px; font-size:15px">LITMUS EYE</span></button>
+          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:15px; padding-right:15px; font-weight: bold; font-size:15px">GITLAB STAGES</span></button>
+          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-primary"><span style="padding-left:25px; padding-right:25px; font-weight: bold; font-size:15px">LITMUS EYE</span></button>
         </div>
         <hr>
         <div class="row">
@@ -169,12 +169,12 @@
           <hr>
           <div class="row">
               <div class="col-sm-6">
-                  <a style="margin-left:40px;" href="#">Baseline Images</a>
-                <p style="margin-top:20px;" >Container images used to run this pipeline</p>
+                  <a style="margin-left:30px;" href="#">Baseline Images</a>
+                <p style="margin-top:10px;" >Container images used to run this pipeline</p>
               </div>
               <div class="col-sm-6">
                 <a style="margin-left:40px;" href="{{ litmus }}">litmus tests</a>
-                <p style="margin-top:20px;">litmus tests run in this pipeline</p>
+                <p style="margin-top:10px;">litmus tests run in this pipeline</p>
               </div>
             </div>
       </div>
