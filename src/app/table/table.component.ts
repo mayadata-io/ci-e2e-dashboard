@@ -379,6 +379,7 @@ export class TableComponent implements OnInit {
   public commitUser: any;
   public baseline: any;
   public litmus: any;
+  public rating: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -394,6 +395,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = ""
       this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
     }
@@ -409,6 +411,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = this.commitUsr(data.commits[index])
       this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
     }
@@ -424,6 +427,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = this.commitUsr(data.commits[index])
       this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
     }
@@ -439,6 +443,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = this.commitUsr(data.commits[index])
       this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
     }
@@ -454,6 +459,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = this.commitUsr(data.commits[index])
       this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
     }
@@ -469,6 +475,7 @@ export class TableComponent implements OnInit {
       this.failedJobs = this.failed(pipelineData[index].jobs)
       this.commitMessage = this.commitMess(data.commits[index])
       this.commitUser = this.commitUsr(data.commits[index])
+      this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = this.commitUsr(data.commits[index])
       this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
     }
@@ -495,6 +502,14 @@ export class TableComponent implements OnInit {
     catch {
       return "N/A";
     }
+  }
+
+  ratingCalculation(data) {
+    var executed = this.executed(data);
+    var passed = this.passed(data);
+    var rating = ((passed/executed)*100) - 5;
+    console.log(rating);
+    return rating + "%"
   }
 
   executed(data) {
