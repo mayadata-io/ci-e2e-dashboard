@@ -1,6 +1,6 @@
 .body {
     background-color: white;
-    font-family: lato;
+    // font-family: lato;
     // text-rendering: optimizeLegibility;
     // -webkit-font-feature-settings: "kern" 1;
     // -webkit-font-smoothing: subpixel-antialiased;
@@ -10,7 +10,7 @@
 }
 
 .detail {
-    font-family: lato;
+    // font-family: lato;
     background-color: white;
     height: 885px;
     overflow-x: scroll;
@@ -22,7 +22,7 @@
 }
 ul .active {
     // background-color: #5EB3E0;
-    background-image: linear-gradient(#5FB5E1, #4F9AD2);
+    background-image: linear-gradient(#64C2E1, #348FC0);
     h3 {
         color: #d3d3d3;
     }
@@ -30,13 +30,13 @@ ul .active {
 h1 {
     font-size: 1.2em;
     // font-family: lato;
-    font-weight: bold;
+    // font-weight: bold;
     color: #54576B;
 }
 h2 {
     font-size: 0.7em;
     // font-family: lato;
-    font-weight: bold;
+    // font-weight: bold;
     color: #949BB3;
 }
 h3 {
@@ -44,7 +44,7 @@ h3 {
     text-align: left;
     // font-family: lato;
     padding-left: 20px;
-    font-weight: bold;
+    // font-weight: bold;
     color: #949BB3;
 }
 h4 {
@@ -53,6 +53,7 @@ h4 {
     text-align: left;
     padding-left: 20px;
     color: #3A3D54;
+    font-weight: 10;
 }
 h5 {
     font-size: 1.2em;
@@ -66,7 +67,7 @@ h6 {
     word-break: normal;
     font-size: 0.9em;
     // font-family: lato;
-    font-weight: bold;
+    // font-weight: bold;
     color: #949BB3;
     text-align: center;
 }
@@ -76,15 +77,15 @@ p {
     // word-break: normal;
     font-size: 15px;
     // font-family: lato;
-    font-weight: bold;
+    // font-weight: bold;
     color: #949BB3;
     text-align: center;
 }
 tr {
     font-size: 0.8em;
     // font-family: lato;
-    font-weight: bold;
-    color: #949BB3;
+    // font-weight: bold;
+    color: #54576B;
     border-bottom:1px solid #d3d3d3;
 }
 .btn-txt {
@@ -152,3 +153,17 @@ img {
       z-index: 0;
     }
   }
+
+.btn-outline-primary:hover {
+    color: #fff;
+    // background-color: #007bff;
+    background-image: linear-gradient(#1991EB, #2DA1F8);
+    border-color: #1585D8;
+}
+
+.btn-outline-primary {
+    color: #354052;
+    background-color: transparent;
+    background-image: none;
+    border-color: #DFE3E9;
+}
