@@ -8,41 +8,12 @@
           <h2>Summary of build status and E2E pipeline status on OpenEBS repository</h2>
         </div>
       </div>
-    <!-- <div class="container">
-        <ul class="nav nav-tabs nav-justified" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" role="tab" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#menu1">Menu 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#menu2">Menu 2</a>
-          </li>
-        </ul>
-      
-        <div class="tab-content">
-          <div role="tabpanel" id="home" class="container tab-pane active"><br>
-            <h3>HOME</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </div>
-          <div role="tabpanel" id="menu1" class="container tab-pane fade"><br>
-            <h3>Menu 1</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-          <div role="tabpanel" id="menu2" class="container tab-pane fade"><br>
-            <h3>Menu 2</h3>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-          </div>
-        </div>
-      </div> -->
       <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3>BRANCH</h3>
             <h4>Master</h4>
-            <h3>Commit in last one week: _</h3>
-            <!-- <h3>{{ masterCommitsCount(i, restItems.dashboard) }}</h3> -->
+            <h3>Commit in last one week: {{ masterCommitsCount(restItems.dashboard.commits) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
@@ -95,10 +66,6 @@
                       <i [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
                       <span style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</span>
                     </button>
-                    <!-- <button>
-                        <i [ngClass]="iconClass(buildStatus(i, restItems.dashboard['pipelines'][6]))"></i>
-                        {{buildStatus(i, restItems.dashboard['pipelines'][6])}}
-                      </button> -->
                   </td>
                   <td class="text-center">
                     <i (click)="detailPannel('GKE', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard["pipelines"][0])'></i> | 
@@ -170,11 +137,11 @@
           <div class="row">
               <div class="col-sm-6">
                   <a style="margin-left:30px;" href="#">Baseline Images</a>
-                <p style="margin-top:10px;" >Container images used to run this pipeline</p>
+                <p style="margin-top:5px;" >Container images used to run this pipeline</p>
               </div>
               <div class="col-sm-6">
-                <a style="margin-left:40px;" href="{{ litmus }}">litmus tests</a>
-                <p style="margin-top:10px;">litmus tests run in this pipeline</p>
+                <a style="margin-left:40px; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
+                <p style="margin-top:5px;">Litmus tests run in this pipeline</p>
               </div>
             </div>
       </div>

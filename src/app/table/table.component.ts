@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
     }, 500);
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 10000);
+    }, 50000);
 
     // var data = this.getRestItems();
     // this.detailPannel('GKE', 0, data)
@@ -128,9 +128,14 @@ export class TableComponent implements OnInit {
     }
   }
 
-  masterCommitsCount(index,data) {
-    console.log(index);
-    console.log(data);
+  masterCommitsCount(data) {
+    var count = 0;
+    for (var i=0; i < data.length; i++) {
+      if (data[i].updated <= "7d 0h 0m") {
+        count++;
+      }
+    }
+    return count;
   }
 
   // getCommit returns commit id
@@ -186,8 +191,8 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-danger";
     else if (status == "running")
       return "btn btn-txt btn-outline-primary";
-    else if (status == "N/A")
-      return "btn btn-txt btn-cancel btn-outline-dark";
+    else if (status == "n/a")
+      return "btn btn-txt btn-outline-secondary";
   }
 
   tooltipData(index, commits, build) {
@@ -202,28 +207,6 @@ export class TableComponent implements OnInit {
       return "n/a"
     }
   }
-
-  // buildStatus(i, platformItems) {
-  //   try {
-  //     if (platformItems[i].status == "running") {
-  //       return "running";
-  //     }
-  //     else if (platformItems[i].status == "canceled") {
-  //       return "cancel";
-  //     }
-  //     else if (platformItems[i].status == "pending") {
-  //       return "pending";
-  //     }
-  //     else if (platformItems[i].status == "success") {
-  //       return "success";
-  //     }
-  //     else if (platformItems[i].status == "failed") {
-  //       return "failed";
-  //     }
-  //   } catch {
-  //     return "n/a";
-  //   }
-  // }
 
   // GCP Pipeline
   // This function extracts the Run status in GCP pipeline using current index
@@ -508,7 +491,6 @@ export class TableComponent implements OnInit {
     var executed = this.executed(data);
     var passed = this.passed(data);
     var rating = ((passed/executed)*100) - 5;
-    console.log(rating);
     return rating + "%"
   }
 
