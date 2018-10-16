@@ -27,9 +27,9 @@ export class TableComponent implements OnInit {
     } else {
       this.restItemsUrl = "https://staging.openebs.ci/api/";
     }
-    this.meta.addTag({ name: 'description', content: 'CI/E2E Dashboard For Master branch of OpenEBS' });
+    this.meta.addTag({ name: 'description', content: 'Openebs.ci is the CI and E2E portal for OpenEBS github PRs. Using this portal, OpenEBS community uses this portal to find the build quality against each PR that is merged. It also hosts stateful application workloads with various deployment scenarios. The example workloads include MongoDB, Percona, WordPress, Prometheus, Redis, CockroachDB etc.' });
     this.meta.addTag({ name: 'keywords', content: 'Openebs,EBS,workload,mongo,jiva,cstor' });
-    this.titleService.setTitle( "CI/E2E Dashboard " );
+    this.titleService.setTitle( "CI/E2E dashboard for OpenEBS" );
   }
 
   ngOnInit() {

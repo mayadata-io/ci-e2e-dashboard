@@ -9,6 +9,7 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
 a,
 a:hover,
 a:focus {
@@ -40,18 +41,20 @@ a:focus {
   border-color: white;
   padding: 10px;
   font-size: 1.1em;
-  font-family: lato;
-  font-weight: bold;
+  // font-family: lato;
+  // font-weight: bold;
   color: #54576b;
   display: block;
 }
 #sidebar ul li a:hover {
-  color: white;
-  background: #54576b;
+  border-radius: 10px;
+  // color: white;
+  background: #F2F4F6;
 }
 #sidebar ul li.active > a {
-  color: white;
-  background-color: #54576b;
+  // color: white;
+  background-color: #F2F4F6;
+  border-radius: 10px;
 }
 .menu .list-group-item:last-child {
   border-bottom: 10;
