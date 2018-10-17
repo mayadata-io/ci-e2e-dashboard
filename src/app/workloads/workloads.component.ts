@@ -16,7 +16,9 @@ import {
   overAllStatus,
   pvc,
   personDetail,
-  yaml
+  yaml,
+  runnigPos,
+  completes
 } from "../model/data.model";
 import { ISubscription } from "rxjs/Subscription";
 @Component({
@@ -27,12 +29,16 @@ import { ISubscription } from "rxjs/Subscription";
 export class WorkloadsComponent implements OnInit, OnDestroy {
   private podUnsub: ISubscription;
   private timeUnsub: ISubscription;
+  private litmustimeUnsub: ISubscription;
+  private litmusUnsub: ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
   public numberController: any;
+  public completes: completes[] = [];
+  public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
   public litmuspod: statefulSet[] = [];
   public jivaContrllers: jivaController[] = [];
@@ -193,6 +199,15 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           };
         });
     });
+
+    this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
+      this.litmusUnsub = this.litmusServies
+        .getLitmusStatus(this.currentRoute[1])
+        .subscribe(res => {
+          this.runnigPos = res.runnigPos;
+          this.completes = res.completes;
+        });
+    });
     this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
@@ -203,6 +218,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.podUnsub.unsubscribe();
     this.timeUnsub.unsubscribe();
+    this.litmusUnsub.unsubscribe();
+    this.litmustimeUnsub.unsubscribe();
   }
   public listVolume() {
     this.kubernetsServices
