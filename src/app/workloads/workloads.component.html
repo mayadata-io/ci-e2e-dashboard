@@ -112,7 +112,7 @@
           <div class="d-flex align-items-end justify-content-between p-2 bg-white">
             <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
               <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
-                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm" style="width:50px;color:black;background:white;"
+                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
                 (click)="save()">Go</button>
             </div>
             <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" [ngClass]="{
@@ -124,7 +124,7 @@
           <div class="d-flex align-items-end justify-content-between p-2 bg-white">
             <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
               <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
-                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm" style="width:50px;color:black;background:white;"
+                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
                 (click)="read()">Go</button>
             </div>
             <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" [ngClass]="{
@@ -139,8 +139,8 @@
         <div class="col-md-12 ">
           <div class=" p-2 configuration-header ">
             <div class="d-flex justify-content-between ">
-              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary btn-sm float-right "
-                (click)="listVolume() " style="color:#354052;background:white;">Execute</button>
+              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
+                (click)="listVolume() " >Execute</button>
             </div>
 
           </div>
@@ -207,7 +207,7 @@
                       </select>
                     </div>
                     <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm" style="width:50px;color:black;background:white;"
+                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
                         (click)="runChaosTest(selectedChaos, selectedApplication) ">
                         Go </button>
                     </div>
