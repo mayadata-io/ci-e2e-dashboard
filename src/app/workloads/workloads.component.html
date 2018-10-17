@@ -6,20 +6,22 @@
           <div class="d-flex align-items-end mt-4" style="margin-bottom:2.5rem">
             <img src="/assets/images/workloads-logos/{{workloadName}}.svg" alt="" style="height:60px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:18px"> {{workloadImage}} </p>
-              <p class="mb-0" style="font-size:14px">{{applicationType}} {{numberstatefullSets}} Replica
-                {{numberstatefullSets}} Zones</p>
+              <p class="mb-0" style="font-size:18px;color:#354052"> {{workloadImage}} </p>
+              <p class="mb-0" style="font-size:14px;color:#354052">{{applicationType}}- {{numberstatefullSets}}
+                Replica-
+                {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
             </div>
           </div>
           <div class="d-flex justify-content-between my-2 text-center">
             <p class="pl-2 text-center" [ngClass]="{
               'w-100':dashboardurl === ''
-            }"
-            > <a href="{{workloadyaml}}"> Depolyments yaml </a></p>
+            }"> <a href="{{workloadyaml}}"
+                style="color:#269BF3"> Depolyment yaml </a></p>
             <p class="pr-2 text-center" [ngClass]="{
               'display':dashboardurl !== '',
               'hide':dashboardurl === ''
-            }"><a href="{{workloadyaml}}">Live Access</a></p>
+            }"><a
+                href="{{workloadyaml}}" style="color:#269BF3">Live Access</a></p>
           </div>
         </div>
         <div class="col-md-12">
@@ -28,17 +30,18 @@
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3">
                 <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:21px">
-                <p class="mb-0" style="font-size:14px;"> &nbsp;&nbsp;1.10.11</p>
+                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
               </div>
-              <p class=" mb-0" style="font-size:14px">Namespace: {{namespace}}</p>
+              <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
             </div>
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3 ml-4">
                 <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:21px">
-                <p class="mb-0" style="font-size:14px"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
+                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
               </div>
-              <p class="ml-4 mb-0" style="font-size:14px">Controller {{numberController}} Replicas {{numberController}}
-                Zones</p>
+              <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
+                {{numberController}}
+                Zones- {{numberController}}</p>
             </div>
 
           </div>
@@ -48,7 +51,7 @@
 
       <div class="row bg-white my-2">
         <div class="col-md-12 d-flex justify-content-around workloads my-5">
-          <div class="workload-deatils mx-2" style="width:33%" *ngFor="let pvc of pvcarray">
+          <div class="workload-deatils mx-2" style="width:33%;color: #7F8FA4" *ngFor="let pvc of pvcarray">
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
                 <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
@@ -107,7 +110,7 @@
         <div class="col-md-12 ">
           <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
           <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-            <div class="d-flex align-items-end justify-content-between" style="width:60%">
+            <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
               <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
                 Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm" style="width:50px;color:black;background:white;"
                 (click)="save()">Go</button>
@@ -119,7 +122,7 @@
             </div>
           </div>
           <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-            <div class="d-flex align-items-end justify-content-between" style="width:60%">
+            <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
               <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
                 Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm" style="width:50px;color:black;background:white;"
                 (click)="read()">Go</button>
@@ -137,7 +140,7 @@
           <div class=" p-2 configuration-header ">
             <div class="d-flex justify-content-between ">
               <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary btn-sm float-right "
-                (click)="listVolume() " style="color:black;background:white;">Execute</button>
+                (click)="listVolume() " style="color:#354052;background:white;">Execute</button>
             </div>
 
           </div>
@@ -145,22 +148,22 @@
           <div class=" my-2 ">
             <div class="py-1 ">
               <div class=" py-1 ">
-                <table class="table " *ngFor="let volume of jivas ">
+                <table style="font-size:14px;color:#7F8FA4" class="table " *ngFor="let volume of jivas ">
                   <tr>
-                    <td>Volume Name:</td>
-                    <td>{{volume.name}}</td>
+                    <td style="padding:0;border:none">Volume Name:</td>
+                    <td style="padding:0;border:none">{{volume.name}}</td>
                   </tr>
                   <tr>
-                    <td>Status:</td>
-                    <td>{{volume.status}}</td>
+                    <td style="padding:0;border:none">Status:</td>
+                    <td style="padding:0;border:none">{{volume.status}}</td>
                   </tr>
                   <tr>
-                    <td>Replica Count:</td>
-                    <td>{{volume.replicas}}</td>
+                    <td style="padding:0;border:none">Replica Count:</td>
+                    <td style="padding:0;border:none">{{volume.replicas}}</td>
                   </tr>
                   <tr>
-                    <td>Capacity:</td>
-                    <td>{{volume.size}}</td>
+                    <td style="padding:0;border:none">Capacity:</td>
+                    <td style="padding:0;border:none">{{volume.size}}</td>
                   </tr>
                 </table>
               </div>
@@ -186,7 +189,7 @@
           <hr class="bg-white my-0" style="width: 80%">
         </div>
         <div class="col-md-12 pr-0">
-          <table class="table action-table bg-white pt-1">
+          <table class="table action-table bg-white pt-1 mb-0">
             <tbody>
               <tr>
                 <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 14px"> Choose one of the test
@@ -229,6 +232,42 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="col-md-12 pr-0">
+          <div class="bg-white p-2">
+            <div style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
+              <p style="font-size:18px"> Running litmus test</p>
+              <p *ngIf="runnigPos.length == 0;else runnig">
+                no litmus test is running
+              </p>
+              <ng-template #runnig>
+                <div *ngFor="let run of runnigPos " style="display:flex;font-size: 14px;justify-content: space-between">
+                  <p style=" width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;"
+                    placement="bottom" ngbTooltip="{{run.name}}">
+                    {{run.name}} </p>
+                  <p style="font-size:14px"> {{run.status}}</p>
+                </div>
+              </ng-template>
+              <p style="font-size:18px"> All litmus test</p>
+              <p *ngIf="completes.length==0;else comp">
+                no litmus test is done yet
+              </p>
+              <ng-template #comp>
+                <div *ngFor="let complete of completes " style="display:flex;font-size: 14px;justify-content: space-between">
+                  <p style=" width: 150px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;font-size: 14px"
+                    placement="bottom" ngbTooltip="{{complete.name}}">
+                    {{complete.name}} </p>
+                  <p style="font-size:14px"> {{complete.status}} </p>
+                </div>
+              </ng-template>
+            </div>
+          </div>
         </div>
       </div>
     </div>
