@@ -12,6 +12,44 @@
     // font-weight: bold;
     color: #54576B;
 }
+
+.navbar-logo {
+    height: 30px;
+}
+
+.newsletter {
+    margin-left:10px;
+    margin-right:10px;
+    height:25px;
+}
+
+.slack {
+    margin-left:10px;
+    margin-right:10px;
+    height: 28px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .header-text {
+        font-size: 13px;
+    }
+    .navbar-logo {
+        height: 22px;
+    }
+    .newsletter {
+        height:20px;
+    }
+    span {
+        font-size: 13px;
+    }
+    .slack {
+        height: 22px;
+    }
+    .heart {
+        font-size: 10px !important; 
+    }
+}
+
 a {
     font-size: 14px;
     color: #8890A9;

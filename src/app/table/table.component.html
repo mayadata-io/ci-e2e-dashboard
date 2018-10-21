@@ -11,9 +11,9 @@
       <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
-            <h3>BRANCH</h3>
+            <h3 style="color:white">BRANCH</h3>
             <h4>Master</h4>
-            <h3>Commit in last one week: {{ masterCommitsCount(restItems.dashboard.commits) }}</h3>
+            <h3 style="color:white">Commit in last one week: {{ masterCommitsCount(restItems.dashboard.commits) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
@@ -23,18 +23,18 @@
             <h3>Commit in last one week: _</h3>
           </a>
         </li>
-        <li style="pointer-events:none; cursor:pointer;" class="nav-item">
+        <!-- <li style="pointer-events:none; cursor:pointer;" class="nav-item">
         <a class="nav-link" href="#references" role="tab" data-toggle="tab">
           <h3>BRANCH</h3>
           <h4>v0.7.1</h4>
           <h3>Commit in last one week: _</h3>
         </a>
-        </li>
+        </li> -->
       </ul>
         <!-- Tab panes -->
         <div class="table container tab-content">
           <div role="tabpanel" class="tab-pane active" id="profile">
-            <table class="table table-borderless" onload="detailPannel('GKE', i, restItems.dashboard);">
+            <table style="min-width:780px;overflow-x:auto"  class="table table-borderless">
               <thead>
                 <tr>
                   <th>#</th>
@@ -94,18 +94,18 @@
         <img src="../assets/images/cloud/{{ image }}">
         <h5>{{ name }}</h5>
         <h6>Kubernetes 1.10.0</h6> 
-          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span style="padding-left:15px; padding-right:15px; font-weight: bold; font-size:15px">GITLAB STAGES</span></button>
-          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span style="padding-left:25px; padding-right:25px; font-weight: bold; font-size:15px">LITMUS EYE</span></button>
+          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
+          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton litmusButton">LITMUS EYE</span></button>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-4">
-            <div style="padding-left:40px; padding-top:30px;">
-                <div style="margin-left:5px;" class="star-ratings-css">
-                    <div class="star-ratings-css-top" [style.width]=rating><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                    <h6 style="font-size:13px; padding-top:10px;">SCORE</h6>
-                  </div>
+            <div style="padding-top:30px;">
+                <div class="star-ratings-css">
+                  <div style="padding-left:8px;" class="star-ratings-css-top" [style.width]=rating><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  <div style="padding-left:8px;" class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  <p style="font-size:13px; padding-top:8px;">SCORE</p>
+                </div>
             </div>
           </div>
           <div class="col-sm-4">
@@ -124,7 +124,7 @@
           <hr>
           <div class="row">
             <div class="col-sm-4">
-              <h6><img height=50px; src="../assets/images/icons/pull-request.svg"></h6>
+              <h6><img height=55px; src="../assets/images/icons/pull-request.svg"></h6>
               <h6>Pull Request</h6>
             </div>
             <div class="col-sm-8">
@@ -156,9 +156,3 @@
     </div>
     <!-- detail pannel End -->
   </div>
-  
-  <script>
-    function test() {
-      console.log('test');
-    }
-  </script>

@@ -16,7 +16,6 @@ export class TableComponent implements OnInit {
   items = [];
   restItems: any;
   restItemsUrl: string;
-  // restItemsUrl = "http://localhost:3000/";
 
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;

@@ -78,9 +78,9 @@ tr {
     pointer-events: none;
 }
 .table {
-    margin-top:40px;
-    overflow-y: auto;
-    max-height:600px;
+    margin-top:10px;
+    overflow: auto;
+    max-height:630px;
 }
 .button {
     margin-right: auto;
@@ -171,4 +171,31 @@ img {
   color: inherit;
   background-color: white;
   border-color: #343a40;
+}
+
+.gitlabButton {
+    padding-left:15px;
+    padding-right:15px; 
+    font-weight: bold; 
+    font-size:15px
+}
+
+.litmusButton {
+    padding-left:25px; 
+    padding-right:25px; 
+    font-weight: bold; 
+    font-size:15px
+}
+
+@media only screen and (max-width: 1500px) {
+    .statusbutton {
+        font-size: 13px !important; 
+    }
+    @media only screen and (max-width: 1400px) {
+        .statusbutton {
+            font-size: 11px !important; 
+            padding-left:14px;
+            padding-right:14px;
+        }
+    }
 }
