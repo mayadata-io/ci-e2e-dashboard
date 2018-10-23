@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="row bg-white my-2" style="padding-top:37px;padding-bottom:37px;">
         <div class="col-md-6" style="margin:0 auto">
-          <div class="d-flex align-items-end mt-4" style="margin-bottom:2.5rem">
+          <div class="d-flex align-items-end mt-4 justify-content-center" style="margin-bottom:2.5rem">
             <img src="/assets/images/workloads-logos/{{workloadName}}.svg" alt="" style="height:60px">
             <div class="ml-2">
               <p class="mb-0" style="font-size:18px;color:#354052"> {{workloadImage}} </p>
@@ -16,12 +16,12 @@
             <p class="pl-2 text-center" [ngClass]="{
               'w-100':dashboardurl === ''
             }"> <a href="{{workloadyaml}}"
-                style="color:#269BF3"> Depolyment yaml </a></p>
+                style="color:#269BF3" target="_blank"> Depolyment yaml </a></p>
             <p class="pr-2 text-center" [ngClass]="{
               'display':dashboardurl !== '',
               'hide':dashboardurl === ''
             }"><a
-                href="{{workloadyaml}}" style="color:#269BF3">Live Access</a></p>
+                href="{{dashboardurl}}" style="color:#269BF3" target="_blank">Live Access</a></p>
           </div>
         </div>
         <div class="col-md-12">
@@ -29,14 +29,14 @@
           <div class="d-flex justify-content-between">
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3">
-                <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:21px">
+                <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:28px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
               </div>
               <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
             </div>
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3 ml-4">
-                <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:21px">
+                <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:28px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
@@ -139,8 +139,8 @@
         <div class="col-md-12 ">
           <div class=" p-2 configuration-header ">
             <div class="d-flex justify-content-between ">
-              <div>Query command mayactl volumes list -n {{namespace}}</div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
-                (click)="listVolume() " >Execute</button>
+              <div style="font-size:18px;">Query command &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;font-style:italic"> mayactl volumes list -n {{namespace}} </span></div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
+                (click)="listVolume() ">Execute</button>
             </div>
 
           </div>
@@ -182,17 +182,21 @@
       </div> -->
       <div class="row my-2 ">
         <div class="col-md-12 pr-0">
+         
           <div class="bg-white text-center" style="padding-top:9rem;padding-bottom: 7rem">
-            <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
+            <img style="width:55%;" src="/assets/images/company-logos/litmuslogo.svg" alt="">
             <p class="mb-0" style="font-size:18px">Run the live chaos test</p>
           </div>
           <hr class="bg-white my-0" style="width: 80%">
         </div>
         <div class="col-md-12 pr-0">
+           <div class="alert alert-primary alert-dismissible text-center mb-0" style="font-size:14px;padding:0.3rem" role="alert" *ngIf="isAlert">
+            {{ alertMessage }}
+          </div>
           <table class="table action-table bg-white pt-1 mb-0">
             <tbody>
               <tr>
-                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 14px"> Choose one of the test
+                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 14px"> Choose one of the tests
                   below </td>
               </tr>
               <tr>

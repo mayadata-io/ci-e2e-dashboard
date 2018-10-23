@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Routing } from './app.routing';
 
 import { PersonService } from './services/savereaddelete.service';
 import { KubernetsService } from './services/kubernetes.service';
 import { LitmusService } from './services/litmus.services';
+import { AgileService } from './services/agile.services';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -36,9 +37,11 @@ import { OverviewComponent } from './overview/overview.component';
     BrowserModule,
     HttpClientModule,
     Routing,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [PersonService,KubernetsService, LitmusService,HttpClient,Meta,Title],
+  providers: [PersonService,KubernetsService, LitmusService,HttpClient,Meta,Title,AgileService],
   bootstrap: [AppComponent],
   exports: [RouterModule,RouterLinkActive]
 })

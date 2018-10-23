@@ -92,7 +92,7 @@
   <div class="col-sm-4 px-0">
     <div class="detail container border">
         <div class="text-center">
-        <img src="../assets/images/cloud/{{ image }}">
+        <img src="/assets/images/cloud/{{ image }}">
         <h5>{{ name }}</h5>
         <h6>Kubernetes 1.10.0</h6> 
           <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
@@ -125,7 +125,7 @@
           <hr>
           <div class="row">
             <div class="col-sm-4">
-              <h6><img height=55px; src="../assets/images/icons/pull-request.svg"></h6>
+              <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
               <h6>Pull Request</h6>
             </div>
             <div class="col-sm-8">
@@ -136,12 +136,12 @@
           </div>
           <hr>
           <div class="row">
-              <div class="col-sm-6">
-                  <a style="margin-left:30px; cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/e2e-infrastructureci">Baseline Images</a>
+              <div class="col-sm-6 text-center">
+                  <a style=" cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/e2e-infrastructureci">Baseline Images</a>
                 <p style="margin-top:5px;" >Container images used to run this pipeline</p>
               </div>
-              <div class="col-sm-6">
-                <a style="text-align:center; cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
+              <div class="col-sm-6 text-center">
+                <a style="cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
                 <p style="margin-top:5px;">Litmus tests run in this pipeline</p>
               </div>
             </div>
