@@ -13,7 +13,8 @@
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
             <h4>Master</h4>
-            <h3 style="color:white">Commits in last one week: {{ masterCommitsCount(restItems.dashboard.commits) }}</h3>
+            <!-- <h3>Commits in last one week: _</h3> -->
+            <h3 style="color:white">Commits in last one week: {{ masterCommitsCount(restItems.dashboard.build) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
@@ -56,24 +57,24 @@
                 </tr>
                 <tr *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
                   <td>{{  i+1 }}</td>
-                  <td>{{ getCommitName(i,restItems.dashboard['commits']) }}</td>
+                  <td>{{ getCommitName(i,restItems.dashboard['build']) }}</td>
                   <td>
-                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['commits']))">{{ getCommit(i,restItems.dashboard['commits']) }}</a>
+                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
                   </td> 
-                  <td>{{ updated(i,restItems.dashboard['commits']) }}</td>
+                  <td>{{ updated(i,restItems.dashboard['build']) }}</td>
                   <td>
-                    <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['commits'], restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
-                      <i [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
+                    <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
+                      <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
                       <span style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</span>
                     </button>
                   </td>
                   <td class="text-center">
-                    <i (click)="detailPannel('GKE', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard["pipelines"][0])'></i> | 
-                    <i (click)="detailPannel('AKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard["pipelines"][1])'></i> | 
-                    <i (click)="detailPannel('EKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard["pipelines"][2])'></i> | 
-                    <i (click)="detailPannel('Packet', i, restItems.dashboard)" style="padding:10px; cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard["pipelines"][3])'></i> | 
-                    <i (click)="detailPannel('GCP', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard["pipelines"][4])'></i> | 
-                    <i (click)="detailPannel('AWS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard["pipelines"][5])'></i>
+                    <i (click)="detailPannel('GKE', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i> | 
+                    <i (click)="detailPannel('AKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i> | 
+                    <i (click)="detailPannel('EKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i> | 
+                    <i (click)="detailPannel('Packet', i, restItems.dashboard)" style="padding:10px; cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i> | 
+                    <i (click)="detailPannel('GCP', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i> | 
+                    <i (click)="detailPannel('AWS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i>
                   </td>
                 </tr>
               </tbody>
@@ -136,11 +137,11 @@
           <hr>
           <div class="row">
               <div class="col-sm-6">
-                  <a style="margin-left:30px;" href="#">Baseline Images</a>
+                  <a style="margin-left:30px; cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/e2e-infrastructureci">Baseline Images</a>
                 <p style="margin-top:5px;" >Container images used to run this pipeline</p>
               </div>
               <div class="col-sm-6">
-                <a style="margin-left:40px; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
+                <a style="text-align:center; cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
                 <p style="margin-top:5px;">Litmus tests run in this pipeline</p>
               </div>
             </div>

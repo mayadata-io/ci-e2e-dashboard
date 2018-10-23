@@ -199,3 +199,19 @@ img {
         }
     }
 }
+
+.btn-status-warning {
+    color:  #ffb000;
+    background-color: transparent;
+    background-image: none;
+    border-color:  #ffb000;
+}
+
+.custom-pointer {
+    // cursor: not-allowed;
+    pointer-events: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
