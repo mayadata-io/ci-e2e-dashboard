@@ -44,7 +44,7 @@ export class TableComponent implements OnInit {
     }, 500);
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 50000);
+    }, 10000);
 
     // var data = this.getRestItems();
     // this.detailPannel('GKE', 0, data)
@@ -123,30 +123,31 @@ export class TableComponent implements OnInit {
     try {
       return commits[index].name;
     } catch (e) {
-      return "N/A";
+      return "n/a";
     }
   }
 
   masterCommitsCount(data) {
     var count = 0;
     for (var i=0; i < data.length; i++) {
-      if (data[i].updated <= "7d 0h 0m") {
+      if (data[i].jobs[0].updated <= "7d 0h 0m") {
         count++;
       }
     }
-    return count;
+    return count -1;
   }
 
   // getCommit returns commit id
   getCommit(index, commits) {
     try {
-      if (commits[index].short_id) {
-        return commits[index].short_id;
+      if (commits[index].sha) {
+        var test = (commits[index].sha)
+        return test;
       } else {
-        return "N/A";
+        return "n/a";
       }
     } catch (e) {
-      return "N/A";
+      return "n/a";
     }
   }
 
@@ -164,11 +165,11 @@ export class TableComponent implements OnInit {
   }
 
   // Updated returns commit id
-  updated(index, commits) {
+  updated(index, data) {
     try {
-      return commits[index].updated + ' ago';
+      return data[index].jobs[0].updated;
     } catch (e) {
-      return "N/A";
+      return "n/a";
     }
   }
   // Fa Icon a/c to the status
@@ -194,14 +195,14 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-secondary";
   }
 
-  tooltipData(index, commits, build) {
+  tooltipData(index, build) {
     try {
       if (build[index].status == "success") {
-        return "Docker Image : " + commits[index].name + "-" + commits[index].short_id
+        var sort_id = (build[index].sha).slice(0,8)
+        return "Docker Image : " + build[index].name + "/" + sort_id
       } else if (build[index].status == "failed") {
         return "Build failed";
       }
-
     } catch (e) {
       return "n/a"
     }
@@ -234,8 +235,50 @@ export class TableComponent implements OnInit {
     }
   }
 
-  gkestatus(i, pipelines) {
+  gkestatus(i, dashboard) {
     try {
+      if(dashboard.build[i].status == "success") {
+        var pipeline = dashboard.pipelines[0];
+        if (pipeline[i].status == "success") {
+          return "fa fa-check-circle btn-txt btn-outline-success";
+        }
+        else if (pipeline[i].status == "canceled") {
+          return "fa fa-ban btn-txt btn-outline-secondary";
+        }
+        else if (pipeline[i].status == "pending") {
+          return "fa fa-clock-o btn-txt btn-outline-warning";
+        }
+        else if (pipeline[i].status == "failed") {
+          var count = 0;
+          for (var j = 0; j < pipeline[i].jobs.length; j++) {
+            if(pipeline[i].jobs[j].status == "success") {
+              count++;
+            }
+          }
+          var percentage = (count/pipeline[i].jobs.length)*100;
+          if (percentage > 50) {
+            return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+          } else {
+            return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+          }
+        }
+        else if (pipeline[i].status == "running") {
+          return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+        }
+      } else if (dashboard.build[i].status == "running") {
+          return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+      } else {
+        return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+      }
+    }
+    catch {
+      return "n/a";
+    }
+  }
+  aksstatus(i, dashboard) {
+    try {
+      if(dashboard.build[i].status == "success") {
+        var pipelines = dashboard.pipelines[1];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
       }
@@ -246,18 +289,37 @@ export class TableComponent implements OnInit {
         return "fa fa-clock-o btn-txt btn-outline-warning";
       }
       else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        var count = 0;
+        for (var j = 0; j < pipelines[i].jobs.length; j++) {
+          if(pipelines[i].jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count/pipelines[i].jobs.length)*100;
+        if (percentage > 50) {
+          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+        } else {
+          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        }
       }
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+      } 
+    } else if (dashboard.build[i].status == "running") {
+      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  } else {
+        return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
       }
     }
     catch {
       return "N/A";
     }
   }
-  aksstatus(i, pipelines) {
+  eksstatus(i, dashboard) {
     try {
+      if(dashboard.build[i].status == "success") {
+        var pipelines = dashboard.pipelines[2];
+
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
       }
@@ -268,18 +330,37 @@ export class TableComponent implements OnInit {
         return "fa fa-clock-o btn-txt btn-outline-warning";
       }
       else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+                var count = 0;
+        for (var j = 0; j < pipelines[i].jobs.length; j++) {
+          if(pipelines[i].jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count/pipelines[i].jobs.length)*100;
+        if (percentage > 50) {
+          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+        } else {
+          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        }
       }
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
+    } else if (dashboard.build[i].status == "running") {
+      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  } else {
+      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+    }
     }
     catch {
       return "N/A";
     }
   }
-  eksstatus(i, pipelines) {
+  packetstatus(i, dashboard) {
     try {
+      if(dashboard.build[i].status == "success") {
+        var pipelines = dashboard.pipelines[3];
+
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
       }
@@ -290,18 +371,36 @@ export class TableComponent implements OnInit {
         return "fa fa-clock-o btn-txt btn-outline-warning";
       }
       else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+                var count = 0;
+        for (var j = 0; j < pipelines[i].jobs.length; j++) {
+          if(pipelines[i].jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count/pipelines[i].jobs.length)*100;
+        if (percentage > 50) {
+          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+        } else {
+          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        }
       }
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
+    } else if (dashboard.build[i].status == "running") {
+      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  }else {
+      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+    }
     }
     catch {
       return "N/A";
     }
   }
-  packetstatus(i, pipelines) {
+  gcpstatus(i, dashboard) {
     try {
+      if(dashboard.build[i].status == "success") {
+        var pipelines = dashboard.pipelines[4];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
       }
@@ -312,18 +411,37 @@ export class TableComponent implements OnInit {
         return "fa fa-clock-o btn-txt btn-outline-warning";
       }
       else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+                var count = 0;
+        for (var j = 0; j < pipelines[i].jobs.length; j++) {
+          if(pipelines[i].jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count/pipelines[i].jobs.length)*100;
+        if (percentage > 50) {
+          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+        } else {
+          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        }
       }
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
+    } else if (dashboard.build[i].status == "running") {
+      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  }else {
+      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+    }
     }
     catch {
       return "N/A";
     }
   }
-  gcpstatus(i, pipelines) {
+
+  awsstatus(i, dashboard) {
     try {
+      if(dashboard.build[i].status == "success") {
+        var pipelines = dashboard.pipelines[5];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
       }
@@ -334,11 +452,27 @@ export class TableComponent implements OnInit {
         return "fa fa-clock-o btn-txt btn-outline-warning";
       }
       else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+                var count = 0;
+        for (var j = 0; j < pipelines[i].jobs.length; j++) {
+          if(pipelines[i].jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count/pipelines[i].jobs.length)*100;
+        if (percentage > 50) {
+          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
+        } else {
+          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+        }
       }
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
+    } else if (dashboard.build[i].status == "running") {
+      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  }else {
+      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+    }
     }
     catch {
       return "N/A";
@@ -375,8 +509,8 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       // this.baseline = ""
       this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
@@ -391,10 +525,10 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
       this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
     }
     else if (cloud == 'EKS') {
@@ -407,10 +541,10 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
       this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
     }
     else if (cloud == 'Packet') {
@@ -423,10 +557,10 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
       this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
     }
     else if (cloud == 'GCP') {
@@ -439,10 +573,10 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
       this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
     }
     else if (cloud == 'AWS') {
@@ -455,34 +589,11 @@ export class TableComponent implements OnInit {
       this.executedJobs = this.executed(pipelineData[index].jobs)
       this.passedJobs = this.passed(pipelineData[index].jobs)
       this.failedJobs = this.failed(pipelineData[index].jobs)
-      this.commitMessage = this.commitMess(data.commits[index])
-      this.commitUser = this.commitUsr(data.commits[index])
+      this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
+      this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.commits[index])
+      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
       this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
-    }
-  }
-
-  awsstatus(i, pipelines) {
-    try {
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
-      }
-      else if (pipelines[i].status == "failed") {
-        return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      }
-    }
-    catch {
-      return "N/A";
     }
   }
 
