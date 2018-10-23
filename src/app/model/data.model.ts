@@ -220,3 +220,9 @@ export interface cstor {
 export interface status {
   status: string;
 }
+export interface contactDetails {
+  name: string;
+  email: string;
+  company: string;
+  tag: string;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-
+import { Meta,Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
@@ -113,7 +113,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     private router: Router,
     private personService: PersonService,
     private kubernetsServices: KubernetsService,
-    private litmusServies: LitmusService
+    private litmusServies: LitmusService,
+    private titleService: Title
   ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
@@ -139,6 +140,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.workloadyaml = res.workloadyaml;
       this.applicationType = res.applicationType;
       this.dashboardurl = res.dashboardurl;
+      this.titleService.setTitle( this.workloadName+" dashboard | OpenEBS.io" );
       console.log(this.dashboardurl);
     });
 
@@ -267,7 +269,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
 
   public runChaosTest(type: string, volume: string) {
     if (type != "" && volume != "") {
-      this.alertMessage = type + " Chaos on " + volume + " started";
+      this.alertMessage = type + " is  triggered";
       for (let i = 0; i < this.chaosTests.length; i++) {
         if (type.trim() == this.chaosTests[i]) {
           type = i.toString();
@@ -304,7 +306,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     setTimeout(
       function() {
         $(".alert")
-          .animate({ opacity: 0, bottom: "40px" }, 500)
+          .animate({ opacity: 0, bottom: "40px" }, 7000)
           .hide("slow");
         setTimeout(
           function() {

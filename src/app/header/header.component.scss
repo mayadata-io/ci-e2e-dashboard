@@ -28,7 +28,16 @@
     margin-right:10px;
     height: 28px;
 }
+input, textarea {
 
+    background-color : #F3F4F5; 
+  
+  }
+  .btn-outline-custom {
+    color: #fff;
+    background-image: linear-gradient(#1991EB, #2DA1F8);
+    border-color: #1585D8;
+}  
 @media only screen and (max-width: 1400px) {
     .header-text {
         font-size: 13px;

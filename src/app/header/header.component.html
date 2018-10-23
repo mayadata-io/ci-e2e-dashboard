@@ -2,7 +2,7 @@
   <div class="container-fluid" style="display: block">
     <div class="row">
       <div class="col-md-2 line">
-        <a class="navbar-brand navbar-logo" href="https://openebs.io" target="_blank"><img class="navbar-logo" src="../assets/images/header/openebsci-logo.png"></a>
+        <a class="navbar-brand navbar-logo" href="https://openebs.io" target="_blank"><img class="navbar-logo" src="/assets/images/header/openebsci-logo.png"></a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> -->
@@ -16,9 +16,13 @@
           </ul>
           <ul class="navbar-nav mr-right">
             <li class="my-2  my-lg-0 form-inline">
-              <span style="margin-right:10px;" (click)="clickit('https://github.com/openebs/openebs/stargazers')" target="_blank" class="btn btn-sm btn-outline-danger fa fa-heart heart" ></span><a href="https://github.com/openebs/openebs/stargazers" target="_blank" style="margin-right:40px;"><span>Like Us!</span></a>
-              <a style="margin-right:40px;" href="#" target="_blank"><img class="newsletter" src="../assets/images/header/newsletter.svg"><span>Subscribe to our news letter</span></a>
-              <a style="margin-right:20px;" href="https://slack.openebs.io/" target="_blank"><img class="slack" src="../assets/images/header/slack.svg"><span>Join Community</span></a>
+              <span style="margin-right:10px;" (click)="clickit('https://github.com/openebs/openebs/stargazers')"
+                target="_blank" class="btn btn-sm btn-outline-danger fa fa-heart heart"></span><a href="https://github.com/openebs/openebs/stargazers"
+                target="_blank" style="margin-right:40px;"><span>Like Us!</span></a>
+              <a style="margin-right:40px;" data-toggle="modal" data-target="#exampleModal"><img class="newsletter" src="/assets/images/header/newsletter.svg"><span>Subscribe
+                  to our news letter</span></a>
+              <a style="margin-right:20px;" href="https://slack.openebs.io/" target="_blank"><img class="slack" src="/assets/images/header/slack.svg"><span>Join
+                  Community</span></a>
             </li>
           </ul>
         </div>
@@ -27,3 +31,70 @@
   </div>
 </nav>
 <!-- href="https://github.com/openebs/openebs/stargazers"  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div *ngIf="setFormChange == false; else second;">
+        <div class="modal-body" style="padding-bottom:2rem;padding-top:1.5rem">
+          <div class="text-center">
+            <img class="mt-0" src="/assets/images/icons/news.svg" alt="">
+            <p style="color:#7C7C7C">Sign up for our user stories and tips.
+            </p>
+          </div>
+
+          <form class="form-view theme2 b-d" novalidate [formGroup]="leadForm" (ngSubmit)="formSubmit()">
+            <div class="d-flex flex-column justify-content-md-between mx-auto" style="width:80%">
+              <!-- Text input-->
+
+              <div class="form-group required-control newsletter-input-1">
+                <div class="input-group">
+                  <div class="input-group-prepend" style="width:14%">
+                    <span class="input-group-text" style="padding-bottom:0.4rem;width:100%;background-color: #F3F4F5"
+                      id="basic-addon1"> <img class="my-0 mx-auto" src="/assets/images/icons/man.svg" alt=""></span>
+                  </div>
+                  <input maxlength="250" id="agilefield-1" name="first_name" id="agilefield-1" formControlName="name"
+                    type="text" placeholder="Name" class="form-control" [ngClass]="{
+                  'valid_input':name.valid && (name.touched || name.dirty),
+                  'invalid_input':name.invalid && (name.touched || name.dirty || isFormEmpty)
+                  }">
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group required-control newsletter-input-2">
+                <div class="input-group">
+                  <div class="input-group-prepend" style="width:14%">
+                    <span class="input-group-text" style="padding-bottom:0.4rem;width:100%;background-color: #F3F4F5"
+                      id="basic-addon1"> <img class="my-0" src="/assets/images/icons/envelope.svg" alt=""> </span>
+                  </div>
+                  <input maxlength="250" id="agilefield-3" name="email" type="email" id="agilefield-2" formControlName="email"
+                    placeholder="Email" class="form-control" [ngClass]="{
+                  'valid_input':email.valid && (email.touched || email.dirty),
+                  'invalid_input':email.invalid && (email.touched || email.dirty || isFormEmpty)
+                  }">
+                </div>
+              </div>
+              <div class="agile-group float-center" style="display: flex; justify-content: center; align-items: center;">
+                <button type="submit" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" id="slacksubmit"
+                  data-toggle="modal" data-target="#openebsnewsletterthanks" [disabled]="!leadForm.valid" style="font-size:14px;width: 100%;padding-bottom: 0.5rem;padding-top: 0.5rem">Signup
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <ng-template #second>
+        <div class="modal-body text-center" style="padding:0;">
+          <div class="modal-body pd-t-b-heading1">
+              <img class=" m-t-b-2" src="/assets/images/icons/news.svg" alt="" height="80">
+            <img src="/assets/images/icons/check.svg" alt="" style="display:block;margin:25px auto">
+            <h2 style="font-weight: 600;" class="pd-t-05">Sign Up Successful</h2>
+            <p class="mb-0" style="color: #E86029;">Thank you for signing up with OpenEBS Newsletter</p>
+          </div>
+
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+</div>

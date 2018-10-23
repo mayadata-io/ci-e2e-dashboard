@@ -20,3 +20,9 @@ p{
     background-image: none;
     border-color: #DFE3E9;
 }
+
+@media screen and (max-width:1300px){
+    p{
+        font-size: 12px;
+    }
+}

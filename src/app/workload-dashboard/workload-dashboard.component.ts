@@ -54,7 +54,7 @@ export class WorkloadDashboardComponent implements OnInit {
       this.kubernetsServices.getAllstatus("wordpress-nfs").subscribe(res => {
         this.wordpressStatus = res.status;
       });
-      this.kubernetsServices.getAllstatus("cockroach-jiva").subscribe(res => {
+      this.kubernetsServices.getAllstatus("cockroachdb-jiva").subscribe(res => {
         this.cockdbjiva = res.status;
       });
     });
