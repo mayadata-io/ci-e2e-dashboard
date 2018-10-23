@@ -134,7 +134,7 @@ export class TableComponent implements OnInit {
         count++;
       }
     }
-    return count -1;
+    return count;
   }
 
   // getCommit returns commit id
