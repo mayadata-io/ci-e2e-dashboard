@@ -110,7 +110,7 @@ export class HeaderComponent implements OnInit {
     };
     var payloadToSend = JSON.stringify(payload);
     var host = window.location.host;
-    if (host == "openebs.io" || host == "www.openebs.io") {
+    if (host == "openebs.ci" || host == "www.openebs.ci") {
       var webhookURL =
         "https://hooks.slack.com/services/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"; // main
     } else {
