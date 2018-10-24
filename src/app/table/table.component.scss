@@ -58,6 +58,7 @@ p {
     font-size: 15px;
     color: #949BB3;
     text-align: center;
+    margin-bottom: 0;
 }
 tr {
     font-size: 0.9em;
@@ -215,3 +216,16 @@ img {
 a:hover {
     text-decoration: none;
 }
+
+.fa {
+    font-size: 17px;
+}
+
+// .row tbody tr.highlight td {
+//     background-color: #F2F3F6;
+//   }
+
+  .highlight {
+    background-color: #F2F3F6;
+  }
+  
