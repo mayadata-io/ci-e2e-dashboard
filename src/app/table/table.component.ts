@@ -1,5 +1,6 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import Chart from 'chart.js'
+import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta,Title } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ import { Meta,Title } from '@angular/platform-browser';
 })
 export class TableComponent implements OnInit {
 
+  // $: any;
   id: any;
   host: any;
   items = [];
@@ -32,6 +34,25 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
+  //   $("#data td").click(function() {
+  //     var selected = $(this).hasClass("highlight");
+  //     $("#data td").removeClass("highlight");
+  //     if(!selected)
+  //             $(this).addClass("highlight");
+  // });
+
+  // $('#data').on('click', function() {
+  //   $(this).toggleClass('selected');
+  //       // $('#data tr').removeClass('highlighted');
+  //   $(this).toggleClass('highlighted');  
+  //   // $('.title').slideToggle();
+  // });
+
+
+$('#data').on('click', 'tbody tr', function(event) {
+  $(this).addClass('highlight').siblings().removeClass('highlight');
+});
+
     // This need to be change 
     var index = 1;
     this.getRestItems();
@@ -42,9 +63,11 @@ export class TableComponent implements OnInit {
         index = 0;
       }
     }, 500);
+    // $("#data tr").eq(3).css('background','yellow');
+    
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 10000);
+    }, 30000);
 
     // var data = this.getRestItems();
     // this.detailPannel('GKE', 0, data)
@@ -97,6 +120,9 @@ export class TableComponent implements OnInit {
     // }
   }
 
+  // toggleTitle(){
+  //   $('.title').slideToggle(); //
+  // }
   // Read all REST Items
   getRestItems() {
     this.restItemsServiceGetRestItems().subscribe(restItems => {
@@ -127,14 +153,14 @@ export class TableComponent implements OnInit {
     }
   }
 
-  masterCommitsCount(data) {
-    var count = 0;
-    for (var i=0; i < data.length; i++) {
-      if (data[i].jobs[0].updated <= "7d 0h 0m") {
-        count++;
-      }
-    }
-    return count;
+  masterBuildsCount(data) {
+    // var count = 0;
+    // for (var i=0; i < data.length; i++) {
+    //   if (data[i].jobs[0].updated <= "7d 0h 0m") {
+    //     count++;
+    //   }
+    // }
+    return data.length;
   }
 
   // getCommit returns commit id
@@ -237,7 +263,7 @@ export class TableComponent implements OnInit {
 
   gkestatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipeline = dashboard.pipelines[0];
         if (pipeline[i].status == "success") {
           return "fa fa-check-circle btn-txt btn-outline-success";
@@ -265,11 +291,11 @@ export class TableComponent implements OnInit {
         else if (pipeline[i].status == "running") {
           return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
         }
-      } else if (dashboard.build[i].status == "running") {
-          return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-      } else {
-        return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-      }
+      // } else if (dashboard.build[i].status == "running") {
+      //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+      // } else {
+      //   return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+      // }
     }
     catch {
       return "n/a";
@@ -277,7 +303,7 @@ export class TableComponent implements OnInit {
   }
   aksstatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipelines = dashboard.pipelines[1];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
@@ -305,11 +331,11 @@ export class TableComponent implements OnInit {
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       } 
-    } else if (dashboard.build[i].status == "running") {
-      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  } else {
-        return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-      }
+  //   } else if (dashboard.build[i].status == "running") {
+  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  // } else {
+  //       return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+  //     }
     }
     catch {
       return "N/A";
@@ -317,7 +343,7 @@ export class TableComponent implements OnInit {
   }
   eksstatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipelines = dashboard.pipelines[2];
 
       if (pipelines[i].status == "success") {
@@ -346,11 +372,11 @@ export class TableComponent implements OnInit {
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
-    } else if (dashboard.build[i].status == "running") {
-      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  } else {
-      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-    }
+  //   } else if (dashboard.build[i].status == "running") {
+  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  // } else {
+  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+  //   }
     }
     catch {
       return "N/A";
@@ -358,7 +384,7 @@ export class TableComponent implements OnInit {
   }
   packetstatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipelines = dashboard.pipelines[3];
 
       if (pipelines[i].status == "success") {
@@ -387,11 +413,11 @@ export class TableComponent implements OnInit {
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
-    } else if (dashboard.build[i].status == "running") {
-      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  }else {
-      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-    }
+  //   } else if (dashboard.build[i].status == "running") {
+  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  // }else {
+  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+  //   }
     }
     catch {
       return "N/A";
@@ -399,7 +425,7 @@ export class TableComponent implements OnInit {
   }
   gcpstatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipelines = dashboard.pipelines[4];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
@@ -427,11 +453,11 @@ export class TableComponent implements OnInit {
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
-    } else if (dashboard.build[i].status == "running") {
-      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  }else {
-      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-    }
+  //   } else if (dashboard.build[i].status == "running") {
+  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  // }else {
+  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+  //   }
     }
     catch {
       return "N/A";
@@ -440,7 +466,7 @@ export class TableComponent implements OnInit {
 
   awsstatus(i, dashboard) {
     try {
-      if(dashboard.build[i].status == "success") {
+      // if(dashboard.build[i].status == "success") {
         var pipelines = dashboard.pipelines[5];
       if (pipelines[i].status == "success") {
         return "fa fa-check-circle btn-txt btn-outline-success";
@@ -468,11 +494,11 @@ export class TableComponent implements OnInit {
       else if (pipelines[i].status == "running") {
         return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
       }
-    } else if (dashboard.build[i].status == "running") {
-      return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  }else {
-      return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-    }
+  //   } else if (dashboard.build[i].status == "running") {
+  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
+  // }else {
+  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
+  //   }
     }
     catch {
       return "N/A";

@@ -13,8 +13,7 @@
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
             <h4>Master</h4>
-            <!-- <h3>Commits in last one week: _</h3> -->
-            <h3 style="color:white">Commits in last one week: {{ masterCommitsCount(restItems.dashboard.build) }}</h3>
+            <h3 style="color:white">Builds in last one week: {{ masterBuildsCount(restItems.dashboard.build) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
@@ -35,46 +34,60 @@
         <!-- Tab panes -->
         <div class="table container tab-content">
           <div role="tabpanel" class="tab-pane active" id="profile">
-            <table style="min-width:780px;overflow-x:auto"  class="table table-borderless">
+            <table id=data style="min-width:800px;overflow-x:auto"  class="table table-borderless">
               <thead>
-                <tr>
-                  <th>#</th>
+                <tr class="text-center">
+                  <!-- <th>#</th> -->
                   <th>Trigger</th>
-                  <th>Commit</th>
-                  <th>Updated</th>
+                  <!-- <th>Commit</th> -->
+                  <!-- <th>Updated</th> -->
                   <th>Build</th>
                   <th style="text-align:center">E2E Pipelines</th>
                 </tr>
+                <tr class="text-center">
+                    <!-- <td></td> -->
+                    <td></td>
+                    <!-- <td></td>
+                    <td></td> -->
+                    <td></td>
+                    <td style="justify-content: center" class="d-flex text-center;">
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/gke.svg"><p>GKE</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/aks.svg"><p>AKS</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/eks.svg"><p>EKS</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/packet.svg"><p>PACKET</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/gcp.svg"><p>GCP</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/aws.svg"><p>AWS</p></span>
+                      <!-- GKE | AKS | EKS | PACKET | GCP | AWS -->
+                    </td>
+                  </tr>
               </thead>
               <tbody *ngIf="undefined !== restItems">
-                <tr class="text-center">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>GKE | AKS | EKS | PACKET | GCP | AWS</td>
-                </tr>
-                <tr *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
-                  <td>{{  i+1 }}</td>
-                  <td>{{ getCommitName(i,restItems.dashboard['build']) }}</td>
+                <tr class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
+                  <!-- <td>{{  i+1 }}</td> -->
                   <td>
-                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
-                  </td> 
-                  <td>{{ updated(i,restItems.dashboard['build']) }}</td>
+                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
+                    <p style="font-size: 12px;">commit: {{ updated(i,restItems.dashboard['build']) }} ago</p>
+                  </td>
+
+                  <!-- <td> -->
+                    <!-- <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a> -->
+                  <!-- </td>  -->
+
+                  <!-- <td>{{ updated(i,restItems.dashboard['build']) }}</td> -->
+
                   <td>
                     <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
                       <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
                       <span style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</span>
                     </button>
                   </td>
-                  <td class="text-center">
-                    <i (click)="detailPannel('GKE', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i> | 
-                    <i (click)="detailPannel('AKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i> | 
-                    <i (click)="detailPannel('EKS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i> | 
-                    <i (click)="detailPannel('Packet', i, restItems.dashboard)" style="padding:10px; cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i> | 
-                    <i (click)="detailPannel('GCP', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i> | 
-                    <i (click)="detailPannel('AWS', i, restItems.dashboard);" style="padding:10px; cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i>
+                  <td>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
                   </td>
                 </tr>
               </tbody>
