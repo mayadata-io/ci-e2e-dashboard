@@ -51,12 +51,12 @@
                     <td></td> -->
                     <td></td>
                     <td style="justify-content: center" class="d-flex text-center;">
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/gke.svg"><p>GKE</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/aks.svg"><p>AKS</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/eks.svg"><p>EKS</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/packet.svg"><p>PACKET</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/gcp.svg"><p>GCP</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="23px;" src="/assets/images/cloud/aws.svg"><p>AWS</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg"><p style="font-size: 13px;">GKE</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg"><p style="font-size: 13px;">AKS</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg"><p style="font-size: 13px;">EKS</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg"><p style="font-size: 13px;">PACKET</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg"><p style="font-size: 13px;">GCP</p></span>
+                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg"><p style="font-size: 13px;">AWS</p></span>
                       <!-- GKE | AKS | EKS | PACKET | GCP | AWS -->
                     </td>
                   </tr>
@@ -82,12 +82,12 @@
                     </button>
                   </td>
                   <td>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:35px; padding-right:35px;"><i (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
+                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
                   </td>
                 </tr>
               </tbody>
@@ -109,7 +109,7 @@
         <h5>{{ name }}</h5>
         <h6>Kubernetes 1.10.0</h6> 
           <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
-          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton litmusButton">LITMUS EYE</span></button>
+          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton litmusButton">E2E LOGS</span></button>
         </div>
         <hr>
         <div class="row">
