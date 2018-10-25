@@ -16,7 +16,7 @@
             <p class="pl-2 text-center" [ngClass]="{
               'w-100':dashboardurl === ''
             }"> <a href="{{workloadyaml}}"
-                style="color:#269BF3" target="_blank"> Depolyment yaml </a></p>
+                style="color:#269BF3" target="_blank"> Deployment yaml </a></p>
             <p class="pr-2 text-center" [ngClass]="{
               'display':dashboardurl !== '',
               'hide':dashboardurl === ''
@@ -29,14 +29,14 @@
           <div class="d-flex justify-content-between">
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3">
-                <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:28px">
+                <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:30px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
               </div>
               <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
             </div>
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3 ml-4">
-                <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:28px">
+                <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
@@ -107,7 +107,10 @@
           <hr>
         </div>
 
-        <div class="col-md-12 ">
+        <div class="col-md-12 "  [ngClass]="{
+          'display':dashboardurl === '',
+          'hide':dashboardurl !== ''
+        }">
           <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
           <div class="d-flex align-items-end justify-content-between p-2 bg-white">
             <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">

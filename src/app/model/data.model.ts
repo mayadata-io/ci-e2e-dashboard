@@ -226,3 +226,9 @@ export interface contactDetails {
   company: string;
   tag: string;
 }
+export interface litmuslog {
+  podname: string;
+  startingstatus: boolean;
+  runnigstatus: boolean;
+  completesstatus: boolean;
+}
