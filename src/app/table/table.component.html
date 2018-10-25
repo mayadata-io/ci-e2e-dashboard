@@ -13,23 +13,23 @@
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
             <h4>Master</h4>
-            <h3 style="color:white">Builds in last one week: {{ masterBuildsCount(restItems.dashboard.build) }}</h3>
+            <h3 *ngIf="undefined !== restItems" style="color:white">Builds in last one week: {{ masterBuildsCount(restItems.dashboard.build) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
           <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
-            <h3>BRANCH</h3>
-            <h4>v0.7</h4>
-            <h3>Commits in last one week: _</h3>
+            <!-- <h3>BRANCH</h3> -->
+            <!-- <h4>v0.7</h4> -->
+            <!-- <h3>Commits in last one week: _</h3> -->
           </a>
         </li>
-        <!-- <li style="pointer-events:none; cursor:pointer;" class="nav-item">
+        <li style="pointer-events:none; cursor:pointer;" class="nav-item">
         <a class="nav-link" href="#references" role="tab" data-toggle="tab">
-          <h3>BRANCH</h3>
-          <h4>v0.7.1</h4>
-          <h3>Commit in last one week: _</h3>
+          <!-- <h3>BRANCH</h3> -->
+          <!-- <h4>v0.7.1</h4> -->
+          <!-- <h3>Commit in last one week: _</h3> -->
         </a>
-        </li> -->
+        </li>
       </ul>
         <!-- Tab panes -->
         <div class="table container tab-content">
@@ -51,12 +51,12 @@
                     <td></td> -->
                     <td></td>
                     <td style="justify-content: center" class="d-flex text-center;">
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg"><p style="font-size: 13px;">GKE</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg"><p style="font-size: 13px;">AKS</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg"><p style="font-size: 13px;">EKS</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg"><p style="font-size: 13px;">PACKET</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg"><p style="font-size: 13px;">GCP</p></span>
-                      <span class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg"><p style="font-size: 13px;">AWS</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg"><p style="font-size: 13px;">GKE</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg"><p style="font-size: 13px;">AKS</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg"><p style="font-size: 13px;">EKS</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg"><p style="font-size: 13px;">PACKET</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg"><p style="font-size: 13px;">GCP</p></span>
+                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg"><p style="font-size: 13px;">AWS</p></span>
                       <!-- GKE | AKS | EKS | PACKET | GCP | AWS -->
                     </td>
                   </tr>
@@ -78,30 +78,30 @@
                   <td>
                     <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
                       <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
-                      <span style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</span>
+                      <a style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
                     </button>
                   </td>
                   <td>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer;" [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
-                    <span style="padding-left:31.9px; padding-right:31.9px;"><i (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer;" [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
-          <div role="tabpanel" class="tab-pane fade" id="references">ccc</div>
+          <!-- <div role="tabpanel" class="tab-pane fade" id="references">ccc</div> -->
         </div>
     </div>
   </div>
 <!-- table pannel End -->
 
 
-<!-- Detaile pannel start -->
+<!-- Detail pannel start -->
   <div class="col-sm-4 px-0">
     <div class="detail container border">
         <div class="text-center">
@@ -139,7 +139,7 @@
           <div class="row">
             <div class="col-sm-4">
               <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
-              <h6>Pull Request</h6>
+              <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
             </div>
             <div class="col-sm-8">
               <!-- <h6>jiva/#1975 @username</h6> -->
@@ -149,13 +149,14 @@
           </div>
           <hr>
           <div class="row">
-              <div class="col-sm-6 text-center">
-                  <a style=" cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/e2e-infrastructureci">Baseline Images</a>
-                <p style="margin-top:5px;" >Container images used to run this pipeline</p>
+              <div class="col-sm-4 text-center">
+                  <a style=" cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline Images</a>
+                <!-- <p style="margin-top:5px;" >Container images used to run this pipeline</p> -->
               </div>
-              <div class="col-sm-6 text-center">
-                <a style="cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
-                <p style="margin-top:5px;">Litmus tests run in this pipeline</p>
+              <div class="col-sm-8 text-center">
+                  <p>Container images used to run this pipeline</p>
+                <!-- <a style="cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
+                <p style="margin-top:5px;">Litmus tests run in this pipeline</p> -->
               </div>
             </div>
       </div>

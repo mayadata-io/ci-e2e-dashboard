@@ -34,24 +34,19 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-  //   $("#data td").click(function() {
-  //     var selected = $(this).hasClass("highlight");
-  //     $("#data td").removeClass("highlight");
-  //     if(!selected)
-  //             $(this).addClass("highlight");
-  // });
+    
+    //for Highlight the row
+    $('#data').on('click', 'tbody tr', function(e) {
+     $(this).addClass('test').siblings().removeClass('test');
+     // For highlight the cell
+       $("#data span").removeClass("highlight");
+       var clickedCell= $(e.target).closest("span");
+       clickedCell.addClass("highlight");
+    });
 
-  // $('#data').on('click', function() {
-  //   $(this).toggleClass('selected');
-  //       // $('#data tr').removeClass('highlighted');
-  //   $(this).toggleClass('highlighted');  
-  //   // $('.title').slideToggle();
-  // });
-
-
-$('#data').on('click', 'tbody tr', function(event) {
-  $(this).addClass('highlight').siblings().removeClass('highlight');
-});
+// $('#data').on('click', 'tbody tr td', function() {
+//   $(this).addClass('highlight').siblings().removeClass('highlight');
+// });
 
     // This need to be change 
     var index = 1;
@@ -59,18 +54,22 @@ $('#data').on('click', 'tbody tr', function(event) {
     setInterval(() => {
       if (index == 1) {
         var data = this.getRestItems();
-        this.detailPannel('GKE', 0, data);
+        // console.log(data.build.length);
+        var count = 0;
+        for (var i = 0; i < data.build.length; i++) {
+          if(data.build[i].status == "running") {
+            count ++;
+          }
+        }
+        // console.log(count);
+        this.detailPannel('GKE', count, data);
         index = 0;
       }
     }, 500);
-    // $("#data tr").eq(3).css('background','yellow');
-    
+
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 30000);
-
-    // var data = this.getRestItems();
-    // this.detailPannel('GKE', 0, data)
+    }, 20000);
 
     // var chBar = document.getElementById("chBar");
     // var chartData = {
@@ -95,34 +94,7 @@ $('#data').on('click', 'tbody tr', function(event) {
     //   }
     //   });
     // }
-
-    // // var colors = ['#007bff','#000000'];      
-    // var donutOptions = {
-    //   cutoutPercentage: 50
-    // };
-    // var chDonutData1 = {
-    //     datasets: [
-    //       {
-    //         backgroundColor: ['#007bff','#000000'],
-    //         borderWidth: 0,
-    //         data: [70,30]
-    //       }
-    //     ]
-    // };
-    // var chDonut1 = document.getElementById("graph");
-    // if (chDonut1) {
-    //   new Chart(chDonut1, {
-    //       type: 'pie',
-    //       data: chDonutData1,
-    //       options: donutOptions
-    //   });
-
-    // }
   }
-
-  // toggleTitle(){
-  //   $('.title').slideToggle(); //
-  // }
   // Read all REST Items
   getRestItems() {
     this.restItemsServiceGetRestItems().subscribe(restItems => {
@@ -225,7 +197,13 @@ $('#data').on('click', 'tbody tr', function(event) {
     try {
       if (build[index].status == "success") {
         var sort_id = (build[index].sha).slice(0,8)
-        return "Docker Image : " + build[index].name + "/" + sort_id
+        if(build[index].name == "maya") {
+          var name = "m-apiserver"
+        }
+        if(build[index].name == "jiva") {
+          var name = "jiva"
+        }
+        return "Docker Image:-" + name + ":" + sort_id
       } else if (build[index].status == "failed") {
         return "Build failed";
       }
@@ -272,7 +250,7 @@ $('#data').on('click', 'tbody tr', function(event) {
           return "fa fa-ban btn-txt btn-outline-secondary";
         }
         else if (pipeline[i].status == "pending") {
-          return "fa fa-clock-o btn-txt btn-outline-warning";
+          return "fa fa-clock-o btn-txt btn-outline-secondary";
         }
         else if (pipeline[i].status == "failed") {
           var count = 0;
@@ -312,7 +290,7 @@ $('#data').on('click', 'tbody tr', function(event) {
         return "fa fa-ban btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
+        return "fa fa-clock-o btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "failed") {
         var count = 0;
@@ -353,7 +331,7 @@ $('#data').on('click', 'tbody tr', function(event) {
         return "fa fa-ban btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
+        return "fa fa-clock-o btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "failed") {
                 var count = 0;
@@ -394,7 +372,7 @@ $('#data').on('click', 'tbody tr', function(event) {
         return "fa fa-ban btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
+        return "fa fa-clock-o btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "failed") {
                 var count = 0;
@@ -434,7 +412,7 @@ $('#data').on('click', 'tbody tr', function(event) {
         return "fa fa-ban btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
+        return "fa fa-clock-o btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "failed") {
                 var count = 0;
@@ -475,7 +453,7 @@ $('#data').on('click', 'tbody tr', function(event) {
         return "fa fa-ban btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-warning";
+        return "fa fa-clock-o btn-txt btn-outline-secondary";
       }
       else if (pipelines[i].status == "failed") {
                 var count = 0;
@@ -522,6 +500,7 @@ $('#data').on('click', 'tbody tr', function(event) {
   public baseline: any;
   public litmus: any;
   public rating: any;
+  public pullRequest: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -538,8 +517,9 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = ""
-      this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
+      this.pullRequest = data.build[index].commit_url
+      // this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
+
     }
     else if (cloud == 'AKS') {
       var pipelineData = data['pipelines'][1]
@@ -554,8 +534,7 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
-      this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
+      // this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
     }
     else if (cloud == 'EKS') {
       var pipelineData = data['pipelines'][2]
@@ -570,8 +549,7 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
-      this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
+      // this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
     }
     else if (cloud == 'Packet') {
       var pipelineData = data['pipelines'][3]
@@ -586,8 +564,7 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
-      this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
+      // this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
     }
     else if (cloud == 'GCP') {
       var pipelineData = data['pipelines'][4]
@@ -602,8 +579,7 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
-      this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
+      // this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
     }
     else if (cloud == 'AWS') {
       var pipelineData = data['pipelines'][5]
@@ -618,8 +594,7 @@ $('#data').on('click', 'tbody tr', function(event) {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
-      // this.baseline = this.commitUsr(data.build[index].jobs[0].commit)
-      this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
+      // this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
     }
   }
 
