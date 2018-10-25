@@ -207,14 +207,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         });
     });
 
-    this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
-      this.litmusUnsub = this.litmusServies
-        .getLitmusStatus1(this.currentRoute[1],)
-        .subscribe(res => {
-          this.runnigPos = res.runnigPos;
-          this.completes = res.completes;
-        });
-    });
+    // this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
+    //   this.litmusUnsub = this.litmusServies
+    //     .getLitmusStatus1(this.currentRoute[1],)
+    //     .subscribe(res => {
+    //       this.runnigPos = res.runnigPos;
+    //       this.completes = res.completes;
+    //     });
+    // });
     this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
@@ -331,7 +331,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           if (this.litmusLog.completesstatus == true) {
             count++;
             console.log(count + "count");
-          } else {
+          } 
+           if(count >3){
             this.setlitmus.unsubscribe();
             this.litmusStarted = false;
           }
