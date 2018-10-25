@@ -75,9 +75,10 @@ tr {
     color: inherit;
 }
 
-.pointer {
+.avoid-clicks {
     pointer-events: none;
-}
+  }
+
 .table {
     margin-top:10px;
     overflow: auto;
@@ -209,7 +210,6 @@ img {
 }
 
 .custom-pointer {
-    // cursor: not-allowed;
     pointer-events: none;
 }
 
@@ -221,11 +221,11 @@ a:hover {
     font-size: 17px;
 }
 
-// .row tbody tr.highlight td {
-//     background-color: #F2F3F6;
-//   }
+.highlight {
+  border-bottom: 5px solid #654CF9;
+}
 
-  .highlight {
-    background-color: #F2F3F6;
-  }
+.test {
+    background-color: #F2F4F6;
+}
   
