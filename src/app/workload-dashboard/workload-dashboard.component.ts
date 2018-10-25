@@ -19,6 +19,7 @@ export class WorkloadDashboardComponent implements OnInit {
   public prometheuscstorStatus: any;
   public cockdbjiva: any;
   public wordpressStatus: any;
+  public redisStatus: any;
 
   constructor(private kubernetsServices: KubernetsService, private meta: Meta,private titleService: Title) {
     this.titleService.setTitle( "workloads dashboard" );
@@ -56,6 +57,9 @@ export class WorkloadDashboardComponent implements OnInit {
       });
       this.kubernetsServices.getAllstatus("cockroachdb-jiva").subscribe(res => {
         this.cockdbjiva = res.status;
+      });
+      this.kubernetsServices.getAllstatus("redis-jiva").subscribe(res => {
+        this.redisStatus = res.status;
       });
     });
   }

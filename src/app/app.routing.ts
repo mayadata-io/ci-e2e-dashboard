@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: "prometheus-cstor", component: WorkloadsComponent },
   { path: "prometheus-jiva", component: WorkloadsComponent },
   { path: "wordpress-nfs", component: WorkloadsComponent },
+  { path: "redis-jiva", component: WorkloadsComponent },
   { path: "overview", component: OverviewComponent }
 ];
 

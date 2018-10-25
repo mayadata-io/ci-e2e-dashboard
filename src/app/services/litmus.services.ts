@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
-import { litmusstatus } from "../model/data.model";
+import { litmusstatus,litmuslog } from "../model/data.model";
 
 @Injectable()
 export class LitmusService {
@@ -19,34 +19,36 @@ export class LitmusService {
     }
   }
 
-  runChaosTestService(
-    type: string,
-    volumename: string,
-    appnamespace: string,
-    targetnamespace: string,
-    appname: string
-  ) {
-    this.http
-      .get(
-        this.apiurl +
-          "litmus?app=" +
-          appname +
-          "&type=" +
-          type +
-          "&appnamespace=" +
-          appnamespace +
-          "&targetnamespace=" +
-          targetnamespace +
-          "&volumename=" +
-          volumename
-      )
-      .subscribe();
+  runChaosTestService(type: string, volumename: string, appnamespace: string, targetnamespace: string, appname: string) {
+    return this.http.get( this.apiurl + 
+       "litmus?app=" + appname + 
+       "&type=" + type +
+       "&appnamespace=" + appnamespace +
+       "&targetnamespace=" + targetnamespace +
+       "&volumename=" + volumename
+    );
   }
-  getLitmusStatus(appnamespace: string) {
+  getLitmusStatus1(appnamespace: string) {
     return this.http.get<litmusstatus>(this.apiurl + "litmus/litmusstatus", {
       params: {
         appnamespace: appnamespace
       }
     });
+  }
+  getLitmusStatus(appnamespace: string,jobname: string) {
+    console.log(jobname);
+    return this.http.get<litmuslog>(this.apiurl + "litmus/litstatus", {
+      params: {
+        appnamespace: appnamespace,
+        jobname:jobname
+      }
+    });
+  }
+  getPodStatus( jobname: string){
+    return this.http.get(this.apiurl + "litmus/jobstatus", {
+      params: {
+        jobname: jobname
+      }
+    })
   }
 }
