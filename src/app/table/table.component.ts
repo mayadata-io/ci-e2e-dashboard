@@ -69,7 +69,7 @@ export class TableComponent implements OnInit {
 
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 20000);
+    }, 600000);
 
     // var chBar = document.getElementById("chBar");
     // var chartData = {
