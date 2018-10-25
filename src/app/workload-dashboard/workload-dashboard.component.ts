@@ -46,7 +46,7 @@ export class WorkloadDashboardComponent implements OnInit {
         this.mongoStatus = res.status;
       });
       this.kubernetsServices.getAllstatus("percona-jiva").subscribe(res => {
-        this.perconacstorStatus = res.status;
+        this.perconaStatus = res.status;
       });
       this.kubernetsServices.getAllstatus("prometheus-jiva").subscribe(res => {
         this.prometheusStatus = res.status;

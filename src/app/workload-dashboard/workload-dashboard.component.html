@@ -1,4 +1,4 @@
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white" style="height:850px">
   <div class="row">
     <div class="col-md-12">
       <div class="">
@@ -17,16 +17,16 @@
               <li class="nav-item">
                 <a class="nav-link nav-link1 active " id="home-tab" data-toggle="tab" href="#home" role="tab"
                   aria-controls="home" aria-selected="true">
-                  <h1 style="font-size: 2.6em;font-family: lato;text-align: left;padding-left: 20px;color: #3A3D54;">Jiva</h1>
-                  <h5 style="font-size: 0.8em;text-align: left;font-family: lato;padding-left: 14px;">Applications
+                  <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">Jiva</h1>
+                  <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
                     Running-5/5</h5>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-link1" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                   aria-controls="profile" aria-selected="false">
-                  <h1 style="font-size: 2.6em;font-family: lato;text-align: left;padding-left: 20px;color: #3A3D54;">cStor</h1>
-                  <h5 style="font-size: 0.8em;text-align: left;font-family: lato;padding-left: 14px;">Applications
+                  <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">cStor</h1>
+                  <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
                     Running-4/4</h5>
                 </a>
               </li>
@@ -35,150 +35,158 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/mongo.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">mongo</p>
-                                <p class="mb-0">Jiva 0.7</p>
-                              </div>
+                              <p class="mb-2">Mongo</p>
+                              <p>3 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':mongoStatus === 'Running',
-                              'hide':mongoStatus !== 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':mongoStatus !== 'Running',
-                              'hide':mongoStatus === 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">Jiva 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                  'display':mongoStatus === 'Running',
+                                  'hide':mongoStatus !== 'Running'
+                                }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                  'display':mongoStatus !== 'Running',
+                                  'hide':mongoStatus === 'Running'
+                                }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/mongo-jiva">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Statefulset - 3 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/mongo-jiva" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
-                              <img src="/assets/images/workloads-logos/percona.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">Percona</p>
-                                <p class="mb-0">Jiva 0.7</p>
-                              </div>
-                            </div>
-                            <img [ngClass]="{
-                              'display':cockdbjiva === 'Running',
-                              'hide':cockdbjiva !== 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':cockdbjiva !== 'Running',
-                              'hide':cockdbjiva === 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
-                          </div>
-                        </div>
-
-                        <div class="bg-white p-3">
-                          <p>Deployment - 1 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/percona-jiva" class="float-right">Dashboard</a> </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="mb-5 shadow-sm bg-white rounded">
-                        <div class="d-flex bg-light p-3">
-                          <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/cockroachdb.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">CockroachDb</p>
-                                <p class="mb-0">Jiva 0.7</p>
-                              </div>
+                              <p class="mb-2">CockroachDB</p>
+                              <p>3 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':cockdbjiva === 'Running',
-                              'hide':cockdbjiva != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':cockdbjiva != 'Running',
-                              'hide':cockdbjiva == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">Jiva 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                        'display':cockdbjiva === 'Running',
+                                        'hide':cockdbjiva !== 'Running'
+                                      }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                        'display':cockdbjiva !== 'Running',
+                                        'hide':cockdbjiva === 'Running'
+                                      }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/cockroachdb-jiva">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Statefulset - 3 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/cockroach-jiva" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
+                              <img src="/assets/images/workloads-logos/percona.svg" alt="" style="height:50px;width:50px">
+                              <p class="mb-2">Percona</p>
+                              <p>1 Replicas </p>
+                            </div>
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">Jiva 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                          'display':perconaStatus === 'Running',
+                                          'hide':perconaStatus !== 'Running'
+                                        }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                          'display':perconaStatus !== 'Running',
+                                          'hide':perconaStatus === 'Running'
+                                        }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/percona-jiva">Dashboard</a> </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                      <div class="mb-5 shadow-sm bg-white rounded">
+                        <div class="d-flex bg-light p-3">
+                          <div class="d-flex justify-content-between w-100">
+                            <div>
                               <img src="/assets/images/workloads-logos/wordpress.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">wordpress</p>
-                                <p class="mb-0">Jiva 0.7</p>
-                              </div>
+                              <p class="mb-2">Wordpress</p>
+                              <p>3 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':wordpressStatus === 'Running',
-                              'hide':wordpressStatus != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':wordpressStatus != 'Running',
-                              'hide':wordpressStatus == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">Jiva 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                            'display':wordpressStatus === 'Running',
+                                            'hide':wordpressStatus !== 'Running'
+                                          }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                            'display':wordpressStatus !== 'Running',
+                                            'hide':wordpressStatus === 'Running'
+                                          }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/wordpress-nfs">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Deployment - 3 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/wordpress-nfs" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/prometheus.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">prometheus</p>
-                                <p class="mb-0">Jiva 0.7</p>
-                              </div>
+                              <p class="mb-2">Prometheus</p>
+                              <p>1 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                                'display':prometheusStatus === 'Running',
-                                'hide':prometheusStatus != 'Running'
-                              }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                                'display':prometheusStatus != 'Running',
-                                'hide':prometheusStatus == 'Running'
-                              }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">Jiva 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                              'display':prometheusStatus === 'Running',
+                                              'hide':prometheusStatus !== 'Running'
+                                            }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                              'display':prometheusStatus !== 'Running',
+                                              'hide':prometheusStatus === 'Running'
+                                            }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/prometheus-jiva">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Deployment - 3 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/prometheus-jiva" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
@@ -188,120 +196,127 @@
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/mongo.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">mongo</p>
-                                <p class="mb-0">cStor 0.7</p>
-                              </div>
+                              <p class="mb-2">MongoDB</p>
+                              <p>3 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':mongocstorStatus === 'Running',
-                              'hide':mongocstorStatus != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':mongocstorStatus != 'Running',
-                              'hide':mongocstorStatus == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">cStor 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                                  'display':mongocstorStatus === 'Running',
+                                                  'hide':mongocstorStatus !== 'Running'
+                                                }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                                  'display':mongocstorStatus !== 'Running',
+                                                  'hide':mongocstorStatus === 'Running'
+                                                }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/mongo-cstor">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Statefulset - 3 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/mongo-cstor" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
-                              <img src="/assets/images/workloads-logos/grafana.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">Grafana</p>
-                                <p class="mb-0">cStor 0.7</p>
-                              </div>
-                            </div>
-                            <img [ngClass]="{
-                              'display':grafanaStatus === 'Running',
-                              'hide':grafanaStatus != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':grafanaStatus != 'Running',
-                              'hide':grafanaStatus == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
-                          </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Deployment - 1 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/grafana-cstor" class="float-right">Dashboard</a> </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="mb-5 shadow-sm bg-white rounded">
-                        <div class="d-flex bg-light p-3">
-                          <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/percona.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">percona</p>
-                                <p class="mb-0">cStor 0.7</p>
-                              </div>
+                              <p class="mb-2">Percona</p>
+                              <p>1 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':perconacstorStatus === 'Running',
-                              'hide':perconacstorStatus != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':perconacstorStatus != 'Running',
-                              'hide':perconacstorStatus == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">cStor 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                                    'display':perconacstorStatus === 'Running',
+                                                    'hide':perconacstorStatus !== 'Running'
+                                                  }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                                    'display':perconacstorStatus !== 'Running',
+                                                    'hide':perconacstorStatus === 'Running'
+                                                  }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/percona-cstor">Dashboard</a> </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="bg-white p-3">
-                          <p>Deployment - 1 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/percona-cstor" class="float-right">Dashboard</a> </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                       <div class="mb-5 shadow-sm bg-white rounded">
                         <div class="d-flex bg-light p-3">
                           <div class="d-flex justify-content-between w-100">
-                            <div class="d-flex align-items-center">
+                            <div>
                               <img src="/assets/images/workloads-logos/prometheus.svg" alt="" style="height:50px;width:50px">
-                              <div class="pl-5">
-                                <p class="mb-2">prometheus</p>
-                                <p class="mb-0">cStor 0.7</p>
-                              </div>
+                              <p class="mb-2">Prometheus</p>
+                              <p>1 Replicas </p>
                             </div>
-                            <img [ngClass]="{
-                              'display':prometheuscstorStatus === 'Running',
-                              'hide':prometheuscstorStatus != 'Running'
-                            }"
-                              src="/assets/images/icons/success.svg" alt="">
-                            <img [ngClass]="{
-                              'display':prometheuscstorStatus != 'Running',
-                              'hide':prometheuscstorStatus == 'Running'
-                            }"
-                              src="/assets/images/icons/error.png" alt="" style="height:35px">
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">cStor 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                                      'display':prometheuscstorStatus === 'Running',
+                                                      'hide':prometheuscstorStatus !== 'Running'
+                                                    }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                                      'display':prometheuscstorStatus !== 'Running',
+                                                      'hide':prometheuscstorStatus === 'Running'
+                                                    }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/prometheus-cstor">Dashboard</a> </p>
+                            </div>
                           </div>
                         </div>
-                        <div class="bg-white p-3">
-                          <p>Deployment - 1 replica </p>
-                          <p>OpenEBS - 3 replica per pv <a href="/prometheus-cstor" class="float-right">Dashboard</a>
-                          </p>
+                      </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                      <div class="mb-5 shadow-sm bg-white rounded">
+                        <div class="d-flex bg-light p-3">
+                          <div class="d-flex justify-content-between w-100">
+                            <div>
+                              <img src="/assets/images/workloads-logos/grafana.svg" alt="" style="height:50px;width:50px">
+                              <p class="mb-2">Grafana</p>
+                              <p>1 Replicas </p>
+                            </div>
+                            <div>
+                              <img src="/assets/images/company-logos/mule-without-tagline.png" alt="openebs" style="height:50px;width:50px">
+                              <p class="mb-2">cStor 0.7 </p>
+                              <p>3 Replicas per pv</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" style="justify-content: inherit;">
+                              <img [ngClass]="{
+                                                        'display':grafanaStatus === 'Running',
+                                                        'hide':grafanaStatus !== 'Running'
+                                                      }"
+                                src="/assets/images/icons/success.svg" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <img [ngClass]="{
+                                                        'display':grafanaStatus !== 'Running',
+                                                        'hide':grafanaStatus === 'Running'
+                                                      }"
+                                src="/assets/images/icons/error.png" alt="" style="height:30px;width:30px;margin-top:10px">
+                              <p> <a href="/grafana-cstor">Dashboard</a> </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
