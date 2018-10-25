@@ -3,10 +3,9 @@
     <div class="col-md-8">
       <div class="row bg-white my-2" style="padding-top:37px;padding-bottom:37px;">
         <div class="col-md-6" style="margin:0 auto">
-          <div class="d-flex align-items-end mt-4 justify-content-center" style="margin-bottom:2.5rem">
-            <img src="/assets/images/workloads-logos/{{workloadName}}.svg" alt="" style="height:60px">
+          <div class="d-flex flex-column align-items-center mt-4 justify-content-center" style="margin-bottom:2.5rem">
+            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:18px;color:#354052"> {{workloadImage}} </p>
               <p class="mb-0" style="font-size:14px;color:#354052">{{applicationType}}- {{numberstatefullSets}}
                 Replica-
                 {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
@@ -27,12 +26,13 @@
         <div class="col-md-12">
           <hr>
           <div class="d-flex justify-content-between">
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:30px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
               </div>
               <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
+              <p class=" mb-0" style="font-size:14px;color:#354052">Image: {{workloadImage}}</p>
             </div>
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3 ml-4">

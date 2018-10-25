@@ -1,6 +1,6 @@
 <div class="col-md-12" style="overflow-y: scroll;height: 900px;">
   <div class="bg-white p-5">
-    <h1 class="my-3 text-center" style="text-decoration:underline" >CI/E2E Portal Overview</h1>
+    <h1 class="my-3 text-center" >CI/E2E Portal Overview</h1>
     <h3 class="my-2">CI/E2E dashboard:</h3>
     <p class="py-3" style="color:#54576b">This CI/E2E portal is built to be used both by OpenEBS developer and user community. Developers and users get
       the
@@ -10,15 +10,18 @@
       Kubernetes cluster deployed currently on GKE. These reference stateful workloads are deployed for both the
       storage
       engines Jiva and cStor. </p>
-      <img class="img-fluid" src="/assets/images/workloaddashboard.png" style="padding-right:20px;padding-left:5px" alt="">
+      <img class="img-fluid" src="/assets/images/workload-dashboard.png" style="padding-right:20px;padding-left:5px" alt="">
     <h3 class="pt-5 ">Stateful workloads using OpenEBS</h3>
     <p class="py-3" style="color:54576b">This portal also provides resource summary dashboard for each stateful workload.</p>
-    <img class="img-fluid" src="/assets/images/mongodashboard.png" style="padding-right:20px;padding-left:5px" alt="">
+    <img class="img-fluid" src="/assets/images/mongo-dashboard.png" style="padding-right:20px;padding-left:5px" alt="">
     <p class="py-5" style="color:#54576b">As shown above the users can see the details (status of each replica and on which node it is running) of both
       application and OpenEBS pods (controllers & replicas)</p>
     <h3 class="my-2">Running chaos tests on live deployments:</h3>
     <p class="py-3" style="color:#54576b">End users can run ready chaos tests against the live deployment by choosing the test on the portal itself. When
       the test is run, they can see the status of Kubernetes resources changing accordingly in the real time and how
       OpenEBS continues to provide data availability to the stateful application.</p>
+      <img class="img-fluid" src="/assets/images/complete-litmus.png" style="padding-right:20px;padding-left:5px" alt="">
+      <h3 class="pt-5 " style="margin-bottom:2rem;">Chaos test result</h3>
+      <img class="img-fluid" src="/assets/images/runnig-litmus-test.png" style="padding-right:20px;padding-left:5px" alt="">
   </div>
 </div>
