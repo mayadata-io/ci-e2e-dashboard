@@ -37,7 +37,7 @@
             <div class="d-flex flex-column align-items-center">
               <div class="d-flex align-items-center mb-3 ml-4">
                 <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
-                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
+                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.7</p>
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
                 {{numberController}}
@@ -55,7 +55,7 @@
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
                 <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
-                  ngbTooltip="{{statefulset.nodeName}}">
+                  ngbTooltip="{{statefulset.name}}">
                   {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                 <img style="height:15px;margin-left:0.5rem" [ngClass]="{
                 'display':statefulset.status === 'Running',

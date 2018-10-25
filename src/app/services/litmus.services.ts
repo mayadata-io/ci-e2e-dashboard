@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
-import { litmusstatus,litmuslog } from "../model/data.model";
+import { litmusstatus,litmuslog,jobname } from "../model/data.model";
 
 @Injectable()
 export class LitmusService {
@@ -44,11 +44,12 @@ export class LitmusService {
       }
     });
   }
-  getPodStatus( jobname: string){
-    return this.http.get(this.apiurl + "litmus/jobstatus", {
+  getJobName( nameSpace: string){
+    return this.http.get<jobname>(this.apiurl + "litmus/getjob", {
       params: {
-        jobname: jobname
+        nameSpace: nameSpace
       }
     })
   }
+
 }
