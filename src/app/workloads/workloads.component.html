@@ -34,14 +34,15 @@
               <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
               <p class=" mb-0" style="font-size:14px;color:#354052">Image: {{workloadImage}}</p>
             </div>
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column ">
               <div class="d-flex align-items-center mb-3 ml-4">
                 <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.7</p>
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
-                {{numberController}}
-                Zones- {{numberController}}</p>
+                {{numberReplica}}
+                Zones- <span *ngIf="(numberstatefullSets+numberController) >=3">3</span><span *ngIf="(numberstatefullSets+numberController) < 3">2</span></p>
+                <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
             </div>
 
           </div>

@@ -40,6 +40,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
   public numberController: any;
+  public numberReplica:any;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -195,6 +196,15 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
           this.numberController = this.jivaContrllers.length;
+          if(this.openebsengine == "cStor"){
+            this.numberReplica = this.numberController*3;
+            console.log(this.openebsengine);
+            console.log(this.numberReplica);
+          }else if(this.openebsengine == "Jiva"){
+            console.log(this.openebsengine);
+            this.numberReplica = this.jivaReplicas.length
+          }
+     
           if (this.overallStatus == "Running") {
             this.runningStatus = true;
           } else if (
