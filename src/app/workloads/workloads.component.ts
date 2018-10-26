@@ -6,6 +6,8 @@ import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
 import { Subscription, Observable, timer, from } from "rxjs";
+import "rxjs/add/observable/interval";
+import "rxjs/add/operator/takeWhile";
 import {
   getResponse,
   postResponse,
@@ -113,8 +115,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public litmusLog: litmuslog;
   public litmusStarted: boolean = false;
   public setlitmus: any;
-  public litmusName:string;
-
+  public litmusName: string;
+  public openebsengine: any;
+  public countstatus: any = 0;
   constructor(
     private router: Router,
     private personService: PersonService,
@@ -146,6 +149,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.workloadyaml = res.workloadyaml;
       this.applicationType = res.applicationType;
       this.dashboardurl = res.dashboardurl;
+      this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
     });
 
@@ -207,14 +211,28 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         });
     });
 
-    // this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
-    //   this.litmusUnsub = this.litmusServies
-    //     .getLitmusStatus1(this.currentRoute[1],)
-    //     .subscribe(res => {
-    //       this.runnigPos = res.runnigPos;
-    //       this.completes = res.completes;
-    //     });
-    // });
+    this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
+      this.litmusUnsub = this.litmusServies
+        .getJobName(this.currentRoute[1])
+        .subscribe(res => {
+          if (JSON.stringify(res.jobname) != undefined) {
+            this.litmuses(this.litmusJobName);
+            this.litmusJobName = JSON.stringify(res.jobname);
+            this.litmusName = res.litmusName.split("-").join(" ");
+
+            this.countstatus++;
+          } else if (this.countstatus > 1) {
+            this.litmusLog.completesstatus = true;
+
+            Observable.interval(10000)
+              .takeWhile(() => this.countstatus)
+              .subscribe(i => {
+                this.litmusStarted = false;
+                this.countstatus = 0;
+              });
+          }
+        });
+    });
     this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
@@ -297,7 +315,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           )
           .subscribe(res => {
             this.litmusJobName = JSON.stringify(res);
-            this.lit(this.litmusJobName);
           });
       } else {
         this.litmusServies
@@ -310,7 +327,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           )
           .subscribe(res => {
             this.litmusJobName = JSON.stringify(res);
-            this.lit(this.litmusJobName);
           });
       }
       this.runAlert();
@@ -318,27 +334,21 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public lit(job: string) {
-    var count = 0;
-    this.setlitmus = timer(0, 5000).subscribe(x => {
-      this.litmusServies
-        .getLitmusStatus(this.currentRoute[1], job)
-        .subscribe(res => {
-          console.log(res);
-          this.litmusStarted = true;
-          this.litmusLog = res;
 
-          if (this.litmusLog.completesstatus == true) {
-            count++;
-            console.log(count + "count");
-          } 
-           if(count >3){
-            this.setlitmus.unsubscribe();
-            this.litmusStarted = false;
-          }
-        });
-    });
+  public litmuses(job: string) {
+    this.litmusServies
+      .getLitmusStatus(this.currentRoute[1], job)
+      .subscribe(res => {
+        console.log(res);
+        this.litmusStarted = true;
+        this.litmusLog = res;
+
+        if (this.litmusLog.completesstatus == true) {
+          this.litmusStarted = false;
+        }
+      });
   }
+
   public runAlert() {
     this.isAlert = true;
     setTimeout(
