@@ -82,7 +82,7 @@
                     </button>
                   </td>
                   <td>
-                    <span (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
+                    <span [ngClass]="{'highlight': i==0}" (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
