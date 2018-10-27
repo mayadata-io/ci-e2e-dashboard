@@ -62,7 +62,7 @@
                   </tr>
               </thead>
               <tbody *ngIf="undefined !== restItems">
-                <tr class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
+                <tr [ngClass]="{'test': i==0}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
                   <!-- <td>{{  i+1 }}</td> -->
                   <td>
                     <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
@@ -82,7 +82,7 @@
                     </button>
                   </td>
                   <td>
-                    <span (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
+                    <span [ngClass]="{'highlight': i==0}" (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
                     <span (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
