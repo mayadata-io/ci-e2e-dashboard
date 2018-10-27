@@ -62,7 +62,7 @@
                   </tr>
               </thead>
               <tbody *ngIf="undefined !== restItems">
-                <tr class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
+                <tr [ngClass]="{'test': i==0}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
                   <!-- <td>{{  i+1 }}</td> -->
                   <td>
                     <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
