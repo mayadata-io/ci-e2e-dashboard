@@ -48,6 +48,14 @@ export class TableComponent implements OnInit {
       clickedCell.addClass("highlight");
     });
 
+    $(document).ready(function(){
+      $("#btn1").click(function(){
+        $(".divClass").slideToggle("slow",function()
+        {
+        });
+      });
+    });
+
     // TODO
     var index = 1;
     this.getRestItems();
@@ -68,7 +76,7 @@ export class TableComponent implements OnInit {
 
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 10000);
+    }, 60000);
 
     // var chBar = document.getElementById("chBar");
     // var chartData = {
@@ -492,13 +500,52 @@ export class TableComponent implements OnInit {
     }
   }
 
+  gitlabStageClass(status) {
+    if (status == "SUCCESS") {
+      return "fa fa-check-circle btn-txt btn-outline-success";
+    }
+    else if (status == "CANCELLED" || status == "SKIPPED" ) {
+      return "fa fa-ban btn-txt btn-outline-secondary";
+    }
+    else if (status == "PENDING") {
+      return "fa fa-clock-o btn-txt btn-outline-secondary";
+    }
+    else if (status == "RUNNING") {
+      return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+    }
+    else if (status == "FAILED") {
+      return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+    }
+  }
+
+  gitlabStageTextClass(status) {
+    if (status == "SUCCESS") {
+      return "btn-txt btn-outline-success";
+    }
+    else if (status == "CANCELLED" || status == "SKIPPED") {
+      return "btn-outline-secondary";
+    }
+    else if (status == "PENDING") {
+      return "btn-txt btn-outline-secondary";
+    }
+    else if (status == "RUNNING") {
+      return "btn-txt fa-spin btn-outline-primary";
+    }
+    else if (status == "FAILED") {
+      return "btn-txt btn-outline-danger";
+    }
+  }
+
   clickit(url) {
     window.open(url, "_blank");
   }
 
   public name: any;
   public image: any;
-  public gitlab_url: any;
+  public gitlabPipelineUrl: any;
+  // public clusterCreationJobUrl: any;
+  // public infraSetupJobUrl: any;
+  // public clusterDeletionJobUrl: any;
   public log_url: any;
   public totalJobs: any;
   public executedJobs: any;
@@ -511,14 +558,23 @@ export class TableComponent implements OnInit {
   public rating: any;
   public pullRequest: any;
   public status: any;
+  public clusterSetupStatus: any;
+  public providerInfraSetup: any;
+  public statefulAppDeploy: any;
+  public appFunctionTest: any;
+  public appChaosTest: any;
+  public clusterCleanup: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
-      // console.log(data);
       var pipelineData = data['pipelines'][0]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gke.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -529,14 +585,24 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 1;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
 
     }
     else if (cloud == 'AKS') {
       var pipelineData = data['pipelines'][1]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aks.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -547,13 +613,23 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 2;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
     }
     else if (cloud == 'EKS') {
       var pipelineData = data['pipelines'][2]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'eks.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -564,13 +640,23 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 3;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
     }
     else if (cloud == 'Packet') {
       var pipelineData = data['pipelines'][3]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'packet.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -581,13 +667,23 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 4;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
     }
     else if (cloud == 'GCP') {
       var pipelineData = data['pipelines'][4]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gcp.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -598,13 +694,23 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 5;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
     }
     else if (cloud == 'AWS') {
       var pipelineData = data['pipelines'][5]
+      // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aws.svg'
       this.name = cloud;
-      this.gitlab_url = pipelineData[index].web_url;
+      this.gitlabPipelineUrl = pipelineData[index].web_url;
+      // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
+      // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
+      // this.clusterDeletionJobUrl = pipelineData[index].jobs[length].web_url;
       this.log_url = pipelineData[index].log_link;
       this.totalJobs = pipelineData[index].jobs.length;
       this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -615,6 +721,12 @@ export class TableComponent implements OnInit {
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
       this.status = 6;
+      this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
+      this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
+      this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
+      this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
+      this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+      this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
       // this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
     }
   }
@@ -665,5 +777,196 @@ export class TableComponent implements OnInit {
   commitMess(data) {
     var message = data.message;
     return message;
+  }
+
+  getClusterSetupStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
+  }
+
+  getProviderInfraSetupStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "PROVIDER-INFRA-SETUP") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
+  }
+
+  getStatefulAppDeployStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "STATEFUL-APP-DEPLOY") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
+  }
+
+  getAppFunctionTestStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-FUNC-TEST") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
+  }
+  getAppChaosTestStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
+  }
+
+  getClusterCleanupStatus(data) {
+    var jobCount = 0;
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP") {
+        jobCount ++;
+        if(data[i].status == "running") {
+          return "RUNNING";
+        } else if(data[i].status == "failed") {
+          return "FAILED";
+        } else if(data[i].status == "skipped") {
+          return "SKIPPED";
+        } else if(data[i].status == "canceled") {
+          return "CANCELED";
+        } else if(data[i].status == "created" || data[i].status == "pending") {
+          return "PENDING";
+        } else {
+          continue;
+        }
+      }
+    }
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount) {
+      return "SUCCESS";
+    }
   }
 }
