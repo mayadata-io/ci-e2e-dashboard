@@ -12,12 +12,12 @@ import { Meta,Title } from '@angular/platform-browser';
 })
 export class TableComponent implements OnInit {
 
-  // $: any;
   id: any;
   host: any;
   items = [];
   restItems: any;
   restItemsUrl: string;
+  initialCount = 0;
 
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
@@ -35,40 +35,40 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     
+    localStorage.removeItem('row');
     //for Highlight the row
     $('#data').on('click', 'tbody tr', function(e) {
-     $(this).addClass('test').siblings().removeClass('test');
+     $(this).addClass('row_color').siblings().removeClass('row_color');
+     // store selected row in localStorage
+     var selectedRow = $(this).index();
+     localStorage.setItem('row', selectedRow);
      // For highlight the cell
-       $("#data span").removeClass("highlight");
-       var clickedCell= $(e.target).closest("span");
-       clickedCell.addClass("highlight");
+      $("#data span").removeClass("highlight");
+      var clickedCell= $(e.target).closest("span");
+      clickedCell.addClass("highlight");
     });
-// $('#data').on('click', 'tbody tr td', function() {
-//   $(this).addClass('highlight').siblings().removeClass('highlight');
-// });
 
-    // This need to be change 
+    // TODO
     var index = 1;
     this.getRestItems();
     setInterval(() => {
       if (index == 1) {
         var data = this.getRestItems();
-        // console.log(data.build.length);
-        var count = 0;
-        for (var i = 0; i < data.build.length; i++) {
-          if(data.build[i].status == "running") {
-            count ++;
+        if (data.build != undefined) {
+          for (var i = 0; i < data.build.length; i++) {
+            if(data.build[i].status == "running") {
+              this.initialCount ++;
+            }
           }
         }
-        // console.log(count);
-        this.detailPannel('GKE', count, data);
+        this.detailPannel('GKE', this.initialCount, data);
         index = 0;
       }
     }, 500);
 
     this.id = setInterval(() => {
       this.getRestItems();
-    }, 600000);
+    }, 10000);
 
     // var chBar = document.getElementById("chBar");
     // var chartData = {
@@ -94,6 +94,15 @@ export class TableComponent implements OnInit {
     //   });
     // }
   }
+
+  rowCount() {
+    var rowValue = localStorage.getItem('row');
+    if(rowValue == null) {
+      rowValue = (this.initialCount).toString();
+    }
+    return rowValue;
+  }
+
   // Read all REST Items
   getRestItems() {
     this.restItemsServiceGetRestItems().subscribe(restItems => {
@@ -124,6 +133,7 @@ export class TableComponent implements OnInit {
     }
   }
 
+  //todo
   masterBuildsCount(data) {
     // var count = 0;
     // for (var i=0; i < data.length; i++) {
@@ -500,6 +510,7 @@ export class TableComponent implements OnInit {
   public litmus: any;
   public rating: any;
   public pullRequest: any;
+  public status: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -517,6 +528,7 @@ export class TableComponent implements OnInit {
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
       this.pullRequest = data.build[index].commit_url
+      this.status = 1;
       // this.litmus = "https://github.com/openebs/e2e-gke/tree/master/script"
 
     }
@@ -533,6 +545,8 @@ export class TableComponent implements OnInit {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
+      this.pullRequest = data.build[index].commit_url
+      this.status = 2;
       // this.litmus = "https://github.com/openebs/e2e-azure/tree/master/script"
     }
     else if (cloud == 'EKS') {
@@ -548,6 +562,8 @@ export class TableComponent implements OnInit {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
+      this.pullRequest = data.build[index].commit_url
+      this.status = 3;
       // this.litmus = "https://github.com/openebs/e2e-eks/tree/eks-test/script"
     }
     else if (cloud == 'Packet') {
@@ -563,6 +579,8 @@ export class TableComponent implements OnInit {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
+      this.pullRequest = data.build[index].commit_url
+      this.status = 4;
       // this.litmus = "https://github.com/openebs/e2e-packet/tree/master/script"
     }
     else if (cloud == 'GCP') {
@@ -578,6 +596,8 @@ export class TableComponent implements OnInit {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
+      this.pullRequest = data.build[index].commit_url
+      this.status = 5;
       // this.litmus = "https://github.com/openebs/e2e-gcp/tree/master/script"
     }
     else if (cloud == 'AWS') {
@@ -593,6 +613,8 @@ export class TableComponent implements OnInit {
       this.commitMessage = this.commitMess(data.build[index].jobs[0].commit)
       this.commitUser = this.commitUsr(data.build[index].jobs[0].commit)
       this.rating = this.ratingCalculation(pipelineData[index].jobs)
+      this.pullRequest = data.build[index].commit_url
+      this.status = 6;
       // this.litmus = "https://github.com/openebs/e2e-aws/tree/master/script"
     }
   }
