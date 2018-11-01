@@ -229,4 +229,15 @@ a:hover {
     // background-color: #F2F4F6;
     background-color: #ededed;
 }
-  
+
+.gitlab_stages {
+    color:#354052;
+    text-align: left;
+    font-size:15px;
+}
+
+.gitlab_stages:hover {
+    color:#007bff;
+    cursor: pointer;
+    font-weight: bold;
+}
