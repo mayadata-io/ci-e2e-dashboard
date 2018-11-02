@@ -21,6 +21,23 @@ p{
     border-color: #DFE3E9;
 }
 
+.btn-outline-customchaos:hover {
+    color: #fff;
+    
+  }
+  .btn-outline-customchaos:enabled {
+    background-image: linear-gradient(#e4eaee, #2da1f8);
+    border-color: #1585d8;
+  }
+  
+  .btn-outline-customchaos {
+    color: #354052;
+    background-color: white;
+    background-image: none;
+    border-color: #dfe3e9;
+  }
+
+
 @media screen and (max-width:1300px){
     p{
         font-size: 12px;

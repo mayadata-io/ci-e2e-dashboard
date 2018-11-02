@@ -4,13 +4,18 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgxCaptchaModule } from 'ngx-captcha';
+
+// Global routing module
 import { Routing } from './app.routing';
 
+// Services 
 import { PersonService } from './services/savereaddelete.service';
 import { KubernetsService } from './services/kubernetes.service';
 import { LitmusService } from './services/litmus.services';
 import { AgileService } from './services/agile.services';
 
+// Components  
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -39,7 +44,8 @@ import { OverviewComponent } from './overview/overview.component';
     Routing,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCaptchaModule
   ],
   providers: [
     PersonService,

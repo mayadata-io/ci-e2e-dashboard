@@ -186,12 +186,6 @@
     </div>
 
     <div class="col-md-4" >
-      <!-- <div class="row my-2">
-      <div class="col-md-12">
-        <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
-        <p>Run the live chaos test</p>
-      </div>
-      </div> -->
       <div class="row my-2 ">
         <div class="col-md-12 pr-0">
 
@@ -223,8 +217,18 @@
                         </option>
                       </select>
                     </div>
-                    <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
+                    <div [formGroup]="aFormGroup">
+                        <ngx-recaptcha2
+                        [siteKey]="siteKey"
+                        [size]="size"
+                        [hl]="lang"
+                        [theme]="theme"
+                        [type]="type"
+                        (expire)="handleExpire()"
+                        (success)="handleSuccess($event)"
+                        formControlName="recaptcha">
+                      </ngx-recaptcha2>
+                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-customchaos" style="width:50px;height: 100%;"
                         (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
                         Go </button>
                     </div>

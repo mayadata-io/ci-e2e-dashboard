@@ -5,6 +5,7 @@ import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable, timer, from } from "rxjs";
 import "rxjs/add/observable/interval";
 import "rxjs/add/operator/takeWhile";
@@ -117,18 +118,27 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public applicationType: any;
   public litmusJobName: string = "";
   public litmusLog: litmuslog;
-  public litmusStarted: boolean = false;
+  public litmusStarted: boolean = true;
   public setlitmus: any;
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
+
+  public aFormGroup: FormGroup;
+  public readonly siteKey = '6LcvoUgUAAAAAJJbhcXvLn3KgG-pyULLusaU4mL1';
+  public captchaIsLoaded = false;
+  public captchaSuccess = false;
+  public captchaIsExpired = false;
+  public captchaResponse?: string;
+
   constructor(
     private router: Router,
     private personService: PersonService,
     private kubernetsServices: KubernetsService,
     private litmusServies: LitmusService,
     private titleService: Title,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
@@ -162,7 +172,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
     });
-
+    this.aFormGroup = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+    });
     for (let j = 0; j < 100; j++) {
       for (let i = 0; i < 10; i++) {
         this.randomString1 =
@@ -399,5 +411,13 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     $("#induceChaos")
       .val("")
       .change();
+  }
+  handleSuccess(captchaResponse: string): void {
+    console.log(this.captchaSuccess);
+    this.litmusStarted = true;
+    this.captchaSuccess = true;
+    this.captchaResponse = captchaResponse;
+    this.captchaIsExpired = false;
+    console.log(this.captchaSuccess);
   }
 }
