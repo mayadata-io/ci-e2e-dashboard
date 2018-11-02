@@ -57,12 +57,11 @@
                       <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg"><p style="font-size: 13px;">PACKET</p></span>
                       <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg"><p style="font-size: 13px;">GCP</p></span>
                       <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg"><p style="font-size: 13px;">AWS</p></span>
-                      <!-- GKE | AKS | EKS | PACKET | GCP | AWS -->
                     </td>
                   </tr>
               </thead>
               <tbody *ngIf="undefined !== restItems">
-                <tr class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
+                <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
                   <!-- <td>{{  i+1 }}</td> -->
                   <td>
                     <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
@@ -82,12 +81,48 @@
                     </button>
                   </td>
                   <td>
-                    <span (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
-                    <span (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
-                    <span (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
-                    <span (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
-                    <span (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
-                    <span (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
+                    <span (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                        <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                        <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gke')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'eks')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gcp')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aws')" stroke-dashoffset="22.5"></circle>
+                    </svg>
+                      </span>
                   </td>
                 </tr>
               </tbody>
@@ -107,10 +142,49 @@
         <div class="text-center">
         <img src="/assets/images/cloud/{{ image }}">
         <h5>{{ name }}</h5>
-        <h6>Kubernetes 1.10.0</h6> 
-          <button (click)="clickit(gitlab_url)" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
+        <h6>Kubernetes 1.10.0</h6>
+          <button id="btn1" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
           <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton litmusButton">E2E LOGS</span></button>
         </div>
+
+        <div style="display: none;" class="divClass">
+          <hr>
+          <table class="mx-4 table table-borderless">
+            <thead>
+              <tr style="border-bottom: none">
+                <th style="padding: 0px;"><p style="font-size:16px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB STAGES</p></th>
+                <th style="padding: 0px;"><p style="font-size:16px; text-align: left; text-decoration: underline; padding-bottom:10px;">STATUS</p></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(clusterSetupStatus)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(providerInfraSetup)'>{{ clusterSetupStatus }}</span></td>
+              </tr>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(providerInfraSetup)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
+              </tr>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(statefulAppDeploy)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
+              </tr>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(appFunctionTest)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
+              </tr>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(appChaosTest)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(appChaosTest)'>{{ appChaosTest }}</span></td>
+              </tr>
+              <tr style="border-bottom: none">
+                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6></td>
+                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(clusterCleanup)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(clusterCleanup)'>{{ clusterCleanup }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
         <hr>
         <div class="row">
           <div class="col-sm-4">

@@ -204,7 +204,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
             console.log(this.openebsengine);
             this.numberReplica = this.jivaReplicas.length
           }
-     
+
           if (this.overallStatus == "Running") {
             this.runningStatus = true;
           } else if (

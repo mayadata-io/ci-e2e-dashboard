@@ -41,7 +41,15 @@ import { OverviewComponent } from './overview/overview.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PersonService,KubernetsService, LitmusService,HttpClient,Meta,Title,AgileService],
+  providers: [
+    PersonService,
+    KubernetsService,
+    LitmusService,
+    HttpClient,
+    Meta,
+    Title,
+    AgileService
+  ],
   bootstrap: [AppComponent],
   exports: [RouterModule,RouterLinkActive]
 })
