@@ -3,10 +3,9 @@
     <div class="col-md-8">
       <div class="row bg-white my-2" style="padding-top:37px;padding-bottom:37px;">
         <div class="col-md-6" style="margin:0 auto">
-          <div class="d-flex align-items-end mt-4 justify-content-center" style="margin-bottom:2.5rem">
-            <img src="/assets/images/workloads-logos/{{workloadName}}.svg" alt="" style="height:60px">
+          <div class="d-flex flex-column align-items-center mt-4 justify-content-center" style="margin-bottom:2.5rem">
+            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:18px;color:#354052"> {{workloadImage}} </p>
               <p class="mb-0" style="font-size:14px;color:#354052">{{applicationType}}- {{numberstatefullSets}}
                 Replica-
                 {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
@@ -27,21 +26,23 @@
         <div class="col-md-12">
           <hr>
           <div class="d-flex justify-content-between">
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:30px">
                 <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
               </div>
               <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
+              <p class=" mb-0" style="font-size:14px;color:#354052">Image: {{workloadImage}}</p>
             </div>
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column ">
               <div class="d-flex align-items-center mb-3 ml-4">
                 <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
-                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsEngine | titlecase}} 0.7</p>
+                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.7</p>
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
-                {{numberController}}
-                Zones- {{numberController}}</p>
+                {{numberReplica}}
+                Zones- <span *ngIf="(numberstatefullSets+numberController) >=3">3</span><span *ngIf="(numberstatefullSets+numberController) < 3">2</span></p>
+                <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
             </div>
 
           </div>
@@ -55,7 +56,7 @@
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
                 <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
-                  ngbTooltip="{{statefulset.nodeName}}">
+                  ngbTooltip="{{statefulset.name}}">
                   {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                 <img style="height:15px;margin-left:0.5rem" [ngClass]="{
                 'display':statefulset.status === 'Running',
@@ -107,7 +108,7 @@
           <hr>
         </div>
 
-        <div class="col-md-12 "  [ngClass]="{
+        <div class="col-md-12 " [ngClass]="{
           'display':dashboardurl === '',
           'hide':dashboardurl !== ''
         }">
@@ -142,7 +143,8 @@
         <div class="col-md-12 ">
           <div class=" p-2 configuration-header ">
             <div class="d-flex justify-content-between ">
-              <div style="font-size:18px;">Query command &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;font-style:italic"> mayactl volumes list -n {{namespace}} </span></div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
+              <div style="font-size:18px;">Query command &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;font-style:italic">
+                  mayactl volumes list -n {{namespace}} </span></div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
                 (click)="listVolume() ">Execute</button>
             </div>
 
@@ -176,7 +178,7 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4" >
       <!-- <div class="row my-2">
       <div class="col-md-12">
         <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
@@ -185,7 +187,7 @@
       </div> -->
       <div class="row my-2 ">
         <div class="col-md-12 pr-0">
-         
+
           <div class="bg-white text-center" style="padding-top:9rem;padding-bottom: 7rem">
             <img style="width:55%;" src="/assets/images/company-logos/litmuslogo.svg" alt="">
             <p class="mb-0" style="font-size:18px">Run the live chaos test</p>
@@ -193,7 +195,8 @@
           <hr class="bg-white my-0" style="width: 80%">
         </div>
         <div class="col-md-12 pr-0">
-           <div class="alert alert-primary alert-dismissible text-center mb-0" style="font-size:14px;padding:0.3rem" role="alert" *ngIf="isAlert">
+          <div class="alert alert-primary alert-dismissible text-center mb-0" style="font-size:14px;padding:0.3rem"
+            role="alert" *ngIf="isAlert">
             {{ alertMessage }}
           </div>
           <table class="table action-table bg-white pt-1 mb-0">
@@ -206,7 +209,7 @@
                 <td style="border-top:none">
                   <div class="row justify-content-around">
                     <div style="width:70%">
-                      <select class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)"
+                      <select [disabled]="litmusStarted" class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)"
                         style="width:100%">
                         <option selected value="">Select Chaos..</option>
                         <option *ngFor="let chaosTest of chaosTests;" value="{{chaosTest}} "> {{chaosTest}}
@@ -214,8 +217,8 @@
                       </select>
                     </div>
                     <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) ">
+                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
+                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
                         Go </button>
                     </div>
                   </div>
@@ -232,7 +235,10 @@
                         </option>
                       </select>
                     </div>
-                    <div>
+                    <div style="visibility:hidden">
+                        <button style="visibility:hidden" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
+                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
+                        Go </button>
                     </div>
                   </div>
                 </td>
@@ -241,38 +247,54 @@
           </table>
         </div>
         <div class="col-md-12 pr-0">
-          <div class="bg-white p-2">
+          <div class="bg-white p-2" >
             <div style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
-              <p style="font-size:18px"> Running litmus test</p>
-              <p *ngIf="runnigPos.length == 0;else runnig">
-                no litmus test is running
-              </p>
-              <ng-template #runnig>
-                <div *ngFor="let run of runnigPos " style="display:flex;font-size: 14px;justify-content: space-between">
-                  <p style=" width: 150px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;"
-                    placement="bottom" ngbTooltip="{{run.name}}">
-                    {{run.name}} </p>
-                  <p style="font-size:14px"> {{run.status}}</p>
-                </div>
-              </ng-template>
-              <p style="font-size:18px"> All litmus test</p>
-              <p *ngIf="completes.length==0;else comp">
-                no litmus test is done yet
-              </p>
-              <ng-template #comp>
-                <div *ngFor="let complete of completes " style="display:flex;font-size: 14px;justify-content: space-between">
-                  <p style=" width: 150px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;font-size: 14px"
-                    placement="bottom" ngbTooltip="{{complete.name}}">
-                    {{complete.name}} </p>
-                  <p style="font-size:14px"> {{complete.status}} </p>
-                </div>
-              </ng-template>
+              <p style="font-size:18px">Litmus test logs</p>
+              <div *ngIf="litmusStarted == true">
+                <p><span style=" width: 130px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;"
+                    placement="bottom" ngbTooltip="{{litmusName}}"> {{litmusName}}</span> job is created</p>
+                <p class="d-flex ">Job Name : &nbsp;&nbsp; <span style=" width: 160px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;"
+                    placement="bottom" ngbTooltip="{{litmusJobName}}"> {{litmusJobName}} </span></p>
+                <p class="d-flex align-items-center" *ngIf="litmusLog.startingstatus === true">Pod Name : &nbsp;&nbsp;<span
+                    style=" width: 150px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"
+                    placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span> </p>
+                <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.startingstatus === true">
+                  <span class="d-flex">
+                    <span style=" width: 80px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;"
+                      placement="bottom" ngbTooltip="{{litmusLog.podname}}"> {{litmusLog.podname}}</span> litmus test
+                    pod is starting </span> <i *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus !== true"
+                    class="fas fa-spinner fa-pulse" style="float:right"></i> <i style="float:right" *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus === true"
+                    class="far fa-check-circle"></i></p>
+                <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.runnigstatus === true">
+                  <span class="d-flex"> <span style=" width: 80px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"
+                      placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
+                    litmus test is running </span> <i class="fas fa-spinner fa-pulse" style="float:right" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus !== true"></i><i
+                    style="float:right" class="far fa-check-circle" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus === true"></i>
+                </p>
+                <p *ngIf="litmusLog.runnigstatus === true">wait for sometime check status at left panel </p>
+                <p class="d-flex  align-items-center" *ngIf="litmusLog.completesstatus === true">
+                  <span style=" width: 100px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"
+                    placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
+                  litmus test is completed </p>
+              </div>
             </div>
           </div>
         </div>

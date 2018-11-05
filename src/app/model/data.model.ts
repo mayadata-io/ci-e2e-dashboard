@@ -232,3 +232,7 @@ export interface litmuslog {
   runnigstatus: boolean;
   completesstatus: boolean;
 }
+export interface jobname{
+  jobname:string;
+  litmusName:string;
+}

@@ -19,6 +19,8 @@ export class WorkloadDashboardComponent implements OnInit {
   public prometheuscstorStatus: any;
   public cockdbjiva: any;
   public wordpressStatus: any;
+  public redisjivaStatus: any;
+  public postgresqljivaStatus: any;
 
   constructor(private kubernetsServices: KubernetsService, private meta: Meta,private titleService: Title) {
     this.titleService.setTitle( "workloads dashboard" );
@@ -46,7 +48,7 @@ export class WorkloadDashboardComponent implements OnInit {
         this.mongoStatus = res.status;
       });
       this.kubernetsServices.getAllstatus("percona-jiva").subscribe(res => {
-        this.perconacstorStatus = res.status;
+        this.perconaStatus = res.status;
       });
       this.kubernetsServices.getAllstatus("prometheus-jiva").subscribe(res => {
         this.prometheusStatus = res.status;
@@ -56,6 +58,12 @@ export class WorkloadDashboardComponent implements OnInit {
       });
       this.kubernetsServices.getAllstatus("cockroachdb-jiva").subscribe(res => {
         this.cockdbjiva = res.status;
+      });
+      this.kubernetsServices.getAllstatus("redis-jiva").subscribe(res => {
+        this.redisjivaStatus = res.status;
+      });
+      this.kubernetsServices.getAllstatus("postgresql-jiva").subscribe(res => {
+        this.postgresqljivaStatus = res.status;
       });
     });
   }
