@@ -5,6 +5,15 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta,Title } from '@angular/platform-browser';
 
+const PIPELINE_MAP = {
+  gke: 0,
+  aks: 1,
+  eks: 2,
+  packet: 3,
+  gcp: 4,
+  aws: 5
+};
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -34,7 +43,6 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     localStorage.removeItem('row');
     //for Highlight the row
     $('#data').on('click', 'tbody tr', function(e) {
@@ -83,7 +91,7 @@ export class TableComponent implements OnInit {
     //   labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     //   datasets: [{
     //     data: [589, 445, 483, 503, 689, 692, 634, 732, 579, 806],
-    //     backgroundColor: 'blue' 
+    //     backgroundColor: 'blue'
     //   },
     //   { data: [409, 245, 383, 403, 589, 692, 580, 532, 879, 406],
     //     backgroundColor: '#000000'
@@ -274,18 +282,18 @@ export class TableComponent implements OnInit {
     }
   }
 
-  gkestatus(i, dashboard) {
+  getJobPercentFromPipeline(i, dashboard, pipe){
     try {
       // if(dashboard.build[i].status == "success") {
-        var pipeline = dashboard.pipelines[0];
+        var pipeline = dashboard.pipelines[PIPELINE_MAP[pipe]];
         if (pipeline[i].status == "success") {
-          return "fa fa-check-circle btn-txt btn-outline-success";
+          return "95 5";
         }
         else if (pipeline[i].status == "canceled") {
-          return "fa fa-ban btn-txt btn-outline-secondary";
+          return "0 0";
         }
         else if (pipeline[i].status == "pending") {
-          return "fa fa-clock-o btn-txt btn-outline-secondary";
+          return "0 0";
         }
         else if (pipeline[i].status == "failed") {
           var count = 0;
@@ -295,226 +303,50 @@ export class TableComponent implements OnInit {
             }
           }
           var percentage = (count/pipeline[i].jobs.length)*100;
-          if (percentage > 50) {
-            return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-          } else {
-            return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-          }
+          return `${percentage} ${100-percentage}`
         }
         else if (pipeline[i].status == "running") {
-          return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+          return "95 5";
         }
-      // } else if (dashboard.build[i].status == "running") {
-      //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-      // } else {
-      //   return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-      // }
     }
     catch {
-      return "n/a";
-    }
-  }
-  aksstatus(i, dashboard) {
-    try {
-      // if(dashboard.build[i].status == "success") {
-        var pipelines = dashboard.pipelines[1];
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "failed") {
-        var count = 0;
-        for (var j = 0; j < pipelines[i].jobs.length; j++) {
-          if(pipelines[i].jobs[j].status == "success") {
-            count++;
-          }
-        }
-        var percentage = (count/pipelines[i].jobs.length)*100;
-        if (percentage > 50) {
-          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-        } else {
-          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-        }
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      } 
-  //   } else if (dashboard.build[i].status == "running") {
-  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  // } else {
-  //       return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-  //     }
-    }
-    catch {
-      return "N/A";
-    }
-  }
-  eksstatus(i, dashboard) {
-    try {
-      // if(dashboard.build[i].status == "success") {
-        var pipelines = dashboard.pipelines[2];
-
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "failed") {
-                var count = 0;
-        for (var j = 0; j < pipelines[i].jobs.length; j++) {
-          if(pipelines[i].jobs[j].status == "success") {
-            count++;
-          }
-        }
-        var percentage = (count/pipelines[i].jobs.length)*100;
-        if (percentage > 50) {
-          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-        } else {
-          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-        }
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      }
-  //   } else if (dashboard.build[i].status == "running") {
-  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  // } else {
-  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-  //   }
-    }
-    catch {
-      return "N/A";
-    }
-  }
-  packetstatus(i, dashboard) {
-    try {
-      // if(dashboard.build[i].status == "success") {
-        var pipelines = dashboard.pipelines[3];
-
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "failed") {
-                var count = 0;
-        for (var j = 0; j < pipelines[i].jobs.length; j++) {
-          if(pipelines[i].jobs[j].status == "success") {
-            count++;
-          }
-        }
-        var percentage = (count/pipelines[i].jobs.length)*100;
-        if (percentage > 50) {
-          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-        } else {
-          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-        }
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      }
-  //   } else if (dashboard.build[i].status == "running") {
-  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  // }else {
-  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-  //   }
-    }
-    catch {
-      return "N/A";
-    }
-  }
-  gcpstatus(i, dashboard) {
-    try {
-      // if(dashboard.build[i].status == "success") {
-        var pipelines = dashboard.pipelines[4];
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "failed") {
-                var count = 0;
-        for (var j = 0; j < pipelines[i].jobs.length; j++) {
-          if(pipelines[i].jobs[j].status == "success") {
-            count++;
-          }
-        }
-        var percentage = (count/pipelines[i].jobs.length)*100;
-        if (percentage > 50) {
-          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-        } else {
-          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-        }
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      }
-  //   } else if (dashboard.build[i].status == "running") {
-  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  // }else {
-  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-  //   }
-    }
-    catch {
-      return "N/A";
+      return "0 0";
     }
   }
 
-  awsstatus(i, dashboard) {
-    try {
-      // if(dashboard.build[i].status == "success") {
-        var pipelines = dashboard.pipelines[5];
-      if (pipelines[i].status == "success") {
-        return "fa fa-check-circle btn-txt btn-outline-success";
-      }
-      else if (pipelines[i].status == "canceled") {
-        return "fa fa-ban btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "pending") {
-        return "fa fa-clock-o btn-txt btn-outline-secondary";
-      }
-      else if (pipelines[i].status == "failed") {
-                var count = 0;
-        for (var j = 0; j < pipelines[i].jobs.length; j++) {
-          if(pipelines[i].jobs[j].status == "success") {
-            count++;
-          }
-        }
-        var percentage = (count/pipelines[i].jobs.length)*100;
-        if (percentage > 50) {
-          return "fa fa-check-circle btn-txt btn-outline-success btn-status-warning";
-        } else {
-          return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-        }
-      }
-      else if (pipelines[i].status == "running") {
-        return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-      }
-  //   } else if (dashboard.build[i].status == "running") {
-  //     return "fa fa-clock-o btn-txt btn-outline-warning custom-pointer";
-  // }else {
-  //     return "fa fa-ban btn-txt btn-outline-secondary custom-pointer";
-  //   }
+  gitlabStageClass(status) {
+    if (status == "SUCCESS") {
+      return "fa fa-check-circle btn-txt btn-outline-success";
     }
-    catch {
-      return "N/A";
+    else if (status == "CANCELLED" || status == "SKIPPED" ) {
+      return "fa fa-ban btn-txt btn-outline-secondary";
+    }
+    else if (status == "PENDING") {
+      return "fa fa-clock-o btn-txt btn-outline-secondary";
+    }
+    else if (status == "RUNNING") {
+      return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
+    }
+    else if (status == "FAILED") {
+      return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
+    }
+  }
+
+  gitlabStageTextClass(status) {
+    if (status == "SUCCESS") {
+      return "btn-txt btn-outline-success";
+    }
+    else if (status == "CANCELLED" || status == "SKIPPED") {
+      return "btn-outline-secondary";
+    }
+    else if (status == "PENDING") {
+      return "btn-txt btn-outline-secondary";
+    }
+    else if (status == "RUNNING") {
+      return "btn-txt fa-spin btn-outline-primary";
+    }
+    else if (status == "FAILED") {
+      return "btn-txt btn-outline-danger";
     }
   }
 
@@ -759,7 +591,8 @@ export class TableComponent implements OnInit {
   executed(data) {
     var executed = 0;
     for (var i = 0; i < data.length; i++) {
-      if (data[i].status === "success" || data[i].status === "failed") {
+      if (data[i].status 
+          "success" || data[i].status === "failed") {
         executed = executed + 1;
       }
     }

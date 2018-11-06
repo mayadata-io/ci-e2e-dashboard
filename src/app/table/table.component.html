@@ -67,12 +67,48 @@
                     </button>
                   </td>
                   <td>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][0]) }}" [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}" [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][2]) }}" [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][3]) }}" [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][4]) }}" [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][5]) }}" [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][0]) }}" [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                        <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                        <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gke')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}" [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][2]) }}" [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'eks')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][3]) }}" [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][4]) }}" [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gcp')" stroke-dashoffset="22.5"></circle>
+                      </svg>
+                    </span>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][5]) }}" [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000" stroke-width="8" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400" stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aws')" stroke-dashoffset="22.5"></circle>
+                    </svg>
+                      </span>
                   </td>
                 </tr>
               </tbody>
