@@ -218,7 +218,7 @@ export class TableComponent implements OnInit {
       return "btn btn-txt btn-outline-secondary";
   }
 
-  tooltipData(index, build) {
+  buildTooltip(index, build) {
     try {
       if (build[index].status == "success") {
         var sort_id = (build[index].sha).slice(0,8)
@@ -231,6 +231,24 @@ export class TableComponent implements OnInit {
         return "Docker Image:-" + name + ":" + sort_id
       } else if (build[index].status == "failed") {
         return "Build failed";
+      }
+    } catch (e) {
+      return "n/a"
+    }
+  }
+
+  pipelineTooltip(index, data) {
+    try {
+      if(data[index].status == "running") {
+        return "running"
+      } else if(data[index].status == "pending") {
+        return "pending"
+      } else if(data[index].status == "cancelled") {
+        return "cancelled"
+      } else {
+        var passedJobs = this.passed(data[index].jobs)
+        var failedJobs = this.failed(data[index].jobs)
+        return "Passed: " + passedJobs + " Failed: " + failedJobs;
       }
     } catch (e) {
       return "n/a"
