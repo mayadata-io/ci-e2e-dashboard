@@ -31,7 +31,7 @@ export class TableComponent implements OnInit {
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-      this.restItemsUrl = "http://localhost:3000";
+      this.restItemsUrl = "https://staging.openebs.ci/api/";
     } else if (this.host == "openebs.ci") {
         this.restItemsUrl = "https://openebs.ci/api/";
     } else {
@@ -314,39 +314,23 @@ export class TableComponent implements OnInit {
     }
   }
 
-  gitlabStageClass(status) {
-    if (status == "SUCCESS") {
-      return "fa fa-check-circle btn-txt btn-outline-success";
-    }
-    else if (status == "CANCELLED" || status == "SKIPPED" ) {
-      return "fa fa-ban btn-txt btn-outline-secondary";
-    }
-    else if (status == "PENDING") {
-      return "fa fa-clock-o btn-txt btn-outline-secondary";
-    }
-    else if (status == "RUNNING") {
-      return "fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary";
-    }
-    else if (status == "FAILED") {
-      return "fa fa-exclamation-triangle btn-txt btn-outline-danger";
-    }
-  }
 
-  gitlabStageTextClass(status) {
-    if (status == "SUCCESS") {
-      return "btn-txt btn-outline-success";
+
+  gitlabStageBuildClass(status) {
+    if (status === "SUCCESS") {
+      return "gitlab_stage_build_success";
     }
-    else if (status == "CANCELLED" || status == "SKIPPED") {
-      return "btn-outline-secondary";
+    else if (status === "CANCELED" || status === "SKIPPED") {
+      return "gitlab_stage_build_skipped";
     }
-    else if (status == "PENDING") {
-      return "btn-txt btn-outline-secondary";
+    else if (status === "PENDING") {
+      return "gitlab_stage_build_pending";
     }
-    else if (status == "RUNNING") {
-      return "btn-txt fa-spin btn-outline-primary";
+    else if (status === "RUNNING") {
+      return "gitlab_stage_build_running";
     }
-    else if (status == "FAILED") {
-      return "btn-txt btn-outline-danger";
+    else if (status === "FAILED") {
+      return "gitlab_stage_build_failed";
     }
   }
 
