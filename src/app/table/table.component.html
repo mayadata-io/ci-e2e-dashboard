@@ -45,7 +45,7 @@
               <tr class="text-center">
                 <td></td>
                 <td></td>
-                <td style="justify-content: center" class="d-flex text-center;">
+                <td class="d-flex align-items-center justify-content-center" >
                   <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg">
                     <p style="font-size: 13px;">GKE</p>
                   </span>
@@ -83,10 +83,12 @@
                     <a style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
                   </button>
                 </td>
-                <td>
+                <td class="d-flex justify-content-center">
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][0]) }}"
                     [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][0]) == 'running';else donut_graph_gke" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_gke>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -95,10 +97,13 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gke')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                  </ng-template>
                   </span>
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}"
                     [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'running';else donut_graph_aks" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_aks>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -107,10 +112,13 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                  </ng-template>  
                   </span>
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][2]) }}"
                     [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][2]) == 'running';else donut_graph_eks" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_eks>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -119,10 +127,13 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'eks')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                  </ng-template>  
                   </span>
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][3]) }}"
                     [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][3]) == 'running';else donut_graph_packet" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_packet>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -131,10 +142,13 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                    </ng-template>
                   </span>
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][4]) }}"
                     [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][4]) == 'running';else donut_graph_gcp" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_gcp>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -143,10 +157,13 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gcp')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                    </ng-template>
                   </span>
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][5]) }}"
                     [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);"
                     style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][5]) == 'running';else donut_graph_aws" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_aws>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -155,6 +172,7 @@
                         stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aws')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
+                    </ng-template>
                   </span>
                 </td>
               </tr>
