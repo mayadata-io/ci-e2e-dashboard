@@ -1,243 +1,294 @@
 .body {
-    background-color: white;
-    border-radius: 5px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 .detail {
-    background-color: white;
-    height: 885px;
-    overflow-x: scroll;
-    border-radius: 5px;
+  background-color: white;
+  height: 885px;
+  overflow-x: scroll;
+  border-radius: 5px;
 }
 
 .details {
-    padding: 25px;
+  padding: 25px;
 }
 ul .active {
-    background-image: linear-gradient(#64C2E1, #348FC0);
-    h3 {
-        color: #d3d3d3;
-    }
+  background-image: linear-gradient(#64c2e1, #348fc0);
+  h3 {
+    color: #d3d3d3;
+  }
 }
 h1 {
-    font-size: 1.2em;
-    color: #54576B;
+  font-size: 1.2em;
+  color: #54576b;
 }
 h2 {
-    font-size: 0.9em;
-    color: #949BB3;
+  font-size: 0.9em;
+  color: #949bb3;
 }
 h3 {
-    font-size: 0.8em;
-    text-align: left;
-    padding-left: 20px;
-    color: #949BB3;
+  font-size: 0.8em;
+  text-align: left;
+  padding-left: 20px;
+  color: #949bb3;
 }
 h4 {
-    font-size: 2.6em;
-    text-align: left;
-    padding-left: 20px;
-    color: #3A3D54;
-    font-weight: 10;
+  font-size: 2.6em;
+  text-align: left;
+  padding-left: 20px;
+  color: #3a3d54;
+  font-weight: 10;
 }
 h5 {
-    font-size: 1.2em;
-    color: #54576B;
-    display: block;
-    text-align: center;
+  font-size: 1.2em;
+  color: #54576b;
+  display: block;
+  text-align: center;
 }
 h6 {
-    position:inherit;
-    word-break: normal;
-    font-size: 0.9em;
-    color: #949BB3;
-    text-align: center;
+  position: inherit;
+  word-break: normal;
+  font-size: 0.9em;
+  color: #949bb3;
+  text-align: center;
 }
 
 p {
-    font-size: 15px;
-    color: #949BB3;
-    text-align: center;
-    margin-bottom: 0;
+  font-size: 15px;
+  color: #949bb3;
+  text-align: center;
+  margin-bottom: 0;
 }
 tr {
-    font-size: 0.9em;
-    color: #54576B;
-    border-bottom:1px solid #d3d3d3;
+  font-size: 0.9em;
+  color: #54576b;
+  border-bottom: 1px solid #d3d3d3;
 }
 .btn-txt {
-    padding: 0px;
-    border-width: 0px;
-  }
-  
+  padding: 0px;
+  border-width: 0px;
+}
+
 .btn-txt:hover {
-    background-color: inherit;
-    color: inherit;
+  background-color: inherit;
+  color: inherit;
 }
 
 .avoid-clicks {
-    pointer-events: none;
-  }
+  pointer-events: none;
+}
 
 .table {
-    margin-top:10px;
-    overflow: auto;
-    max-height:630px;
+  margin-top: 10px;
+  overflow: auto;
+  max-height: 630px;
 }
 .button {
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
 }
 
 .checked {
-    color: orange;
+  color: orange;
 }
 
 img {
-    padding: 15px;
+  padding: 15px;
 }
 
 // star rating
 .star-ratings-css {
-    unicode-bidi: bidi-override;
-    color: #c5c5c5;
-    font-size: 20px;
-    height: 25px;
-    width: 100px;
-    margin: 0 auto;
-    position: relative;
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  font-size: 20px;
+  height: 25px;
+  width: 100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+
+  &-top {
+    color: orange;
     padding: 0;
-    
-    &-top {
-      color: orange;
-      padding: 0;
-      position: absolute;
-      z-index: 1;
-      display: block;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-    }
-    &-bottom {
-      padding: 0;
-      display: block;
-      z-index: 0;
-    }
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
   }
+  &-bottom {
+    padding: 0;
+    display: block;
+    z-index: 0;
+  }
+}
 
 .btn-outline-custom:hover {
-    color: #fff;
-    background-image: linear-gradient(#1991EB, #2DA1F8);
-    border-color: #1585D8;
+  color: #fff;
+  background-image: linear-gradient(#1991eb, #2da1f8);
+  border-color: #1585d8;
 }
 
 .btn-outline-custom {
-    color: #354052;
-    background-color: transparent;
-    background-image: none;
-    border-color: #DFE3E9;
+  color: #354052;
+  background-color: transparent;
+  background-image: none;
+  border-color: #dfe3e9;
 }
 
-.btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {
-    color: inherit;
-    background-color: white;
-    border-color: #28a745;
+.btn-outline-success:not(:disabled):not(.disabled):active,
+.btn-outline-success:not(:disabled):not(.disabled).active,
+.show > .btn-outline-success.dropdown-toggle {
+  color: inherit;
+  background-color: white;
+  border-color: #28a745;
 }
 
-.btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active, .show > .btn-outline-danger.dropdown-toggle {
-    color: inherit;
-    background-color: white;
-    border-color: #dc3545;
+.btn-outline-danger:not(:disabled):not(.disabled):active,
+.btn-outline-danger:not(:disabled):not(.disabled).active,
+.show > .btn-outline-danger.dropdown-toggle {
+  color: inherit;
+  background-color: white;
+  border-color: #dc3545;
 }
 
-.btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {
-    color: inherit;
-    background-color: white;
-    border-color: #6c757d;
+.btn-outline-secondary:not(:disabled):not(.disabled):active,
+.btn-outline-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: inherit;
+  background-color: white;
+  border-color: #6c757d;
 }
 
-.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #007bff;
 }
 
-.btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active, .show > .btn-outline-warning.dropdown-toggle {
+.btn-outline-warning:not(:disabled):not(.disabled):active,
+.btn-outline-warning:not(:disabled):not(.disabled).active,
+.show > .btn-outline-warning.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #ffc107;
 }
 
-.btn-outline-dark:not(:disabled):not(.disabled):active, .btn-outline-dark:not(:disabled):not(.disabled).active, .show > .btn-outline-dark.dropdown-toggle {
+.btn-outline-dark:not(:disabled):not(.disabled):active,
+.btn-outline-dark:not(:disabled):not(.disabled).active,
+.show > .btn-outline-dark.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #343a40;
 }
 
 .gitlabButton {
-    padding-left:15px;
-    padding-right:15px; 
-    font-weight: bold; 
-    font-size:15px
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .litmusButton {
-    padding-left:25px; 
-    padding-right:25px; 
-    font-weight: bold; 
-    font-size:15px
+  padding-left: 25px;
+  padding-right: 25px;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 @media only screen and (max-width: 1500px) {
+  .statusbutton {
+    font-size: 13px !important;
+  }
+  @media only screen and (max-width: 1400px) {
     .statusbutton {
-        font-size: 13px !important; 
+      font-size: 11px !important;
+      padding-left: 14px;
+      padding-right: 14px;
     }
-    @media only screen and (max-width: 1400px) {
-        .statusbutton {
-            font-size: 11px !important; 
-            padding-left:14px;
-            padding-right:14px;
-        }
-    }
+  }
 }
 
 .btn-status-warning {
-    color:  #ffb000;
-    background-color: transparent;
-    background-image: none;
-    border-color:  #ffb000;
+  color: #ffb000;
+  background-color: transparent;
+  background-image: none;
+  border-color: #ffb000;
 }
 
 .custom-pointer {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .fa {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 .highlight {
-  border-bottom: 5px solid #654CF9;
+  border-bottom: 5px solid #654cf9;
 }
 
 .row_color {
-    // background-color: #F2F4F6;
-    background-color: #ededed;
+  // background-color: #F2F4F6;
+  background-color: #ededed;
 }
 
 .gitlab_stages {
-    color:#354052;
-    text-align: left;
-    font-size:15px;
+  color: #354052;
+  text-align: left;
+  font-size: 11px;
+  margin-bottom: 0px;
+  vertical-align: middle;
 }
 
 .gitlab_stages:hover {
-    color:#007bff;
-    cursor: pointer;
-    font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
 }
+
+.gitlab_stage_build_status {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+.gitlab_stage_primary{
+    border-radius: 24px;
+    padding: 0.3rem 0rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    width: 90%;
+    font-size:10px;
+    text-align: center;
+}
+.gitlab_stage_build_success {
+  background-color: rgba(128,174,59,0.55);
+  color: #335500;
+
+}
+.gitlab_stage_build_failed {
+  background-color: rgba(237,123,123,0.55);
+  color: #760606;
+}
+.gitlab_stage_build_running {
+    background: rgba(108,138,255,0.55);
+  color: #0000a1;
+}
+.gitlab_stage_build_skipped {
+  background-color: rgba(201,202,206,0.55);
+  color: #4e5672;
+}
+.gitlab_stage_build_pending {
+  background-color: rgba(232,223,17,0.55);
+  color: #656204;
+}
+

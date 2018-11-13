@@ -13,7 +13,8 @@
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
             <h4>Master</h4>
-            <h3 *ngIf="undefined !== restItems" style="color:white">Builds in last one week: {{ masterBuildsCount(restItems.dashboard.build) }}</h3>
+            <h3 *ngIf="undefined !== restItems" style="color:white">Builds in last one week: {{
+              masterBuildsCount(restItems.dashboard.build) }}</h3>
           </a>
         </li>
         <li style="pointer-events:none;" class="nav-item">
@@ -24,188 +25,306 @@
           </a>
         </li>
         <li style="pointer-events:none; cursor:pointer;" class="nav-item">
-        <a class="nav-link" href="#references" role="tab" data-toggle="tab">
-          <!-- <h3>BRANCH</h3> -->
-          <!-- <h4>v0.7.1</h4> -->
-          <!-- <h3>Commit in last one week: _</h3> -->
-        </a>
+          <a class="nav-link" href="#references" role="tab" data-toggle="tab">
+            <!-- <h3>BRANCH</h3> -->
+            <!-- <h4>v0.7.1</h4> -->
+            <!-- <h3>Commit in last one week: _</h3> -->
+          </a>
         </li>
       </ul>
-        <!-- Tab panes -->
-        <div class="table container tab-content">
-          <div role="tabpanel" class="tab-pane active" id="profile">
-            <table id=data style="min-width:800px;overflow-x:auto"  class="table table-borderless">
-              <thead>
-                <tr class="text-center">
-                  <!-- <th>#</th> -->
-                  <th>Trigger</th>
-                  <!-- <th>Commit</th> -->
-                  <!-- <th>Updated</th> -->
-                  <th>Build</th>
-                  <th style="text-align:center">E2E Pipelines</th>
-                </tr>
-                <tr class="text-center">
-                    <!-- <td></td> -->
-                    <td></td>
-                    <!-- <td></td>
-                    <td></td> -->
-                    <td></td>
-                    <td style="justify-content: center" class="d-flex text-center;">
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg"><p style="font-size: 13px;">GKE</p></span>
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg"><p style="font-size: 13px;">AKS</p></span>
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg"><p style="font-size: 13px;">EKS</p></span>
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg"><p style="font-size: 13px;">PACKET</p></span>
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg"><p style="font-size: 13px;">GCP</p></span>
-                      <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg"><p style="font-size: 13px;">AWS</p></span>
-                    </td>
-                  </tr>
-              </thead>
-              <tbody *ngIf="undefined !== restItems">
-                <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index" [attr.data-index]="i">
-                  <!-- <td>{{  i+1 }}</td> -->
-                  <td>
-                    <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a>
-                    <p style="font-size: 12px;">commit: {{ updated(i,restItems.dashboard['build']) }} ago</p>
-                  </td>
-
-                  <!-- <td> -->
-                    <!-- <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{ getCommit(i,restItems.dashboard['build']) |  slice:0:8 }}</a> -->
-                  <!-- </td>  -->
-
-                  <!-- <td>{{ updated(i,restItems.dashboard['build']) }}</td> -->
-
-                  <td>
-                    <button placement="bottom" ngbTooltip="{{tooltipData(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));" [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
-                      <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
-                      <a style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
-                    </button>
-                  </td>
-                  <td>
-                    <span [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gkestatus(i, restItems.dashboard)'></i></span>
-                    <span [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='aksstatus(i, restItems.dashboard)'></i></span>
-                    <span [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='eksstatus(i, restItems.dashboard)'></i></span>
-                    <span [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='packetstatus(i, restItems.dashboard)'></i></span>
-                    <span [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='gcpstatus(i, restItems.dashboard)'></i></span>
-                    <span [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;"><i [ngClass]='awsstatus(i, restItems.dashboard)'></i></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
-          <!-- <div role="tabpanel" class="tab-pane fade" id="references">ccc</div> -->
-        </div>
-    </div>
-  </div>
-<!-- table pannel End -->
-
-
-<!-- Detail pannel start -->
-  <div class="col-sm-4 px-0">
-    <div class="detail container border">
-        <div class="text-center">
-        <img src="/assets/images/cloud/{{ image }}">
-        <h5>{{ name }}</h5>
-        <h6>Kubernetes 1.10.0</h6>
-          <button id="btn1" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton gitlabButton">GITLAB STAGES</span></button>
-          <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span class="statusbutton litmusButton">E2E LOGS</span></button>
-        </div>
-
-        <div style="display: none;" class="divClass">
-          <hr>
-          <table class="mx-4 table table-borderless">
+      <!-- Tab panes -->
+      <div class="table container tab-content">
+        <div role="tabpanel" class="tab-pane active" id="profile">
+          <table id=data style="min-width:800px;overflow-x:auto" class="table table-borderless">
             <thead>
-              <tr style="border-bottom: none">
-                <th style="padding: 0px;"><p style="font-size:16px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB STAGES</p></th>
-                <th style="padding: 0px;"><p style="font-size:16px; text-align: left; text-decoration: underline; padding-bottom:10px;">STATUS</p></th>
+              <tr class="text-center">
+                <th>Trigger</th>
+                <th>Build</th>
+                <th style="text-align:center">E2E Pipelines</th>
+              </tr>
+              <tr class="text-center">
+                <td></td>
+                <td></td>
+                <td class="d-flex align-items-center justify-content-center" >
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg">
+                    <p style="font-size: 13px;">GKE</p>
+                  </span>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg">
+                    <p style="font-size: 13px;">AKS</p>
+                  </span>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg">
+                    <p style="font-size: 13px;">EKS</p>
+                  </span>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg">
+                    <p style="font-size: 13px;">PACKET</p>
+                  </span>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg">
+                    <p style="font-size: 13px;">GCP</p>
+                  </span>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg">
+                    <p style="font-size: 13px;">AWS</p>
+                  </span>
+                </td>
               </tr>
             </thead>
-            <tbody>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(clusterSetupStatus)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(providerInfraSetup)'>{{ clusterSetupStatus }}</span></td>
-              </tr>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(providerInfraSetup)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
-              </tr>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(statefulAppDeploy)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
-              </tr>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(appFunctionTest)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
-              </tr>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(appChaosTest)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(appChaosTest)'>{{ appChaosTest }}</span></td>
-              </tr>
-              <tr style="border-bottom: none">
-                <td style="padding: 0px;"><h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6></td>
-                <td style="padding: 0px; pointer-events: none;"><i style="font-size:15px; margin-right:8px;" [ngClass]='gitlabStageClass(clusterCleanup)'></i><span style="font-size:13px;" [ngClass]='gitlabStageTextClass(clusterCleanup)'>{{ clusterCleanup }}</span></td>
+            <tbody *ngIf="undefined !== restItems">
+              <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index"
+                [attr.data-index]="i">
+                <td>
+                  <a style="cursor:pointer; color:#5C93E8" (click)="clickit(commitUrl(i,restItems.dashboard['build']))">{{
+                    getCommitName(i,restItems.dashboard['build']) }}/{{ getCommit(i,restItems.dashboard['build']) |
+                    slice:0:8 }}</a>
+                  <p style="font-size: 12px;">commit: {{ updated(i,restItems.dashboard['build']) }} ago</p>
+                </td>
+                <td>
+                  <button placement="bottom" ngbTooltip="{{buildTooltip(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));"
+                    [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
+                    <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
+                    <a style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
+                  </button>
+                </td>
+                <td class="d-flex justify-content-center">
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][0]) }}"
+                    [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][0]) == 'running';else donut_graph_gke" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_gke>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gke')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                  </ng-template>
+                  </span>
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}"
+                    [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'running';else donut_graph_aks" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_aks>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                  </ng-template>  
+                  </span>
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][2]) }}"
+                    [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][2]) == 'running';else donut_graph_eks" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_eks>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'eks')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                  </ng-template>  
+                  </span>
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][3]) }}"
+                    [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][3]) == 'running';else donut_graph_packet" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_packet>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                    </ng-template>
+                  </span>
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][4]) }}"
+                    [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][4]) == 'running';else donut_graph_gcp" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_gcp>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gcp')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                    </ng-template>
+                  </span>
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][5]) }}"
+                    [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);"
+                    style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][5]) == 'running';else donut_graph_aws" style="font-size:15px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donut_graph_aws>
+                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
+                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                        stroke-width="8" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aws')"
+                        stroke-dashoffset="22.5"></circle>
+                    </svg>
+                    </ng-template>
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        
+        <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
+        <!-- <div role="tabpanel" class="tab-pane fade" id="references">ccc</div> -->
+      </div>
+    </div>
+  </div>
+  <!-- table pannel End -->
+
+
+  <!-- Detail pannel start -->
+  <div class="col-sm-4 px-0">
+    <div class="detail container border">
+      <div class="text-center">
+        <img src="/assets/images/cloud/{{ image }}">
+        <h5>{{ name }}</h5>
+        <h6>Kubernetes 1.10.0</h6>
+        <button id="btn1" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span
+            class="statusbutton gitlabButton">GITLAB STAGES</span></button>
+        <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span
+            class="statusbutton litmusButton">E2E LOGS</span></button>
+      </div>
+
+      <div style="display: none;" class="divClass">
         <hr>
-        <div class="row">
-          <div class="col-sm-4">
-            <div style="padding-top:30px;">
-                <div class="star-ratings-css">
-                  <div style="padding-left:8px;" class="star-ratings-css-top" [style.width]=rating><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                  <div style="padding-left:8px;" class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                  <p style="font-size:13px; padding-top:8px;">SCORE</p>
-                </div>
+        <table class="px-3 table table-borderless">
+          <thead>
+            <tr style="border-bottom: none">
+              <th style="padding: 0px;">
+                <p style="font-size:11px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
+                  STAGES</p>
+              </th>
+              <th style="padding: 0px;">
+                <p style="font-size:11px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(clusterSetupStatus)'>{{ clusterSetupStatus }}</span></td>
+            </tr>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
+            </tr>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
+            </tr>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
+            </tr>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(appChaosTest)'>{{ appChaosTest }}</span></td>
+            </tr>
+            <tr style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(clusterCleanup)'>{{ clusterCleanup }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+      <div class="row">
+        <div class="col-sm-12">
+          <div style="">
+            <div class="star-ratings-css">
+              <div style="padding-left:8px;" class="star-ratings-css-top" [style.width]=rating><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <div style="padding-left:8px;" class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
             </div>
+            <p style="font-size:13px; padding-top:8px;">RATING</p>
           </div>
-          <div class="col-sm-4">
+        </div>
+        <div class="col-sm-12 d-flex" style="padding-top:10px;">
+          <div class="w-25">
             <h5 style="color:black;font-size:15px;">{{ totalJobs }}</h5>
             <h6 style="font-size:13px;">TOTAL</h6>
+          </div>
+          <div class="w-25">
+            <h5 style="color:blue;font-size:15px;">{{ executedJobs }}</h5>
+            <h6 style="font-size:13px;">EXECUTED</h6>
+          </div>
+          <div class="w-25">
             <h5 style="color:green;font-size:15px;">{{ passedJobs }}</h5>
             <h6 style="font-size:13px;">PASSED</h6>
           </div>
-          <div class="col-sm-4">
-            <h5 style="color:blue;font-size:15px;">{{ executedJobs }}</h5>
-            <h6 style="font-size:13px;">EXECUTED</h6>
+          <div class="w-25">
             <h5 style="color:red;font-size:15px;">{{ failedJobs }}</h5>
             <h6 style="font-size:13px;">FAILED</h6>
           </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-sm-4">
-              <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
-              <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
-            </div>
-            <div class="col-sm-8">
-              <!-- <h6>jiva/#1975 @username</h6> -->
-              <h6 style="margin-top:10px;">{{ commitUser }}</h6>
-              <h6 style="font-size:14px; height:50px; overflow-y:auto">{{ commitMessage }}</h6>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-              <div class="col-sm-4 text-center">
-                  <a style=" cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline Images</a>
-                <!-- <p style="margin-top:5px;" >Container images used to run this pipeline</p> -->
-              </div>
-              <div class="col-sm-8 text-center">
-                  <p>Container images used to run this pipeline</p>
-                <!-- <a style="cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
-                <p style="margin-top:5px;">Litmus tests run in this pipeline</p> -->
-              </div>
-            </div>
+        </div>
       </div>
-      <!-- <br> -->
-      <!-- <div class="detail">
+      <hr>
+      <div class="row">
+        <div class="col-sm-4">
+          <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
+          <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
+        </div>
+        <div class="col-sm-8">
+          <!-- <h6>jiva/#1975 @username</h6> -->
+          <h6 style="margin-top:10px;">{{ commitUser }}</h6>
+          <h6 style="font-size:14px; height:50px; overflow-y:auto">{{ commitMessage }}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-4 text-center">
+          <a style=" cursor: pointer; color: #007bff" target="_blank" href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline
+            Images</a>
+          <!-- <p style="margin-top:5px;" >Container images used to run this pipeline</p> -->
+        </div>
+        <div class="col-sm-8 text-center">
+          <p>Container images used to run this pipeline</p>
+          <!-- <a style="cursor:pointer; color: #007bff" (click)=clickit(litmus)>Litmus tests</a>
+                <p style="margin-top:5px;">Litmus tests run in this pipeline</p> -->
+        </div>
+      </div>
+    </div>
+    <!-- <br> -->
+    <!-- <div class="detail">
           <div class="card">
               <div class="card-body">
                   <canvas id="chBar"></canvas>
               </div>
           </div>
         </div> -->
-    </div>
-    <!-- detail pannel End -->
   </div>
+  <!-- detail pannel End -->
+</div>
