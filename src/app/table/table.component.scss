@@ -245,7 +245,9 @@ a:hover {
 .gitlab_stages {
   color: #354052;
   text-align: left;
-  font-size: 15px;
+  font-size: 11px;
+  margin-bottom: 0px;
+  vertical-align: middle;
 }
 
 .gitlab_stages:hover {
@@ -261,11 +263,11 @@ a:hover {
 }
 .gitlab_stage_primary{
     border-radius: 24px;
-    padding: 0.5rem 0rem;
+    padding: 0.3rem 0rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
     width: 90%;
-    font-size:13px;
+    font-size:10px;
     text-align: center;
 }
 .gitlab_stage_build_success {

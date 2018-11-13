@@ -206,52 +206,52 @@
           <thead>
             <tr style="border-bottom: none">
               <th style="padding: 0px;">
-                <p style="font-size:16px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
+                <p style="font-size:11px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
                   STAGES</p>
               </th>
               <th style="padding: 0px;">
-                <p style="font-size:16px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
+                <p style="font-size:11px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(clusterSetupStatus)'>{{ clusterSetupStatus }}</span></td>
             </tr>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
             </tr>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
             </tr>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
             </tr>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appChaosTest)'>{{ appChaosTest }}</span></td>
             </tr>
             <tr style="border-bottom: none">
-              <td style="padding: 0px;">
+              <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
