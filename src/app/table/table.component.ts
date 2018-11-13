@@ -4,6 +4,8 @@ import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta,Title } from '@angular/platform-browser';
+import { ISubscription } from "rxjs/Subscription";
+import { Subscription, Observable, timer, from } from "rxjs";
 
 const PIPELINE_MAP = {
   gke: 0,
@@ -27,6 +29,8 @@ export class TableComponent implements OnInit {
   restItems: any;
   restItemsUrl: string;
   initialCount = 0;
+  public gitBranch:string ='master'; 
+  private restCallSubscription: ISubscription;
 
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
@@ -55,6 +59,16 @@ export class TableComponent implements OnInit {
       var clickedCell= $(e.target).closest("span");
       clickedCell.addClass("highlight");
     });
+    $('#datav7').on('click', 'tbody tr', function(e) {
+      $(this).addClass('row_color').siblings().removeClass('row_color');
+      // store selected row in localStorage
+      var selectedRow = $(this).index();
+      localStorage.setItem('row', selectedRow);
+      // For highlight the cell
+       $("#data span").removeClass("highlight");
+       var clickedCell= $(e.target).closest("span");
+       clickedCell.addClass("highlight");
+     });
 
     $(document).ready(function(){
       $("#btn1").click(function(){
@@ -66,10 +80,10 @@ export class TableComponent implements OnInit {
 
     // TODO
     var index = 1;
-    this.getRestItems();
+    this.getRestItems(this.gitBranch);
     setInterval(() => {
       if (index == 1) {
-        var data = this.getRestItems();
+        var data = this.getRestItems(this.gitBranch);
         if (data.build != undefined) {
           for (var i = 0; i < data.build.length; i++) {
             if(data.build[i].status == "running") {
@@ -83,8 +97,8 @@ export class TableComponent implements OnInit {
     }, 500);
 
     this.id = setInterval(() => {
-      this.getRestItems();
-    }, 60000);
+      this.getRestItems(this.gitBranch);
+    }, 5000);
 
     // var chBar = document.getElementById("chBar");
     // var chartData = {
@@ -120,8 +134,8 @@ export class TableComponent implements OnInit {
   }
 
   // Read all REST Items
-  getRestItems() {
-    this.restItemsServiceGetRestItems().subscribe(restItems => {
+  getRestItems(gitBranch) {
+   this.restCallSubscription = this.restItemsServiceGetRestItems(gitBranch).subscribe(restItems => {
       this.restItems = restItems;
       this.items = JSON.parse(JSON.stringify(restItems));
     });
@@ -130,8 +144,8 @@ export class TableComponent implements OnInit {
   }
 
   // Rest Items Service: Read all REST Items
-  restItemsServiceGetRestItems() {
-    return this.http.get<any[]>(this.restItemsUrl).pipe(map(data => data));
+  restItemsServiceGetRestItems(gitBranch) {
+    return this.http.get<any[]>(this.restItemsUrl,{params:{branch:gitBranch}}).pipe(map(data => data));
   }
 
   ngOnDestroy() {
@@ -767,4 +781,12 @@ export class TableComponent implements OnInit {
       return "SUCCESS";
     }
   }
-}
+
+  branchChange(branch){
+      this.gitBranch= branch;
+      this.restCallSubscription.unsubscribe();
+      this.restItems= {};
+      localStorage.removeItem('row');
+      }
+  }
+
