@@ -1,0 +1,46 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/tls-acme: 'true'
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+  name: dashboard-ingress
+  namespace: openebs-ci
+spec:
+  rules:
+  - host: openebs.ci
+    http:
+      paths:
+      - backend:
+          serviceName: openebs-ci-client-service
+          servicePort: 80
+        path: "/"
+      - backend:
+          serviceName: echoheaders
+          servicePort: 80
+        path: "/echo/"
+      - backend:
+          serviceName: openebs-ci-backend-service
+          servicePort: 3000
+        path: "/api/"
+  - host: www.openebs.ci
+    http:
+      paths:
+      - backend:
+          serviceName: openebs-ci-client-service
+          servicePort: 80
+        path: "/"
+      - backend:
+          serviceName: echoheaders
+          servicePort: 80
+        path: "/echo/"
+      - backend:
+          serviceName: openebs-ci-backend-service
+          servicePort: 3000
+        path: "/api/"
+  tls:
+  - hosts:
+    - openebs.ci
+    - www.openebs.ci
+    secretName: dashboard-ingress

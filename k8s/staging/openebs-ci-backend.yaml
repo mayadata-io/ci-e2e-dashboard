@@ -1,0 +1,50 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: stage-openebs-ci-backend
+  name: stage-openebs-ci-backend
+  namespace: staging-openebs-ci
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stage-openebs-ci-backend
+  template:
+    metadata:
+      labels:
+        app: stage-openebs-ci-backend
+    spec:
+      containers:
+      - env:
+        - name: KEY
+          valueFrom:
+            secretKeyRef:
+              key: apikey
+              name: api-key
+        image: mayadata/staging-dashboard-ci-backend:346b4a0e
+        imagePullPolicy: Always
+        name: stage-openebs-ci-backend
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app: stage-openebs-ci-backend
+  name: stage-openebs-ci-backend-service
+  namespace: staging-openebs-ci
+spec:
+  ports:
+  - name: stage-openebs-ci-backend
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: stage-openebs-ci-backend
+  type: ClusterIP      

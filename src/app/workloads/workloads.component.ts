@@ -132,7 +132,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     if (this.openebsEngine == "cstor") {
       this.chaosTests = [
         "Kill OpenEBS Target",
-        "Increase Latency Between App and Replicas"
+        "Increase Latency Between App and Replicas",
+        "cStor Pool failure"
       ];
     } else {
       this.chaosTests = [
