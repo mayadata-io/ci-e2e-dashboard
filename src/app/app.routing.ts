@@ -10,15 +10,21 @@ const routes: Routes = [
   { path: "", component: TableComponent },
   { path: "workload-dashboard", component: WorkloadDashboardComponent },
   { path: "mongo-jiva", component: WorkloadsComponent },
-  { path: "grafana-cstor", component: WorkloadsComponent },
   { path: "mongo-cstor", component: WorkloadsComponent },
+  { path: "grafana-cstor", component: WorkloadsComponent },
+  { path: "percona-jiva", component: WorkloadsComponent },  
   { path: "percona-cstor", component: WorkloadsComponent },
   { path: "prometheus-cstor", component: WorkloadsComponent },
   { path: "cockroachdb-cstor", component: WorkloadsComponent },
-  { path: "wordpress-nfs", component: WorkloadsComponent },
+  { path: "cockroachdb-jiva", component: WorkloadsComponent },
+  { path: "wordpress-nfs-jiva", component: WorkloadsComponent },
+  { path: "logging", component: WorkloadsComponent },
+  { path: "redis-jiva", component: WorkloadsComponent },
   { path: "redis-cstor", component: WorkloadsComponent },
   { path: "postgresql-jiva", component: WorkloadsComponent },
-  { path: "overview", component: OverviewComponent }
+  { path: "postgresql-cstor", component: WorkloadsComponent },
+  { path: "overview", component: OverviewComponent },
+  { path: ":workload", component: WorkloadsComponent }
 ];
 
 export const Routing = RouterModule.forRoot(routes);
