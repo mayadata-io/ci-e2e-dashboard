@@ -1,0 +1,49 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: openebs-ci-backend
+  name: openebs-ci-backend
+  namespace: openebs-ci
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openebs-ci-backend
+  template:
+    metadata:
+      labels:
+        app: openebs-ci-backend
+    spec:
+      containers:
+      - env:
+        - name: KEY
+          valueFrom:
+            secretKeyRef:
+              key: apikey
+              name: api-key
+        image: mayadata/dashboard-ci-backend:4edbd261
+        imagePullPolicy: Always
+        name: openebs-ci-backend
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: openebs-ci-backend
+  name: openebs-ci-backend-service
+  namespace: openebs-ci
+spec:
+  ports:
+  - name: openebs-ci-backend
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: openebs-ci-backend
+  type: ClusterIP      
