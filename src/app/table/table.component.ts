@@ -362,6 +362,7 @@ export class TableComponent implements OnInit {
   public appFunctionTest: any;
   public appChaosTest: any;
   public clusterCleanup: any;
+  public kubernetesVersion: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -369,6 +370,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gke.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.9.7";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -397,6 +399,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aks.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.9.11";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -424,6 +427,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'eks.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.3";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -451,6 +455,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'packet.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.0";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -478,6 +483,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gcp.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.11.1";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -505,6 +511,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aws.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.0";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
