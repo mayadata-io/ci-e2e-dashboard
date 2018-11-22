@@ -103,6 +103,7 @@ export interface overAllStatus {
       nodeName: string;
       adjacency: string;
       dockerImage: string;
+      node:string;
     }
   ];
   jivaReplica: [
@@ -115,6 +116,7 @@ export interface overAllStatus {
       nodeName: string;
       status: string;
       openebsjivaversion: string;
+      node:string;
     }
   ];
   jivaController: [
@@ -128,6 +130,7 @@ export interface overAllStatus {
       status: string;
       openebsjivaversion: string;
       adjacency: string;
+      node:string;
     }
   ];
   applicationPod: [

@@ -122,6 +122,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
+  public numberNode = new Set();
   constructor(
     private router: Router,
     private personService: PersonService,
@@ -255,7 +256,13 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   this.pvcDetails = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
-        this.litmuspod = res.statefulSet;
+        this.litmuspod = res.statefulSet;        
+        for(let i=0;i<res.jivaController.length;i++){
+          this.numberNode.add(res.jivaController[i].node);
+        }
+        for(let i=0;i<res.jivaReplica.length;i++){
+          this.numberNode.add(res.jivaReplica[i].node);
+        }
       });
   }
 

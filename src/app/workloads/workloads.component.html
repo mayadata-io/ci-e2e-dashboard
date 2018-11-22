@@ -41,7 +41,7 @@
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
                 {{numberReplica}}
-                Zones- <span *ngIf="(numberstatefullSets+numberController) >=3">3</span><span *ngIf="(numberstatefullSets+numberController) < 3 && (numberstatefullSets+numberController) > 0">2</span><span *ngIf="(numberstatefullSets+numberController) == 0">0</span></p>
+                Zones- <span>{{numberNode.size}}</span> </p>
                 <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
             </div>
 
