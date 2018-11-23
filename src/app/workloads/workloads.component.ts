@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router,ActivatedRoute } from "@angular/router";
 import { Meta, Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
@@ -34,13 +34,16 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private timeUnsub: ISubscription;
   private litmustimeUnsub: ISubscription;
   private litmusUnsub: ISubscription;
+  private routeSub : ISubscription;
+  private personalSub : ISubscription;
+  private pvcDetails : ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
-  public numberController: any;
-  public numberReplica:any;
+  public numberController: any= 0;
+  public numberReplica:any = 0;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -119,20 +122,23 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
+  public numberNode = new Set();
   constructor(
     private router: Router,
     private personService: PersonService,
     private kubernetsServices: KubernetsService,
     private litmusServies: LitmusService,
-    private titleService: Title
+    private titleService: Title,
+    private route : ActivatedRoute
   ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
     this.openebsEngine = this.router.url.split("-")[1];
-    if (this.openebsEngine == "cstor") {
+    if (this.openebsEngine == "cstor" || this.router.url.split("/")[1] == "logging") {
       this.chaosTests = [
         "Kill OpenEBS Target",
-        "Increase Latency Between App and Replicas"
+        "Increase Latency Between App and Replicas",
+        "cStor Pool failure"
       ];
     } else {
       this.chaosTests = [
@@ -144,7 +150,11 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
+
+    // this.routeSub = this.route.params.subscribe(params =>{
+    // });
+
+    this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
       this.workloadyaml = res.workloadyaml;
@@ -243,18 +253,27 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           }
         });
     });
-    this.kubernetsServices
+  this.pvcDetails = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
-        this.litmuspod = res.statefulSet;
+        this.litmuspod = res.statefulSet;        
+        for(let i=0;i<res.jivaController.length;i++){
+          this.numberNode.add(res.jivaController[i].node);
+        }
+        for(let i=0;i<res.jivaReplica.length;i++){
+          this.numberNode.add(res.jivaReplica[i].node);
+        }
       });
   }
 
   ngOnDestroy() {
     this.podUnsub.unsubscribe();
     this.timeUnsub.unsubscribe();
-    // this.litmusUnsub.unsubscribe();
-    // this.litmustimeUnsub.unsubscribe();
+    // this.routeSub.unsubscribe();
+    this.pvcDetails.unsubscribe();
+    this.personalSub.unsubscribe();
+    this.litmusUnsub.unsubscribe();
+    this.litmustimeUnsub.unsubscribe();
   }
   public listVolume() {
     this.kubernetsServices

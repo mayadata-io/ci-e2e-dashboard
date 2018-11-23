@@ -41,7 +41,7 @@
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
                 {{numberReplica}}
-                Zones- <span *ngIf="(numberstatefullSets+numberController) >=3">3</span><span *ngIf="(numberstatefullSets+numberController) < 3">2</span></p>
+                Zones- <span>{{numberNode.size}}</span> </p>
                 <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
             </div>
 
@@ -49,133 +49,140 @@
           <hr>
         </div>
       </div>
-
-      <div class="row bg-white my-2">
-        <div class="col-md-12 d-flex justify-content-around workloads my-5">
-          <div class="workload-deatils mx-2" style="width:33%;color: #7F8FA4" *ngFor="let pvc of pvcarray">
-            <div *ngFor="let statefulset of statefullSets">
-              <p *ngIf="statefulset.pvc === pvc.name ">
-                <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
-                  ngbTooltip="{{statefulset.name}}">
-                  {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
-                <img style="height:15px;margin-left:0.5rem" [ngClass]="{
-                'display':statefulset.status === 'Running',
-                'hide':statefulset.status !== 'Running'
-              }"
-                  src="/assets/images/icons/success.svg" alt="">
-                <img [ngClass]="{
-                'display':statefulset.status !== 'Running',
-                'hide':statefulset.status === 'Running'
-              }"
-                  src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
-              </p>
-            </div>
-            <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
-              <p *ngIf="jivaContrller.pvc === pvc.name">
-                <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
-                  placement="bottom" ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom"
-                  ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span>
-                <img style="height:15px;margin-left:0.5rem" [ngClass]="{
-              'display':jivaContrller.status === 'Running',
-              'hide':jivaContrller.status !== 'Running'
-            }"
-                  src="/assets/images/icons/success.svg" alt="">
-                <img [ngClass]="{
-              'display':jivaContrller.status !== 'Running',
-              'hide':jivaContrller.status === 'Running'
-            }"
-                  src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
-              </p>
-            </div>
-            <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
-              <p *ngIf="jivaReplica.pvc === pvc.name">
-                <img src="assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
-                  placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom"
-                  ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span>
-                <img style="height:15px;margin-left:0.5rem" [ngClass]="{
-                'display':jivaReplica.status === 'Running',
-                'hide':jivaReplica.status !== 'Running'
-              }"
-                  src="/assets/images/icons/success.svg" alt="">
-                <img [ngClass]="{
-                'display':jivaReplica.status !== 'Running',
-                'hide':jivaReplica.status === 'Running'
-              }"
-                  src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
-              </p>
-            </div>
-          </div>
-          <hr>
-        </div>
-
-        <div class="col-md-12 " [ngClass]="{
-          'display':dashboardurl === '',
-          'hide':dashboardurl !== ''
-        }">
-          <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
-          <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-            <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
-              <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
-                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
-                (click)="save()">Go</button>
-            </div>
-            <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" [ngClass]="{
-                'btn-success':poststatus===200,
-                'btn-danger':poststatus===500
-              }">{{poststatus}}
-            </div>
-          </div>
-          <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-            <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
-              <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
-                Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
-                (click)="read()">Go</button>
-            </div>
-            <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" [ngClass]="{
-                'btn-success':getstatus===200,
-                'btn-danger':getstatus===500
-              }">{{getstatus}}
-            </div>
-          </div>
-        </div>
+      <div *ngIf="statefullSets.length == 0; else deployPersent" class="row bg-white my-2">
+          <div class="text-center mx-auto">
+              <img src="/assets/images/company-logos/mule-without-tagline.png" height="150" alt="">
+              <h1 class="py-4">Deployment Doesn't Exits</h1>
+          </div> 
       </div>
-      <div class="row bg-white">
-        <div class="col-md-12 ">
-          <div class=" p-2 configuration-header ">
-            <div class="d-flex justify-content-between ">
-              <div style="font-size:18px;">Query command &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;font-style:italic">
-                  mayactl volumes list -n {{namespace}} </span></div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
-                (click)="listVolume() ">Execute</button>
+    <ng-template #deployPersent>
+          <div class="row bg-white my-2">
+            <div class="col-md-12 d-flex justify-content-around workloads my-5">          
+              <div class="workload-deatils mx-2" style="width:33%;color: #7F8FA4" *ngFor="let pvc of pvcarray">
+                <div *ngFor="let statefulset of statefullSets">
+                  <p *ngIf="statefulset.pvc === pvc.name ">
+                    <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
+                      ngbTooltip="{{statefulset.name}}">
+                      {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
+                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                    'display':statefulset.status === 'Running',
+                    'hide':statefulset.status !== 'Running'
+                  }"
+                      src="/assets/images/icons/success.svg" alt="">
+                    <img [ngClass]="{
+                    'display':statefulset.status !== 'Running',
+                    'hide':statefulset.status === 'Running'
+                  }"
+                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                  </p>
+                </div>
+                <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
+                  <p *ngIf="jivaContrller.pvc === pvc.name">
+                    <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
+                      placement="bottom" ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom"
+                      ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span>
+                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                  'display':jivaContrller.status === 'Running',
+                  'hide':jivaContrller.status !== 'Running'
+                }"
+                      src="/assets/images/icons/success.svg" alt="">
+                    <img [ngClass]="{
+                  'display':jivaContrller.status !== 'Running',
+                  'hide':jivaContrller.status === 'Running'
+                }"
+                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                  </p>
+                </div>
+                <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
+                  <p *ngIf="jivaReplica.pvc === pvc.name">
+                    <img src="assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
+                      placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom"
+                      ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span>
+                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                    'display':jivaReplica.status === 'Running',
+                    'hide':jivaReplica.status !== 'Running'
+                  }"
+                      src="/assets/images/icons/success.svg" alt="">
+                    <img [ngClass]="{
+                    'display':jivaReplica.status !== 'Running',
+                    'hide':jivaReplica.status === 'Running'
+                  }"
+                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                  </p>
+                </div>
+              </div>
+              <hr>
             </div>
 
-          </div>
-
-          <div class=" my-2 ">
-            <div class="py-1 ">
-              <div class=" py-1 ">
-                <table style="font-size:14px;color:#7F8FA4" class="table " *ngFor="let volume of jivas ">
-                  <tr>
-                    <td style="padding:0;border:none">Volume Name:</td>
-                    <td style="padding:0;border:none">{{volume.name}}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:0;border:none">Status:</td>
-                    <td style="padding:0;border:none">{{volume.status}}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:0;border:none">Replica Count:</td>
-                    <td style="padding:0;border:none">{{volume.replicas}}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:0;border:none">Capacity:</td>
-                    <td style="padding:0;border:none">{{volume.size}}</td>
-                  </tr>
-                </table>
+            <div class="col-md-12 " [ngClass]="{
+              'display':dashboardurl === '',
+              'hide':dashboardurl !== ''
+            }">
+              <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
+              <div class="d-flex align-items-end justify-content-between p-2 bg-white">
+                <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
+                  <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
+                    Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
+                    (click)="save()">Go</button>
+                </div>
+                <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" [ngClass]="{
+                    'btn-success':poststatus===200,
+                    'btn-danger':poststatus===500
+                  }">{{poststatus}}
+                </div>
+              </div>
+              <div class="d-flex align-items-end justify-content-between p-2 bg-white">
+                <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
+                  <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
+                    Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;"
+                    (click)="read()">Go</button>
+                </div>
+                <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" [ngClass]="{
+                    'btn-success':getstatus===200,
+                    'btn-danger':getstatus===500
+                  }">{{getstatus}}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div class="row bg-white" >
+            <div class="col-md-12 ">
+              <div class=" p-2 configuration-header ">
+                <div class="d-flex justify-content-between ">
+                  <div style="font-size:18px;">Query command &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;font-style:italic">
+                      mayactl volumes list -n {{namespace}} </span></div> <button class="btn btn-secondary btn-sm float-right btn-outline-custom"
+                    (click)="listVolume() ">Execute</button>
+                </div>
+
+              </div>
+
+              <div class=" my-2 ">
+                <div class="py-1 ">
+                  <div class=" py-1 ">
+                    <table style="font-size:14px;color:#7F8FA4" class="table " *ngFor="let volume of jivas ">
+                      <tr>
+                        <td style="padding:0;border:none">Volume Name:</td>
+                        <td style="padding:0;border:none">{{volume.name}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0;border:none">Status:</td>
+                        <td style="padding:0;border:none">{{volume.status}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0;border:none">Replica Count:</td>
+                        <td style="padding:0;border:none">{{volume.replicas}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0;border:none">Capacity:</td>
+                        <td style="padding:0;border:none">{{volume.size}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </ng-template>
     </div>
 
     <div class="col-md-4" >

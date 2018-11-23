@@ -1,11 +1,3 @@
-/*
-    ADDITIONAL DEMO STYLE, NOT IMPORTANT TO MAKE THINGS WORK BUT TO MAKE IT A BIT NICER :)
-*/
-/* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
-/* body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-} */
 .cursor-pointer {
   cursor: pointer;
 }
@@ -17,58 +9,47 @@ a:focus {
   text-decoration: none;
   transition: all 0.3s;
 }
+
 #sidebar {
-  // background: white;
   transition: all 0.3s;
-  // width: 252px;
-  // max-width: 252px;
-  // height: 88.8vh;
-  overflow: auto;
 }
-// #sidebar .sidebar-header {
-//     padding: 20px;
-//     background: white;
-// }
+
 #sidebar ul.components {
   padding: 20px 0;
 }
-// #sidebar ul p {
-//     color: black;
-//     padding: 10px;
-// }
+
 #sidebar ul li a {
   border: 2px solid;
   border-color: white;
   padding: 10px;
   font-size: 1.2em;
-  // font-family: lato;
-  // font-weight: bold;
   color: #54576b;
   display: block;
 }
+
 #sidebar ul li a:hover {
   border-radius: 10px;
-  // color: white;
   background: #F2F4F6;
 }
+
 #sidebar ul li.active > a {
-  // color: white;
   background-color: #F2F4F6;
   border-radius: 10px;
 }
+
 .menu .list-group-item:last-child {
   border-bottom: 10;
 }
+
 img {
   padding-right: 15px;
 }
+
 ul {
   margin-top: 0px;
   font-size: 12px !important;
-  // padding-left: 15px !important;
-  // padding-right: 20px !important;
-  // background: white;
 }
+
 .wrapper {
   background-color: white;
   min-height: 100%;
@@ -79,12 +60,15 @@ ul {
   left: 0px;
   display: inline-block;
 }
+
 #sidebar.active {
   margin-left: -250px;
 }
+
 a[data-toggle="collapse"] {
   position: relative;
 }
+
 .dropdown-toggle::after {
   display: block;
   position: absolute;
@@ -92,6 +76,7 @@ a[data-toggle="collapse"] {
   right: 10px;
   transform: translateY(-50%);
 }
+
 // @media (max-width: 768px) {
 //     #sidebar {
 //         margin-left: -250px;

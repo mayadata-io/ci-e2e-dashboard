@@ -1,5 +1,7 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import Chart from 'chart.js'
+import * as moment from 'moment';
+import * as dateformat from 'dateformat';
 import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -32,7 +34,7 @@ export class TableComponent implements OnInit {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.restItemsUrl = "http://localhost:3000";
-    } else if (this.host == "openebs.ci") {
+    } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci" ) {
         this.restItemsUrl = "https://openebs.ci/api/";
     } else {
       this.restItemsUrl = "https://staging.openebs.ci/api/";
@@ -149,15 +151,18 @@ export class TableComponent implements OnInit {
     }
   }
 
-  //todo
+  //Get master build count
   masterBuildsCount(data) {
-    // var count = 0;
-    // for (var i=0; i < data.length; i++) {
-    //   if (data[i].jobs[0].updated <= "7d 0h 0m") {
-    //     count++;
-    //   }
-    // }
-    return data.length;
+    var buildCount = 0;
+    for (var i=0; i < data.length; i++) {
+      var now = moment(dateformat((new Date()), "UTC:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
+      var buildTime = moment(data[i].jobs[0].created_at, 'YYYY-M-DD,HH:mm:ss');
+      var difference = moment.duration((now.diff(buildTime, 'second')), "second").days();
+      if (difference < 7) {
+        buildCount++;
+      }
+    }
+    return buildCount;
   }
 
   // getCommit returns commit id
@@ -362,6 +367,7 @@ export class TableComponent implements OnInit {
   public appFunctionTest: any;
   public appChaosTest: any;
   public clusterCleanup: any;
+  public kubernetesVersion: any;
 
   detailPannel(cloud, index, data) {
     if (cloud == 'GKE') {
@@ -369,6 +375,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gke.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.9.7";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -397,6 +404,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aks.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.9.11";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -424,6 +432,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'eks.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.3";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -451,6 +460,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'packet.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.0";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -478,6 +488,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'gcp.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.11.1";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;
@@ -505,6 +516,7 @@ export class TableComponent implements OnInit {
       // var length = pipelineData[index].jobs.length - 1;
       this.image = 'aws.svg'
       this.name = cloud;
+      this.kubernetesVersion = "1.10.0";
       this.gitlabPipelineUrl = pipelineData[index].web_url;
       // this.clusterCreationJobUrl = pipelineData[index].jobs[0].web_url;
       // this.infraSetupJobUrl = pipelineData[index].jobs[1].web_url;

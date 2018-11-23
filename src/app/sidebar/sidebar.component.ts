@@ -8,19 +8,15 @@ import { RouterLinkActive } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
+  public jivas = [];
+  public cstors = [];
 
   constructor(private kubernetsServices: KubernetsService) { }
 
   ngOnInit() {
     // this.kubernetsServices.getListNamespaces().subscribe(res => {
     //   this.jivas = res.jiva
-    //   this.cstor = res.cstor
-    //   // console.log(this.listNamespaces);
-    //   // for (let i of this.listNamespaces.jiva) {
-    //   //   console.log(i);
-    //   // }
-    //   console.log(res.jiva);
+    //   this.cstors = res.cstor
     // })
   }
 
