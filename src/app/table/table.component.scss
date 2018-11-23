@@ -6,7 +6,6 @@
 .detail {
   background-color: white;
   height: 885px;
-  overflow-x: scroll;
   border-radius: 5px;
 }
 
@@ -81,7 +80,7 @@ tr {
 
 .table {
   margin-top: 10px;
-  overflow: auto;
+  // overflow: auto;
   max-height: 630px;
 }
 .button {
@@ -292,3 +291,22 @@ a:hover {
   color: #656204;
 }
 
+.scrollbar
+{
+	height: 895px;
+	overflow: auto;
+}
+
+#scrollbar::-webkit-scrollbar
+{
+  width: 5px;
+  height: 5px;
+}
+
+#scrollbar::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #4D99D0;
+}
