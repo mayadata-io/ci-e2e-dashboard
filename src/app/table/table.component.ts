@@ -1,5 +1,7 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import Chart from 'chart.js'
+import * as moment from 'moment';
+import * as dateformat from 'dateformat';
 import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -149,15 +151,18 @@ export class TableComponent implements OnInit {
     }
   }
 
-  //todo
+  //Get master build count
   masterBuildsCount(data) {
-    // var count = 0;
-    // for (var i=0; i < data.length; i++) {
-    //   if (data[i].jobs[0].updated <= "7d 0h 0m") {
-    //     count++;
-    //   }
-    // }
-    return data.length;
+    var buildCount = 0;
+    for (var i=0; i < data.length; i++) {
+      var now = moment(dateformat((new Date()), "UTC:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
+      var buildTime = moment(data[i].jobs[0].created_at, 'YYYY-M-DD,HH:mm:ss');
+      var difference = moment.duration((now.diff(buildTime, 'second')), "second").days();
+      if (difference < 7) {
+        buildCount++;
+      }
+    }
+    return buildCount;
   }
 
   // getCommit returns commit id
