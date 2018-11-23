@@ -134,7 +134,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
     this.openebsEngine = this.router.url.split("-")[1];
-    if (this.openebsEngine == "cstor") {
+    if (this.openebsEngine == "cstor" || this.router.url.split("/")[1] == "logging") {
       this.chaosTests = [
         "Kill OpenEBS Target",
         "Increase Latency Between App and Replicas",
