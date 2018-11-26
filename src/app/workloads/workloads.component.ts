@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { Meta, Title } from "@angular/platform-browser";
+import { Meta,Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
 import { Subscription, Observable, timer, from } from "rxjs";
-import "rxjs/add/observable/interval";
-import "rxjs/add/operator/takeWhile";
 import {
   getResponse,
   postResponse,
@@ -20,8 +18,7 @@ import {
   personDetail,
   yaml,
   runnigPos,
-  completes,
-  litmuslog
+  completes
 } from "../model/data.model";
 import { ISubscription } from "rxjs/Subscription";
 @Component({
@@ -40,7 +37,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
   public numberController: any;
-  public numberReplica:any;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -112,13 +108,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public isAlert: boolean;
   public currentRoute: any;
   public applicationType: any;
-  public litmusJobName: string = "";
-  public litmusLog: litmuslog;
-  public litmusStarted: boolean = false;
-  public setlitmus: any;
-  public litmusName: string;
-  public openebsengine: any;
-  public countstatus: any = 0;
+
   constructor(
     private router: Router,
     private personService: PersonService,
@@ -150,8 +140,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.workloadyaml = res.workloadyaml;
       this.applicationType = res.applicationType;
       this.dashboardurl = res.dashboardurl;
-      this.openebsengine = res.openebsEngine;
-      this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
+      this.titleService.setTitle( this.workloadName+" dashboard | OpenEBS.io" );
+      console.log(this.dashboardurl);
     });
 
     for (let j = 0; j < 100; j++) {
@@ -196,15 +186,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
           this.numberController = this.jivaContrllers.length;
-          if(this.openebsengine == "cStor"){
-            this.numberReplica = this.numberController*3;
-            console.log(this.openebsengine);
-            console.log(this.numberReplica);
-          }else if(this.openebsengine == "Jiva"){
-            console.log(this.openebsengine);
-            this.numberReplica = this.jivaReplicas.length
-          }
-
           if (this.overallStatus == "Running") {
             this.runningStatus = true;
           } else if (
@@ -223,24 +204,10 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
 
     this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
       this.litmusUnsub = this.litmusServies
-        .getJobName(this.currentRoute[1])
+        .getLitmusStatus(this.currentRoute[1])
         .subscribe(res => {
-          if (JSON.stringify(res.jobname) != undefined) {
-            this.litmuses(this.litmusJobName);
-            this.litmusJobName = JSON.stringify(res.jobname);
-            this.litmusName = res.litmusName.split("-").join(" ");
-
-            this.countstatus++;
-          } else if (this.countstatus > 1) {
-            this.litmusLog.completesstatus = true;
-
-            Observable.interval(10000)
-              .takeWhile(() => this.countstatus)
-              .subscribe(i => {
-                this.litmusStarted = false;
-                this.countstatus = 0;
-              });
-          }
+          this.runnigPos = res.runnigPos;
+          this.completes = res.completes;
         });
     });
     this.kubernetsServices
@@ -253,8 +220,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.podUnsub.unsubscribe();
     this.timeUnsub.unsubscribe();
-    // this.litmusUnsub.unsubscribe();
-    // this.litmustimeUnsub.unsubscribe();
+    this.litmusUnsub.unsubscribe();
+    this.litmustimeUnsub.unsubscribe();
   }
   public listVolume() {
     this.kubernetsServices
@@ -303,7 +270,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public runChaosTest(type: string, volume: string) {
     if (type != "" && volume != "") {
       this.alertMessage = type + " is  triggered";
-      this.litmusName = type;
       for (let i = 0; i < this.chaosTests.length; i++) {
         if (type.trim() == this.chaosTests[i]) {
           type = i.toString();
@@ -315,50 +281,26 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       console.log(this.openebsEngine);
       console.log(type);
       if (this.openebsEngine == "cstor") {
-        this.litmusServies
-          .runChaosTestService(
-            type,
-            volume.trim(),
-            this.namespace,
-            "openebs",
-            this.workloadName
-          )
-          .subscribe(res => {
-            this.litmusJobName = JSON.stringify(res);
-          });
+        this.litmusServies.runChaosTestService(
+          type,
+          volume.trim(),
+          this.namespace,
+          "openebs",
+          this.workloadName
+        );
       } else {
-        this.litmusServies
-          .runChaosTestService(
-            type,
-            volume.trim(),
-            this.namespace,
-            this.namespace,
-            this.workloadName
-          )
-          .subscribe(res => {
-            this.litmusJobName = JSON.stringify(res);
-          });
+        this.litmusServies.runChaosTestService(
+          type,
+          volume.trim(),
+          this.namespace,
+          this.namespace,
+          this.workloadName
+        );
       }
       this.runAlert();
       this.setSelectToDefault();
     }
   }
-
-
-  public litmuses(job: string) {
-    this.litmusServies
-      .getLitmusStatus(this.currentRoute[1], job)
-      .subscribe(res => {
-        console.log(res);
-        this.litmusStarted = true;
-        this.litmusLog = res;
-
-        if (this.litmusLog.completesstatus == true) {
-          this.litmusStarted = false;
-        }
-      });
-  }
-
   public runAlert() {
     this.isAlert = true;
     setTimeout(
