@@ -4,6 +4,8 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgxCaptchaModule } from 'ngx-captcha';
+
 import { Routing } from './app.routing';
 
 import { PersonService } from './services/savereaddelete.service';
@@ -39,7 +41,8 @@ import { OverviewComponent } from './overview/overview.component';
     Routing,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCaptchaModule
   ],
   providers: [
     PersonService,

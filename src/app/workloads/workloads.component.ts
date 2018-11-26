@@ -5,6 +5,7 @@ import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable, timer, from } from "rxjs";
 import "rxjs/add/observable/interval";
 import "rxjs/add/operator/takeWhile";
@@ -117,24 +118,32 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public applicationType: any;
   public litmusJobName: string = "";
   public litmusLog: litmuslog;
-  public litmusStarted: boolean = false;
+  public litmusStarted: boolean = true;
   public setlitmus: any;
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
-  public numberNode = new Set();
+
+  public aFormGroup: FormGroup;
+  public readonly siteKey = '6LfhZXwUAAAAAJ3CT-iZUjqHFHBnQXAggxMt96Z6 ';
+  public captchaIsLoaded = false;
+  public captchaSuccess = false;
+  public captchaIsExpired = false;
+  public captchaResponse?: string;
+
   constructor(
     private router: Router,
     private personService: PersonService,
     private kubernetsServices: KubernetsService,
     private litmusServies: LitmusService,
     private titleService: Title,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
     this.openebsEngine = this.router.url.split("-")[1];
-    if (this.openebsEngine == "cstor" || this.router.url.split("/")[1] == "logging") {
+    if (this.openebsEngine == "cstor") {
       this.chaosTests = [
         "Kill OpenEBS Target",
         "Increase Latency Between App and Replicas",
@@ -163,7 +172,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
     });
-
+    this.aFormGroup = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+        });
     for (let j = 0; j < 100; j++) {
       for (let i = 0; i < 10; i++) {
         this.randomString1 =
@@ -256,13 +267,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   this.pvcDetails = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
-        this.litmuspod = res.statefulSet;        
-        for(let i=0;i<res.jivaController.length;i++){
-          this.numberNode.add(res.jivaController[i].node);
-        }
-        for(let i=0;i<res.jivaReplica.length;i++){
-          this.numberNode.add(res.jivaReplica[i].node);
-        }
+        this.litmuspod = res.statefulSet;
       });
   }
 
@@ -407,4 +412,15 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .val("")
       .change();
   }
-}
+  handleSuccess(captchaResponse: string): void {
+    console.log(this.captchaSuccess);
+    this.litmusStarted = true;
+    this.captchaSuccess = true;
+    this.captchaResponse = captchaResponse;
+    this.captchaIsExpired = false;
+    console.log(this.captchaSuccess);
+    (<HTMLInputElement> document.getElementById("btwngo")).disabled =false;
+  
+  };
+  }
+

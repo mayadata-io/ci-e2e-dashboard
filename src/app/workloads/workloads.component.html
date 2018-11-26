@@ -41,7 +41,7 @@
               </div>
               <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
                 {{numberReplica}}
-                Zones- <span>{{numberNode.size}}</span> </p>
+                Zones- <span *ngIf="(numberstatefullSets+numberController) >=3">3</span><span *ngIf="(numberstatefullSets+numberController) < 3 && (numberstatefullSets+numberController) > 0">2</span><span *ngIf="(numberstatefullSets+numberController) == 0">0</span></p>
                 <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
             </div>
 
@@ -186,12 +186,6 @@
     </div>
 
     <div class="col-md-4" >
-      <!-- <div class="row my-2">
-      <div class="col-md-12">
-        <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
-        <p>Run the live chaos test</p>
-      </div>
-      </div> -->
       <div class="row my-2 ">
         <div class="col-md-12 pr-0">
 
@@ -223,11 +217,6 @@
                         </option>
                       </select>
                     </div>
-                    <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
-                        Go </button>
-                    </div>
                   </div>
                 </td>
               </tr>
@@ -242,11 +231,22 @@
                         </option>
                       </select>
                     </div>
-                    <div style="visibility:hidden">
-                        <button style="visibility:hidden" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
-                        Go </button>
-                    </div>
+                    <div [formGroup]="aFormGroup">
+                      <ngx-recaptcha2
+                      [siteKey]="siteKey"
+                      [size]="size"
+                      [hl]="lang"
+                      [theme]="theme"
+                      [type]="type"
+                      (expire)="handleExpire()"
+                      (success)="handleSuccess()"
+                      formControlName="recaptcha">
+                    </ngx-recaptcha2>
+                    <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-customchaos" id="btwngo" style="width:50px;height: 35%;" disabled=""
+                      (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
+                      Go </button>
+                      <script type="text/javascript"> if("handleSuccess()" === "yes") { if(typeof grecaptcha !== 'undefined' && grecaptcha && grecaptcha.reset) { grecaptcha.reset(); } } </script>
+                  </div>
                   </div>
                 </td>
               </tr>
