@@ -66,7 +66,7 @@
                   </span>
                 </td>
               </tr>
-            </thead>
+            </thead>           
             <tbody *ngIf="undefined !== restItems">
               <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center" *ngFor="let post of restItems.dashboard['pipelines'][0]; let i = index"
                 [attr.data-index]="i">
@@ -202,6 +202,7 @@
               </tr>
             </tbody>
           </table>
+          <app-lodding-spinners class="row" *ngIf="showSpinnerTable;"></app-lodding-spinners>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
         <!-- <div role="tabpanel" class="tab-pane fade" id="references">ccc</div> -->
@@ -212,19 +213,21 @@
 
 
   <!-- Detail pannel start -->
-  <div class="col-sm-4 px-0">
+  <div class="col-sm-4 px-0">   
     <div class="detail container border">
+        <app-lodding-spinners  *ngIf="showSpinnerDetails; else hideDetailPanel"></app-lodding-spinners>
+        <ng-template #hideDetailPanel>
       <div class="text-center">
         <img src="/assets/images/cloud/{{ image }}">
         <h5>{{ name }}</h5>
         <h6>Kubernetes {{ kubernetesVersion }}</h6>
-        <button id="btn1" style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span
+        <button  style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom" data-toggle="collapse" href="#gitlabStageToggle" role="button"  aria-controls="gitlabStageToggle"><span
             class="statusbutton gitlabButton">GITLAB STAGES</span></button>
         <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"><span
             class="statusbutton litmusButton">E2E LOGS</span></button>
       </div>
 
-      <div style="display: none;" class="divClass">
+      <div class="collapse" id="gitlabStageToggle">
         <hr>
         <table class="px-3 table table-borderless">
           <thead>
@@ -340,6 +343,7 @@
                 <p style="margin-top:5px;">Litmus tests run in this pipeline</p> -->
         </div>
       </div>
+    </ng-template>
     </div>
     <!-- <br> -->
     <!-- <div class="detail">

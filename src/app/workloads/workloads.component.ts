@@ -118,11 +118,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public litmusJobName: string = "";
   public litmusLog: litmuslog;
   public litmusStarted: boolean = false;
+  public litmusGoBtn:boolean = true;
+  public litmusGetResponse:boolean = true;
   public setlitmus: any;
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
   public numberNode = new Set();
+  public showSpinner:boolean = true; 
   constructor(
     private router: Router,
     private personService: PersonService,
@@ -186,10 +189,12 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       $(".hide-custom").hide();
     }
 
-    this.timeUnsub = timer(0, 5000).subscribe(x => {
+    this.timeUnsub = timer(0, 50000).subscribe(x => {
       this.podUnsub = this.kubernetsServices
         .getPodDetails(this.currentRoute[1], this.currentRoute[1])
-        .subscribe(res => {
+        .subscribe(res => {          
+          this.showSpinner = false;
+          this.litmusGetResponse=false;
           this.statefullSets = res.statefulSet;
           this.applicationPods = res.applicationPod;
           this.jivaContrllers = res.jivaController;
@@ -206,13 +211,20 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
           this.numberController = this.jivaContrllers.length;
+          if(this.numberController>=1){
+          this.litmusGoBtn = false;
+         }
+        //  else if(this.numberController == undefined ){
+        //   this.litmusGoBtn = false;
+        //   this.appPersent = false;
+        //   this.litmusGetResponse=false;
+        //  }
+
           if(this.openebsengine == "cStor"){
             this.numberReplica = this.numberController*3;
-            console.log(this.openebsengine);
-            console.log(this.numberReplica);
+          
           }else if(this.openebsengine == "Jiva"){
-            console.log(this.openebsengine);
-            this.numberReplica = this.jivaReplicas.length
+            this.numberReplica = this.jivaReplicas.length;
           }
 
           if (this.overallStatus == "Running") {
@@ -248,6 +260,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
               .takeWhile(() => this.countstatus)
               .subscribe(i => {
                 this.litmusStarted = false;
+                this.litmusGoBtn = false;
                 this.countstatus = 0;
               });
           }
@@ -370,10 +383,13 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(res);
         this.litmusStarted = true;
+        this.litmusGoBtn = true;
         this.litmusLog = res;
 
         if (this.litmusLog.completesstatus == true) {
           this.litmusStarted = false;
+          this.litmusGoBtn = false;
+          
         }
       });
   }

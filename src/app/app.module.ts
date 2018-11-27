@@ -20,6 +20,7 @@ import { WorkloadDashboardComponent } from './workload-dashboard/workload-dashbo
 import { BannerComponent } from './components/banner/banner.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
 import { OverviewComponent } from './overview/overview.component';
+import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-spinners.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OverviewComponent } from './overview/overview.component';
     WorkloadDashboardComponent,
     BannerComponent,
     WorkloadsComponent,
-    OverviewComponent
+    OverviewComponent,
+    LoddingSpinnersComponent
   ],
   imports: [
     BrowserModule,
