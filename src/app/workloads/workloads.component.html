@@ -49,12 +49,15 @@
           <hr>
         </div>
       </div>
-      <div *ngIf="statefullSets.length == 0; else deployPersent" class="row bg-white my-2">
-          <div class="text-center mx-auto">
-              <img src="/assets/images/company-logos/mule-without-tagline.png" height="150" alt="">
-              <h1 class="py-4">Deployment Doesn't Exits</h1>
-          </div> 
-      </div>
+
+    <app-lodding-spinners class=" row spinners" *ngIf="showSpinner; else hideSipnner"></app-lodding-spinners>
+    <ng-template #hideSipnner> 
+    <div *ngIf="statefullSets.length == 0; else deployPersent" class="row bg-white my-2">
+        <div class="text-center mx-auto">
+            <img src="/assets/images/company-logos/mule-without-tagline.png" height="70" alt="">
+            <p class="py-4"> <Span class="font-weight-bold">{{workloadName | titlecase}}</Span> is currently not deployed in the cluster</p>
+        </div> 
+    </div>
     <ng-template #deployPersent>
           <div class="row bg-white my-2">
             <div class="col-md-12 d-flex justify-content-around workloads my-5">          
@@ -183,6 +186,7 @@
             </div>
           </div>
     </ng-template>
+  </ng-template>   
     </div>
 
     <div class="col-md-4" >
@@ -225,7 +229,7 @@
                     </div>
                     <div>
                       <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
+                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]=" litmusGoBtn">
                         Go </button>
                     </div>
                   </div>
@@ -234,8 +238,8 @@
               <tr>
                 <td style="border-top:none">
                   <div class="row justify-content-around">
-                    <div style="width:70%">
-                      <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)">
+                    <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
+                      <select  class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)">
                         <option selected value="">Select Application..</option>
                         <option *ngFor="let statefulset of litmuspod" value="{{statefulset.pvc}} ">
                           {{statefulset.name}}
@@ -244,7 +248,7 @@
                     </div>
                     <div style="visibility:hidden">
                         <button style="visibility:hidden" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]="litmusStarted">
+                        (click)="runChaosTest(selectedChaos, selectedApplication) " >
                         Go </button>
                     </div>
                   </div>
@@ -255,58 +259,68 @@
         </div>
         <div class="col-md-12 pr-0">
           <div class="bg-white p-2" >
-            <div style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
-              <p style="font-size:18px">Litmus test logs</p>
-              <div *ngIf="litmusStarted == true">
-                <p><span style=" width: 130px;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;"
-                    placement="bottom" ngbTooltip="{{litmusName}}"> {{litmusName}}</span> job is created</p>
-                <p class="d-flex ">Job Name : &nbsp;&nbsp; <span style=" width: 160px;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;"
-                    placement="bottom" ngbTooltip="{{litmusJobName}}"> {{litmusJobName}} </span></p>
-                <p class="d-flex align-items-center" *ngIf="litmusLog.startingstatus === true">Pod Name : &nbsp;&nbsp;<span
-                    style=" width: 150px;
+            <div *ngIf="litmusGetResponse ;else showLitmus"></div>
+            <ng-template #showLitmus>
+              
+              <div *ngIf="statefullSets.length > 0; else deployPersent1" style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
+                <p style="font-size:18px">Litmus logs</p>
+                <div *ngIf="litmusStarted == true">
+                  <p><span style=" width: 130px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;"
-                    placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span> </p>
-                <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.startingstatus === true">
-                  <span class="d-flex">
-                    <span style=" width: 80px;
+                      placement="bottom" ngbTooltip="{{litmusName}}"> {{litmusName}}</span> job is created</p>
+                  <p class="d-flex ">Job Name : &nbsp;&nbsp; <span style=" width: 160px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;"
+                      placement="bottom" ngbTooltip="{{litmusJobName}}"> {{litmusJobName}} </span></p>
+                  <p class="d-flex align-items-center" *ngIf="litmusLog.startingstatus === true">Pod Name : &nbsp;&nbsp;<span
+                      style=" width: 150px;
                       white-space: nowrap;
                       overflow: hidden;
                       text-overflow: ellipsis;"
-                      placement="bottom" ngbTooltip="{{litmusLog.podname}}"> {{litmusLog.podname}}</span> litmus test
-                    pod is starting </span> <i *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus !== true"
-                    class="fas fa-spinner fa-pulse" style="float:right"></i> <i style="float:right" *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus === true"
-                    class="far fa-check-circle"></i></p>
-                <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.runnigstatus === true">
-                  <span class="d-flex"> <span style=" width: 80px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;"
+                      placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span> </p>
+                  <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.startingstatus === true">
+                    <span class="d-flex">
+                      <span style=" width: 80px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;"
+                        placement="bottom" ngbTooltip="{{litmusLog.podname}}"> {{litmusLog.podname}}</span> litmus test
+                      pod is starting </span> <i *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus !== true"
+                      class="fas fa-spinner fa-pulse" style="float:right"></i> <i style="float:right" *ngIf="litmusLog.startingstatus === true && litmusLog.runnigstatus === true"
+                      class="far fa-check-circle"></i></p>
+                  <p class="d-flex justify-content-between align-items-center" *ngIf="litmusLog.runnigstatus === true">
+                    <span class="d-flex"> <span style=" width: 80px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;"
+                        placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
+                      litmus test is running </span> <i class="fas fa-spinner fa-pulse" style="float:right" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus !== true"></i><i
+                      style="float:right" class="far fa-check-circle" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus === true"></i>
+                  </p>
+                  <p *ngIf="litmusLog.runnigstatus === true">wait for sometime check status at left panel </p>
+                  <p class="d-flex  align-items-center" *ngIf="litmusLog.completesstatus === true">
+                    <span style=" width: 100px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;"
                       placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
-                    litmus test is running </span> <i class="fas fa-spinner fa-pulse" style="float:right" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus !== true"></i><i
-                    style="float:right" class="far fa-check-circle" *ngIf="litmusLog.runnigstatus === true && litmusLog.completesstatus === true"></i>
-                </p>
-                <p *ngIf="litmusLog.runnigstatus === true">wait for sometime check status at left panel </p>
-                <p class="d-flex  align-items-center" *ngIf="litmusLog.completesstatus === true">
-                  <span style=" width: 100px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;"
-                    placement="bottom" ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
-                  litmus test is completed </p>
+                    litmus test is completed </p>
+                </div>
               </div>
-            </div>
+            <ng-template #deployPersent1>
+              <div style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
+                  Note: Need an active application deployment in the cluster
+              </div>
+            </ng-template>
+          </ng-template>
           </div>
         </div>
       </div>
     </div>
+    
   </div>
 
 </div>
