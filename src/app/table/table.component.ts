@@ -29,7 +29,8 @@ export class TableComponent implements OnInit {
   restItems: any;
   restItemsUrl: string;
   initialCount = 0;
-
+  public showSpinnerTable:boolean = true; 
+  public showSpinnerDetails:boolean = true; 
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
@@ -58,13 +59,6 @@ export class TableComponent implements OnInit {
       clickedCell.addClass("highlight");
     });
 
-    $(document).ready(function(){
-      $("#btn1").click(function(){
-        $(".divClass").slideToggle("slow",function()
-        {
-        });
-      });
-    });
 
     // TODO
     var index = 1;
@@ -124,6 +118,8 @@ export class TableComponent implements OnInit {
   // Read all REST Items
   getRestItems() {
     this.restItemsServiceGetRestItems().subscribe(restItems => {
+      this.showSpinnerTable = false;
+      this.showSpinnerDetails = false;
       this.restItems = restItems;
       this.items = JSON.parse(JSON.stringify(restItems));
     });
@@ -370,6 +366,10 @@ export class TableComponent implements OnInit {
   public kubernetesVersion: any;
 
   detailPannel(cloud, index, data) {
+    this.showSpinnerDetails = true;
+    setTimeout( () => {
+      this.showSpinnerDetails = false;
+    }, 500);
     if (cloud == 'GKE') {
       var pipelineData = data['pipelines'][0]
       // var length = pipelineData[index].jobs.length - 1;
