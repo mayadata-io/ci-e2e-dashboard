@@ -8,7 +8,7 @@ p{
 .hide{
     display: none;
 }
-.btn-outline-custom:hover {
+.btn-outline-custom:hover:enabled {
     color: #fff;
     background-image: linear-gradient(#1991EB, #2DA1F8);
     border-color: #1585D8;
