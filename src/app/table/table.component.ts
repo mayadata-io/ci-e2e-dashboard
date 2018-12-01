@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-      this.restItemsUrl = "http://localhost:3000";
+      this.restItemsUrl = "https://openebs.ci/api/";
     } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci" ) {
         this.restItemsUrl = "https://openebs.ci/api/";
     } else {
