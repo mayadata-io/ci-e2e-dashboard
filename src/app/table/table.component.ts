@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
   constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-      this.restItemsUrl = "https://openebs.ci/api/";
+      this.restItemsUrl = "http://localhost:3000";
     } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci" ) {
         this.restItemsUrl = "https://openebs.ci/api/";
     } else {
@@ -206,17 +206,17 @@ export class TableComponent implements OnInit {
   }
 
   buttonStatusClass(status) {
-    if (status == "success") return "btn btn-txt btn-outline-success";
+    if (status == "success") return "gitlab_stage_build_success";
     else if (status == "pending")
-      return "btn btn-txt btn-outline-warning";
-    else if (status == "canceled")
-      return "btn btn-txt btn-outline-secondary";
+      return "gitlab_stage_build_pending";
+    else if (status == "canceled"  || status == "skipped")
+      return "gitlab_stage_build_skipped";
     else if (status == "failed")
-      return "btn btn-txt btn-outline-danger";
+      return "gitlab_stage_build_failed";
     else if (status == "running")
-      return "btn btn-txt btn-outline-primary";
+      return "gitlab_stage_build_running";
     else if (status == "n/a")
-      return "btn btn-txt btn-outline-secondary";
+      return "gitlab_stage_build_skipped";
   }
 
   buildTooltip(index, build) {

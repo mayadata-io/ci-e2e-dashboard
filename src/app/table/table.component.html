@@ -77,11 +77,11 @@
                     slice:0:8 }}</a>
                   <p style="font-size: 12px;">commit: {{ updated(i,restItems.dashboard['build']) }} ago</p>
                 </td>
-                <td>
-                  <button placement="bottom" ngbTooltip="{{buildTooltip(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));"
+                <td style="width:80%; margin:0 auto;">
+                  <button class="gitlab_stage_primary" style="padding:0px; cursor:pointer;" placement="bottom" ngbTooltip="{{buildTooltip(i, restItems.dashboard['build'])}}" (click)="clickit(buildWeburl(i, restItems.dashboard['build']));"
                     [ngClass]="buttonStatusClass(buildStatus(i, restItems.dashboard['build']))">
-                    <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i>
-                    <a style="margin-left:5px; font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
+                    <!-- <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, restItems.dashboard['build']))"></i> -->
+                    <a style="font-size:15px">{{buildStatus(i, restItems.dashboard['build'])}}</a>
                   </button>
                 </td>
                 <td class="d-flex justify-content-center">
