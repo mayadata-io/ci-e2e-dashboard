@@ -2,25 +2,24 @@
   <div class="row">
     <div class="col-md-8">
       <div class="row bg-white my-2" style="padding-top:15px;padding-bottom:15px;">
-        <div class="col-md-6" style="margin:0 auto">
-          <div class="d-flex flex-column align-items-center mt-4 justify-content-center" style="margin-bottom:2rem">
-            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
+        <div class="col-md-8 d-flex  align-items-center" >
+          <div class=" my-3" >
+            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:70px;margin-bottom: 10px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:14px;color:#354052">{{applicationType}}- {{numberstatefullSets}}
+              <p class="mb-0" style="font-size:14px;color:#354052">Type: {{applicationType}} &nbsp;&nbsp;
                 Replica-
-                {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
+                {{numberstatefullSets}}&nbsp;&nbsp; Zones- {{numberstatefullSets}}</p>
             </div>
           </div>
-          <div class="d-flex justify-content-between text-center">
-            <p class="pl-2 text-center" [ngClass]="{
+          <div class="d-flex ">
+            <span class="ml-3 mr-3 status_primary yaml" [ngClass]="{
               'w-100':dashboardurl === ''
             }"> <a href="{{workloadyaml}}"
-                style="color:#269BF3" target="_blank"> Deployment yaml </a></p>
-            <p class="pr-2 text-center" [ngClass]="{
+                 target="_blank">yaml </a></span>
+            <span class=" status_primary status_success" [ngClass]="{
               'display':dashboardurl !== '',
               'hide':dashboardurl === ''
-            }"><a
-                href="{{dashboardurl}}" style="color:#269BF3" target="_blank">Live Access</a></p>
+            }"><a href="{{dashboardurl}}"  target="_blank">Live</a></span>
           </div>
         </div>
         <div class="col-md-12">

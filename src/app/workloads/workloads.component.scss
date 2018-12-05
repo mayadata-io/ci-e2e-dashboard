@@ -21,6 +21,26 @@ p{
     border-color: #DFE3E9;
 }
 
+.status_primary{
+    border-radius: 24px;
+    padding: 0.5rem 2rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    width: 90%;
+    font-size:14px;
+    text-align: center;
+}
+.status_success {
+  background-color: rgba(128,174,59,0.55);
+  color: #335500;
+
+}
+
+.yaml {
+  background: rgba(108,138,255,0.55);
+  color: #0000a1;
+}
+
 @media screen and (max-width:1300px){
     p{
         font-size: 12px;
