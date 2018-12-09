@@ -8,11 +8,6 @@
     background: linear-gradient(to right, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c2e1', endColorstr='#348fc0', GradientType=1 );
 
-    // background: linear-gradient(180deg, #64C2E1 0%, #348FC0 100%);
-
-// h1{
-//     color: wheat;
-
 h5{
     color: #DFE2E5;
 }
@@ -25,8 +20,6 @@ h5{
     border-style: dotted;
     border-width: 1px;
     border-radius: 10px ;
-    // border-top-left-radius: 15px;
-    // border-bottom-right-radius: 15px;
     border-color:  rgba(100,194,225,1) ;
     height: 110px;
     padding-top: 14px;
@@ -43,7 +36,7 @@ h5{
 p{
     font-size: 0.8rem;
 }
-#customers {
+#workloadlist {
     font-family:sans-serif;
     font-style: normal;
     color: rgb(28, 41, 58);
@@ -52,28 +45,22 @@ p{
     border-radius: 15px 50px 30px;
     border:solid white 1px;
     border-radius:6px;
-    // border-collapse: separate;
     border-spacing: 5px;
     min-width: 350px;
 
 
 
 }
-#customers td{
+#workloadlist td{
     padding: 8px;
     text-align: left;
 }
 
-// #customers tr:hover {background-color:rgb(95, 193, 206);}
 
-
-#customers th {
+#workloadlist th {
     
     border-collapse: collapse;
     text-align: center;
-    // font-family: inherit;
-    // font-style: oblique;
-    // font-size: 1em;
     font-family: 'Open Sans',sans-serif!important;
     font-weight: 700;
     font-style: normal;
@@ -82,38 +69,35 @@ p{
 
     padding-top: 10px;
     padding-bottom: 10px;
-    // padding: 3px;
     border-width: 3.5px;
     border-top-style: solid ;
     border-bottom-width: 3.7px;
 	border-bottom-style: solid;
     border-bottom-color: rgba(100,194,225,1);
     border-top-color: rgba(100,194,225,1);
-    // background-color: #DFE2E5 ;
-    // border-bottom-color: aqua;
-    // border-color: aquamarine;
+
 
 
 
 }
-#customers .headtext{
-    text-align: center;
+#workloadlist .headtext{
+    text-align: left;
 
 
 }
 
-// #customers .headrow{
+// #workloadlist .headrow{
 //     border-bottom-color: blue;
 // }
-#customers .tablerowtext{
-    text-align: center;
+#workloadlist .tablerowtext{
+    text-align: left;
     font-family: 'Open Sans',sans-serif!important;
     font-weight: 700;
     font-style: normal;
     font-size: 13px;
     color: #141823;
 }
-#customers .tabledatarow:hover {
+#workloadlist .tabledatarow:hover {
     background: rgba(100,194,225,1);
     background: -moz-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(100,194,225,1)), color-stop(100%, rgba(52,143,192,1)));
@@ -123,12 +107,12 @@ p{
     background: linear-gradient(to right, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c2e1', endColorstr='#348fc0', GradientType=1 );
 }
-#customers .tabledatarow{
+#workloadlist .tabledatarow{
     border-bottom-width: 1px;
     border-bottom-style: dotted;
     border-bottom-color: rgba(100,194,225,1);
 }
-#customers .tabledatarow{
+#workloadlist .tabledatarow{
     text-align: center;
     text-decoration-style: solid;
 }
@@ -151,8 +135,10 @@ border-radius: 5px;
 
 }
 .workloadbalance{
+
+    margin-top: 90px;
     width: 100%;
-    margin-top: 125px;
+    margin-top: 87px;
     height: 215px;
     text-align:-webkit-center;
 }
@@ -162,7 +148,7 @@ border-radius: 5px;
     position: absolute;
     border-radius: 50%;
     border: 0.5px solid rgb(246, 247, 243);
-    margin-top: 50px;
+    margin-top: 35px;
     margin-left: 76px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 
 
@@ -198,6 +184,6 @@ border-radius: 5px;
 }
 .dashboardbox{
     font-size: 12px;font-style: normal;
-                          font-weight: bold;line-height: normal;font-size: 14px;text-decoration-line: underline;color: #2197F0;
+                          font-weight: bold;line-height: normal;font-size: 14px;text-decoration-line: underline;color: rgb(8, 8, 8);
 }
 
