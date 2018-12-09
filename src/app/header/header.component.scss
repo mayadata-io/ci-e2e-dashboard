@@ -40,7 +40,7 @@ input, textarea {
   .btn-outline-custom {
     color: #fff;
     background-image: linear-gradient(#1991EB, #2DA1F8);
-    border-color: #1585D8;
+    border-color: #2DA1F8;
 }  
 @media only screen and (max-width: 1400px) {
     .header-text {
@@ -95,4 +95,14 @@ span {
 img {
     margin-top: 10px;
     margin-bottom: 15px;
+}
+
+.far {
+    color: #7265ea;
+    font-size: 90px;
+    padding: 17px;
+}
+
+input {
+    background-color: white;
 }
