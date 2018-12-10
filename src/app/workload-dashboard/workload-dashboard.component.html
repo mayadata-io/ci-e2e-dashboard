@@ -1,4 +1,4 @@
-<div class="container-fluid bg-white" style="height:1250px">
+<div class="container-fluid bg-white" style="height:920px">
   <div class="row">
     <div class="col-md-12">
       <div class="">
@@ -13,12 +13,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 m-2">
+            <div class="d-flex align-items-end justify-content-between">
             <ul class="nav" id="myTab" role="tablist" style="width: 389.18 ;height: 75.29;  ">
               <li class="nav-item">
                 <a class="nav-link nav-link1 active " id="home-tab" data-toggle="tab" href="#home" role="tab"
                   aria-controls="home" aria-selected="true" style="
-                  height: 99.995192px;
-              ">
+                  height: 99.995192px;">
                   <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">Jiva</h1>
                   <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
                     Running-{{jivastatuscount}}/7</h5>
@@ -27,44 +27,33 @@
               <li class="nav-item" id="cstortab">
                 <a class="nav-link nav-link1" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                   aria-controls="profile" aria-selected="false" style="
-                  height: 99.995192px;
-              ">
+                  height: 99.995192px;">
                   <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">cStor</h1>
                   <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
                     Running-{{cStorstatuscount}}/8</h5>
                 </a>
               </li>
             </ul>
-            <div class=gridlist style="margin-top: 0px;margin-left: 90%">
-                <ul class="nav" id="myTab" role="tablist" >
-                    <li class="nav-item" style="height: 26px;" >
-                              <a  id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="false" >
-                                <input style=" outline-color:white;" type="image" title="Grid view" src="/assets/images/gridf.png">
-                              </a>
-                            </li> 
-                            <li class="nav-item" style="height: 25px;width: 25px;position:absolute;top: 92px;margin-left: 4% ; " >
-                              <a  id="displaylist-tab" data-toggle="tab" href="#displaylist" role="tab"
-                                aria-controls="profile" aria-selected="false">
-                                <input style=" outline-color:white;" type="image" title="List view" src="/assets/images/listf.png" style="height: 35px;" >
-                              </a>
-                            </li>
-                 </ul>
-              </div>                  
+            <ul class="nav">
+              <li class="nav-item" style="height: 26px;" (click)="chooseViewType(0);">           
+                  <i class="fas fa-th viewtype" [ngClass]="{'active':viewType===0,'inactive':viewType===1}"></i>
+              </li> 
+              <li (click)="chooseViewType(1);" class="nav-item" >
+                  <i class="fas fa-list viewtype" [ngClass]="{'active':viewType===1,'inactive':viewType===0}"></i>
+              </li>
+           </ul>
+          </div>
+
 
              <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                  <div class="container-fluid">
-                  <div class="row">
+                  <div class="row" *ngIf="viewType==0;else tablecstor">
                       <div class="col-md-3 text-center">
                           <div class="workloadmainbox">
                             <div class="workloadlogocolour" style="background-color: #539A49;"></div>
                               <div class="workloadlogo">
-                            <img src="/assets/images/workloads-logos/mongo.svg" alt="" style="
-                            padding-right: 2px;
-                            padding-bottom: 0px;
-                            padding-top: 1px;
-                        ">
+                            <img src="/assets/images/workloads-logos/mongo.svg" alt="" style="padding-right: 2px;padding-bottom: 0px;padding-top: 1px;">
                             </div>
                             <div class="workloadbalance">
                              <div class="workloadstatus" >
@@ -92,10 +81,10 @@
                                 <h5 style="border-top-width: 5px ;margin-top: 8px;">Jiva 0.8</h5>
                               </div>
                               <div>
-                                <p>Deployment 2 replica</p>
-                                <p>Openebs - 3 replicas-pv</p>
+                                <p>StatefulSet 2 replicas</p>
+                                <p>OpenEBS - 1 replicas-pv</p>
                               </div>
-                              <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                              <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                 <a class="dashboardbox" style=" color: #2197F0;" href="/mongo-jiva" >Dashboard</a>
                               </div>
                             </div>
@@ -135,9 +124,9 @@
                         </div>
                         <div>
                           <p>Deployment 1 replica</p>
-                          <p>Openebs - 3 replicas-pv</p>
+                          <p>OpenEBS - 3 replicas-pv</p>
                         </div>
-                        <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                        <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                           <a class="dashboardbox" style=" color: #2197F0;" href="/percona-jiva">Dashboard</a>
                         </div>
                       </div>
@@ -179,10 +168,10 @@
                             <h5 style="border-top-width: 5px ;margin-top: 8px;">Jiva 0.8</h5>
                           </div>
                           <div>
-                            <p>Deployment 1 replica</p>
-                            <p>Openebs - 3 replicas-pv</p>
+                            <p>StatefulSet 2 replicas</p>
+                            <p>OpenEBS - 1 replicas-pv</p>
                           </div>
-                          <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                          <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                             <a class="dashboardbox"style=" color: #2197F0;" href="/cockroachdb-jiva">Dashboard</a>
                           </div>
                         </div>
@@ -224,9 +213,9 @@
                             </div>
                             <div>
                               <p>Deployment 1 replica</p>
-                              <p>Openebs - 3 replicas-pv</p>
+                              <p>OpenEBS - 3 replicas-pv</p>
                             </div>
-                            <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                            <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                               <a class="dashboardbox"style=" color: #2197F0;" href="/prometheus-jiva">Dashboard</a>
                             </div>
                           </div>
@@ -265,9 +254,9 @@
                             </div>
                             <div>
                               <p>Deployment 1 replica</p>
-                              <p>Openebs - 3 replicas-pv</p>
+                              <p>OpenEBS - 3 replicas-pv</p>
                             </div>
-                            <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                            <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                               <a class="dashboardbox"style=" color: #2197F0;" href="/wordpress-nfs">Dashboard</a>
                             </div>
                           </div>
@@ -308,10 +297,10 @@
                                 <h5 style="border-top-width: 5px ;margin-top: 8px;">Jiva 0.8</h5>
                               </div>
                               <div>
-                                <p>Deployment 1 replica</p>
-                                <p>Openebs - 3 replicas-pv</p>
+                                <p>StatefulSet 2 replicas</p>
+                                <p>OpenEBS - 1 replicas-pv</p>
                               </div>
-                              <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                              <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                 <a class="dashboardbox"style=" color: #2197F0;" href="/redis-jiva">Dashboard</a>
                               </div>
                             </div>
@@ -353,21 +342,183 @@
                                   <h5 style="border-top-width: 5px ;margin-top: 8px;">Jiva 0.8</h5>
                                 </div>
                                 <div>
-                                  <p>Deployment 1 replica</p>
-                                  <p>Openebs - 3 replicas-pv</p>
+                                  <p>StatefulSet 2 replicas</p>
+                                  <p>OpenEBS - 1 replicas-pv</p>
                                 </div>
-                                <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                   <a class="dashboardbox"style=" color: #2197F0;" href="/wordpress-nfs">Dashboard</a>
                                 </div>
                               </div>
                             </div>
                           </div>
                     </div>
+                    <ng-template #tablecstor> 
+                      <table id="workloadlist" >
+                          <tr class="headrow"  >
+                            <th class="headtext">Applications</th>
+                            <th class="headtext"> Replicas</th>
+                            <th class="headtext"> Jiva</th>
+                            <th class="headtext"> Replicas/pv</th>
+                            <th class="headtext"> Status</th>
+                            <th class="headtext">  Access </th>
+                          </tr>
+                          <tr class="tabledatarow">
+                              <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
+                              <td class="tablerowtext">2</td>
+                              <td class="tablerowtext">0.8</td>
+                              <td class="tablerowtext">1</td>
+                              <td>
+                                  <span [ngClass]="{
+                                    'display':mongoStatus === 'Running',
+                                    'hide':mongoStatus !== 'Running'
+                                  }"
+                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                        <span [ngClass]="{
+                                    'display':mongoStatus !== 'Running',
+                                    'hide':mongoStatus === 'Running'
+                                  }"
+                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              </td>
+                              <td><a class="dashboardbox" href="/mongodb-jiva">Dashboard</a></td>
+                            </tr>
+                            <tr class="tabledatarow">
+                                <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
+                                <td class="tablerowtext">2</td>
+                                <td class="tablerowtext">0.8</td>
+                                <td class="tablerowtext">3</td>
+                                <td>
+                                    <span [ngClass]="{
+                                      'display':perconaStatus === 'Running',
+                                      'hide':perconaStatus !== 'Running'
+                                    }"
+                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                          <span [ngClass]="{
+                                      'display':perconaStatus !== 'Running',
+                                      'hide':perconaStatus === 'Running'
+                                    }"
+                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                </td>
+                                <td><a class="dashboardbox" href="/percona-jiva">Dashboard</a></td>
+                              </tr>
+                          <tr class="tabledatarow">
+                            <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
+                            <td class="tablerowtext">2</td>
+                            <td class="tablerowtext">0.8</td>
+                            <td class="tablerowtext">3</td>
+                            <td>
+                                <span [ngClass]="{
+                                  'display':cockdbjiva === 'Running',
+                                  'hide':cockdbjiva !== 'Running'
+                                }"
+                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                      <span [ngClass]="{
+                                  'display':cockdbjiva !== 'Running',
+                                  'hide':cockdbjiva === 'Running'
+                                }"
+                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                            </td>
+                            <td><a class="dashboardbox" href="/cockroachdb-jiva "> Dashboard</a> </td>
+                          </tr>
+                      
+                          <tr class="tabledatarow">
+                              <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
+                              <td class="tablerowtext">2</td>
+                              <td class="tablerowtext">0.8</td>
+                              <td class="tablerowtext">3</td>
+                              <td>
+                                  <span [ngClass]="{
+                                    'display':prometheusStatus === 'Running',
+                                    'hide':prometheusStatus !== 'Running'
+                                  }"
+                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                        <span [ngClass]="{
+                                    'display':prometheusStatus !== 'Running',
+                                    'hide':prometheusStatus === 'Running'
+                                  }"
+                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              </td>
+                              <td><a class="dashboardbox" href="/prometheus-jiva">Dashboard</a></td>
+                            </tr>
+                      
+                          <tr class="tabledatarow">
+                            <td><a><img src="/assets/images/workloads-logos/wordpress.svg" style="height:20px;"> Wordpress</a></td>
+                            <td class="tablerowtext">2</td>
+                            <td class="tablerowtext">0.8</td>
+                            <td class="tablerowtext">3</td>
+                            <td>
+                                <span [ngClass]="{
+                                  'display':wordpressStatus === 'Running',
+                                  'hide':wordpressStatus !== 'Running'
+                                }"
+                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                      <span [ngClass]="{
+                                  'display':wordpressStatus !== 'Running',
+                                  'hide':wordpressStatus === 'Running'
+                                }"
+                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                            </td>
+                            <td><a class="dashboardbox" href="/Wordpress-jiva">Dashboard</a></td>
+                          </tr>
+                      
+                     
+                            <tr class="tabledatarow">
+                                <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
+                                <td class="tablerowtext">2</td>
+                                <td class="tablerowtext">0.8</td>
+                                <td class="tablerowtext">1</td>
+                                <td>
+                                    <span [ngClass]="{
+                                      'display':redisjivaStatus === 'Running',
+                                      'hide':redisjivaStatus !== 'Running'
+                                    }"
+                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;
+                             font-weight: 700;
+                             font-style: normal;
+                             font-size: 13px;;">ACTIVE</span>
+                          <span [ngClass]="{
+                                      'display':redisjivaStatus !== 'Running',
+                                      'hide':redisjivaStatus === 'Running'
+                                    }"
+                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;
+                           font-weight: 700;
+                           font-style: normal;
+                           font-size: 13px;">INACTIVE</span>
+                                </td>
+                                <td><a class="dashboardbox"  href="/redis-jiva">Dashboard</a></td>
+                              </tr>
+                          
+                             
+                          
+                             
+                          
+                              <tr class="tabledatarow">
+                                <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
+                                <td class="tablerowtext">2</td>
+                                <td class="tablerowtext">0.8</td>
+                                <td class="tablerowtext">1</td>
+                                <td>
+                                    <span [ngClass]="{
+                                      'display':postgresqljivaStatus === 'Running',
+                                      'hide':postgresqljivaStatus !== 'Running'
+                                    }"
+                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                          <span [ngClass]="{
+                                      'display':postgresqljivaStatus !== 'Running',
+                                      'hide':postgresqljivaStatus === 'Running'
+                                    }"
+                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                </td>
+                                <td><a class="dashboardbox" href="/postgresql-jiva">Dashboard</a></td>
+                              </tr>
+                       
+                        </table>
+
+                    </ng-template>
                   </div>
                 </div>
                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> 
                 <div class="container-fluid">
-                  <div class="row">
+                  <div class="row" *ngIf="viewType==0;else tablejiva">
                       <div class="col-md-3 text-center">
                           <div class="workloadmainbox">
                             <div class="workloadlogocolour" style="background-color: #F4BD19;"></div>
@@ -401,9 +552,9 @@
                               </div>
                               <div>
                                 <p>Deployment 1 replica</p>
-                                <p>Openebs - 3 replicas-pv</p>
+                                <p>OpenEBS - 3 replicas-pv</p>
                               </div>
-                              <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                              <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                 <a class="dashboardbox"style=" color: #2197F0;" href="/logging">Dashboard</a>
                               </div>
                             </div>
@@ -445,8 +596,8 @@
                                 <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
                               </div>
                               <div>
-                                <p>Deployment 1 replica</p>
-                                <p>Openebs - 3 replicas-pv</p>
+                                <p>StatefulSet 2 replicas</p>
+                                <p>OpenEBS - 3 replicas-pv</p>
                               </div>
                               <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                 <a class="dashboardbox"style=" color: #2197F0;" href="/mongo-cstor">Dashboard</a>
@@ -490,9 +641,9 @@
                                 </div>
                                 <div>
                                   <p>Deployment 1 replica</p>
-                                  <p>Openebs - 3 replicas-pv</p>
+                                  <p>OpenEBS - 3 replicas-pv</p>
                                 </div>
-                                <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                   <a class="dashboardbox"style=" color: #2197F0;" href="/prometheus-cstor">Dashboard</a>
                                 </div>
                               </div>
@@ -534,10 +685,10 @@
                                     <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
                                   </div>
                                   <div>
-                                    <p>Deployment 1 replica</p>
-                                    <p>Openebs - 3 replicas-pv</p>
+                                    <p>StatefulSet 2 replicas</p>
+                                    <p>OpenEBS - 3 replicas-pv</p>
                                   </div>
-                                  <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                  <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                     <a class="dashboardbox"style=" color: #2197F0;" href="/cockroachdb-jiva">Dashboard</a>
                                   </div>
                                 </div>
@@ -577,7 +728,7 @@
                                   </div>
                                   <div>
                                     <p>Deployment 1 replica</p>
-                                    <p>Openebs - 3 replicas-pv</p>
+                                    <p>OpenEBS - 3 replicas-pv</p>
                                   </div>
                                   <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                     <a class="dashboardbox" style=" color: #2197F0;"href="/percona-cstor">Dashboard</a>
@@ -617,10 +768,10 @@
                                       <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
                                     </div>
                                     <div>
-                                      <p>Deployment 1 replica</p>
-                                      <p>Openebs - 3 replicas-pv</p>
+                                      <p>StatefulSet 2 replicas</p>
+                                      <p>OpenEBS - 3 replicas-pv</p>
                                     </div>
-                                    <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                    <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                       <a class="dashboardbox"style=" color: #2197F0;" href="/redis-cstor">Dashboard</a>
                                     </div>
                                   </div>
@@ -663,10 +814,10 @@
                                         <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
                                       </div>
                                       <div>
-                                        <p>Deployment 1 replica</p>
-                                        <p>Openebs - 3 replicas-pv</p>
+                                        <p>StatefulSet 2 replica</p>
+                                        <p>OpenEBS - 3 replicas-pv</p>
                                       </div>
-                                      <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                      <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                         <a class="dashboardbox" style=" color: #2197F0;"href="/wordpress-nfs">Dashboard</a>
                                       </div>
                                     </div>
@@ -710,9 +861,9 @@
                                         </div>
                                         <div>
                                           <p>Deployment 1 replica</p>
-                                          <p>Openebs - 3 replicas-pv</p>
+                                          <p>OpenEBS - 3 replicas-pv</p>
                                         </div>
-                                        <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                                        <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                           <a class="dashboardbox"style=" color: #2197F0;" href="/grafana-cstor">Dashboard</a>
                                         </div>
                                       </div>
@@ -722,345 +873,181 @@
                      
                           
                     </div>
+
+                    <ng-template #tablejiva> 
+ 
+                      <table id="workloadlist">
+                          <tr class="headrow"  >
+                            <th class="headtext">Applications</th>
+                            <th class="headtext"> Replicas</th>
+                            <th class="headtext"> cStor</th>
+                            <th class="headtext"> Replicas/pv</th>
+                            <th class="headtext"> Status</th>
+                            <th class="headtextaccess">  Access </th>
+                          </tr>
+                          <tr class="tabledatarow">
+                              <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
+                              <td class="tablerowtext">2</td>
+                              <td class="tablerowtext">0.8</td>
+                              <td class="tablerowtext">3</td>
+                              <td>
+                                  <span [ngClass]="{
+                                    'display':mongocstorStatus === 'Running',
+                                    'hide':mongocstorStatus !== 'Running'
+                                  }"
+                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                        <span [ngClass]="{
+                                    'display':mongocstorStatus !== 'Running',
+                                    'hide':mongocstorStatus === 'Running'
+                                  }"
+                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              </td>
+                              <td><a class="dashboardbox" href="/mongo-cstor">Dashboard</a></td>
+                            </tr>
+
+                      
+                          <tr class="tabledatarow">
+                              <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
+                              <td class="tablerowtext">2</td>
+                              <td class="tablerowtext">0.8</td>
+                              <td class="tablerowtext">3</td>
+                              <td>
+                                  <span [ngClass]="{
+                                    'display':postgresqlcstorStatus === 'Running',
+                                    'hide':postgresqlcstorStatus !== 'Running'
+                                  }"
+                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                        <span [ngClass]="{
+                                    'display':postgresqlcstorStatus !== 'Running',
+                                    'hide':postgresqlcstorStatus === 'Running'
+                                  }"
+                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              </td>
+                              <td><a class="dashboardbox" href="/postgresql-cstor">Dashboard</a></td>
+                            </tr>
+                            <tr class="tabledatarow">
+                                <td><a><img src="/assets/images/workloads-logos/elasticsearch.svg" style="height:20px;"> Elasticsearch</a></td>
+                                <td class="tablerowtext">2</td>
+                                <td class="tablerowtext">0.8</td>
+                                <td class="tablerowtext">3</td>
+                                <td>
+                                    <span [ngClass]="{
+                                      'display':elasticsearchcstorStatus === 'Running',
+                                      'hide':elasticsearchcstorStatus !== 'Running'
+                                    }"
+                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                          <span [ngClass]="{
+                                      'display':elasticsearchcstorStatus !== 'Running',
+                                      'hide':elasticsearchcstorStatus === 'Running'
+                                    }"
+                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                </td>
+                                <td><a class="dashboardbox" href="/logging">Dashboard</a></td>
+                              </tr>
+                              <tr class="tabledatarow">
+                                  <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
+                                  <td class="tablerowtext">2</td>
+                                  <td class="tablerowtext">0.8</td>
+                                  <td class="tablerowtext">3</td>
+                                  <td>
+                                      <span [ngClass]="{
+                                        'display':perconacstorStatus === 'Running',
+                                        'hide':perconacstorStatus !== 'Running'
+                                      }"
+                               style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                            <span [ngClass]="{
+                                        'display':perconacstorStatus !== 'Running',
+                                        'hide':perconacstorStatus === 'Running'
+                                      }"
+                             style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                  </td>
+                                  <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
+                                </tr>
+                          <tr class="tabledatarow">
+                            <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
+                            <td class="tablerowtext">2</td>
+                            <td class="tablerowtext">0.8</td>
+                            <td class="tablerowtext">3</td>
+                            <td>
+                                <span [ngClass]="{
+                                  'display':cockdbcstorStatus === 'Running',
+                                  'hide':cockdbcstorStatus !== 'Running'
+                                }"
+                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                      <span [ngClass]="{
+                                  'display':cockdbcstorStatus !== 'Running',
+                                  'hide':cockdbcstorStatus === 'Running'
+                                }"
+                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                            </td>
+                            <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
+                          </tr>
+                      
+                          <tr class="tabledatarow">
+                            <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
+                            <td class="tablerowtext">2</td>
+                            <td class="tablerowtext">0.8</td>
+                            <td class="tablerowtext">3</td>
+                            <td>
+                                <span [ngClass]="{
+                                  'display':rediscstorStatus === 'Running',
+                                  'hide':rediscstorStatus !== 'Running'
+                                }"
+                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                      <span [ngClass]="{
+                                  'display':rediscstorStatus !== 'Running',
+                                  'hide':rediscstorStatus === 'Running'
+                                }"
+                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                            </td>
+                            <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
+                          </tr>
+       
+                          <tr class="tabledatarow">
+                              <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
+                              <td class="tablerowtext">2</td>
+                              <td class="tablerowtext">0.8</td>
+                              <td class="tablerowtext">3</td>
+                              <td>
+                                  <span [ngClass]="{
+                                    'display':prometheuscstorStatus === 'Running',
+                                    'hide':prometheuscstorStatus !== 'Running'
+                                  }"
+                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                        <span [ngClass]="{
+                                    'display':prometheuscstorStatus !== 'Running',
+                                    'hide':prometheuscstorStatus === 'Running'
+                                  }"
+                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              </td>
+                              <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
+                            </tr>
+                            <tr class="tabledatarow">
+                                <td><a><img src="/assets/images/workloads-logos/grafana.svg" style="height:20px;"> Grafana</a></td>
+                                <td class="tablerowtext">2</td>
+                                <td class="tablerowtext">0.8</td>
+                                <td class="tablerowtext">3</td>
+                                <td>
+                                    <span [ngClass]="{
+                                      'display':grafanaStatus === 'Running',
+                                      'hide':grafanaStatus !== 'Running'
+                                    }"
+                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                          <span [ngClass]="{
+                                      'display':grafanaStatus !== 'Running',
+                                      'hide':grafanaStatus === 'Running'
+                                    }"
+                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                </td>
+                                <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
+                              </tr>
+                       
+                        </table>
+
+                    </ng-template>
                 </div>
               </div> 
-<div class="tab-pane fade" id="displaylist" role="tabpanel" aria-labelledby="displaylist-tab">
-<div class="container-fluid">
-<div class="row">
-  <h4 style="font-family: Lato;color: #354052">Jiva 0.8</h4>
-<table id="workloadlist" >
-    <tr class="headrow"  >
-      <th class="headtext">Name</th>
-      <th class="headtext"> Version</th>
-      <th class="headtext"> Replicas</th>
-      <th class="headtext"> Replicas/pv</th>
-      <th class="headtext"> Status</th>
-      <th class="headtext">  Access </th>
-    </tr>
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':cockdbjiva === 'Running',
-            'hide':cockdbjiva !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-<span [ngClass]="{
-            'display':cockdbjiva !== 'Running',
-            'hide':cockdbjiva === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox" href="/cockroachdb-jiva "> Dashboard</a> </td>
-    </tr>
 
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':redisjivaStatus === 'Running',
-            'hide':redisjivaStatus !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;
-   font-weight: 700;
-   font-style: normal;
-   font-size: 13px;;">ACTIVE</span>
-<span [ngClass]="{
-            'display':redisjivaStatus !== 'Running',
-            'hide':redisjivaStatus === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;
- font-weight: 700;
- font-style: normal;
- font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox"  href="/redis-jiva">Dashboard</a></td>
-    </tr>
-
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':perconaStatus === 'Running',
-            'hide':perconaStatus !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-<span [ngClass]="{
-            'display':perconaStatus !== 'Running',
-            'hide':perconaStatus === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox" href="/percona-jiva">Dashboard</a></td>
-    </tr>
-
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':mongoStatus === 'Running',
-            'hide':mongoStatus !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-<span [ngClass]="{
-            'display':mongoStatus !== 'Running',
-            'hide':mongoStatus === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox" href="/mongodb-jiva">Dashboard</a></td>
-    </tr>
-
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':postgresqljivaStatus === 'Running',
-            'hide':postgresqljivaStatus !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-<span [ngClass]="{
-            'display':postgresqljivaStatus !== 'Running',
-            'hide':postgresqljivaStatus === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox" href="/postgresql-jiva">Dashboard</a></td>
-    </tr>
-
-    <tr class="tabledatarow">
-      <td><a><img src="/assets/images/workloads-logos/wordpress.svg" style="height:20px;"> Wordpress</a></td>
-      <td class="tablerowtext">Jiva 0.8</td>
-      <td class="tablerowtext">2</td>
-      <td class="tablerowtext">3</td>
-      <td>
-          <span [ngClass]="{
-            'display':wordpressStatus === 'Running',
-            'hide':wordpressStatus !== 'Running'
-          }"
-   style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-<span [ngClass]="{
-            'display':wordpressStatus !== 'Running',
-            'hide':wordpressStatus === 'Running'
-          }"
- style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-      </td>
-      <td><a class="dashboardbox" href="/Wordpress-jiva">Dashboard</a></td>
-    </tr>
-
-    <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
-        <td class="tablerowtext">Jiva 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':prometheusStatus === 'Running',
-              'hide':prometheusStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':prometheusStatus !== 'Running',
-              'hide':prometheusStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/prometheus-jiva">Dashboard</a></td>
-      </tr>
- 
- 
-  </table>
-  <h4 style="font-family: Lato;color: #354052">cStor 0.8</h4>
-  <table id="workloadlist">
-      <tr class="headrow"  >
-        <th class="headtext">Name</th>
-        <th class="headtext"> Version</th>
-        <th class="headtext"> Replicas</th>
-        <th class="headtext"> Replicas/pv</th>
-        <th class="headtext"> Status</th>
-        <th class="headtextaccess">  Access </th>
-      </tr>
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':cockdbcstorStatus === 'Running',
-              'hide':cockdbcstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':cockdbcstorStatus !== 'Running',
-              'hide':cockdbcstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':rediscstorStatus === 'Running',
-              'hide':rediscstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':rediscstorStatus !== 'Running',
-              'hide':rediscstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':perconacstorStatus === 'Running',
-              'hide':perconacstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':perconacstorStatus !== 'Running',
-              'hide':perconacstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':mongocstorStatus === 'Running',
-              'hide':mongocstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':mongocstorStatus !== 'Running',
-              'hide':mongocstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/mongo-cstor">Dashboard</a></td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':postgresqlcstorStatus === 'Running',
-              'hide':postgresqlcstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':postgresqlcstorStatus !== 'Running',
-              'hide':postgresqlcstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/postgresql-cstor">Dashboard</a></td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/elasticsearch1.svg" style="height:20px;">Elasticsearch</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':elasticsearchcstorStatus === 'Running',
-              'hide':elasticsearchcstorStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':elasticsearchcstorStatus !== 'Running',
-              'hide':elasticsearchcstorStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/logging">Dashboard</a></td>
-      </tr>
-  
-      <tr class="tabledatarow">
-        <td><a><img src="/assets/images/workloads-logos/grafana.svg" style="height:20px;">Grafana</a></td>
-        <td class="tablerowtext">cStor 0.8</td>
-        <td class="tablerowtext">2</td>
-        <td class="tablerowtext">3</td>
-        <td>
-            <span [ngClass]="{
-              'display':grafanaStatus === 'Running',
-              'hide':grafanaStatus !== 'Running'
-            }"
-     style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-  <span [ngClass]="{
-              'display':grafanaStatus !== 'Running',
-              'hide':grafanaStatus === 'Running'
-            }"
-   style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-        </td>
-        <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
-      </tr>
-
-      <tr class="tabledatarow">
-          <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;">Prometheus</a></td>
-          <td class="tablerowtext">cStor 0.8</td>
-          <td class="tablerowtext">2</td>
-          <td class="tablerowtext">3</td>
-          <td>
-              <span [ngClass]="{
-                'display':prometheuscstorStatus === 'Running',
-                'hide':prometheuscstorStatus !== 'Running'
-              }"
-       style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-    <span [ngClass]="{
-                'display':prometheuscstorStatus !== 'Running',
-                'hide':prometheuscstorStatus === 'Running'
-              }"
-     style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-          </td>
-          <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
-        </tr>
-   
-   
-    </table>
-
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
