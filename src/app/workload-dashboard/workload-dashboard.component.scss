@@ -79,16 +79,6 @@ p{
     font-size: 13px;
     color: #141823;
 }
-#workloadlist .tabledatarow:hover {
-    background: rgba(100,194,225,1);
-    background: -moz-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(100,194,225,1)), color-stop(100%, rgba(52,143,192,1)));
-    background: -webkit-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -o-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -ms-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: linear-gradient(to right, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c2e1', endColorstr='#348fc0', GradientType=1 );
-}
 #workloadlist .tabledatarow{
     border-bottom-width: 1px;
     border-bottom-style: dotted;

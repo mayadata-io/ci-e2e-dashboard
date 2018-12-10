@@ -35,10 +35,10 @@
               </li>
             </ul>
             <ul class="nav">
-              <li class="nav-item" style="height: 26px;" (click)="chooseViewType(0);">           
+              <li class="nav-item" style="height: 26px;" (click)="chooseViewType(0);" style="cursor:pointer">           
                   <i class="fas fa-th viewtype" [ngClass]="{'active':viewType===0,'inactive':viewType===1}"></i>
               </li> 
-              <li (click)="chooseViewType(1);" class="nav-item" >
+              <li (click)="chooseViewType(1);" class="nav-item" style="cursor:pointer">
                   <i class="fas fa-list viewtype" [ngClass]="{'active':viewType===1,'inactive':viewType===0}"></i>
               </li>
            </ul>
@@ -346,7 +346,7 @@
                                   <p>OpenEBS - 1 replicas-pv</p>
                                 </div>
                                 <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
-                                  <a class="dashboardbox"style=" color: #2197F0;" href="/wordpress-nfs">Dashboard</a>
+                                  <a class="dashboardbox"style=" color: #2197F0;" href="/postgresql-jiva">Dashboard</a>
                                 </div>
                               </div>
                             </div>
@@ -379,7 +379,7 @@
                                   }"
                          style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
                               </td>
-                              <td><a class="dashboardbox" href="/mongodb-jiva">Dashboard</a></td>
+                              <td><a class="dashboardbox" href="/mongo-jiva">Dashboard</a></td>
                             </tr>
                             <tr class="tabledatarow">
                                 <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
@@ -457,7 +457,7 @@
                                 }"
                        style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
                             </td>
-                            <td><a class="dashboardbox" href="/Wordpress-jiva">Dashboard</a></td>
+                            <td><a class="dashboardbox" href="/Wordpress-nfs">Dashboard</a></td>
                           </tr>
                       
                      
@@ -599,7 +599,7 @@
                                 <p>StatefulSet 2 replicas</p>
                                 <p>OpenEBS - 3 replicas-pv</p>
                               </div>
-                              <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
+                              <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
                                 <a class="dashboardbox"style=" color: #2197F0;" href="/mongo-cstor">Dashboard</a>
                               </div>
                             </div>
@@ -689,7 +689,7 @@
                                     <p>OpenEBS - 3 replicas-pv</p>
                                   </div>
                                   <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
-                                    <a class="dashboardbox"style=" color: #2197F0;" href="/cockroachdb-jiva">Dashboard</a>
+                                    <a class="dashboardbox"style=" color: #2197F0;" href="/cockroachdb-cstor">Dashboard</a>
                                   </div>
                                 </div>
                               </div>
@@ -818,7 +818,7 @@
                                         <p>OpenEBS - 3 replicas-pv</p>
                                       </div>
                                       <div style="width: 100%;height:10%; background-color: rgba(183, 224, 255, 0.4969);">
-                                        <a class="dashboardbox" style=" color: #2197F0;"href="/wordpress-nfs">Dashboard</a>
+                                        <a class="dashboardbox" style=" color: #2197F0;"href="/postgresql-cstor">Dashboard</a>
                                       </div>
                                     </div>
                                   </div>
