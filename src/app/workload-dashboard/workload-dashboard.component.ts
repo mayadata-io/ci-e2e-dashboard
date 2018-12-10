@@ -27,6 +27,7 @@ export class WorkloadDashboardComponent implements OnInit {
   public postgresqlcstorStatus:any;
   public jivastatuscount = 0;
   public cStorstatuscount =0; 
+  public viewType:number = 0;  // 0: grid view 1:table view
 
   constructor(private kubernetsServices: KubernetsService, private meta: Meta,private titleService: Title) {
     this.titleService.setTitle( "workloads dashboard" );
@@ -134,4 +135,9 @@ export class WorkloadDashboardComponent implements OnInit {
       });
     });
   }
+
+  chooseViewType(viewtype:number){
+    this.viewType = viewtype;
+  }
+
 }
