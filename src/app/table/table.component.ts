@@ -357,6 +357,7 @@ export class TableComponent implements OnInit {
   public appFunctionTest: any;
   public appChaosTest: any;
   public clusterCleanup: any;
+  public appDeprovision: any;
   public kubernetesVersion: any;
 
   detailPannel(cloud, index, data) {
@@ -455,6 +456,7 @@ export class TableComponent implements OnInit {
     this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
     this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
     this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
+    this.appDeprovision = this.getAppDeprovisionStatus(pipelineData[index].jobs)
     this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
   }
 
@@ -565,9 +567,10 @@ export class TableComponent implements OnInit {
         continue;
       }
     }
-    if (jobCount == successCount) {
+    if (jobCount == successCount && jobCount != 0) {
       return "SUCCESS";
     }
+    return "n/a"
   }
 
   getStatefulAppDeployStatus(data) {
@@ -609,9 +612,10 @@ export class TableComponent implements OnInit {
         continue;
       }
     }
-    if (jobCount == successCount) {
+    if (jobCount == successCount && jobCount != 0) {
       return "SUCCESS";
     }
+    return "n/a"
   }
 
   getAppFunctionTestStatus(data) {
@@ -653,9 +657,10 @@ export class TableComponent implements OnInit {
         continue;
       }
     }
-    if (jobCount == successCount) {
+    if (jobCount == successCount && jobCount != 0) {
       return "SUCCESS";
     }
+    return "n/a"
   }
   getAppChaosTestStatus(data) {
     var jobCount = 0;
@@ -696,9 +701,55 @@ export class TableComponent implements OnInit {
         continue;
       }
     }
-    if (jobCount == successCount) {
+    if (jobCount == successCount && jobCount != 0) {
       return "SUCCESS";
     }
+    return "n/a"
+  }
+
+  getAppDeprovisionStatus(data) {
+    var jobCount = 0;
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION") {
+            jobCount ++;
+          }
+        }
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "running") {
+             return "RUNNING";
+          }
+        }
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "failed") {
+            return "FAILED";
+          }
+        }
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "skipped") {
+             return "SKIPPED";
+          }
+        }
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "canceled") {
+            return "CANCELED";
+          }
+        }
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].stage == "APP-DEPROVISION") {
+            if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
+          }
+        } 
+    var successCount = 0;
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION" && data[i].status == "success") {
+        successCount++;
+        continue;
+      }
+    }
+    if (jobCount == successCount && jobCount != 0) {
+      return "SUCCESS";
+    }
+    return "n/a"
   }
 
   getClusterCleanupStatus(data) {

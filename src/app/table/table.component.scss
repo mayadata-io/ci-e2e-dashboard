@@ -10,7 +10,7 @@
 }
 
 .details {
-  padding: 25px;
+  padding: 5px;
 }
 ul .active {
   background-image: linear-gradient(#64c2e1, #348fc0);
@@ -79,8 +79,7 @@ tr {
 }
 
 .table {
-  margin-top: 10px;
-  // overflow: auto;
+  margin-top: 2px;
   max-height: 630px;
 }
 .button {
@@ -308,5 +307,5 @@ a:hover {
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #4D99D0;
+	background-color: #C0C0C0;
 }

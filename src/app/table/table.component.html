@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
-            <h4>Master</h4>
+            <h4 style="font-size: 2em">Master</h4>
             <h3 *ngIf="undefined !== restItems" style="color:white">Builds in last one week: {{
               masterBuildsCount(restItems.dashboard.build) }}
             </h3>
@@ -243,42 +243,49 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom: none">
+            <tr *ngIf="clusterSetupStatus != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(clusterSetupStatus)'>{{ clusterSetupStatus }}</span></td>
             </tr>
-            <tr style="border-bottom: none">
+            <tr *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
             </tr>
-            <tr style="border-bottom: none">
+            <tr *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
             </tr>
-            <tr style="border-bottom: none">
+            <tr *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
             </tr>
-            <tr style="border-bottom: none">
+            <tr *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appChaosTest)'>{{ appChaosTest }}</span></td>
             </tr>
-            <tr style="border-bottom: none">
+            <tr *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
+              <td style="padding: 0px;vertical-align: middle;">
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP-DEPROVISION</h6>
+              </td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(appDeprovision)'>{{ appDeprovision }}</span></td>
+            </tr>
+            <tr *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
               </td>

@@ -1,11 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-white border px-0">
+<nav class="navbar navbar-expand-lg bg-white border px-0 fixed-top">
   <div class="container-fluid" style="display: block">
     <div class="row">
       <div class="col-md-2 line">
         <a class="navbar-brand navbar-logo" href="/"><img class="navbar-logo" src="/assets/images/header/openebsci-logo.png"></a>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
       </div>
       <div class="col-md-10">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -16,13 +13,9 @@
           </ul>
           <ul class="navbar-nav mr-right">
             <li class="my-2  my-lg-0 form-inline">
-              <span style="margin-right:10px;" (click)="clickit('https://github.com/openebs/openebs/stargazers')"
-                target="_blank" class="btn btn-sm btn-outline-danger fa fa-heart heart"></span><a href="https://github.com/openebs/openebs/stargazers"
-                target="_blank" style="margin-right:40px;"><span>Like Us!</span></a>
-              <a style="margin-right:40px;" data-toggle="modal" data-target="#exampleModal"><img class="newsletter" src="/assets/images/header/newsletter.svg"><span>Subscribe
-                  to our news letter</span></a>
-              <a style="margin-right:20px;" href="https://slack.openebs.io/" target="_blank"><img class="slack" src="/assets/images/header/slack.svg"><span>Join
-                  Community</span></a>
+              <a style="margin-right:15px;" placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-danger fa fa-heart heart"></a>
+              <a style="margin-right:15px; margin-left:15px;font-size: 26px; color: #7265ea; padding: 0px" data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="far fa-envelope-open"></a>
+              <a href="https://slack.openebs.io/" target="_blank"><img placement="bottom" ngbTooltip="Join Community" class="slack" src="/assets/images/header/slack.svg"></a>
             </li>
           </ul>
         </div>
@@ -30,16 +23,17 @@
     </div>
   </div>
 </nav>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribe" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div style="width:120%" class="modal-content">
 
       <div *ngIf="setFormChange == false; else second;">
         <div class="modal-body" style="padding-bottom:2rem;padding-top:1.5rem">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span style="padding-right: 7px;">×</span></button>
           <div class="text-center">
-            <img class="mt-0" src="/assets/images/icons/news.svg" alt="">
-            <p style="color:#7C7C7C">Sign up for our user stories and tips.
-            </p>
+            <i class="far fa-envelope-open"></i>
+            <h3 style="font-weight: bold; padding-top: 15px; padding-bottom: 10px;">Subscribe to our newsletter</h3>
+            <p style="color: #999; padding-bottom: 10px;">Join our subscribers list to get the latest newsletter and updates delivered directly to your inbox.</p>
           </div>
           <form class="form-view theme2 b-d" novalidate [formGroup]="leadForm" (ngSubmit)="formSubmit()">
             <div class="d-flex flex-column justify-content-md-between mx-auto" style="width:80%">
@@ -71,7 +65,7 @@
               </div>
               <div class="agile-group float-center" style="display: flex; justify-content: center; align-items: center;">
                 <button type="submit" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" id="slacksubmit"
-                  data-toggle="modal" data-target="#openebsnewsletterthanks" [disabled]="!leadForm.valid" style="font-size:14px;width: 100%;padding-bottom: 0.5rem;padding-top: 0.5rem">Signup
+                  data-toggle="modal" data-target="#openebsnewsletterthanks" [disabled]="!leadForm.valid" style="font-size:14px;width: 100%;padding-bottom: 0.5rem;padding-top: 0.5rem">Subscribe
                 </button>
               </div>
             </div>
