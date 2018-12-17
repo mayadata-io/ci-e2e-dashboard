@@ -52,7 +52,7 @@ p{
     border-collapse: collapse;
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
-    font-weight: 700;
+    // font-weight: 700;
     font-style: normal;
     font-size: 16px;
     color: rgb(47, 43, 63);
@@ -74,7 +74,7 @@ p{
 #workloadlist .tablerowtext{
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
-    font-weight: 700;
+    // font-weight: 700;
     font-style: normal;
     font-size: 13px;
     color: #141823;
@@ -93,7 +93,7 @@ p{
     margin-right:25px;
     position: absolute;
     width: 205.79px;
-    height: 310.62px;
+    height: 330.62px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
@@ -136,7 +136,7 @@ p{
     color:#ced4da;
 }
 .viewtype{
-    font-size: 25px;
+    font-size: 20px;
     padding: 0.2rem
 }
 .jivacstor{
@@ -153,9 +153,13 @@ p{
 .dashboardbox{
     font-size: 12px;
     font-style: normal;
-    font-weight: bold;
+    // font-weight: bold;
     line-height: normal;
     font-size: 14px;
-    text-decoration-line: underline;color: rgb(8, 8, 8);
+   color: rgb(8, 8, 8);
+
+    :hover{
+        text-decoration-line: underline;
+    }
 }
 
