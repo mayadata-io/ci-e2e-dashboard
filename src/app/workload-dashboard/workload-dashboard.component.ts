@@ -11,18 +11,12 @@ import { Meta,Title } from "@angular/platform-browser";
 })
 export class WorkloadDashboardComponent implements OnInit {
   public grafanaStatus: any;
-  public mongoStatus: any;
-  public perconaStatus: any;
   public mongocstorStatus: any;
   public perconacstorStatus: any;
-  public prometheusStatus: any;
   public prometheuscstorStatus: any;
-  public cockdbjiva: any;
   public cockdbcstorStatus: any;
   public wordpressStatus: any;
-  public redisjivaStatus: any;
   public rediscstorStatus: any;
-  public postgresqljivaStatus: any;
   public elasticsearchcstorStatus:any;
   public postgresqlcstorStatus:any;
   public jivastatuscount = 0;
@@ -42,13 +36,6 @@ export class WorkloadDashboardComponent implements OnInit {
           this.jivastatuscount = 0;
            this.cStorstatuscount =0; 
    
-      this.kubernetsServices.getAllstatus("percona-jiva").subscribe(res => {
-        this.perconaStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
-       
-        }
-      });
       this.kubernetsServices.getAllstatus("percona-cstor").subscribe(res => {
         this.perconacstorStatus = res.status;
         if(res.status == 'Running'){
@@ -61,32 +48,14 @@ export class WorkloadDashboardComponent implements OnInit {
           this.cStorstatuscount=this.cStorstatuscount+1;
         }
       });
-      this.kubernetsServices.getAllstatus("prometheus-jiva").subscribe(res => {
-        this.prometheusStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
-        }
-      });
       this.kubernetsServices.getAllstatus("mongo-cstor").subscribe(res => {
         this.mongocstorStatus = res.status;
         if(res.status == 'Running'){
           this.cStorstatuscount=this.cStorstatuscount+1;
         }
       });
-      this.kubernetsServices.getAllstatus("mongo-jiva").subscribe(res => {
-        this.mongoStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
-        }
-      });
       this.kubernetsServices.getAllstatus("wordpress-nfs").subscribe(res => {
         this.wordpressStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
-        }
-      });
-      this.kubernetsServices.getAllstatus("cockroachdb-jiva").subscribe(res => {
-        this.cockdbjiva = res.status;
         if(res.status == 'Running'){
           this.jivastatuscount=this.jivastatuscount+1;
         }
@@ -97,22 +66,10 @@ export class WorkloadDashboardComponent implements OnInit {
           this.cStorstatuscount=this.cStorstatuscount+1;
         }
       });
-      this.kubernetsServices.getAllstatus("redis-jiva").subscribe(res => {
-        this.redisjivaStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
-        }
-      });
       this.kubernetsServices.getAllstatus("redis-cstor").subscribe(res => {
         this.rediscstorStatus = res.status;
         if(res.status == 'Running'){
           this.cStorstatuscount=this.cStorstatuscount+1;
-        }
-      });
-      this.kubernetsServices.getAllstatus("postgresql-jiva").subscribe(res => {
-        this.postgresqljivaStatus = res.status;
-        if(res.status == 'Running'){
-          this.jivastatuscount=this.jivastatuscount+1;
         }
       });
       this.kubernetsServices.getAllstatus("postgresql-cstor").subscribe(res => {

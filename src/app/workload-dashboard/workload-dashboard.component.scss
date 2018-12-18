@@ -14,14 +14,98 @@ h5{
 h5{
     color: #7491AB;
 }
+
+.card{
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    width:14rem;
+
+    .card-body{
+        padding: 1rem;
+    }
+    .applications-color{
+        padding-top: 2rem;
+        background-image: -webkit-linear-gradient(270deg, #34ADFF 88%, #FFF 30%);
+    }
+    .elasticsearch-bg{
+        background-image: -webkit-linear-gradient(270deg, #F4BD19 88%, #FFF 30%);   
+    }
+    .postgresql-bg{
+        background-image: -webkit-linear-gradient(270deg, #336791 88%, #FFF 30%); 
+    }
+    .redis-bg{
+        background-image: -webkit-linear-gradient(270deg, #A41C13 88%, #FFF 30%); 
+    }
+    .grafana-bg{
+        background-image: -webkit-linear-gradient(270deg, rgb(238, 118, 70) 88%, #FFF 30%); 
+    }
+    .prometheus-bg{
+        background-image: -webkit-linear-gradient(270deg, #E6522C 88%, #FFF 30%); 
+    }
+    .cockdb-bg{
+        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
+    }
+    .percona-bg{
+        background-image: -webkit-linear-gradient(270deg, #d20000 88%, #FFF 30%); 
+    }
+    .mongo-bg{
+        background-image: -webkit-linear-gradient(270deg, #539A49 88%, #FFF 30%); 
+    }
+    .wordpress-bg{
+        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
+    }
+    .mongo-bg{
+
+    }
+    .workload-title-img{
+        height: 28px;
+        width: auto;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .status-application{
+        width: 50%;
+        border-radius: 2rem;
+        margin:0 auto;
+        color: #fff;
+        font-size: 12px;
+    }
+    .status-active{
+        background-color: #539A49;
+    }
+    .status-inactive{
+        background-color:  #D20000;
+    }
+    .card-img-top{
+        height: 60px;
+        width: 60px;
+        border-radius:50%;
+        padding: 0.1rem;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        background-color: #fff;
+    }
+    .list-group-item{
+        border-top:3px solid #B4DEFF;
+        border-bottom:3px solid #B4DEFF;
+        color: #354052;
+        padding-top:0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .dashboard-hyperlink{
+        background-color: rgba(183, 224, 255, 0.4969);;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        color: #2197F0;
+
+        :hover{
+            text-decoration: underline;
+        }
+    }
+}
 .nav-link1{
-    border-style: dotted;
-    border-width: 1px;
-    border-radius: 10px ;
-    border-color:  rgba(100,194,225,1) ;
-    height: 110px;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    border: 1px solid  rgba(100,194,225,1);
+    height: 80px;
+    padding: 2px 20px;
 }
 .display{
     display: block;
@@ -52,7 +136,6 @@ p{
     border-collapse: collapse;
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
-    // font-weight: 700;
     font-style: normal;
     font-size: 16px;
     color: rgb(47, 43, 63);
@@ -74,7 +157,6 @@ p{
 #workloadlist .tablerowtext{
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
-    // font-weight: 700;
     font-style: normal;
     font-size: 13px;
     color: #141823;
@@ -153,11 +235,9 @@ p{
 .dashboardbox{
     font-size: 12px;
     font-style: normal;
-    // font-weight: bold;
     line-height: normal;
     font-size: 14px;
-   color: rgb(8, 8, 8);
-
+    color: rgb(8, 8, 8);
     :hover{
         text-decoration-line: underline;
     }
