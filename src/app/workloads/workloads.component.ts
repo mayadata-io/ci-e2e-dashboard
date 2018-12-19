@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router,ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
@@ -126,13 +127,21 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public countstatus: any = 0;
   public numberNode = new Set();
   public showSpinner:boolean = true; 
+  public aFormGroup: FormGroup;
+  public readonly siteKey = '6LfhZXwUAAAAAJ3CT-iZUjqHFHBnQXAggxMt96Z6';
+  public captchaIsLoaded = false;
+  public captchaSuccess = false;
+  public captchaIsExpired = false;
+  public captchaResponse?: string;
   constructor(
     private router: Router,
     private personService: PersonService,
     private kubernetsServices: KubernetsService,
     private litmusServies: LitmusService,
     private titleService: Title,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private formBuilder: FormBuilder
+
   ) {
     this.windowWidth = window.innerWidth;
     this.currentRoute = this.router.url.split("/");
@@ -166,6 +175,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
     });
+    this.aFormGroup = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+        });
 
     for (let j = 0; j < 100; j++) {
       for (let i = 0; i < 10; i++) {
@@ -423,4 +435,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .val("")
       .change();
   }
+  handleSuccess(captchaResponse: string): void {
+    console.log(this.captchaSuccess);
+    this.litmusStarted = true;
+    this.captchaSuccess = true;
+    this.captchaResponse = captchaResponse;
+    this.captchaIsExpired = false;
+    console.log(this.captchaSuccess);
+    (<HTMLInputElement> document.getElementById("litmusGo")).style.visibility = "visible";
+    // (<HTMLInputElement> document.getElementById("captchaform")).disabled =true;
+  };
 }
