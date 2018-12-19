@@ -1,666 +1,527 @@
-<div class="container-fluid bg-white" style="height:920px">
-  <div class="row">
+<div class="container-fluid" style="height:100%;background-color:#EFF2F6;">
+  <div class="row bg-white my-3 py-3 rounded">
     <div class="col-md-12">
       <div class="">
-        <div class="mb-4 mt-3" style="padding-left:15px">
+        <div class="mb-3 mt-1" style="padding-left:15px">
           <h1 style="font-size: 18px;color: #354052">Live deployments of stateful applications</h1>
-          <h2 style="    font-size: 14px;color: #7F8FA4">Running either OpenEBS JIVA or OpenEBS cStor</h2>
+          <h2 style="font-size: 14px;color: #7F8FA4">Running either OpenEBS JIVA or OpenEBS cStor</h2>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 m-2 pl-0">
+            <div class="d-flex align-items-end justify-content-between">
+              <ul class="nav" id="myTab" role="tablist" style="width: 389.18 ;height: 75.29;">
+                <li class="nav-item" id="cstortab">
+                  <a class="nav-link nav-link1 active rounded-left" id="cstor-tab" data-toggle="tab" href="#cstor" role="tab"
+                    aria-controls="cstor" aria-selected="false" >
+                    <h1 style="font-size: 2.6em;text-align: left;color: #3A3D54;">cStor</h1>
+                    <h5 style="font-size: 0.8em;text-align: left;">Applications
+                      Running-{{cStorstatuscount}}/8</h5>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-link1  rounded-right" id="jiva-tab" data-toggle="tab" href="#jiva" role="tab"
+                    aria-controls="jiva" aria-selected="true">
+                    <h1 style="font-size: 2.6em;text-align: left;color: #3A3D54;">Jiva</h1>
+                    <h5 style="font-size: 0.8em;text-align: left;">Applications
+                      Running-{{jivastatuscount}}/1</h5>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav">
+                <li class="nav-item" style="height: 26px;" (click)="chooseViewType(0);" style="cursor:pointer">           
+                    <i class="fas fa-th viewtype" [ngClass]="{'active':viewType===0,'inactive':viewType===1}"></i>
+                </li> 
+                <li (click)="chooseViewType(1);" class="nav-item" style="cursor:pointer">
+                    <i class="fas fa-list viewtype" [ngClass]="{'active':viewType===1,'inactive':viewType===0}"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="col-md-12">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12 m-2">
-            <div class="d-flex align-items-end justify-content-between">
-            <ul class="nav" id="myTab" role="tablist" style="width: 389.18 ;height: 75.29;  ">
-              <li class="nav-item" id="cstortab">
-                <a class="nav-link nav-link1 active " id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                  aria-controls="profile" aria-selected="false" style="
-                  height: 99.995192px;">
-                  <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">cStor</h1>
-                  <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
-                    Running-{{cStorstatuscount}}/8</h5>
-                </a>
-              </li>              
-              <li class="nav-item">
-                <a class="nav-link nav-link1 " id="home-tab" data-toggle="tab" href="#home" role="tab"
-                  aria-controls="home" aria-selected="true" style="
-                  height: 99.995192px;">
-                  <h1 style="font-size: 2.6em;text-align: left;padding-left: 20px;color: #3A3D54;">Jiva</h1>
-                  <h5 style="font-size: 0.8em;text-align: left;padding-left: 14px;">Applications
-                    Running-{{jivastatuscount}}/1</h5>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav">
-              <li class="nav-item" style="height: 26px;" (click)="chooseViewType(0);" style="cursor:pointer">           
-                  <i class="fas fa-th viewtype" [ngClass]="{'active':viewType===0,'inactive':viewType===1}"></i>
-              </li> 
-              <li (click)="chooseViewType(1);" class="nav-item" style="cursor:pointer">
-                  <i class="fas fa-list viewtype" [ngClass]="{'active':viewType===1,'inactive':viewType===0}"></i>
-              </li>
-           </ul>
-          </div>
-             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade  " id="home" role="tabpanel" aria-labelledby="home-tab">
-                 <div class="container-fluid">
-                  <div class="row" *ngIf="viewType==0;else tablecstor">
-
-                      <div class="col-md-3 text-center" >
-                        <div class="workloadmainbox">
-                          <div class="workloadlogocolour" style="background-color: #31373D;"></div>
-                            <div class="workloadlogo">
-                          <img src="/assets/images/workloads-logos/wordpress.svg" alt="" >
-                          </div>
-                          <div class="workloadbalance">
-                           <div class="workloadstatus" >
-                              <img src="/assets/images/wordpresstitle.png" alt="" style="width:65%;height: 22px;margin-top: 12px;margin-bottom: 11px;border-left-width: 10px;margin-left: 13px;">
+  </div>
+  <div class="row py-4 mb-5 bg-white rounded">
+      <div class="col-md-12">
+        <div class="container-fluid">
+            <div class="row">
+              <div class="tab-content w-100" >
+                  <div class="tab-pane fade show active" id="cstor" role="tabpanel" aria-labelledby="cstor-tab"> 
+                      <div class="container-fluid">
+                        <div class="row" *ngIf="viewType==0;else tablecstor">
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center mongo-bg">
+                                  <img class="card-img-top " src="assets/images/workloads-logos/mongo.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="/assets/images/mongotitle1.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':mongocstorStatus === 'Running',
+                                      'hide':mongocstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':mongocstorStatus !== 'Running',
+                                          'hide ':mongocstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">StatefulSet 2 replicas</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/mongo-cstor" >Dashboard</a>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center percona-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/percona.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/perconatitle1.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':perconacstorStatus === 'Running',
+                                      'hide':perconacstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':perconacstorStatus !== 'Running',
+                                          'hide ':perconacstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">Deployment 1 replica</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/percona-cstor" >Dashboard</a>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center cockdb-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/cockroachdb.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/cockroachdbtitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':cockdbcstorStatus === 'Running',
+                                      'hide':cockdbcstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':cockdbcstorStatus !== 'Running',
+                                          'hide ':cockdbcstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">StatefulSet 2 replicas</p>
+                                    <p class="card-text">OpenEBS - 1 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/cockroachdb-cstor" >Dashboard</a>
+                                </div>
+                            </div>                          
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center prometheus-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/prometheus.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/prometheustitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':prometheuscstorStatus === 'Running',
+                                      'hide':prometheuscstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':prometheuscstorStatus !== 'Running',
+                                          'hide ':prometheuscstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">Deployment 1 replica</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/prometheus-cstor" >Dashboard</a>
+                                </div>
+                            </div> 
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center grafana-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/grafana.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/grafanatitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':grafanaStatus === 'Running',
+                                      'hide':grafanaStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':grafanaStatus !== 'Running',
+                                          'hide ':grafanaStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">Deployment 1 replica</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/grafana-cstor" >Dashboard</a>
+                                </div>
+                            </div>                               
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center redis-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/redis.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/redistitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':rediscstorStatus === 'Running',
+                                      'hide':rediscstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':rediscstorStatus !== 'Running',
+                                          'hide ':rediscstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">StatefulSet 2 replicas</p>
+                                    <p class="card-text">OpenEBS - 1 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/redis-cstor" >Dashboard</a>
+                                </div>
+                            </div> 
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center postgresql-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/postgresql.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/postgresqltitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':postgresqlcstorStatus === 'Running',
+                                      'hide':postgresqlcstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':postgresqlcstorStatus !== 'Running',
+                                          'hide ':postgresqlcstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">StatefulSet 2 replicas</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/postgresql-cstor" >Dashboard</a>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center elasticsearch-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/elasticsearch.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/elasticsearchtitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':elasticsearchcstorStatus === 'Running',
+                                      'hide':elasticsearchcstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':elasticsearchcstorStatus !== 'Running',
+                                          'hide ':elasticsearchcstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">StatefulSet 1 replicas</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/logging" >Dashboard</a>
+                                </div>
+                            </div>                                                                
+                        </div>      
+                        <ng-template #tablecstor>  
+                          <div class="row">     
+                            <table id="workloadlist">
+                                <tr class="headrow"  >
+                                  <th class="headtext">Applications</th>
+                                  <th class="headtext"> Replicas</th>
+                                  <th class="headtext"> cStor</th>
+                                  <th class="headtext"> Replicas/pv</th>
+                                  <th class="headtext"> Status</th>
+                                  <th class="headtextaccess">  Access </th>
+                                </tr>
+                                <tr class="tabledatarow">
+                                    <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
+                                    <td class="tablerowtext">2</td>
+                                    <td class="tablerowtext">0.8</td>
+                                    <td class="tablerowtext">3</td>
+                                    <td>
+                                        <span [ngClass]="{
+                                          'display':mongocstorStatus === 'Running',
+                                          'hide':mongocstorStatus !== 'Running'
+                                        }"
+                                  style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                               <span [ngClass]="{
-                                'display':wordpressStatus === 'Running',
-                                'hide':wordpressStatus !== 'Running'
-                              }"
-                       style="background-color:#539A49;border-radius: 20px;
-                       justify-content: center;
-                       align-items: center;
-                       overflow: hidden;
-                       font-size: 15px;width: 85px;
-                       color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                    <span [ngClass]="{
-                                'display':wordpressStatus !== 'Running',
-                                'hide':wordpressStatus === 'Running'
-                              }"
-                     style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                     justify-content: center;
-                     align-items: center;
-                     overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                            </div>
-                            <div class="jivacstor">
-                              <h5 style="border-top-width: 5px ;margin-top: 8px;">Jiva 0.8</h5>
-                            </div>
-                            <div>
-                              <p>Deployment 1 replica</p>
-                              <p>OpenEBS - 3 replicas-pv</p>
-                            </div>
-                            <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                              <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/wordpress-nfs">Dashboard</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <ng-template #tablecstor> 
-                      <table id="workloadlist" >
-                          <tr class="headrow"  >
-                            <th class="headtext">Applications</th>
-                            <th class="headtext"> Replicas</th>
-                            <th class="headtext"> Jiva</th>
-                            <th class="headtext"> Replicas/pv</th>
-                            <th class="headtext"> Status</th>
-                            <th class="headtext">  Access </th>
-                          </tr>                      
-                          <tr class="tabledatarow">
-                            <td><a><img src="/assets/images/workloads-logos/wordpress.svg" style="height:20px;"> Wordpress</a></td>
-                            <td class="tablerowtext">2</td>
-                            <td class="tablerowtext">0.8</td>
-                            <td class="tablerowtext">3</td>
-                            <td>
-                                <span [ngClass]="{
-                                  'display':wordpressStatus === 'Running',
-                                  'hide':wordpressStatus !== 'Running'
-                                }"
-                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                      <span [ngClass]="{
-                                  'display':wordpressStatus !== 'Running',
-                                  'hide':wordpressStatus === 'Running'
-                                }"
-                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                            </td>
-                            <td><a class="dashboardbox" href="/Wordpress-nfs">Dashboard</a></td>
-                          </tr>                      
-                        </table>
-                    </ng-template>
-                  </div>
-                </div>
-               <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab"> 
-                <div class="container-fluid">
-                  <div class="row" *ngIf="viewType==0;else tablejiva">
-                      <div class="col-md-3 text-center">
-                          <div class="workloadmainbox">
-                            <div class="workloadlogocolour" style="background-color: #F4BD19;"></div>
-                              <div class="workloadlogo">
-                            <img src="/assets/images/workloads-logos/elasticsearch.svg" alt="" style=" padding-right: 5px;padding-top: 2px; padding-left: 0px;" >
-                            </div>
-                            <div class="workloadbalance">
-                             <div class="workloadstatus">
-                                <img src="/assets/images/elasticsearchtitle.png" alt="" style="width:65%;height: 28px;margin-top: 9px;margin-bottom: 8px;border-left-width: 10px;">
-                                <span [ngClass]="{
-                                  'display':elasticsearchcstorStatus === 'Running',
-                                  'hide':elasticsearchcstorStatus !== 'Running'
-                                }"
-                         style="background-color:#539A49;border-radius: 20px;
-                         justify-content: center;
-                         align-items: center;
-                         overflow: hidden;
-                         font-size: 15px;width: 85px;
-                         color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                      <span [ngClass]="{
-                                  'display':elasticsearchcstorStatus !== 'Running',
-                                  'hide':elasticsearchcstorStatus === 'Running'
-                                }"
-                       style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                       justify-content: center;
-                       align-items: center;
-                       overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                              </div>
-                              <div class="jivacstor">
-                                <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                              </div>
-                              <div>
-                                <p>Deployment 1 replica</p>
-                                <p>OpenEBS - 3 replicas-pv</p>
-                              </div>
-                              <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/logging">Dashboard</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <div class="workloadmainbox">
-                              <div class="workloadlogocolour" style="background-color: #539A49;"></div>
-                                <div class="workloadlogo">
-                              <img src="/assets/images/workloads-logos/mongo.svg" alt="" style="
-                              padding-right: 2px;
-                              padding-bottom: 0px;
-                              padding-top: 1px;
-                          ">
-                              </div>
-                              <div class="workloadbalance">
-                               <div class="workloadstatus" >
-                                 <img src="/assets/images/mongotitle1.png" alt="" style="width:60%;height:px;margin-top: 7px;margin-bottom: 5px;">
-                                      <span [ngClass]="{
-                                                  'display':mongocstorStatus === 'Running',
-                                                  'hide':mongocstorStatus !== 'Running'
-                                                }"
-                                         style="background-color:#539A49;border-radius: 20px;
-                                         justify-content: center;
-                                         align-items: center;
-                                         overflow: hidden;
-                                         font-size: 15px;width: 85px;
-                                         color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                                      <span [ngClass]="{
-                                                  'display':mongocstorStatus !== 'Running',
-                                                  'hide':mongocstorStatus === 'Running'
-                                                }"
-                                       style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                                       justify-content: center;
-                                       align-items: center;
-                                       overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                </div>
-                                <div class="jivacstor">
-                                <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                              </div>
-                              <div>
-                                <p>StatefulSet 2 replicas</p>
-                                <p>OpenEBS - 3 replicas-pv</p>
-                              </div>
-                              <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/mongo-cstor">Dashboard</a>
-                              </div>
-                            </div>
-                          </div>
-                          </div>
-                          <div class="col-md-3 text-center">
-                            <div class="workloadmainbox">
-                              <div class="workloadlogocolour" style="background-color: #E6522C;" ></div>
-                                <div class="workloadlogo">
-                              <img src="/assets/images/workloads-logos/prometheus.svg" alt="" style="
-                              padding-left: 0px;
-                              padding-bottom: 0px;
-                          " >
-                              </div>
-                              <div class="workloadbalance">
-                               <div class="workloadstatus">
-                                  <img src="/assets/images/prometheustitle.png" alt="" style="width:60%;height:20px;margin-top: 15px;margin-bottom: 10px;">
-                                  <span [ngClass]="{
-                                    'display':prometheuscstorStatus === 'Running',
-                                    'hide':prometheuscstorStatus !== 'Running'
-                                  }"
-                           style="background-color:#539A49;border-radius: 20px;
-                           justify-content: center;
-                           align-items: center;
-                           overflow: hidden;
-                           font-size: 15px;width: 85px;
-                           color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                        <span [ngClass]="{
-                                    'display':prometheuscstorStatus !== 'Running',
-                                    'hide':prometheuscstorStatus === 'Running'
-                                  }"
-                         style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                         justify-content: center;
-                         align-items: center;
-                         overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                </div>
-                                <div class="jivacstor">
-                                  <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                </div>
-                                <div>
-                                  <p>Deployment 1 replica</p>
-                                  <p>OpenEBS - 3 replicas-pv</p>
-                                </div>
-                                <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                  <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/prometheus-cstor">Dashboard</a>
-                                </div>
-                              </div>
-                            </div>
-                            </div>
-                  
-                            <div class="col-md-3 text-center">
-                              <div class="workloadmainbox">
-                                <div class="workloadlogocolour" style="background-color: #31373D;" ></div>
-                                  <div class="workloadlogo">
-                                <img src="/assets/images/workloads-logos/cockroachdb.svg" alt="" style="
-                                padding-left: 0px;
-                                padding-bottom: 0px;
-                            " >
-                                </div>
-                                <div class="workloadbalance">
-                                 <div class="workloadstatus">
-                                    <img src="/assets/images/cockroachdbtitle.png" alt="" style=" width: 150px;margin-top: 7px;margin-bottom: 5px;">
-                                    <span [ngClass]="{
-                                      'display':cockdbcstorStatus === 'Running',
-                                      'hide':cockdbcstorStatus !== 'Running'
-                                    }"
-                             style="background-color:#539A49;border-radius: 20px;
-                             justify-content: center;
-                             align-items: center;
-                             overflow: hidden;
-                             font-size: 15px;width: 85px;
-                             color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                          <span [ngClass]="{
-                                      'display':cockdbcstorStatus !== 'Running',
-                                      'hide':cockdbcstorStatus === 'Running'
-                                    }"
-                           style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                           justify-content: center;
-                           align-items: center;
-                           overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                  </div>
-                                  <div class="jivacstor">
-                                    <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                  </div>
-                                  <div>
-                                    <p>StatefulSet 2 replicas</p>
-                                    <p>OpenEBS - 3 replicas-pv</p>
-                                  </div>
-                                  <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                    <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/cockroachdb-cstor">Dashboard</a>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
-
-                              <div class="col-md-3 text-center" style="top: 350px;">
-                              <div class="workloadmainbox">
-                                <div class="workloadlogocolour"></div>
-                                  <div class="workloadlogo">
-                                <img src="/assets/images/workloads-logos/percona.svg" alt="" >
-                                </div>
-                                <div class="workloadbalance">
-                                 <div class="workloadstatus" >
-                                    <img src="/assets/images/perconatitle1.png" alt="" style="width:58%;height: 24px;margin-top: 11px;margin-bottom: 10px;border-left-width: 10px;margin-left: 0px;">
-                                    <span [ngClass]="{
-                                      'display':perconacstorStatus === 'Running',
-                                      'hide':perconacstorStatus !== 'Running'
-                                    }"
-                             style="background-color:#539A49;border-radius: 20px;
-                             justify-content: center;
-                             align-items: center;
-                             overflow: hidden;
-                             font-size: 15px;width: 85px;
-                             color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                          <span [ngClass]="{
-                                      'display':perconacstorStatus !== 'Running',
-                                      'hide':perconacstorStatus === 'Running'
-                                    }"
-                           style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                           justify-content: center;
-                           align-items: center;
-                           overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                  </div>
-                                  <div class="jivacstor">
-                                    <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                  </div>
-                                  <div>
-                                    <p>Deployment 1 replica</p>
-                                    <p>OpenEBS - 3 replicas-pv</p>
-                                  </div>
-                                  <div style="width: 100%,height:10%; background-color: rgba(183, 224, 255, 0.4969);">
-                                    <a class="dashboardbox" style=" color: #2197F0;    vertical-align: bottom;"href="/percona-cstor">Dashboard</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div><div class="col-md-3 text-center" style="top: 350px;">
-                                <div class="workloadmainbox">
-                                  <div class="workloadlogocolour" style="background-color: #A41C13;"></div>
-                                    <div class="workloadlogo">
-                                  <img src="/assets/images/workloads-logos/redis.svg" alt="" style="padding-top: 5px;padding-bottom: 0px;
-                                  padding-right: 1px;
-                                  border-top-width: 3px;
-                              " >
-                                  </div>
-                                  <div class="workloadbalance">
-                                   <div class="workloadstatus" >
-                                      <img src="/assets/images/redistitle.png" alt="" style="width: 70px;height: 24px;margin-top: 12px;margin-bottom: 9px;border-left-width: 10px;margin-left: 5px;">
-                                      <span [ngClass]="{
-                                        'display':rediscstorStatus === 'Running',
-                                        'hide':rediscstorStatus !== 'Running'
-                                      }"
-                               style="background-color:#539A49;border-radius: 20px;
-                               justify-content: center;
-                               align-items: center;
-                               overflow: hidden;
-                               font-size: 15px;width: 85px;
-                               color:  #fafbf7; margin-left:30%;">ACTIVE</span>
-                            <span [ngClass]="{
-                                        'display':rediscstorStatus !== 'Running',
-                                        'hide':rediscstorStatus === 'Running'
-                                      }"
-                             style="background-color: #D20000;margin-left:28%;border-radius: 20px;justify-content: center;align-items: center;
-                             overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                    </div>
-                                    <div class="jivacstor">
-                                      <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                    </div>
-                                    <div>
-                                      <p>StatefulSet 2 replicas</p>
-                                      <p>OpenEBS - 3 replicas-pv</p>
-                                    </div>
-                                    <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                      <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/redis-cstor">Dashboard</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-3 text-center" style="top: 350px;">
-                                  <div class="workloadmainbox">
-                                    <div class="workloadlogocolour" style="background-color: #336791;;"></div>
-                                      <div class="workloadlogo">
-                                    <img src="/assets/images/workloads-logos/postgresql.svg" alt="" style="
-                                    padding-left: 2px;
-                                    padding-bottom: 1px;
-                                    padding-top: 5px;
-                                    padding-right: 1px;
-                                " >
-                                    </div>
-                                    <div class="workloadbalance">
-                                     <div class="workloadstatus" >
-                                        <img src="/assets/images/postgresqltitle.png" alt="" style="width:65%;height: 22px;margin-top: 12px;margin-bottom: 11px;border-left-width: 10px;margin-left: 13px;">
+                                          'display':mongocstorStatus !== 'Running',
+                                          'hide':mongocstorStatus === 'Running'
+                                        }"
+                                style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                    </td>
+                                    <td><a class="dashboardbox" href="/mongo-cstor">Dashboard</a></td>
+                                  </tr>
+      
+                            
+                                <tr class="tabledatarow">
+                                    <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
+                                    <td class="tablerowtext">2</td>
+                                    <td class="tablerowtext">0.8</td>
+                                    <td class="tablerowtext">3</td>
+                                    <td>
                                         <span [ngClass]="{
                                           'display':postgresqlcstorStatus === 'Running',
                                           'hide':postgresqlcstorStatus !== 'Running'
                                         }"
-                                 style="background-color:#539A49;border-radius: 20px;
-                                 justify-content: center;
-                                 align-items: center;
-                                 overflow: hidden;
-                                 font-size: 15px;width: 85px;
-                                 color:  #fafbf7; margin-left:30%;">ACTIVE</span>
+                                  style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                               <span [ngClass]="{
                                           'display':postgresqlcstorStatus !== 'Running',
                                           'hide':postgresqlcstorStatus === 'Running'
                                         }"
-                               style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                               justify-content: center;
-                               align-items: center;
-                               overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                      </div>
-                                      <div class="jivacstor">
-                                        <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                      </div>
-                                      <div>
-                                        <p>StatefulSet 2 replica</p>
-                                        <p>OpenEBS - 3 replicas-pv</p>
-                                      </div>
-                                      <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                        <a class="dashboardbox" style=" color: #2197F0;    vertical-align: bottom;"href="/postgresql-cstor">Dashboard</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-3 text-center" style="top: 350px;">
-                                    <div class="workloadmainbox">
-                                      <div class="workloadlogocolour" style="background: linear-gradient(to top, rgb(207, 209, 79) 0%, rgb(238, 118, 70) 100%);"></div>
-                                        <div class="workloadlogo">
-                                      <img src="/assets/images/workloads-logos/grafana.svg" alt="" style="
-                                      padding-left: 1px;
-                                      padding-bottom: 1px;
-                                      padding-top: 3px;
-                                      padding-right: 1px;
-                                  " >
-                                      </div>
-                                      <div class="workloadbalance">
-                                       <div class="workloadstatus" >
-                                          <img src="/assets/images/grafanatitle.png" alt="" style="width:45%;height: 22px;margin-top: 12px;margin-bottom: 11px;border-left-width: 10px;">
+                                style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                    </td>
+                                    <td><a class="dashboardbox" href="/postgresql-cstor">Dashboard</a></td>
+                                  </tr>
+                                  <tr class="tabledatarow">
+                                      <td><a><img src="/assets/images/workloads-logos/elasticsearch.svg" style="height:20px;"> Elasticsearch</a></td>
+                                      <td class="tablerowtext">2</td>
+                                      <td class="tablerowtext">0.8</td>
+                                      <td class="tablerowtext">3</td>
+                                      <td>
                                           <span [ngClass]="{
-                                            'display':grafanaStatus === 'Running',
-                                            'hide':grafanaStatus !== 'Running'
+                                            'display':elasticsearchcstorStatus === 'Running',
+                                            'hide':elasticsearchcstorStatus !== 'Running'
                                           }"
-                                   style="background-color:#539A49;border-radius: 20px;
-                                   justify-content: center;
-                                   align-items: center;
-                                   overflow: hidden;
-                                   font-size: 15px;width: 85px;
-                                   color:  #fafbf7; margin-left:30%;">ACTIVE</span>
+                                    style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                                 <span [ngClass]="{
-                                            'display':grafanaStatus !== 'Running',
-                                            'hide':grafanaStatus === 'Running'
+                                            'display':elasticsearchcstorStatus !== 'Running',
+                                            'hide':elasticsearchcstorStatus === 'Running'
                                           }"
-                                 style="background-color: #D20000;margin-left:28%;border-radius: 20px;
-                                 justify-content: center;
-                                 align-items: center;
-                                 overflow: hidden;font-size: 15px;width: 95px;align-items: center;color:  #fafbf7;">INACTIVE</span>
-                                        </div>
-                                        <div class="jivacstor">
-                                          <h5 style="border-top-width: 5px ;margin-top: 8px;">cStor 0.8</h5>
-                                        </div>
-                                        <div>
-                                          <p>Deployment 1 replica</p>
-                                          <p>OpenEBS - 3 replicas-pv</p>
-                                        </div>
-                                        <div style="width: 100%;height:15%; background-color: rgba(183, 224, 255, 0.4969);">
-                                          <a class="dashboardbox"style=" color: #2197F0;    vertical-align: bottom;" href="/grafana-cstor">Dashboard</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                            
-                     
-                          
-                    </div>
-
-                    <ng-template #tablejiva> 
- 
-                      <table id="workloadlist">
-                          <tr class="headrow"  >
-                            <th class="headtext">Applications</th>
-                            <th class="headtext"> Replicas</th>
-                            <th class="headtext"> cStor</th>
-                            <th class="headtext"> Replicas/pv</th>
-                            <th class="headtext"> Status</th>
-                            <th class="headtextaccess">  Access </th>
-                          </tr>
-                          <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/mongo.svg" style="height:20px;"> MongoDB</a></td>
-                              <td class="tablerowtext">2</td>
-                              <td class="tablerowtext">0.8</td>
-                              <td class="tablerowtext">3</td>
-                              <td>
+                                  style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                      </td>
+                                      <td><a class="dashboardbox" href="/logging">Dashboard</a></td>
+                                    </tr>
+                                    <tr class="tabledatarow">
+                                        <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
+                                        <td class="tablerowtext">2</td>
+                                        <td class="tablerowtext">0.8</td>
+                                        <td class="tablerowtext">3</td>
+                                        <td>
+                                            <span [ngClass]="{
+                                              'display':perconacstorStatus === 'Running',
+                                              'hide':perconacstorStatus !== 'Running'
+                                            }"
+                                      style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                                   <span [ngClass]="{
-                                    'display':mongocstorStatus === 'Running',
-                                    'hide':mongocstorStatus !== 'Running'
-                                  }"
-                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                        <span [ngClass]="{
-                                    'display':mongocstorStatus !== 'Running',
-                                    'hide':mongocstorStatus === 'Running'
-                                  }"
-                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                              </td>
-                              <td><a class="dashboardbox" href="/mongo-cstor">Dashboard</a></td>
-                            </tr>
-
-                      
-                          <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/postgresql.svg" style="height:20px;"> Postgresql</a></td>
-                              <td class="tablerowtext">2</td>
-                              <td class="tablerowtext">0.8</td>
-                              <td class="tablerowtext">3</td>
-                              <td>
-                                  <span [ngClass]="{
-                                    'display':postgresqlcstorStatus === 'Running',
-                                    'hide':postgresqlcstorStatus !== 'Running'
-                                  }"
-                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                        <span [ngClass]="{
-                                    'display':postgresqlcstorStatus !== 'Running',
-                                    'hide':postgresqlcstorStatus === 'Running'
-                                  }"
-                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                              </td>
-                              <td><a class="dashboardbox" href="/postgresql-cstor">Dashboard</a></td>
-                            </tr>
-                            <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/elasticsearch.svg" style="height:20px;"> Elasticsearch</a></td>
-                                <td class="tablerowtext">2</td>
-                                <td class="tablerowtext">0.8</td>
-                                <td class="tablerowtext">3</td>
-                                <td>
-                                    <span [ngClass]="{
-                                      'display':elasticsearchcstorStatus === 'Running',
-                                      'hide':elasticsearchcstorStatus !== 'Running'
-                                    }"
-                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                          <span [ngClass]="{
-                                      'display':elasticsearchcstorStatus !== 'Running',
-                                      'hide':elasticsearchcstorStatus === 'Running'
-                                    }"
-                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                                </td>
-                                <td><a class="dashboardbox" href="/logging">Dashboard</a></td>
-                              </tr>
-                              <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/percona.svg" style="height:20px;"> PerconaDB</a></td>
+                                              'display':perconacstorStatus !== 'Running',
+                                              'hide':perconacstorStatus === 'Running'
+                                            }"
+                                    style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                        </td>
+                                        <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
+                                      </tr>
+                                <tr class="tabledatarow">
+                                  <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
                                   <td class="tablerowtext">2</td>
                                   <td class="tablerowtext">0.8</td>
                                   <td class="tablerowtext">3</td>
                                   <td>
                                       <span [ngClass]="{
-                                        'display':perconacstorStatus === 'Running',
-                                        'hide':perconacstorStatus !== 'Running'
+                                        'display':cockdbcstorStatus === 'Running',
+                                        'hide':cockdbcstorStatus !== 'Running'
                                       }"
-                               style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                                style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                             <span [ngClass]="{
-                                        'display':perconacstorStatus !== 'Running',
-                                        'hide':perconacstorStatus === 'Running'
+                                        'display':cockdbcstorStatus !== 'Running',
+                                        'hide':cockdbcstorStatus === 'Running'
                                       }"
-                             style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                              style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
                                   </td>
-                                  <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
+                                  <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
                                 </tr>
-                          <tr class="tabledatarow">
-                            <td><a><img src="/assets/images/workloads-logos/cockroachdb.svg" style="height:20px;"> CockroachDB</a></td>
-                            <td class="tablerowtext">2</td>
-                            <td class="tablerowtext">0.8</td>
-                            <td class="tablerowtext">3</td>
-                            <td>
+                            
+                                <tr class="tabledatarow">
+                                  <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
+                                  <td class="tablerowtext">2</td>
+                                  <td class="tablerowtext">0.8</td>
+                                  <td class="tablerowtext">3</td>
+                                  <td>
+                                      <span [ngClass]="{
+                                        'display':rediscstorStatus === 'Running',
+                                        'hide':rediscstorStatus !== 'Running'
+                                      }"
+                                style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                            <span [ngClass]="{
+                                        'display':rediscstorStatus !== 'Running',
+                                        'hide':rediscstorStatus === 'Running'
+                                      }"
+                              style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                  </td>
+                                  <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
+                                </tr>
+              
+                                <tr class="tabledatarow">
+                                    <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
+                                    <td class="tablerowtext">2</td>
+                                    <td class="tablerowtext">0.8</td>
+                                    <td class="tablerowtext">3</td>
+                                    <td>
+                                        <span [ngClass]="{
+                                          'display':prometheuscstorStatus === 'Running',
+                                          'hide':prometheuscstorStatus !== 'Running'
+                                        }"
+                                  style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                              <span [ngClass]="{
+                                          'display':prometheuscstorStatus !== 'Running',
+                                          'hide':prometheuscstorStatus === 'Running'
+                                        }"
+                                style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                    </td>
+                                    <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
+                                  </tr>
+                                  <tr class="tabledatarow">
+                                      <td><a><img src="/assets/images/workloads-logos/grafana.svg" style="height:20px;"> Grafana</a></td>
+                                      <td class="tablerowtext">2</td>
+                                      <td class="tablerowtext">0.8</td>
+                                      <td class="tablerowtext">3</td>
+                                      <td>
+                                          <span [ngClass]="{
+                                            'display':grafanaStatus === 'Running',
+                                            'hide':grafanaStatus !== 'Running'
+                                          }"
+                                    style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
                                 <span [ngClass]="{
-                                  'display':cockdbcstorStatus === 'Running',
-                                  'hide':cockdbcstorStatus !== 'Running'
-                                }"
-                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                      <span [ngClass]="{
-                                  'display':cockdbcstorStatus !== 'Running',
-                                  'hide':cockdbcstorStatus === 'Running'
-                                }"
-                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                            </td>
-                            <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
-                          </tr>
-                      
-                          <tr class="tabledatarow">
-                            <td><a><img src="/assets/images/workloads-logos/redis.svg" style="height:20px;"> Redis</a></td>
-                            <td class="tablerowtext">2</td>
-                            <td class="tablerowtext">0.8</td>
-                            <td class="tablerowtext">3</td>
-                            <td>
-                                <span [ngClass]="{
-                                  'display':rediscstorStatus === 'Running',
-                                  'hide':rediscstorStatus !== 'Running'
-                                }"
-                         style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                      <span [ngClass]="{
-                                  'display':rediscstorStatus !== 'Running',
-                                  'hide':rediscstorStatus === 'Running'
-                                }"
-                       style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                            </td>
-                            <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
-                          </tr>
-       
-                          <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
-                              <td class="tablerowtext">2</td>
-                              <td class="tablerowtext">0.8</td>
-                              <td class="tablerowtext">3</td>
-                              <td>
-                                  <span [ngClass]="{
-                                    'display':prometheuscstorStatus === 'Running',
-                                    'hide':prometheuscstorStatus !== 'Running'
-                                  }"
-                           style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                        <span [ngClass]="{
-                                    'display':prometheuscstorStatus !== 'Running',
-                                    'hide':prometheuscstorStatus === 'Running'
-                                  }"
-                         style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                              </td>
-                              <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
-                            </tr>
-                            <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/grafana.svg" style="height:20px;"> Grafana</a></td>
-                                <td class="tablerowtext">2</td>
-                                <td class="tablerowtext">0.8</td>
-                                <td class="tablerowtext">3</td>
-                                <td>
-                                    <span [ngClass]="{
-                                      'display':grafanaStatus === 'Running',
-                                      'hide':grafanaStatus !== 'Running'
-                                    }"
-                             style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
-                          <span [ngClass]="{
-                                      'display':grafanaStatus !== 'Running',
-                                      'hide':grafanaStatus === 'Running'
-                                    }"
-                           style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
-                                </td>
-                                <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
-                              </tr>
-                       
-                        </table>
+                                            'display':grafanaStatus !== 'Running',
+                                            'hide':grafanaStatus === 'Running'
+                                          }"
+                                  style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                      </td>
+                                      <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
+                                    </tr>
+                              
+                            </table>      
+                          </div>
+                        </ng-template>
+                      </div>
+                  </div> 
+                  <div class="tab-pane fade " id="jiva" role="tabpanel" aria-labelledby="jiva-tab">
+                      <div class="container-fluid">
+                        <div class="row " *ngIf="viewType==0;else tablejiva">
+                            <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center wordpress-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/wordpress.svg" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/wordpresstitle.png" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':wordpressStatus === 'Running',
+                                      'hide':wordpressStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':wordpressStatus !== 'Running',
+                                          'hide ':wordpressStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">JIVA 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">Deployment 1 replica</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/wordpress-nfs" >Dashboard</a>
+                                </div>
+                            </div>                               
+                        </div>
+                        <div class="row">
+                          <ng-template #tablejiva> 
+                            <table id="workloadlist" >
+                                <tr class="headrow"  >
+                                  <th class="headtext">Applications</th>
+                                  <th class="headtext"> Replicas</th>
+                                  <th class="headtext"> Jiva</th>
+                                  <th class="headtext"> Replicas/pv</th>
+                                  <th class="headtext"> Status</th>
+                                  <th class="headtext">  Access </th>
+                                </tr>
+                                <tr class="tabledatarow">
+                                  <td><a><img src="/assets/images/workloads-logos/wordpress.svg" style="height:20px;"> Wordpress</a></td>
+                                  <td class="tablerowtext">2</td>
+                                  <td class="tablerowtext">0.8</td>
+                                  <td class="tablerowtext">3</td>
+                                  <td>
+                                      <span [ngClass]="{
+                                        'display':wordpressStatus === 'Running',
+                                        'hide':wordpressStatus !== 'Running'
+                                      }"
+                                style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                            <span [ngClass]="{
+                                        'display':wordpressStatus !== 'Running',
+                                        'hide':wordpressStatus === 'Running'
+                                      }"
+                              style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                  </td>
+                                  <td><a class="dashboardbox" href="/Wordpress-nfs">Dashboard</a></td>
+                                </tr>
+                              </table>
 
-                    </ng-template>
-                </div>
-              </div> 
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                          </ng-template>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+           </div>
+        </div>
+      </div>   
+  </div>
 </div>
 
 <!-- class="d-flex flex-column align-items-center" -->
