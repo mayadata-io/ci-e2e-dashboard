@@ -60,9 +60,9 @@
           <div class="row bg-white my-2">
             <div class="mx-auto">
               <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 15px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 14px;"> InActive</span></p>
+              <hr>
             </div>
             <br>
-            <hr style="width: 750px;height: 20px;margin-top: 0px;margin-bottom: 0px; border-top: 2px solid rgb(208, 228, 243);">
             <div class="col-md-12 d-flex justify-content-around workloads my-5">          
               <div class="workload-deatils mx-2 " style="width:33%;color: #7F8FA4;" *ngFor="let pvc of pvcarray">
                   <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt="">
@@ -126,7 +126,8 @@
               'display':dashboardurl === '',
               'hide':dashboardurl !== ''
             }">
-            <hr style="width: 750px;height: 10px;margin-top: 0px;margin-bottom: 0px;border-top: 2px solid rgb(208, 228, 243)">
+            <p></p>
+            <hr>
               <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
                 <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
@@ -236,26 +237,6 @@
                 <td>{{ chaosTest }}</td>
               </div>
             </tr>
-            
-              <!-- <tr>
-                <td style="border-top:none">
-                  <div class="row justify-content-around">
-                    <div style="width:70%">
-                      <select [disabled]="litmusStarted" class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)"
-                        style="width:100%">
-                        <option selected value="">Select Chaos..</option>
-                        <option *ngFor="let chaosTest of chaosTests;" value="{{chaosTest}} "> {{chaosTest}}
-                        </option>
-                      </select>
-                    </div>
-                    <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]=" litmusGoBtn">
-                        Go </button>
-                    </div> 
-                  </div>
-                </td>
-              </tr> -->
               <tr>
               <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
                 <hr>
@@ -271,22 +252,7 @@
                 </div>
               </div>
               </tr>
-              <!-- <tr>
-                <td style="border-top:none">
-                  <div class="row justify-content-around">
-                    <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
-                      <select  class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)" style="
-                      margin-bottom: 20px;">
-                        <option selected value="">Select Application..</option>
-                        <option *ngFor="let statefulset of litmuspod" value="{{statefulset.pvc}} ">
-                          {{statefulset.name}}
-                        </option>
-                      </select>
-                    </div >
-                  </div>
-                </td>
-              </tr> -->
-              <tr>
+               <tr>
                 <td>
                   <div class="hide-custom" >   
                       <div [formGroup]="aFormGroup">
