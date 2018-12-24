@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <div class="row d-flex justify-content-between bg-white my-2" style="padding-top:15px;padding-bottom:15px;padding-left: 8px;padding-right: 10px;border-radius: 7px;">
-          <div class="d-flex flex-column my-auto mx-2"  >
+      <div class="row d-flex justify-content-between bg-white my-3 rounded" >
+          <div class="d-flex flex-column my-3 mx-2"  >
             <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
             <div class="ml-2">
               <p class="mb-0" style="font-size:12px;color:#354052">{{applicationType}} 
@@ -57,13 +57,13 @@
         </div> 
     </div>
     <ng-template #deployPersent>
-          <div class="row bg-white my-2">
-            <div class="mx-auto">
-              <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 15px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 14px;"> InActive</span></p>
+          <div class="row bg-white my-2 rounded">
+            <div class="mx-2">
+              <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 13px;padding-right: 5px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 13px;"> InActive</span></p>
               <hr>
             </div>
             <br>
-            <div class="col-md-12 d-flex justify-content-around workloads my-5">          
+            <div class="col-md-12 d-flex justify-content-around workloads my-3">          
               <div class="workload-deatils mx-2 " style="width:33%;color: #7F8FA4;" *ngFor="let pvc of pvcarray">
                   <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt="">
                 <div *ngFor="let statefulset of statefullSets">
@@ -71,7 +71,7 @@
                     <span placement="bottom"
                       ngbTooltip="{{statefulset.name}}">
                       {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
-                    <img style="height:15px;" [ngClass]="{
+                    <img style="height:13px;" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
                   }"
@@ -80,7 +80,7 @@
                     'display':statefulset.status !== 'Running',
                     'hide':statefulset.status === 'Running'
                   }"
-                      src="/assets/images/icons/inactive.png" alt="" style="height:14px;">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;">
                   </p>
                 </div>
                 <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px">
@@ -89,7 +89,7 @@
                     <span
                       placement="bottom" ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom"
                       ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span>
-                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                    <img style="height:13px;margin-left:0.5rem" [ngClass]="{
                   'display':jivaContrller.status === 'Running',
                   'hide':jivaContrller.status !== 'Running'
                 }"
@@ -98,7 +98,7 @@
                   'display':jivaContrller.status !== 'Running',
                   'hide':jivaContrller.status === 'Running'
                 }"
-                      src="/assets/images/icons/inactive.png" alt="" style="height:14px;margin-left:0.5rem">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;margin-left:0.5rem">
                   </p>
                 </div>
                 <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
@@ -115,7 +115,7 @@
                     'display':jivaReplica.status !== 'Running',
                     'hide':jivaReplica.status === 'Running'
                   }"
-                      src="/assets/images/icons/inactive.png" alt="" style="height:14px;margin-left:0.5rem">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;margin-left:0.5rem">
                   </p>
                 </div>
               </div>
@@ -196,19 +196,19 @@
   </ng-template>   
     </div>
 
-    <div class="col-md-4" >
+    <div class="col-md-4">
       <!-- <div class="row my-2">
       <div class="col-md-12">
         <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
         <p>Run the live chaos test</p>
       </div>
       </div> -->
-      <div class="row my-2 ">
+      <div class="row my-3 " >
         <div class="col-md-12 pr-0">
 
-          <div class="bg-white text-center" style="padding-top:2rem;padding-bottom: 1.5rem">
+          <div class="bg-white text-center rounded" style="padding-top:2rem;padding-bottom: 1.5rem">
             <img style="width:55%;" src="/assets/images/company-logos/litmuslogo.svg" alt="">
-            <p class="mb-0" style="font-size:18px">Run the live chaos test</p>
+            <p class="mb-0 font-italic" style="font-size:12px;color: #354052;">Run live chaos test</p>
           </div>
           <hr class="bg-white my-0" style="width: 80%">
         </div>
@@ -220,14 +220,12 @@
           <!-- <div id="captchaform"> -->
           
           <!-- </div> -->
-          <table class="table table-borderless bg-white pt-1 mb-0" id="captchaform">
-            <tbody style="font-size: 12px">
+          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
+            <tbody style="font-size: 12px; color: #354052;">
               <tr>
-                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 14px"> Choose one of the tests
-                  below </td>
+                <td class="p-2 pr-0 text-monospace" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below </td>
               </tr>
-              <hr>
-              <tr class="custom-select1 ">
+              <tr class="custom-select1 " style="line-height: 0.8;">
               <div *ngFor="let chaosTest of chaosTests;">
                 <td>
                     <input type="radio" name="onChaosSelect"
@@ -237,10 +235,11 @@
                 <td>{{ chaosTest }}</td>
               </div>
             </tr>
-              <tr>
+              <tr style="line-height: 0.8;">
               <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
-                <hr>
                 <div class="custom-select1 hide-custom">
+                    <hr>
+                    <p class="text-lg-left text-monospace">Select Application</p>
                   <div *ngFor="let statefulset of litmuspod">
                     <td>
                         <input type="radio" name="ApplicationSelect" 
@@ -254,6 +253,8 @@
               </tr>
                <tr>
                 <td>
+                  <div [ngClass]="{'hide':litmusGoBtn}">
+                    <hr>
                   <div class="hide-custom" >   
                       <div [formGroup]="aFormGroup">
                         <ngx-recaptcha2
@@ -269,7 +270,8 @@
                           formControlName="recaptcha">
                         </ngx-recaptcha2>
                       </div>
-                    </div>  
+                    </div>
+                  </div>  
                       <div>
                           <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" id="litmusGo" style="width:50px;height: 100%; visibility: hidden;;margin-top: 7px"
                           (click)="runChaosTest(selectedChaos, selectedApplication) " >
