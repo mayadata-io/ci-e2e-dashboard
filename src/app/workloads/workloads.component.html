@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <div class="row d-flex justify-content-between bg-white my-3 rounded" >
+      <div class="row d-flex justify-content-between bg-white my-3 rounded shadow-sm" >
           <div class="d-flex flex-column my-3 mx-2"  >
             <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:12px;color:#354052">{{applicationType}} 
-                Replica-
-                {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
+              <p class="mb-0" style="font-size:13px;color:#354052">{{applicationType}} 
+                Replica
+                {{numberstatefullSets}} Zones {{numberstatefullSets}}</p>
             </div>
           
           <div class="d-flex">
@@ -40,9 +40,9 @@
               <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
               <p class="mb-0" style="font-size:12px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.8</p>
             </div>
-            <p class="ml-4 mb-0" style="font-size:12px;color:#354052">Controller- {{numberController}} Replicas-
-              {{numberReplica}}
-              Zones- <span>{{numberNode.size}}</span> </p>
+            <p class="ml-4 mb-0" style="font-size:12px;color:#354052">Controller {{numberController}} &nbsp;&nbsp;Replicas
+              {{numberReplica}}&nbsp;&nbsp;
+              Zones <span>{{numberNode.size}}</span> </p>
               <p class="ml-4 mb-0" style="font-size:12px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
           </div>
         </div>
@@ -57,7 +57,7 @@
         </div> 
     </div>
     <ng-template #deployPersent>
-          <div class="row bg-white my-2 rounded">
+          <div class="row bg-white my-2 rounded shadow-sm">
             <div class="mx-2">
               <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 13px;padding-right: 5px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 13px;"> InActive</span></p>
               <hr>
@@ -206,7 +206,7 @@
       <div class="row my-3 " >
         <div class="col-md-12 pr-0">
 
-          <div class="bg-white text-center rounded" style="padding-top:2rem;padding-bottom: 1.5rem">
+          <div class="bg-white text-center rounded shadow-lg" style="padding-top:2rem;padding-bottom: 1.5rem">
             <img style="width:55%;" src="/assets/images/company-logos/litmuslogo.svg" alt="">
             <p class="mb-0 font-italic" style="font-size:12px;color: #354052;">Run live chaos test</p>
           </div>
@@ -223,7 +223,7 @@
           <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
             <tbody style="font-size: 12px; color: #354052;">
               <tr>
-                <td class="p-2 pr-0 text-monospace" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below </td>
+                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below : </td>
               </tr>
               <tr class="custom-select1 " style="line-height: 0.8;">
               <div *ngFor="let chaosTest of chaosTests;">
@@ -232,14 +232,14 @@
                         value="{{chaosTest}}" 
                         (change)="onChaosSelect($event.target.value)">
                 </td>
-                <td>{{ chaosTest }}</td>
+                <td class="chaoslabel">{{ chaosTest }}</td>
               </div>
             </tr>
               <tr style="line-height: 0.8;">
               <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
                 <div class="custom-select1 hide-custom">
                     <hr>
-                    <p class="text-lg-left text-monospace">Select Application</p>
+                    <p class="text-lg-left">Select Application :</p>
                   <div *ngFor="let statefulset of litmuspod">
                     <td>
                         <input type="radio" name="ApplicationSelect" 
