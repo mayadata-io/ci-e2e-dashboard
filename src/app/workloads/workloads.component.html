@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="row d-flex justify-content-between bg-white my-2 rounded shadow-sm" >
           <div class="d-flex flex-column my-3 mx-2 "  >
-            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
+            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:40px;margin-bottom: 10px">
             <div class="ml-2">
               <p class="mb-0" style="font-size:13px;color:#354052">{{applicationType}} 
                 Replica
@@ -220,7 +220,7 @@
           <!-- <div id="captchaform"> -->
           
           <!-- </div> -->
-          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform" style="height: 60vh;">
+          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
             <tbody style="font-size: 12px; color: #354052;">
               <tr>
                 <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below : </td>
@@ -239,7 +239,7 @@
               <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
                 <div class="custom-select1 hide-custom">
                     <hr>
-                    <p class="text-lg-left">Select Application :</p>
+                    <p class="text-lg-left" style="padding-left: 8px;">Select Application :</p>
                   <div *ngFor="let statefulset of litmuspod">
                     <td>
                         <input type="radio" name="ApplicationSelect" 
@@ -282,11 +282,11 @@
           </table>
         </div>
         <div class="col-md-12 pr-0">
-          <div class="bg-white p-2" >
+          <div class="bg-white p-2 rounded-bottom"style="height: 45vh" >
             <div *ngIf="litmusGetResponse ;else showLitmus"></div>
             <ng-template #showLitmus>
               
-              <div *ngIf="statefullSets.length > 0; else deployPersent1" style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
+              <div *ngIf="statefullSets.length > 0; else deployPersent1" style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;" class="shadow">
                 <p style="font-size:18px">Litmus logs</p>
                 <div *ngIf="litmusStarted == true">
                   <p><span style=" width: 130px;
