@@ -443,6 +443,5 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.captchaIsExpired = false;
     console.log(this.captchaSuccess);
     (<HTMLInputElement> document.getElementById("litmusGo")).style.visibility = "visible";
-    // (<HTMLInputElement> document.getElementById("captchaform")).disabled =true;
   };
 }

@@ -258,13 +258,6 @@
                       <div [formGroup]="aFormGroup">
                         <ngx-recaptcha2
                           [siteKey]="siteKey"
-                          (reset)="handleReset()"
-                          (load)="handleLoad()"
-                          [size]="size"
-                          [hl]="lang"
-                          [theme]="theme"
-                          [type]="type"
-                          (expire)="handleExpire()"
                           (success)="handleSuccess()"
                           formControlName="recaptcha">
                         </ngx-recaptcha2>
