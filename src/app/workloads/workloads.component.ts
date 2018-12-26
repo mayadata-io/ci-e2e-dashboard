@@ -233,7 +233,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         //  }
 
           if(this.openebsengine == "cStor"){
-            this.numberReplica = this.numberController;
+            this.numberReplica = this.numberController*3;
           
           }else if(this.openebsengine == "Jiva"){
             this.numberReplica = this.jivaReplicas.length;
