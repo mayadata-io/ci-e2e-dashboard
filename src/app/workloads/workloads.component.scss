@@ -26,23 +26,18 @@ p{
         font-size: 12px;
     }
 }
-.mx-2:nth-of-type(2)
+.divideLine:nth-of-type(2)
 {
 border-left: 1.4px solid rgb(175, 210, 236);
 padding-left: 15px;
 
   }
-.mx-2:nth-of-type(1){
+.divideLine:nth-of-type(1){
     padding-right: 5px;
 }
 
-.my-auto:nth-of-type(2){
+.VLine{
     border-left: 1.4px solid rgb(175, 210, 236);padding-left: 15px;
-
-}
-.my-5{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
 
 }
     input[type='radio']:after {
@@ -65,7 +60,7 @@ padding-left: 15px;
         border-radius: 15px;
         top: -3px;
         left: -2px;
-        // padding: 2px;
+        padding: 2px;
         position: relative;
         background-color: #F05A2B;
         content: '';

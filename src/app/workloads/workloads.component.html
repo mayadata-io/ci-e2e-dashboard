@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <div class="row d-flex justify-content-between bg-white my-3 rounded shadow-sm" >
-          <div class="d-flex flex-column my-3 mx-2"  >
+      <div class="row d-flex justify-content-between bg-white my-2 rounded shadow-sm" >
+          <div class="d-flex flex-column my-3 mx-2 "  >
             <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
             <div class="ml-2">
               <p class="mb-0" style="font-size:13px;color:#354052">{{applicationType}} 
@@ -22,7 +22,7 @@
                 href="{{dashboardurl}}" style="color:#269BF3" target="_blank">Live Access</a></p>
             </div>
         </div>
-        <div class="d-flex flex-column my-auto" style="padding-left: 50px;">
+        <div class="d-flex flex-column my-auto VLine" style="padding-left: 50px;">
           <div class="d-flex justify-content-between">
             <div class="d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
@@ -64,7 +64,7 @@
             </div>
             <br>
             <div class="col-md-12 d-flex justify-content-around workloads my-3">          
-              <div class="workload-deatils mx-2 " style="width:33%;color: #7F8FA4;" *ngFor="let pvc of pvcarray">
+              <div class="workload-deatils mx-2 divideLine" style="width:33%;color: #7F8FA4;" *ngFor="let pvc of pvcarray">
                   <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt="">
                 <div *ngFor="let statefulset of statefullSets">
                   <p *ngIf="statefulset.pvc === pvc.name ">
@@ -203,7 +203,7 @@
         <p>Run the live chaos test</p>
       </div>
       </div> -->
-      <div class="row my-3 " >
+      <div class="row my-2 " >
         <div class="col-md-12 pr-0">
 
           <div class="bg-white text-center rounded shadow-lg" style="padding-top:2rem;padding-bottom: 1.5rem">
@@ -220,7 +220,7 @@
           <!-- <div id="captchaform"> -->
           
           <!-- </div> -->
-          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
+          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform" style="height: 60vh;">
             <tbody style="font-size: 12px; color: #354052;">
               <tr>
                 <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below : </td>
@@ -254,7 +254,6 @@
                <tr>
                 <td>
                   <div [ngClass]="{'hide':litmusGoBtn}">
-                    <hr>
                   <div class="hide-custom" >   
                       <div [formGroup]="aFormGroup">
                         <ngx-recaptcha2
