@@ -435,11 +435,10 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .val("")
       .change();
   }
-  handleSuccess(captchaResponse: string): void {
+  handleSuccess(): void {
     console.log(this.captchaSuccess);
     this.litmusStarted = true;
     this.captchaSuccess = true;
-    this.captchaResponse = captchaResponse;
     this.captchaIsExpired = false;
     console.log(this.captchaSuccess);
     (<HTMLInputElement> document.getElementById("litmusGo")).style.visibility = "visible";
