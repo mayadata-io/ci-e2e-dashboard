@@ -1,52 +1,50 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <div class="row bg-white my-2" style="padding-top:15px;padding-bottom:15px;">
-        <div class="col-md-6" style="margin:0 auto">
-          <div class="d-flex flex-column align-items-center mt-4 justify-content-center" style="margin-bottom:2rem">
-            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:60px;margin-bottom: 10px">
+      <div class="row d-flex justify-content-between bg-white my-2 rounded shadow-sm" >
+          <div class="d-flex flex-column my-3 mx-2 "  >
+            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" style="height:40px;margin-bottom: 10px">
             <div class="ml-2">
-              <p class="mb-0" style="font-size:14px;color:#354052">{{applicationType}}- {{numberstatefullSets}}
-                Replica-
-                {{numberstatefullSets}} Zones- {{numberstatefullSets}}</p>
+              <p class="mb-0" style="font-size:13px;color:#354052">{{applicationType}} 
+                Replica
+                {{numberstatefullSets}} Zones {{numberstatefullSets}}</p>
             </div>
-          </div>
-          <div class="d-flex justify-content-between text-center">
-            <p class="pl-2 text-center" [ngClass]="{
+          
+          <div class="d-flex">
+            <p class="pl-2" [ngClass]="{
               'w-100':dashboardurl === ''
             }"> <a href="{{workloadyaml}}"
-                style="color:#269BF3" target="_blank"> Deployment yaml </a></p>
-            <p class="pr-2 text-center" [ngClass]="{
+                style="color:#269BF3; font-size: 12px;" target="_blank"> Deployment yaml </a></p>
+            <p class="pr-2 " [ngClass]="{
               'display':dashboardurl !== '',
               'hide':dashboardurl === ''
             }"><a
                 href="{{dashboardurl}}" style="color:#269BF3" target="_blank">Live Access</a></p>
-          </div>
+            </div>
         </div>
-        <div class="col-md-12">
-          <hr>
+        <div class="d-flex flex-column my-auto VLine" style="padding-left: 50px;">
           <div class="d-flex justify-content-between">
             <div class="d-flex flex-column">
               <div class="d-flex align-items-center mb-3">
                 <img src="/assets/images/company-logos/k8slogo.svg" alt="" style="height:30px">
-                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp;1.10.11</p>
+                <p class="mb-0" style="font-size:13px;color:#354052"> &nbsp;&nbsp;1.10.7</p>
               </div>
-              <p class=" mb-0" style="font-size:14px;color:#354052">Namespace: {{namespace}}</p>
-              <p class=" mb-0" style="font-size:14px;color:#354052">Image: {{workloadImage}}</p>
+              <p class=" mb-0" style="font-size:12px;color:#354052">Namespace: {{namespace}} </p>
+              <p class=" mb-0" style="font-size:12px;color:#354052 ;max-width: 30ch;overflow: hidden;">Image: {{workloadImage}}</p>
             </div>
-            <div class="d-flex flex-column ">
-              <div class="d-flex align-items-center mb-3 ml-4">
-                <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
-                <p class="mb-0" style="font-size:14px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.8</p>
-              </div>
-              <p class="ml-4 mb-0" style="font-size:14px;color:#354052">Controller- {{numberController}} Replicas-
-                {{numberReplica}}
-                Zones- <span>{{numberNode.size}}</span> </p>
-                <p class="ml-4 mb-0" style="font-size:14px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
-            </div>
-
           </div>
-          <hr>
+        </div>
+      <div class="d-flex flex-column my-auto "style="padding-right: 20px;">
+          <div class="d-flex flex-column ">
+            <div class="d-flex align-items-center mb-3 ml-4">
+              <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
+              <p class="mb-0" style="font-size:12px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.8</p>
+            </div>
+            <p class="ml-4 mb-0" style="font-size:12px;color:#354052">Controller {{numberController}} &nbsp;&nbsp;Replicas
+              {{numberReplica}}&nbsp;&nbsp;
+              Zones <span>{{numberNode.size}}</span> </p>
+              <p class="ml-4 mb-0" style="font-size:12px;color:#354052" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
+          </div>
         </div>
       </div>
 
@@ -59,58 +57,65 @@
         </div> 
     </div>
     <ng-template #deployPersent>
-          <div class="row bg-white my-2">
-            <div class="col-md-12 d-flex justify-content-around workloads my-5">          
-              <div class="workload-deatils mx-2" style="width:33%;color: #7F8FA4" *ngFor="let pvc of pvcarray">
+          <div class="row bg-white my-2 rounded shadow-sm">
+            <div class="mx-2">
+              <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 13px;padding-right: 5px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 13px;"> InActive</span></p>
+              <hr>
+            </div>
+            <br>
+            <div class="col-md-12 d-flex justify-content-around workloads my-3">          
+              <div class="workload-deatils mx-2 divideLine" style="width:33%;color: #7F8FA4;" *ngFor="let pvc of pvcarray">
+                  <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt="">
                 <div *ngFor="let statefulset of statefullSets">
                   <p *ngIf="statefulset.pvc === pvc.name ">
-                    <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt=""><span placement="bottom"
+                    <span placement="bottom"
                       ngbTooltip="{{statefulset.name}}">
                       {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
-                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                    <img style="height:13px;" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
                   }"
-                      src="/assets/images/icons/success.svg" alt="">
+                      src="/assets/images/icons/active.png" alt="">
                     <img [ngClass]="{
                     'display':statefulset.status !== 'Running',
                     'hide':statefulset.status === 'Running'
                   }"
-                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;">
                   </p>
                 </div>
+                <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px">
                 <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
                   <p *ngIf="jivaContrller.pvc === pvc.name">
-                    <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
+                    <span
                       placement="bottom" ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom"
                       ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span>
-                    <img style="height:15px;margin-left:0.5rem" [ngClass]="{
+                    <img style="height:13px;margin-left:0.5rem" [ngClass]="{
                   'display':jivaContrller.status === 'Running',
                   'hide':jivaContrller.status !== 'Running'
                 }"
-                      src="/assets/images/icons/success.svg" alt="">
+                      src="/assets/images/icons/active.png" alt="">
                     <img [ngClass]="{
                   'display':jivaContrller.status !== 'Running',
                   'hide':jivaContrller.status === 'Running'
                 }"
-                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;margin-left:0.5rem">
                   </p>
                 </div>
                 <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
                   <p *ngIf="jivaReplica.pvc === pvc.name">
-                    <img src="assets/images/company-logos/mule-without-tagline.png" height="28" alt="" style="margin-right:10px"><span
+                    <span
                       placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom"
                       ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span>
                     <img style="height:15px;margin-left:0.5rem" [ngClass]="{
                     'display':jivaReplica.status === 'Running',
                     'hide':jivaReplica.status !== 'Running'
                   }"
-                      src="/assets/images/icons/success.svg" alt="">
+                      src="/assets/images/icons/active.png" alt="">
                     <img [ngClass]="{
                     'display':jivaReplica.status !== 'Running',
                     'hide':jivaReplica.status === 'Running'
                   }"
-                      src="/assets/images/icons/error.png" alt="" style="height:15px;margin-left:0.5rem">
+                      src="/assets/images/icons/inactive.png" alt="" style="height:13px;margin-left:0.5rem">
                   </p>
                 </div>
               </div>
@@ -121,6 +126,8 @@
               'display':dashboardurl === '',
               'hide':dashboardurl !== ''
             }">
+            <p></p>
+            <hr>
               <p class="mb-0 p-2 bg-white pr-0" style="font-size:18px">Load Generation</p>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
                 <div class="d-flex align-items-end justify-content-between" style="width:60%;color:#354052">
@@ -189,19 +196,19 @@
   </ng-template>   
     </div>
 
-    <div class="col-md-4" >
+    <div class="col-md-4">
       <!-- <div class="row my-2">
       <div class="col-md-12">
         <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
         <p>Run the live chaos test</p>
       </div>
       </div> -->
-      <div class="row my-2 ">
+      <div class="row my-2 " >
         <div class="col-md-12 pr-0">
 
-          <div class="bg-white text-center" style="padding-top:9rem;padding-bottom: 7rem">
+          <div class="bg-white text-center rounded shadow-lg" style="padding-top:2rem;padding-bottom: 1.5rem">
             <img style="width:55%;" src="/assets/images/company-logos/litmuslogo.svg" alt="">
-            <p class="mb-0" style="font-size:18px">Run the live chaos test</p>
+            <p class="mb-0 font-italic" style="font-size:12px;color: #354052;">Run live chaos test</p>
           </div>
           <hr class="bg-white my-0" style="width: 80%">
         </div>
@@ -210,59 +217,69 @@
             role="alert" *ngIf="isAlert">
             {{ alertMessage }}
           </div>
-          <table class="table action-table bg-white pt-1 mb-0">
-            <tbody>
+          <!-- <div id="captchaform"> -->
+          
+          <!-- </div> -->
+          <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
+            <tbody style="font-size: 12px; color: #354052;">
               <tr>
-                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 14px"> Choose one of the tests
-                  below </td>
+                <td class="p-2 pr-0" style="padding:0.10px;border-top:none;font-size: 15px;"> Choose one of the chaos tests from below : </td>
               </tr>
-              <tr>
-                <td style="border-top:none">
-                  <div class="row justify-content-around">
-                    <div style="width:70%">
-                      <select [disabled]="litmusStarted" class="custom-select" id="induceChaos" (change)="onChaosSelect($event.target.value)"
-                        style="width:100%">
-                        <option selected value="">Select Chaos..</option>
-                        <option *ngFor="let chaosTest of chaosTests;" value="{{chaosTest}} "> {{chaosTest}}
-                        </option>
-                      </select>
-                    </div>
-                    <div>
-                      <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " [disabled]=" litmusGoBtn">
-                        Go </button>
-                    </div>
-                  </div>
+              <tr class="custom-select1 " style="line-height: 0.8;">
+              <div *ngFor="let chaosTest of chaosTests;">
+                <td>
+                    <input type="radio" name="onChaosSelect"
+                        value="{{chaosTest}}" 
+                        (change)="onChaosSelect($event.target.value)">
                 </td>
+                <td class="chaoslabel">{{ chaosTest }}</td>
+              </div>
+            </tr>
+              <tr style="line-height: 0.8;">
+              <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
+                <div class="custom-select1 hide-custom">
+                    <hr>
+                    <p class="text-lg-left" style="padding-left: 8px;">Select Application :</p>
+                  <div *ngFor="let statefulset of litmuspod">
+                    <td>
+                        <input type="radio" name="ApplicationSelect" 
+                            value="{{statefulset.pvc}}" 
+                            (change)="onAppSelect($event.target.value)">
+                    </td>
+                    <td>{{statefulset.name}}</td>
+                  </div>
+                </div>
+              </div>
               </tr>
-              <tr>
-                <td style="border-top:none">
-                  <div class="row justify-content-around">
-                    <div [ngClass]="{'hide':litmusGoBtn}" style="width:70%">
-                      <select  class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)">
-                        <option selected value="">Select Application..</option>
-                        <option *ngFor="let statefulset of litmuspod" value="{{statefulset.pvc}} ">
-                          {{statefulset.name}}
-                        </option>
-                      </select>
+               <tr>
+                <td>
+                  <div [ngClass]="{'hide':litmusGoBtn}">
+                  <div class="hide-custom" >   
+                      <div [formGroup]="aFormGroup">
+                        <ngx-recaptcha2
+                          [siteKey]="siteKey"
+                          (success)="handleSuccess()"
+                          formControlName="recaptcha">
+                        </ngx-recaptcha2>
+                      </div>
                     </div>
-                    <div style="visibility:hidden">
-                        <button style="visibility:hidden" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" style="width:50px;height: 100%;"
-                        (click)="runChaosTest(selectedChaos, selectedApplication) " >
-                        Go </button>
-                    </div>
-                  </div>
-                </td>
+                  </div>  
+                      <div>
+                          <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" id="litmusGo" style="width:50px;height: 100%; visibility: hidden;;margin-top: 7px"
+                          (click)="runChaosTest(selectedChaos, selectedApplication) " >
+                          Go </button>
+                      </div>
+                    </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="col-md-12 pr-0">
-          <div class="bg-white p-2" >
+          <div class="bg-white p-2 rounded-bottom"style="height: 45vh" >
             <div *ngIf="litmusGetResponse ;else showLitmus"></div>
             <ng-template #showLitmus>
               
-              <div *ngIf="statefullSets.length > 0; else deployPersent1" style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;">
+              <div *ngIf="statefullSets.length > 0; else deployPersent1" style="background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;" class="shadow">
                 <p style="font-size:18px">Litmus logs</p>
                 <div *ngIf="litmusStarted == true">
                   <p><span style=" width: 130px;
