@@ -229,6 +229,12 @@ export class TableComponent implements OnInit {
         if(build[index].name == "jiva") {
           var name = "jiva"
         }
+        if(build[index].name == "cStor") {
+          var name = "cstor-pool"
+        }
+        if(build[index].name == "istgt") {
+          var name = "cstor-istgt"
+        }
         return "Docker Image:-" + name + ":" + sort_id
       } else if (build[index].status == "failed") {
         return "Build failed";
