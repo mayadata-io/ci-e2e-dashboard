@@ -226,6 +226,10 @@ img {
 a:hover {
   text-decoration: none;
 }
+.dropBtn:hover{
+  border: 1px blue solid;
+}
+
 
 .fa {
   font-size: 17px;
@@ -241,9 +245,9 @@ a:hover {
 }
 
 .gitlab_stages {
-  color: #354052;
+  color: #2399f1;
   text-align: left;
-  font-size: 11px;
+  font-size: 14px;
   margin-bottom: 0px;
   vertical-align: middle;
 }
@@ -257,7 +261,7 @@ a:hover {
 .gitlab_stage_build_status {
     display: flex;
     justify-content: center;
-    width: 90%;
+    width: 100%;
 }
 .gitlab_stage_primary{
     border-radius: 24px;
@@ -265,16 +269,16 @@ a:hover {
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
     width: 90%;
-    font-size:10px;
+    font-size:12px;
     text-align: center;
 }
 .gitlab_stage_build_success {
-  background-color: rgba(128,174,59,0.55);
+  background-color: #ecf4e0;
   color: #335500;
 
 }
 .gitlab_stage_build_failed {
-  background-color: rgba(237,123,123,0.55);
+  background-color: #fce0e0;
   color: #760606;
 }
 .gitlab_stage_build_running {
@@ -309,3 +313,4 @@ a:hover {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #C0C0C0;
 }
+
