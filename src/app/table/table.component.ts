@@ -81,29 +81,6 @@ export class TableComponent implements OnInit {
       this.getRestItems();
     }, 60000);
 
-    // var chBar = document.getElementById("chBar");
-    // var chartData = {
-    //   labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-    //   datasets: [{
-    //     data: [589, 445, 483, 503, 689, 692, 634, 732, 579, 806],
-    //     backgroundColor: 'blue'
-    //   },
-    //   { data: [409, 245, 383, 403, 589, 692, 580, 532, 879, 406],
-    //     backgroundColor: '#000000'
-    //   }]
-    // };
-    // if (chBar) {
-    //   new Chart(chBar, {
-    //   type: 'bar',data: chartData,
-    //   options: {
-    //     scales: {
-    //       xAxes: [{ barPercentage: 0.7,categoryPercentage: 0.5 }],
-    //       yAxes: [{ ticks: { beginAtZero: false } }]
-    //     },
-    //     legend: { display: false }
-    //   }
-    //   });
-    // }
   }
 
   rowCount() {
