@@ -165,12 +165,12 @@
           <thead>
             <tr style="border-bottom: none">
               <th style="padding: 0px;">
-                <p style="font-size:11px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
+                <p style="font-size:11px; text-align: left;  padding-bottom:10px;">GITLAB
                   STAGES</p>
                   <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
               <th style="padding: 0px;">
-                <p style="font-size:11px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
+                <p style="font-size:11px; text-align: center;  padding-bottom:10px;width:90%">STATUS</p>
                 <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
             </tr>
@@ -179,7 +179,7 @@
           <tbody>
             <tr *ngIf="clusterSetupStatus != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Cluster setup</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span class="gitlab_stage_primary" style="width: 60px;"
                   [ngClass]='gitlabStageBuildClass(clusterSetupStatus.status)'>{{ clusterSetupStatus.status }}</span>
@@ -190,9 +190,9 @@
                   </button> 
                 </td>
             </tr>
-            <div class="accordion rounded bg-light  " id="accordionExample" style="width: 270px">
+            <div class="accordion   " id="accordionExample" style="width: 270px">
                 <div id="collapseOnee" class="collapse  " aria-labelledby="headingOne" data-parent="#accordionExample">
-                  <div class="d-flex bd-highlight" style="font-size: 13px;">  
+                  <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                     <div class=" px-2 py-1 flex-fill bd-highlight" >
                         <span>Success : <span class="text-success ">{{ clusterSetupStatus.successJobCount }} </span> </span>
                       </div>
@@ -205,11 +205,10 @@
                      </div>
                 </div>
               </div>
-              <hr style="margin: 0px; margin-top: 3px;">
-            <tr *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
+            <tr class="border-top" *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
                
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Provider infra setup</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(providerInfraSetup.status)'>{{ providerInfraSetup.status }}</span>
@@ -220,9 +219,9 @@
                 </button> 
               </td>
             </tr>
-            <div class="accordion rounded bg-light  " id="accordionExample" style="width: 270px" >
+            <div class="accordion   " id="accordionExample" style="width: 270px" >
                 <div id="collapseTwo" class="collapse  " aria-labelledby="headingOne" data-parent="#accordionExample">
-                  <div class="d-flex bd-highlight" style="font-size: 13px;">  
+                  <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                     <div class=" px-2 py-1 flex-fill bd-highlight" >
                         <span>Success : <span class="text-success ">{{ providerInfraSetup.successJobCount }} </span> </span>
                       </div>
@@ -235,11 +234,11 @@
                      </div>
                 </div>
               </div>
-              <hr style="margin: 0px; margin-top: 3px;">
+             
  
-            <tr *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
+            <tr class="border-top" *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Stateful app deploy</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(statefulAppDeploy.status)'>{{ statefulAppDeploy.status }}</span>
@@ -251,9 +250,9 @@
                 </button></td>
             </tr>
             
-            <div class="accordion rounded bg-light   " id="accordionExample" style="width: 270px">
+            <div class="accordion    " id="accordionExample" style="width: 270px">
                 <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;" >  
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4" >  
                         <div class=" px-1 py-1 flex-fill bd-highlight" >
                             <span>Success : <span class="text-success ">{{ statefulAppDeploy.successJobCount }} </span> </span>
                           </div>
@@ -266,10 +265,10 @@
                          </div>
                   </div>
               </div>
-              <hr style="margin: 0px; margin-top: 3px;">
-            <tr *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
+             
+             <tr class="border-top" *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App function test</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appFunctionTest.status)'>{{ appFunctionTest.status }}</span></td>
@@ -279,9 +278,9 @@
                 </button>
               </td>
             </tr>
-            <div class="accordion rounded bg-light   " id="accordionExample" style="width: 270px">
+            <div class="accordion    " id="accordionExample" style="width: 270px">
                 <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;">  
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                         <div class=" px-2 py-1 flex-fill bd-highlight">
                             <span>Success : <span class="text-success ">{{ appFunctionTest.successJobCount }} </span> </span>
                           </div>
@@ -294,10 +293,10 @@
                          </div>
                 </div>
               </div>
-              <hr style="margin: 0px; margin-top: 3px;">
-            <tr *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
+             
+            <tr class="border-top" *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App chaos test</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appChaosTest.status)'>{{ appChaosTest.status }}</span></td>
@@ -307,9 +306,9 @@
                     </button>
                   </td>
                 </tr>
-                <div class="accordion rounded bg-light   " id="accordionExample" style="width: 270px">
+                <div class="accordion    " id="accordionExample" style="width: 270px">
                     <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="d-flex bd-highlight" style="font-size: 13px;">  
+                        <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                             <div class=" px-2 py-1 flex-fill bd-highlight">
                                 <span>Success : <span class="text-success ">{{ appChaosTest.successJobCount }} </span> </span>
                               </div>
@@ -322,10 +321,9 @@
                              </div>
                                     </div>
                   </div>
-                  <hr style="margin: 0px; margin-top: 3px;">
-            <tr *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
+            <tr class="border-top" *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP-DEPROVISION</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App-Deprovision</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appDeprovision.status)'>{{ appDeprovision.status }}</span></td>
@@ -336,11 +334,11 @@
                   </td>
                 </tr>
                 
-                <div class="accordion rounded bg-light   " id="accordionExample" style="width: 270px">
+                <div class="accordion    " id="accordionExample" style="width: 270px">
                     <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="d-flex bd-highlight" style="font-size: 13px;">  
-                            <div class=" px-2 py-1 flex-fill bd-highlight">
-                                <span>Success : <span class="text-success ">{{ appDeprovision.successJobCount }} </span> </span>
+                        <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                            <div class=" px-2 py-1 flex-fill bd-highlight ">
+                                <span >Success : <span class="text-success ">{{ appDeprovision.successJobCount }} </span> </span>
                             </div>
                             <div class="px-2 py-1 flex-fill bd-highlight">
                                 <span> Failed :  <span class="text-danger ">{{  appDeprovision.failedJobCount }} </span></span> 
@@ -351,12 +349,12 @@
                             </div>
                       </div>
                   </div>
-                  <hr style="margin: 0px; margin-top: 3px;">
-            <tr *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
+                 
+            <tr class="border-top" *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Cluster cleanup</h6>
               </td>
-              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary "
                   [ngClass]='gitlabStageBuildClass(clusterCleanup.status)'>{{ clusterCleanup.status }}</span></td>
                   <td style="padding: 0">
                       <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="padding: 0px;">
@@ -364,9 +362,9 @@
                       </button> 
                     </td>
             </tr>
-            <div class="accordion rounded bg-light   " id="accordionExample" style="width: 270px">
+            <div class="accordion    " id="accordionExample" style="width: 270px ; font-family: lato;">
                 <div id="collapseSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;">  
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                         <div class=" px-2 py-1 flex-fill bd-highlight">
                             <span>Success : <span class="text-success ">{{ clusterCleanup.successJobCount }} </span> </span>
                         </div>
