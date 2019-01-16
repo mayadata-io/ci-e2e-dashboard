@@ -167,12 +167,15 @@
               <th style="padding: 0px;">
                 <p style="font-size:11px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
                   STAGES</p>
+                  <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
               <th style="padding: 0px;">
                 <p style="font-size:11px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
+                <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
             </tr>
           </thead>
+         
           <tbody>
             <tr *ngIf="clusterSetupStatus != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
@@ -202,6 +205,7 @@
                      </div>
                 </div>
               </div>
+              <hr style="margin: 0px; margin-top: 3px;">
             <tr *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
                
               <td style="padding: 0px;vertical-align: middle;">
@@ -231,9 +235,8 @@
                      </div>
                 </div>
               </div>
-            <!-- <tr style="border-bottom: none;">
-              
-            </tr> -->
+              <hr style="margin: 0px; margin-top: 3px;">
+ 
             <tr *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
@@ -263,6 +266,7 @@
                          </div>
                   </div>
               </div>
+              <hr style="margin: 0px; margin-top: 3px;">
             <tr *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
@@ -290,6 +294,7 @@
                          </div>
                 </div>
               </div>
+              <hr style="margin: 0px; margin-top: 3px;">
             <tr *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
@@ -317,6 +322,7 @@
                              </div>
                                     </div>
                   </div>
+                  <hr style="margin: 0px; margin-top: 3px;">
             <tr *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP-DEPROVISION</h6>
@@ -345,6 +351,7 @@
                             </div>
                       </div>
                   </div>
+                  <hr style="margin: 0px; margin-top: 3px;">
             <tr *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
                 <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
