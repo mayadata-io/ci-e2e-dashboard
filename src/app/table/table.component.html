@@ -10,7 +10,7 @@
       </div>
       <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
+          <a class="nav-link active " href="#profile" role="tab" data-toggle="tab">
             <h3 style="color:white">BRANCH</h3>
             <h4 style="font-size: 2em">Master</h4>
             <h3 *ngIf="undefined !== restItems" style="color:white">Builds in last one week: {{
@@ -20,16 +20,12 @@
         </li>
         <li style="pointer-events:none;" class="nav-item">
           <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
-            <!-- <h3>BRANCH</h3> -->
-            <!-- <h4>v0.7</h4> -->
-            <!-- <h3>Commits in last one week: _</h3> -->
+         
           </a>
         </li>
         <li style="pointer-events:none; cursor:pointer;" class="nav-item">
           <a class="nav-link" href="#references" role="tab" data-toggle="tab">
-            <!-- <h3>BRANCH</h3> -->
-            <!-- <h4>v0.7.1</h4> -->
-            <!-- <h3>Commit in last one week: _</h3> -->
+      
           </a>
         </li>
       </ul>
@@ -56,15 +52,7 @@
                   <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg">
                     <p style="font-size: 13px;">EKS</p>
                   </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/packet.svg">
-                    <p style="font-size: 13px;">PACKET</p>
-                  </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gcp.svg">
-                    <p style="font-size: 13px;">GCP</p>
-                  </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aws.svg">
-                    <p style="font-size: 13px;">AWS</p>
-                  </span>
+                  
                 </td>
               </tr>
             </thead>           
@@ -142,63 +130,7 @@
                   </ng-template>  
                   </ng-template>
                   </span>
-                  <!-- PACKET PIPELINES -->
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][3]) }}"
-                    [ngClass]="{'highlight': (status == 4 && i==rowCount())}" (click)="detailPannel('Packet', i, restItems.dashboard)"
-                    [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][3]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][3]) == 'running';else donutGraphPacket" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
-                    <ng-template #donutGraphPacket>
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][3]) == 'pending';else statusGraphPacket" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                    <ng-template #statusGraphPacket>
-                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
-                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                        stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')"
-                        stroke-dashoffset="22.5"></circle>
-                    </svg>
-                    </ng-template>
-                    </ng-template>
-                  </span>
-                  <!-- GCP PIPELINES -->
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][4]) }}"
-                    [ngClass]="{'highlight': (status == 5 && i==rowCount())}" (click)="detailPannel('GCP', i, restItems.dashboard);"
-                    [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][4]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][4]) == 'running';else donutGraphGcp" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
-                    <ng-template #donutGraphGcp>
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][4]) == 'pending';else statusGraphGcp" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                    <ng-template #statusGraphGcp>
-                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
-                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                        stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gcp')"
-                        stroke-dashoffset="22.5"></circle>
-                    </svg>
-                    </ng-template>
-                    </ng-template>
-                  </span>
-                  <!-- AWS PIPELINES -->
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][5]) }}"
-                    [ngClass]="{'highlight': (status == 6 && i==rowCount())}" (click)="detailPannel('AWS', i, restItems.dashboard);"
-                    [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][5]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][5]) == 'running';else donutGraphAws" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
-                    <ng-template #donutGraphAws>
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][5]) == 'pending';else statusGraphAws" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                    <ng-template #statusGraphAws>
-                    <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-                        stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
-                      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                        stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aws')"
-                        stroke-dashoffset="22.5"></circle>
-                    </svg>
-                    </ng-template>
-                    </ng-template>
-                  </span>
+                 
                 </td>
               </tr>
             </tbody>
@@ -206,7 +138,6 @@
           <app-lodding-spinners class="row" *ngIf="showSpinnerTable;"></app-lodding-spinners>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
-        <!-- <div role="tabpanel" class="tab-pane fade" id="references">ccc</div> -->
       </div>
     </div>
   </div>
@@ -234,64 +165,218 @@
           <thead>
             <tr style="border-bottom: none">
               <th style="padding: 0px;">
-                <p style="font-size:11px; text-align: left; text-decoration: underline; padding-bottom:10px;">GITLAB
+                <p style="font-size:11px; text-align: left;  padding-bottom:10px;">GITLAB
                   STAGES</p>
+                  <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
               <th style="padding: 0px;">
-                <p style="font-size:11px; text-align: center; text-decoration: underline; padding-bottom:10px;width:90%">STATUS</p>
+                <p style="font-size:11px; text-align: center;  padding-bottom:10px;width:90%">STATUS</p>
+                <hr style="margin-top: 5px;margin-bottom: 5px;">
               </th>
             </tr>
           </thead>
+         
           <tbody>
             <tr *ngIf="clusterSetupStatus != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Cluster setup</h6>
               </td>
-              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(clusterSetupStatus)'>{{ clusterSetupStatus }}</span></td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span class="gitlab_stage_primary" style="width: 60px;"
+                  [ngClass]='gitlabStageBuildClass(clusterSetupStatus.status)'>{{ clusterSetupStatus.status }}</span>
+              </td> 
+              <td style="padding: 0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOnee" aria-expanded="false" aria-controls="collapseOnee" style="padding: 0px;">
+                    <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                  </button> 
+                </td>
             </tr>
-            <tr *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
+            <div class="accordion   " id="accordionExample" style="width: 270px">
+                <div id="collapseOnee" class="collapse  " aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                    <div class=" px-2 py-1 flex-fill bd-highlight" >
+                        <span>Success : <span class="text-success ">{{ clusterSetupStatus.successJobCount }} </span> </span>
+                      </div>
+                      <div class="px-2 py-1 flex-fill bd-highlight">
+                        <span> Failed :  <span class="text-danger ">{{  clusterSetupStatus.failedJobCount }} </span></span> 
+                      </div>
+                      <div class="px-2 py-1 flex-fill bd-highlight">
+                        <span >Skipped : <span class="text-info ">{{  clusterSetupStatus.skippedJobCount }}</span> </span>
+                      </div>
+                     </div>
+                </div>
+              </div>
+            <tr class="border-top" *ngIf="providerInfraSetup != 'n/a'" style="border-bottom: none">
+               
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Provider infra setup</h6>
               </td>
-              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(providerInfraSetup)'>{{ providerInfraSetup }}</span></td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span class="gitlab_stage_primary"
+                  [ngClass]='gitlabStageBuildClass(providerInfraSetup.status)'>{{ providerInfraSetup.status }}</span>
+              </td>   
+              <td style="padding: 0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="padding: 0px;">
+                  <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                </button> 
+              </td>
             </tr>
-            <tr *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
+            <div class="accordion   " id="accordionExample" style="width: 270px" >
+                <div id="collapseTwo" class="collapse  " aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                    <div class=" px-2 py-1 flex-fill bd-highlight" >
+                        <span>Success : <span class="text-success ">{{ providerInfraSetup.successJobCount }} </span> </span>
+                      </div>
+                      <div class="px-2 py-1 flex-fill bd-highlight">
+                        <span> Failed :  <span class="text-danger ">{{  providerInfraSetup.failedJobCount }} </span></span> 
+                      </div>
+                      <div class="px-2 py-1 flex-fill bd-highlight">
+                        <span >Skipped : <span class="text-info ">{{  providerInfraSetup.skippedJobCount }}</span> </span>
+                      </div>
+                     </div>
+                </div>
+              </div>
+             
+ 
+            <tr class="border-top" *ngIf="statefulAppDeploy != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Stateful app deploy</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(statefulAppDeploy)'>{{ statefulAppDeploy }}</span></td>
+                  [ngClass]='gitlabStageBuildClass(statefulAppDeploy.status)'>{{ statefulAppDeploy.status }}</span>
+                  
+                </td>
+                <td style="padding: 0"> 
+                  <button class="btn btn-link collapsed " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="padding: 0px;">
+                  <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                </button></td>
             </tr>
-            <tr *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
+            
+            <div class="accordion    " id="accordionExample" style="width: 270px">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4" >  
+                        <div class=" px-1 py-1 flex-fill bd-highlight" >
+                            <span>Success : <span class="text-success ">{{ statefulAppDeploy.successJobCount }} </span> </span>
+                          </div>
+                          <div class="px-1 py-1 flex-fill bd-highlight">
+                            <span> Failed :  <span class="text-danger ">{{  statefulAppDeploy.failedJobCount }} </span></span> 
+                          </div>
+                          <div class="px-1 py-1 flex-fill bd-highlight">
+                            <span >Skipped : <span class="text-info ">{{  statefulAppDeploy.skippedJobCount }}</span> </span>
+                          </div>
+                         </div>
+                  </div>
+              </div>
+             
+             <tr class="border-top" *ngIf="appFunctionTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App function test</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(appFunctionTest)'>{{ appFunctionTest }}</span></td>
+                  [ngClass]='gitlabStageBuildClass(appFunctionTest.status)'>{{ appFunctionTest.status }}</span></td>
+              <td style="padding: 0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="padding: 0px;">
+                  <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                </button>
+              </td>
             </tr>
-            <tr *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
+            <div class="accordion    " id="accordionExample" style="width: 270px">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                        <div class=" px-2 py-1 flex-fill bd-highlight">
+                            <span>Success : <span class="text-success ">{{ appFunctionTest.successJobCount }} </span> </span>
+                          </div>
+                          <div class="px-2 py-1 flex-fill bd-highlight">
+                            <span> Failed :  <span class="text-danger ">{{  appFunctionTest.failedJobCount }} </span></span> 
+                          </div>
+                          <div class="px-2 py-1 flex-fill bd-highlight">
+                            <span >Skipped : <span class="text-info ">{{  appFunctionTest.skippedJobCount }}</span> </span>
+                          </div>
+                         </div>
+                </div>
+              </div>
+             
+            <tr class="border-top" *ngIf="appChaosTest != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App chaos test</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(appChaosTest)'>{{ appChaosTest }}</span></td>
-            </tr>
-            <tr *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
+                  [ngClass]='gitlabStageBuildClass(appChaosTest.status)'>{{ appChaosTest.status }}</span></td>
+                  <td style="padding: 0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="padding: 0px;">
+                      <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                    </button>
+                  </td>
+                </tr>
+                <div class="accordion    " id="accordionExample" style="width: 270px">
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                            <div class=" px-2 py-1 flex-fill bd-highlight">
+                                <span>Success : <span class="text-success ">{{ appChaosTest.successJobCount }} </span> </span>
+                              </div>
+                              <div class="px-2 py-1 flex-fill bd-highlight">
+                                <span> Failed :  <span class="text-danger ">{{  appChaosTest.failedJobCount }} </span></span> 
+                              </div>
+                              <div class="px-2 py-1 flex-fill bd-highlight">
+                                <span >Skipped : <span class="text-info ">{{  appChaosTest.skippedJobCount }}</span> </span>
+                              </div>
+                             </div>
+                                    </div>
+                  </div>
+            <tr class="border-top" *ngIf="appDeprovision != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP-DEPROVISION</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">App-Deprovision</h6>
               </td>
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(appDeprovision)'>{{ appDeprovision }}</span></td>
-            </tr>
-            <tr *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
+                  [ngClass]='gitlabStageBuildClass(appDeprovision.status)'>{{ appDeprovision.status }}</span></td>
+                  <td style="padding: 0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="padding: 0px;">
+                      <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                    </button>
+                  </td>
+                </tr>
+                
+                <div class="accordion    " id="accordionExample" style="width: 270px">
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                            <div class=" px-2 py-1 flex-fill bd-highlight ">
+                                <span >Success : <span class="text-success ">{{ appDeprovision.successJobCount }} </span> </span>
+                            </div>
+                            <div class="px-2 py-1 flex-fill bd-highlight">
+                                <span> Failed :  <span class="text-danger ">{{  appDeprovision.failedJobCount }} </span></span> 
+                            </div>
+                            <div class="px-2 py-1 flex-fill bd-highlight">
+                                <span >Skipped : <span class="text-info ">{{  appDeprovision.skippedJobCount }}</span> </span>
+                            </div>
+                            </div>
+                      </div>
+                  </div>
+                 
+            <tr class="border-top" *ngIf="clusterCleanup != 'n/a'" style="border-bottom: none">
               <td style="padding: 0px;vertical-align: middle;">
-                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
+                <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">Cluster cleanup</h6>
               </td>
-              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
-                  [ngClass]='gitlabStageBuildClass(clusterCleanup)'>{{ clusterCleanup }}</span></td>
+              <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary "
+                  [ngClass]='gitlabStageBuildClass(clusterCleanup.status)'>{{ clusterCleanup.status }}</span></td>
+                  <td style="padding: 0">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="padding: 0px;">
+                        <img style="padding: 0px;height: 10px;" src="/assets/images/icons/down-arrow.png" alt="" >
+                      </button> 
+                    </td>
             </tr>
+            <div class="accordion    " id="accordionExample" style="width: 270px ; font-family: lato;">
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
+                        <div class=" px-2 py-1 flex-fill bd-highlight">
+                            <span>Success : <span class="text-success ">{{ clusterCleanup.successJobCount }} </span> </span>
+                        </div>
+                        <div class="px-2 py-1 flex-fill bd-highlight">
+                            <span> Failed :  <span class="text-danger ">{{  clusterCleanup.failedJobCount }} </span></span> 
+                        </div>
+                        <div class="px-2 py-1 flex-fill bd-highlight">
+                            <span >Skipped : <span class="text-info ">{{  clusterCleanup.skippedJobCount }}</span> </span>
+                        </div>
+                        </div>
+                  </div>
+              </div>
           </tbody>
         </table>
       </div>
@@ -349,14 +434,7 @@
       </div>
     </ng-template>
     </div>
-    <!-- <br> -->
-    <!-- <div class="detail">
-          <div class="card">
-              <div class="card-body">
-                  <canvas id="chBar"></canvas>
-              </div>
-          </div>
-        </div> -->
+    
   </div>
   <!-- detail pannel End -->
 </div>

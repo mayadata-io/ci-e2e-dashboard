@@ -81,29 +81,6 @@ export class TableComponent implements OnInit {
       this.getRestItems();
     }, 60000);
 
-    // var chBar = document.getElementById("chBar");
-    // var chartData = {
-    //   labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-    //   datasets: [{
-    //     data: [589, 445, 483, 503, 689, 692, 634, 732, 579, 806],
-    //     backgroundColor: 'blue'
-    //   },
-    //   { data: [409, 245, 383, 403, 589, 692, 580, 532, 879, 406],
-    //     backgroundColor: '#000000'
-    //   }]
-    // };
-    // if (chBar) {
-    //   new Chart(chBar, {
-    //   type: 'bar',data: chartData,
-    //   options: {
-    //     scales: {
-    //       xAxes: [{ barPercentage: 0.7,categoryPercentage: 0.5 }],
-    //       yAxes: [{ ticks: { beginAtZero: false } }]
-    //     },
-    //     legend: { display: false }
-    //   }
-    //   });
-    // }
   }
 
   rowCount() {
@@ -321,19 +298,19 @@ export class TableComponent implements OnInit {
   }
 
   gitlabStageBuildClass(status) {
-    if (status === "SUCCESS") {
+    if (status === "Success") {
       return "gitlab_stage_build_success";
     }
     else if (status === "CANCELED" || status === "SKIPPED") {
       return "gitlab_stage_build_skipped";
     }
-    else if (status === "PENDING") {
+    else if (status === "Pending") {
       return "gitlab_stage_build_pending";
     }
-    else if (status === "RUNNING") {
+    else if (status === "Running") {
       return "gitlab_stage_build_running";
     }
-    else if (status === "FAILED") {
+    else if (status === "Failed") {
       return "gitlab_stage_build_failed";
     }
   }
@@ -365,6 +342,7 @@ export class TableComponent implements OnInit {
   public clusterCleanup: any;
   public appDeprovision: any;
   public kubernetesVersion: any;
+
 
   detailPannel(cloud, index, data) {
     this.showSpinnerDetails = true;
@@ -464,6 +442,7 @@ export class TableComponent implements OnInit {
     this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
     this.appDeprovision = this.getAppDeprovisionStatus(pipelineData[index].jobs)
     this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
+
   }
 
   ratingCalculation(data) {
@@ -515,27 +494,73 @@ export class TableComponent implements OnInit {
   }
 
   getClusterSetupStatus(data) {
+    var jobCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "CLUSTER-SETUP") {
-        if(data[i].status == "running") {
-          return "RUNNING";
-        } else if(data[i].status == "failed") {
-          return "FAILED";
-        } else if(data[i].status == "skipped") {
-          return "SKIPPED";
-        } else if(data[i].status == "canceled") {
-          return "CANCELED";
-        } else if(data[i].status == "created" || data[i].status == "pending") {
-          return "PENDING";
-        } else {
-          return "SUCCESS";
-        }
+        jobCount ++;
       }
     }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "running") {
+        statusObj.status = "Running"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "failed") {
+        statusObj.failedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "skipped") {
+        statusObj.skippedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "canceled") {
+        statusObj.status = "CANCELLED"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP") {
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
+      }
+    }
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-SETUP" && data[i].status == "success") {
+        statusObj.successJobCount++;
+      }
+      
+    }
+
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+   
+
+    return statusObj;
   }
+
 
   getProviderInfraSetupStatus(data) {
     var jobCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP") {
         jobCount ++;
@@ -543,44 +568,58 @@ export class TableComponent implements OnInit {
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "running") {
-         return "RUNNING";
+        statusObj.status = "Running"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "failed") {
-        return "FAILED";
+        statusObj.failedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "skipped") {
-         return "SKIPPED";
+        statusObj.skippedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "canceled") {
-        return "CANCELED";
+        statusObj.status = "CANCELLED"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP") {
-        if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
       }
     }
-    var successCount = 0;
     for(var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "success") {
-        successCount++;
-        continue;
+        statusObj.successJobCount++;
       }
+      
     }
-    if (jobCount == successCount && jobCount != 0) {
-      return "SUCCESS";
+
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
     }
-    return "n/a"
+   
+
+    return statusObj;
   }
 
   getStatefulAppDeployStatus(data) {
     var jobCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY") {
         jobCount ++;
@@ -588,44 +627,57 @@ export class TableComponent implements OnInit {
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "running") {
-         return "RUNNING";
+        statusObj.status = "Running"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "failed") {
-        return "FAILED";
+        statusObj.failedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "skipped") {
-         return "SKIPPED";
+        statusObj.skippedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "canceled") {
-        return "CANCELED";
+        statusObj.status = "CANCELLED"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY") {
-        if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
       }
     }
-    var successCount = 0;
     for(var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "success") {
-        successCount++;
-        continue;
+        statusObj.successJobCount++;
       }
+      
     }
-    if (jobCount == successCount && jobCount != 0) {
-      return "SUCCESS";
-    }
-    return "n/a"
-  }
 
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+   
+
+    return statusObj;
+  }
   getAppFunctionTestStatus(data) {
     var jobCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST") {
         jobCount ++;
@@ -633,148 +685,222 @@ export class TableComponent implements OnInit {
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "running") {
-         return "RUNNING";
+        statusObj.status = "Running"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "failed") {
-        return "FAILED";
+        statusObj.failedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "skipped") {
-         return "SKIPPED";
+        statusObj.skippedJobCount++;
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "canceled") {
-        return "CANCELED";
+        statusObj.status = "CANCELLED"
       }
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST") {
-        if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
       }
     }
-    var successCount = 0;
     for(var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST" && data[i].status == "success") {
-        successCount++;
-        continue;
+        statusObj.successJobCount++;
       }
+      
     }
-    if (jobCount == successCount && jobCount != 0) {
-      return "SUCCESS";
+
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
     }
-    return "n/a"
+   
+
+    return statusObj;
   }
+
   getAppChaosTestStatus(data) {
     var jobCount = 0;
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST") {
-            jobCount ++;
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "running") {
-             return "RUNNING";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "failed") {
-            return "FAILED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "skipped") {
-             return "SKIPPED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "canceled") {
-            return "CANCELED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-CHAOS-TEST") {
-            if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
-          }
-        } 
-    var successCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST") {
+        jobCount ++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "running") {
+        statusObj.status = "Running"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "failed") {
+        statusObj.failedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "skipped") {
+        statusObj.skippedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "canceled") {
+        statusObj.status = "CANCELLED"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-CHAOS-TEST") {
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
+      }
+    }
     for(var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-CHAOS-TEST" && data[i].status == "success") {
-        successCount++;
-        continue;
+        statusObj.successJobCount++;
       }
+      
     }
-    if (jobCount == successCount && jobCount != 0) {
-      return "SUCCESS";
-    }
-    return "n/a"
-  }
 
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+   
+
+    return statusObj;
+  }
   getAppDeprovisionStatus(data) {
     var jobCount = 0;
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION") {
-            jobCount ++;
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "running") {
-             return "RUNNING";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "failed") {
-            return "FAILED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "skipped") {
-             return "SKIPPED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION" && data[i].status == "canceled") {
-            return "CANCELED";
-          }
-        }
-        for (var i = 0; i < data.length; i++) {
-          if(data[i].stage == "APP-DEPROVISION") {
-            if(data[i].status == "created" || data[i].status == "pending") { return "PENDING"; }
-          }
-        } 
-    var successCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION") {
+        jobCount ++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION" && data[i].status == "running") {
+        statusObj.status = "Running"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION" && data[i].status == "failed") {
+        statusObj.failedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION" && data[i].status == "skipped") {
+        statusObj.skippedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION" && data[i].status == "canceled") {
+        statusObj.status = "CANCELLED"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "APP-DEPROVISION") {
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
+      }
+    }
     for(var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-DEPROVISION" && data[i].status == "success") {
-        successCount++;
-        continue;
+        statusObj.successJobCount++;
       }
+      
     }
-    if (jobCount == successCount && jobCount != 0) {
-      return "SUCCESS";
-    }
-    return "n/a"
-  }
 
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+   
+
+    return statusObj;
+  }
   getClusterCleanupStatus(data) {
+    var jobCount = 0;
+    var statusObj={
+      status: "",
+      successJobCount: 0,
+      failedJobCount:0,
+      skippedJobCount:0
+    }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "CLUSTER-CLEANUP") {
-        if(data[i].status == "running") {
-          return "RUNNING";
-        } else if(data[i].status == "failed") {
-          return "FAILED";
-        } else if(data[i].status == "skipped") {
-          return "SKIPPED";
-        } else if(data[i].status == "canceled") {
-          return "CANCELED";
-        } else if(data[i].status == "created" || data[i].status == "pending") {
-          return "PENDING";
-        } else {
-          return "SUCCESS"
-        }
+        jobCount ++;
       }
     }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "running") {
+        statusObj.status = "Running"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "failed") {
+        statusObj.failedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "skipped") {
+        statusObj.skippedJobCount++;
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "canceled") {
+        statusObj.status = "CANCELLED"
+      }
+    }
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP") {
+        if(data[i].status == "created" || data[i].status == "pending") { 
+          statusObj.status = "Pending"
+         }
+      }
+    }
+    for(var i = 0; i < data.length; i++) {
+      if(data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "success") {
+        statusObj.successJobCount++;
+      }
+      
+    }
+
+    if(statusObj.successJobCount == jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == jobCount){
+      statusObj.status = "SKIPPED"
+    } else if (statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+   
+
+    return statusObj;
   }
 }
