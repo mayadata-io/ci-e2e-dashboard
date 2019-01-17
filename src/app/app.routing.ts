@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: "redis-cstor", component: WorkloadsComponent },
   { path: "postgresql-jiva", component: WorkloadsComponent },
   { path: "postgresql-cstor", component: WorkloadsComponent },
+  { path: "nuodb-cstor", component: WorkloadsComponent },
+
   { path: "overview", component: OverviewComponent },
   { path: ":workload", component: WorkloadsComponent }
 ];

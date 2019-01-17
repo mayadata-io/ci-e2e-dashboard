@@ -80,6 +80,34 @@
                                 </div>
                             </div>
                             <div class="card text-center">
+                                <div class="applications-color d-flex justify-content-center nuodb-bg" >
+                                  <img class="card-img-top " src="assets/images/workloads-logos/nuodb.png" alt="workload image">
+                                </div>  
+                                <div class="card-body pt-0">
+                                    <img class="workload-title-img" src="assets/images/nuodbtitle.svg" alt="" >
+                                    <span class="status-application" [ngClass]="{
+                                      'display status-active':nuodbcstorStatus === 'Running',
+                                      'hide':nuodbcstorStatus !== 'Running'}">
+                                      ACTIVE
+                                    </span>
+                                    <span class="status-application" [ngClass]="{
+                                          'display status-inactive':nuodbcstorStatus !== 'Running',
+                                          'hide ':nuodbcstorStatus === 'Running'}">
+                                    INACTIVE
+                                    </span>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">cStor 0.8</li>
+                                </ul>
+                                <div class="card-body">
+                                    <p class="card-text">Deployment 1 replica</p>
+                                    <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                                </div>
+                                <div class="card-body dashboard-hyperlink">
+                                    <a href="/nuodb-cstor" >Dashboard</a>
+                                </div>
+                            </div>    
+                            <div class="card text-center">
                                 <div class="applications-color d-flex justify-content-center percona-bg" >
                                   <img class="card-img-top " src="assets/images/workloads-logos/percona.svg" alt="workload image">
                                 </div>  
