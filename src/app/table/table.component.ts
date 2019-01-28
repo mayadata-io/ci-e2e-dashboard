@@ -301,7 +301,7 @@ export class TableComponent implements OnInit {
     if (status === "Success") {
       return "gitlab_stage_build_success";
     }
-    else if (status === "CANCELED" || status === "SKIPPED") {
+    else if (status === "CANCELED" || status === "Skipped") {
       return "gitlab_stage_build_skipped";
     }
     else if (status === "Pending") {
@@ -494,16 +494,16 @@ export class TableComponent implements OnInit {
   }
 
   getClusterSetupStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount :0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "CLUSTER-SETUP") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -540,10 +540,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -554,16 +554,16 @@ export class TableComponent implements OnInit {
 
 
   getProviderInfraSetupStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount:0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "PROVIDER-INFRA-SETUP") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -600,10 +600,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -613,16 +613,16 @@ export class TableComponent implements OnInit {
   }
 
   getStatefulAppDeployStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount:0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "STATEFUL-APP-DEPLOY") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -659,10 +659,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -671,16 +671,16 @@ export class TableComponent implements OnInit {
     return statusObj;
   }
   getAppFunctionTestStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount:0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-FUNC-TEST") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -717,10 +717,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -730,16 +730,16 @@ export class TableComponent implements OnInit {
   }
 
   getAppChaosTestStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount : 0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-CHAOS-TEST") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -776,10 +776,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -788,16 +788,16 @@ export class TableComponent implements OnInit {
     return statusObj;
   }
   getAppDeprovisionStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount : 0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "APP-DEPROVISION") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -834,10 +834,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
@@ -846,16 +846,16 @@ export class TableComponent implements OnInit {
     return statusObj;
   }
   getClusterCleanupStatus(data) {
-    var jobCount = 0;
     var statusObj={
       status: "",
       successJobCount: 0,
       failedJobCount:0,
-      skippedJobCount:0
+      skippedJobCount:0,
+      jobCount:0
     }
     for (var i = 0; i < data.length; i++) {
       if(data[i].stage == "CLUSTER-CLEANUP") {
-        jobCount ++;
+        statusObj.jobCount ++;
       }
     }
     for (var i = 0; i < data.length; i++) {
@@ -892,10 +892,10 @@ export class TableComponent implements OnInit {
       
     }
 
-    if(statusObj.successJobCount == jobCount) {
+    if(statusObj.successJobCount == statusObj.jobCount) {
       statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == jobCount){
-      statusObj.status = "SKIPPED"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount){
+      statusObj.status = "Skipped"
     } else if (statusObj.failedJobCount > 0) {
       statusObj.status = "Failed"
     }
