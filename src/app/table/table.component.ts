@@ -301,7 +301,7 @@ export class TableComponent implements OnInit {
     if (status === "Success") {
       return "gitlab_stage_build_success";
     }
-    else if (status === "CANCELED" || status === "Skipped") {
+    else if (status === "canceled" || status === "Skipped") {
       return "gitlab_stage_build_skipped";
     }
     else if (status === "Pending") {

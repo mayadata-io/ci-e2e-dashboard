@@ -185,13 +185,13 @@
                   [ngClass]='gitlabStageBuildClass(clusterSetupStatus.status)'>{{ clusterSetupStatus.status }}</span>
               </td> 
               <td class="dropData" style="padding: 0;width: 13px;">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOnee" aria-expanded="false" aria-controls="collapseOnee" style="padding: 0px;">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCSS" aria-expanded="false" aria-controls="collapseCSS" style="padding: 0px;">
                     <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                   </button> 
                 </td>
             </tr>
-            <tr class="accordion   " id="accordionExample" >
-                <td colspan="2" id="collapseOnee" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <tr class="accordion   " id="colCSS" >
+                <td colspan="2" id="collapseCSS" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colCSS">
                   <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                     <div class=" px-2 py-1 flex-fill d-flex justify-content-center" >
                         <span>Success : <span class="text-success ">{{ clusterSetupStatus.successJobCount }} </span> </span>
@@ -214,13 +214,13 @@
                   [ngClass]='gitlabStageBuildClass(providerInfraSetup.status)'>{{ providerInfraSetup.status }}</span>
               </td>   
               <td class="dropData" style="padding: 0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="padding: 0px;">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePIS" aria-expanded="false" aria-controls="collapsePIS" style="padding: 0px;">
                   <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                 </button> 
               </td>
             </tr>
-            <tr class="accordion   " id="accordionExample2"  >
-              <td colspan="2" id="collapseTwo" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample2">
+            <tr class="accordion   " id="colPIS"  >
+              <td colspan="2" id="collapsePIS" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colPIS">
                   <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                     <div class=" px-2 py-1 flex-fill d-flex justify-content-center" >
                         <span>Success : <span class="text-success ">{{ providerInfraSetup.successJobCount }} </span> </span>
@@ -245,13 +245,13 @@
                   
                 </td>
                 <td class="dropData" style="padding: 0"> 
-                  <button class="btn btn-link collapsed " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="padding: 0px;">
+                  <button class="btn btn-link collapsed " type="button" data-toggle="collapse" data-target="#collapseSAD" aria-expanded="false" aria-controls="collapseSAD" style="padding: 0px;">
                     <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                 </button></td>
             </tr>
             
-            <tr class="accordion    " id="accordionExample3" >
-              <td colspan="2" id="collapseThree" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample3">
+            <tr class="accordion    " id="colSAD" >
+              <td colspan="2" id="collapseSAD" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colSAD">
                     <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4" >  
                         <div class="px-2 py-1 flex-fill d-flex justify-content-center" >
                             <span>Success : <span class="text-success ">{{ statefulAppDeploy.successJobCount }} </span> </span>
@@ -273,13 +273,13 @@
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appFunctionTest.status)'>{{ appFunctionTest.status }}</span></td>
               <td class="dropData" style="padding: 0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="padding: 0px;">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAFT" aria-expanded="false" aria-controls="collapseAFT" style="padding: 0px;">
                   <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                 </button>
               </td>
             </tr>
-            <tr class="accordion    " id="accordionExample4" >
-              <td colspan="2" id="collapseFour" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample4">
+            <tr class="accordion    " id="colAFT" >
+              <td colspan="2" id="collapseAFT" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colAFT">
                     <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                         <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                             <span>Success : <span class="text-success ">{{ appFunctionTest.successJobCount }} </span> </span>
@@ -301,13 +301,13 @@
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appChaosTest.status)'>{{ appChaosTest.status }}</span></td>
                   <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="padding: 0px;">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseACT" aria-expanded="false" aria-controls="collapseACT" style="padding: 0px;">
                       <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                     </button>
                   </td>
                 </tr>
-                <tr class="accordion    " id="accordionExample5" >
-                  <td colspan="2" id="collapseFive" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample5">
+                <tr class="accordion    " id="colACT" >
+                  <td colspan="2" id="collapseACT" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colACT">
                         <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                             <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                                 <span>Success : <span class="text-success ">{{ appChaosTest.successJobCount }} </span> </span>
@@ -329,14 +329,14 @@
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary"
                   [ngClass]='gitlabStageBuildClass(appDeprovision.status)'>{{ appDeprovision.status }}</span></td>
                   <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="padding: 0px;">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAD" aria-expanded="false" aria-controls="collapseAD" style="padding: 0px;">
                       <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                     </button>
                   </td>
                 </tr>
                 
-                <tr class="accordion    " id="accordionExample6" >
-                  <td colspan="2" id="collapseSix" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample6">
+                <tr class="accordion    " id="colAD" >
+                  <td colspan="2" id="collapseAD" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colAD">
                         <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                             <div class=" px-2 py-1 flex-fill d-flex justify-content-center ">
                                 <span >Success : <span class="text-success ">{{ appDeprovision.successJobCount }} </span> </span>
@@ -358,13 +358,13 @@
               <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span class="gitlab_stage_primary "
                   [ngClass]='gitlabStageBuildClass(clusterCleanup.status)'>{{ clusterCleanup.status }}</span></td>
                   <td class="dropData" style="padding: 0">
-                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="padding: 0px;">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCCup" aria-expanded="false" aria-controls="collapseCCup" style="padding: 0px;">
                         <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
                       </button> 
                     </td>
             </tr>
-            <tr class="accordion    " id="accordionExample7" >
-              <td colspan="2" id="collapseSeven" class="collapse p-0" aria-labelledby="headingOne" data-parent="#accordionExample7">
+            <tr class="accordion    " id="colCCup" >
+              <td colspan="2" id="collapseCCup" class="collapse p-0" aria-labelledby="headingOne" data-parent="#colCCup">
                     <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">  
                         <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                             <span>Success : <span class="text-success ">{{ clusterCleanup.successJobCount }} </span> </span>
