@@ -11,10 +11,6 @@ export class DashboardData {
         this.apiurl = "http://localhost:3000";
     }
 
-    async getAwsDetails() {
-        return await this.http.get<any[]>(this.apiurl + "/aws").toPromise();
-    }
-
     getEksDetails() {
         return this.http.get<any[]>(this.apiurl + "/eks");
     }
@@ -26,15 +22,6 @@ export class DashboardData {
     getGkeDetails() {
         return this.http.get<any[]>(this.apiurl + "/gke");
     }
-
-    getGcpDetails() {
-        return this.http.get<any[]>(this.apiurl + "/gcp");
-    }
-
-    getPacketDetails() {
-        return this.http.get<any[]>(this.apiurl + "/packet");
-    }
-
     getBuildDetails() {
         return this.http.get<any[]>(this.apiurl + "/build");
     }

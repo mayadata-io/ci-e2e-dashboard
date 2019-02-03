@@ -89,10 +89,6 @@ export class TableComponent implements OnInit {
     });
 
     this.getData = timer(0, 5000).subscribe(x => {
-      this.DashboardDatas.getAwsDetails().then(data => {
-        this.showSpinnerTable = false;
-        this.awsData = data;
-      });
       this.DashboardDatas.getEksDetails().subscribe(data => {
         this.showSpinnerTable = false;
         this.eksData = data;
@@ -101,17 +97,9 @@ export class TableComponent implements OnInit {
         this.showSpinnerTable = false;
         this.aksData = data;
       });
-      this.DashboardDatas.getGcpDetails().subscribe(data => {
-        this.showSpinnerTable = false;
-        this.gcpData = data;
-      });
       this.DashboardDatas.getGkeDetails().subscribe(data => {
         this.showSpinnerTable = false;
         this.gkeData = data;
-      });
-      this.DashboardDatas.getPacketDetails().subscribe(data => {
-        this.showSpinnerTable = false;
-        this.packetData = data;
       });
       this.DashboardDatas.getBuildDetails().subscribe(data => {
         this.showSpinnerTable = false;
