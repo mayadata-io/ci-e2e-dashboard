@@ -8,7 +8,7 @@ export class DashboardData {
 
     private apiurl: string;
     constructor(private http: HttpClient, private meta:Meta,private titleService: Title) {
-        this.apiurl = "http://localhost:3000";
+        this.apiurl = "http://147.75.102.37:30002";
     }
 
     getEksDetails() {
