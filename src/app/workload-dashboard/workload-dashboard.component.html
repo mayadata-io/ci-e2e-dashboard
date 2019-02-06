@@ -302,7 +302,35 @@
                                 <div class="card-body dashboard-hyperlink">
                                     <a href="/logging" >Dashboard</a>
                                 </div>
-                            </div>                                                                
+                            </div>
+                            <div class="card text-center">
+                              <div class="applications-color d-flex justify-content-center minio-bg" >
+                                <img class="card-img-top " src="assets/images/workloads-logos/minio.svg" alt="workload image">
+                              </div>  
+                              <div class="card-body pt-0">
+                                  <img class="workload-title-img" src="assets/images/titletitle.png" alt="" >
+                                  <span class="status-application" [ngClass]="{
+                                    'display status-active':miniocstorStatus === 'Running',
+                                    'hide':miniocstorStatus !== 'Running'}">
+                                    ACTIVE
+                                  </span>
+                                  <span class="status-application" [ngClass]="{
+                                        'display status-inactive':miniocstorStatus !== 'Running',
+                                        'hide ':miniocstorStatus === 'Running'}">
+                                  INACTIVE
+                                  </span>
+                              </div>
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item">cStor 0.8</li>
+                              </ul>
+                              <div class="card-body">
+                                  <p class="card-text">Deployment 1 replicas</p>
+                                  <p class="card-text">OpenEBS - 3 replicas-pv</p>
+                              </div>
+                              <div class="card-body dashboard-hyperlink">
+                                  <a href="/minio-cstor" >Dashboard</a>
+                              </div>
+                          </div>                                                                 
                         </div>      
                         <ng-template #tablecstor>  
                           <div class="row">     
@@ -432,7 +460,6 @@
                                   </td>
                                   <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
                                 </tr>
-              
                                 <tr class="tabledatarow">
                                     <td><a><img src="/assets/images/workloads-logos/prometheus.svg" style="height:20px;"> Prometheus</a></td>
                                     <td class="tablerowtext">2</td>
@@ -471,7 +498,26 @@
                                       </td>
                                       <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
                                     </tr>
-                              
+                                    
+                                    <tr class="tabledatarow">
+                                      <td><a><img src="/assets/images/workloads-logos/minio.svg" style="height:20px;"> Minio</a></td>
+                                      <td class="tablerowtext">2</td>
+                                      <td class="tablerowtext">0.8</td>
+                                      <td class="tablerowtext">3</td>
+                                      <td>
+                                          <span [ngClass]="{
+                                            'display':minioStatus === 'Running',
+                                            'hide':minioStatus !== 'Running'
+                                          }"
+                                    style="color:#539A49;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">ACTIVE</span>
+                                <span [ngClass]="{
+                                            'display':minioStatus !== 'Running',
+                                            'hide':minioStatus === 'Running'
+                                          }"
+                                  style="color: #D20000;font-family: 'Open Sans',sans-serif!important;  font-weight: 700;  font-style: normal;  font-size: 13px;">INACTIVE</span>
+                                      </td>
+                                      <td><a class="dashboardbox" href="/minio-cstor">Dashboard</a></td>
+                                    </tr>
                             </table>      
                           </div>
                         </ng-template>
