@@ -20,6 +20,7 @@ export class WorkloadDashboardComponent implements OnInit {
   public elasticsearchcstorStatus:any;
   public postgresqlcstorStatus:any;
   public nuodbcstorStatus:any;
+  public miniocstorStatus:any;
   public jivastatuscount = 0;
   public cStorstatuscount =0; 
   public viewType:number = 0;  // 0: grid view 1:table view
@@ -93,6 +94,12 @@ export class WorkloadDashboardComponent implements OnInit {
       });
       this.kubernetsServices.getAllstatus("nuodb-cstor").subscribe(res => {
         this.nuodbcstorStatus = res.status;
+        if(res.status == 'Running'){
+          this.cStorstatuscount=this.cStorstatuscount+1;
+        }
+      });
+      this.kubernetsServices.getAllstatus("minio-cstor").subscribe(res => {
+        this.miniocstorStatus = res.status;
         if(res.status == 'Running'){
           this.cStorstatuscount=this.cStorstatuscount+1;
         }
