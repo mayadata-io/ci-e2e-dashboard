@@ -1,13 +1,21 @@
 <!-- <div class="container-fluid"> -->
-<app-header></app-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 bg-white border scrollbar" id="scrollbar">
+        <div class="col-md-2 bg-white border p-0 scrollbar" id="scrollbar">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="col-md-10 scrollbar" style="max-width:auto" id="scrollbar">
-            <div style="padding-top:10px;">
+        <div class="col-md-10 p-0" style="max-width:auto; font-family: 'Lato', sans-serif;">
+            <app-header></app-header>
+            <div class="scrollbar " style="padding-top:10px;padding-left: 15px;" id="scrollbar">
                 <router-outlet></router-outlet>
+            </div>
+            <div class="row fixed-bottom" >
+                <div class="col-md-12 text-right" >
+                    <a href="https://docs.openebs.io/" target="_blank" placement="left" ngbTooltip="About Openebs">
+                        <img src="assets/images/company-logos/openebs.svg" alt="">
+                        <span style="font-size: 12px;color: #383842;">&nbsp;v0.8.1-RC3&nbsp;&nbsp;</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

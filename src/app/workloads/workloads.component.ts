@@ -77,6 +77,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public selectedApplication = "";
   public writeStatus = false;
   public readStatus = false;
+  public openebsVersion : any ;
   public alphabet = [
     "a",
     "b",
@@ -165,6 +166,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
 
     // this.routeSub = this.route.params.subscribe(params =>{
     // });
+    this.kubernetsServices.getOpenebsVersion().subscribe( res => {
+      this.openebsVersion = res ;
+    })
 
     this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
