@@ -38,7 +38,7 @@
           <div class="d-flex flex-column ">
             <div class="d-flex align-items-center mb-3 ml-4">
               <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" style="height:30px">
-              <p class="mb-0" style="font-size:12px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} 0.8</p>
+              <p class="mb-0" style="font-size:12px;color:#354052"> &nbsp;&nbsp; {{openebsengine}} {{openebsVersion}}</p>
             </div>
             <p class="ml-4 mb-0" style="font-size:12px;color:#354052">Controller {{numberController}} &nbsp;&nbsp;Replicas
               {{numberReplica}}&nbsp;&nbsp;
@@ -58,9 +58,10 @@
     </div>
     <ng-template #deployPersent>
           <div class="row bg-white my-2 rounded shadow-sm">
-            <div class="mx-2">
-              <p style="margin-top: 10px;margin-left: 19px;font-family:sans-serif;font-size: 0.85rem;color: #7F8FA4; "><span style="color: #354052;font-size: 15px" >Status</span> <span style="margin-left: 550px;"> <img src="/assets/images/icons/active.png" alt="" style="height: 13px;padding-right: 5px;">Active</span><span style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 13px;"> InActive</span></p>
-              <hr>
+            <div class="col-8 pt-2"><p style="color: #354052;font-size: 15px" >Status</p></div>
+            <div class="col-4 pt-2 d-flex bd-highlight">
+              <div class=" bd-highlight"> <img src="/assets/images/icons/active.png" alt="" style="height: 13px;padding-right: 5px;">Active</div>
+              <div class="bd-highlight" style="padding-left: 10px;">  <img src="/assets/images/icons/inactive.png" alt="" style="height: 13px;"> InActive</div>
             </div>
             <br>
             <div class="col-md-12 d-flex justify-content-around workloads my-3">          

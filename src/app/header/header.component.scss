@@ -5,14 +5,26 @@
 .navbar {
     padding: 0px;;
 }
+.headbar{
+    background: #23232A;
+    color: #ffff;
+    background-image: url('/src/assets/images/header/head-left.svg');
+    background-position-y: top;
+    background-repeat: no-repeat;
+    background-position-x: right;
+}
 
 .header-text {
     // font-family: lato;
     font-size: 17px;
     // font-weight: bold;
-    color: #54576B;
+    color: #ffff;
 }
-
+.head-icons{
+    padding: 5px;
+    font-size: 20px;
+    color: #ffff;
+}
 .navbar-logo {
     height: 40px;
 }
@@ -106,3 +118,18 @@ img {
 input {
     background-color: white;
 }
+.head-top-icon{
+ padding-right: 10px;
+}
+.head-top-icon{
+    a:nth-child(1):hover{
+        color: red;
+
+    }
+    a:nth-child(2):hover{
+        color: black;
+    }
+    a:nth-child(3):hover{
+        color: black;
+    }
+}   

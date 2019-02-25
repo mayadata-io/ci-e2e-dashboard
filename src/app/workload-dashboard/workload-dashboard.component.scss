@@ -15,99 +15,31 @@ h5{
     color: #7491AB;
 }
 
-.card{
-    margin-right: 2rem;
-    margin-bottom: 1rem;
-    width:14rem;
+.status-active{
+    background-color: #539A49;
+}
+.status-inactive{
+    background-color:  #D20000;
+}
 
-    .card-body{
-        padding: 1rem;
-    }
-    .applications-color{
-        padding-top: 2rem;
-        background-image: -webkit-linear-gradient(270deg, #34ADFF 88%, #FFF 30%);
-    }
-    .elasticsearch-bg{
-        background-image: -webkit-linear-gradient(270deg, #F4BD19 88%, #FFF 30%);   
-    }
-    .postgresql-bg{
-        background-image: -webkit-linear-gradient(270deg, #336791 88%, #FFF 30%); 
-    }
-    .redis-bg{
-        background-image: -webkit-linear-gradient(270deg, #A41C13 88%, #FFF 30%); 
-    }
-    .grafana-bg{
-        background-image: -webkit-linear-gradient(270deg, rgb(238, 118, 70) 88%, #FFF 30%); 
-    }
-    .prometheus-bg{
-        background-image: -webkit-linear-gradient(270deg, #E6522C 88%, #FFF 30%); 
-    }
-    .cockdb-bg{
-        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
-    }
-    .percona-bg{
-        background-image: -webkit-linear-gradient(270deg, #d20000 88%, #FFF 30%); 
-    }
-    .mongo-bg{
-        background-image: -webkit-linear-gradient(270deg, #539A49 88%, #FFF 30%); 
-    }
-    .wordpress-bg{
-        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
-    }
-    .nuodb-bg{
-        background-image: -webkit-linear-gradient(270deg, #B5D118 88%, #FFF 30%);   
-    }
-    .mongo-bg{
+.list-group-item{
+    border-top:3px solid #B4DEFF;
+    border-bottom:3px solid #B4DEFF;
+    color: #354052;
+    padding-top:0.5rem;
+    padding-bottom: 0.5rem;
+}
+.dashboard-hyperlink{
+    background-color: rgba(183, 224, 255, 0.4969);;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    color: #2197F0;
 
-    }
-    .minio-bg{
-        background-image: -webkit-linear-gradient(270deg, #000 88%, #FFF 30%); 
-    }
-    .workload-title-img{
-        height: 28px;
-        width: auto;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-    .status-application{
-        width: 50%;
-        border-radius: 2rem;
-        margin:0 auto;
-        color: #fff;
-        font-size: 12px;
-    }
-    .status-active{
-        background-color: #539A49;
-    }
-    .status-inactive{
-        background-color:  #D20000;
-    }
-    .card-img-top{
-        height: 60px;
-        width: 60px;
-        border-radius:50%;
-        padding: 0.1rem;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-        background-color: #fff;
-    }
-    .list-group-item{
-        border-top:3px solid #B4DEFF;
-        border-bottom:3px solid #B4DEFF;
-        color: #354052;
-        padding-top:0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    .dashboard-hyperlink{
-        background-color: rgba(183, 224, 255, 0.4969);;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        color: #2197F0;
-
-        :hover{
-            text-decoration: underline;
-        }
+    :hover{
+        text-decoration: underline;
     }
 }
+
 .nav-link1{
     border: 1px solid  rgba(100,194,225,1);
     height: 80px;
@@ -122,7 +54,7 @@ h5{
 p{
     font-size: 0.8rem;
 }
-#workloadlist {
+#myTable {
     font-family:sans-serif;
     font-style: normal;
     color: rgb(28, 41, 58);
@@ -135,10 +67,10 @@ p{
     min-width: 350px;
     margin-top: 2rem;
 }
-#workloadlist td{
+#myTable td{
     padding: 8px;
 }
-#workloadlist th {
+#myTable th {
     border-collapse: collapse;
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
@@ -148,31 +80,33 @@ p{
     padding-top: 10px;
     padding-bottom: 10px;
 }
-#workloadlist th:first-child{
+#myTable th:first-child{
     text-align: left
 }
-#workloadlist tr td:first-child{
+#myTable tr td:first-child{
     text-align: left
 }
-#workloadlist .headtext{
+#myTable .headtext{
     text-align: center;
 }
-#workloadlist .headrow{
-    border-bottom:0.5px solid rgba(100,194,225,1);
+#myTable .headrow{
+    border-bottom:2px solid #D0D3E2;
+    border-top:2px solid #D0D3E2;
+    background-color: rgb(255, 255, 255);
 }
-#workloadlist .tablerowtext{
+#myTable .tablerowtext{
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
     font-style: normal;
     font-size: 13px;
     color: #141823;
 }
-#workloadlist .tabledatarow{
+#myTable .tabledatarow{
     border-bottom-width: 1px;
     border-bottom-style: dotted;
     border-bottom-color: rgba(100,194,225,1);
 }
-#workloadlist .tabledatarow{
+#myTable .tabledatarow{
     text-align: center;
     text-decoration-style: solid;
 }
@@ -243,9 +177,32 @@ p{
     font-style: normal;
     line-height: normal;
     font-size: 14px;
-    color: rgb(8, 8, 8);
+    color: #00ABFF;
     :hover{
         text-decoration-line: underline;
     }
 }
-
+.badge-gradient-success {
+    background-color: #B8F8E0;
+    color: #003E31;
+}
+.badge-gradient-danger {
+    background-color: #ffb8bd;
+    color: #700B0B;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #EFEFF2;
+    border-radius: 20px;
+  }
+  input[type=text] {
+    // width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('/src/assets/images/icons/search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 7px 20px 7px 40px;
+  }

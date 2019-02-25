@@ -1,3 +1,4 @@
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -15,7 +16,7 @@ a:focus {
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
+  padding: 0;
 }
 
 #sidebar ul li a {
@@ -29,17 +30,17 @@ a:focus {
 
 #sidebar ul li a:hover {
   border-radius: 10px;
-  background: #F2F4F6;
+  background: rgb(13, 92, 170);
 }
 
-#sidebar ul li.active > a {
-  background-color: #F2F4F6;
+#sidebar ul li:active > a {
+  background-color: rgb(34, 95, 156);
   border-radius: 10px;
 }
 
-.menu .list-group-item:last-child {
-  border-bottom: 10;
-}
+// .menu .list-group-item:last-child {
+//   border-bottom: 10;
+// }
 
 img {
   padding-right: 15px;
@@ -76,16 +77,34 @@ a[data-toggle="collapse"] {
   right: 10px;
   transform: translateY(-50%);
 }
+.sidebarBottom{
+  position: absolute;
+  bottom: 0;
+}
+.bgColor{
+  background-image: url('/src/assets/images/company-logos/sideimg.svg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+#sidebar {
+  border: none;
+  li:active{
+  color: #64c2e1;
+}
+li:focus{
+  outline:#64c2e1  ;
+  border-radius: 20px;
+  color: #00ABFF;
+  
+}
+}
+.fa-dharmachakra:hover {
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-// @media (max-width: 768px) {
-//     #sidebar {
-//         margin-left: -250px;
-//     }
-//     #sidebar.active {
-//         margin-left: 0;
-//     }
-// }
-
-// .collapse {
-//     padding-left: 100px;
-// }

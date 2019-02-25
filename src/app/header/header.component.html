@@ -1,23 +1,20 @@
-<nav class="navbar navbar-expand-lg bg-white border px-0 fixed-top">
+<nav class="navbar navbar-expand-lg bg-white border px-0 ">
   <div class="container-fluid" style="display: block">
     <div class="row">
-      <div class="col-md-2 line">
-        <a class="navbar-brand navbar-logo" href="/"><img class="navbar-logo" src="/assets/images/header/openebsci-logo.png"></a>
-      </div>
-      <div class="col-md-10">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li>
-              <span style="margin-top:30px;" class="header-text">{{header}}</span>
-            </li>
-          </ul>
-          <ul class="navbar-nav mr-right">
-            <li class="my-2  my-lg-0 form-inline">
-              <a style="margin-right:15px;" placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-danger fa fa-heart heart"></a>
-              <a style="margin-right:15px; margin-left:15px;font-size: 26px; color: #7265ea; padding: 0px" data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="far fa-envelope-open"></a>
-              <a href="https://slack.openebs.io/" target="_blank"><img placement="bottom" ngbTooltip="Join Community" class="slack" src="/assets/images/header/slack.svg"></a>
-            </li>
-          </ul>
+        <div class="w-100 headbar">
+          <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">    
+            <ul class="navbar-nav mr-auto">
+              <li>
+                <span style="margin-top:30px;" class="header-text">{{header}}</span>
+              </li>
+            </ul>
+            <ul class="navbar-nav mr-right ">
+                <li class="my-2  my-lg-0 form-inline head-top-icon">
+                    <a style="margin-right:15px;" placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-light fas fa-heart head-icons"></a>
+                    <a style="margin-right:15px; margin-left:15px;" data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="btn btn-sm btn-outline-light fas fa-envelope-open-text head-icons"></a>
+                    <a style="margin-left:15px;" ngbTooltip="Join Community"  placement="left" href="https://github.com/openebs/openebs/stargazers"  class="btn btn-sm btn-outline-light fab fa-slack head-icons"></a>
+                </li>
+            </ul>
         </div>
       </div>
     </div>
