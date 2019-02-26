@@ -15,7 +15,7 @@ export class LitmusService {
     ) {
       this.apiurl = "http://localhost:3000/";
     } else {
-      this.apiurl = "https://workloads.openebs.ci/api/";
+      this.apiurl = "https://workloads.openebs.ci/";
     }
   }
 
