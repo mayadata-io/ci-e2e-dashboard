@@ -55,7 +55,6 @@ p{
     font-size: 0.8rem;
 }
 #myTable {
-    font-family:sans-serif;
     font-style: normal;
     color: rgb(28, 41, 58);
     border-collapse: collapse;
@@ -96,60 +95,14 @@ p{
 }
 #myTable .tablerowtext{
     text-align: center;
-    font-family: 'Open Sans',sans-serif!important;
+    font-family: 'Lato',sans-serif;
     font-style: normal;
-    font-size: 13px;
+    font-size: 14px;
     color: #141823;
-}
-#myTable .tabledatarow{
-    border-bottom-width: 1px;
-    border-bottom-style: dotted;
-    border-bottom-color: rgba(100,194,225,1);
 }
 #myTable .tabledatarow{
     text-align: center;
     text-decoration-style: solid;
-}
-.workloadmainbox{
-    margin-top: 50px;
-    margin-right:25px;
-    position: absolute;
-    width: 205.79px;
-    height: 330.62px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.workloadlogocolour{
-    position: absolute;
-    width: 100%;
-    height: 25%;
-    background-color: #D20000;
-}
-.workloadbalance{
-    margin-top: 90px;
-    width: 100%;
-    margin-top: 87px;
-    height: 215px;
-    text-align: center;
-}
-.workloadlogo{
-    background-color: white;
-    position: absolute;
-    border-radius: 50%;
-    border: 0.5px solid rgb(246, 247, 243);
-    margin-top: 35px;
-    margin-left: 76px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.workloadlogo img {
-    object-fit: fill;
-    padding-left: 3px;
-    border-top-width: 5px;
-    border-bottom-width: 1px;
-    width: 57px;
-    margin-top: 0px;
-    height: 55px;
-    padding-bottom: 2px;
-    height:58px;width:57px;
 }
 .active{
   color: #495057;
@@ -157,23 +110,7 @@ p{
 .inactive{
     color:#ced4da;
 }
-.viewtype{
-    font-size: 20px;
-    padding: 0.2rem
-}
-.jivacstor{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-family: Lato;
-    font-size: 12px;
-    text-align: center;
-    border-top-style: solid ;
-    border-bottom-style: solid;
-    border-color: #B4DEFF;
-    color: #354052;
-}
 .dashboardbox{
-    font-size: 12px;
     font-style: normal;
     line-height: normal;
     font-size: 14px;
@@ -206,3 +143,26 @@ p{
     background-repeat: no-repeat;
     padding: 7px 20px 7px 40px;
   }
+.tabledatarow{
+    span{
+        font-size: 12px;
+        opacity: 1;
+    }
+    img{
+        transition: transform .5s;
+        opacity: 1;
+    }
+}
+.tabledatarow:hover{
+img{
+        -ms-transform: scale(2); /* IE 9 */
+        -webkit-transform: scale(2); /* Safari 3-8 */
+        transform: scale(2); 
+        border-radius: 50%;
+}
+}
+table tr:nth-of-type(odd){
+    background-color: rgba(239,239,242,0.4);
+    border-radius: 20px;
+}
+  
