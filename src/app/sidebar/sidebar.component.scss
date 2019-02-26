@@ -1,4 +1,6 @@
-
+h5{
+  font-size: 18px;
+}
 .cursor-pointer {
   cursor: pointer;
 }
@@ -85,6 +87,7 @@ a[data-toggle="collapse"] {
   background-image: url('/src/assets/images/company-logos/sideimg.svg');
   background-position: bottom;
   background-repeat: no-repeat;
+  background-size: contain;
   width: 100%;
 }
 #sidebar {
@@ -99,7 +102,8 @@ li:focus{
   
 }
 }
-.fa-dharmachakra:hover {
+.dharma:hover{
+.fa-dharmachakra{
   -webkit-animation:spin 4s linear infinite;
   -moz-animation:spin 4s linear infinite;
   animation:spin 4s linear infinite;
@@ -107,4 +111,4 @@ li:focus{
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
+}
