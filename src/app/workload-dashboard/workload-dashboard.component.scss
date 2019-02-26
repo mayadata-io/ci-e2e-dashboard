@@ -1,15 +1,5 @@
- .nav-link1.active{ 
-    background: rgba(100,194,225,1);
-    background: -moz-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(100,194,225,1)), color-stop(100%, rgba(52,143,192,1)));
-    background: -webkit-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -o-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -ms-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: linear-gradient(to right, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c2e1', endColorstr='#348fc0', GradientType=1 );
 h5{
     color: #DFE2E5;
-}
 }
 h5{
     color: #7491AB;
@@ -39,12 +29,6 @@ h5{
         text-decoration: underline;
     }
 }
-
-.nav-link1{
-    border: 1px solid  rgba(100,194,225,1);
-    height: 80px;
-    padding: 2px 20px;
-}
 .display{
     display: block;
 }
@@ -59,10 +43,10 @@ p{
     color: rgb(28, 41, 58);
     border-collapse: collapse;
     width: 100%;
-    border-radius: 15px 50px 30px;
-    border:solid white 1px;
+    // border-radius: 15px 50px 30px;
+    // border:solid white 1px;
     border-radius:6px;
-    border-spacing: 5px;
+    // border-spacing: 5px;
     min-width: 350px;
     margin-top: 2rem;
 }
@@ -102,7 +86,7 @@ p{
 }
 #myTable .tabledatarow{
     text-align: center;
-    text-decoration-style: solid;
+    // text-decoration-style: solid;
 }
 .active{
   color: #495057;
@@ -132,37 +116,35 @@ p{
     border-radius: 20px;
   }
   input[type=text] {
-    // width: 100%;
+    width: 18%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+    border: 2px solid #d0d3e2;
+    border-radius: 8px;
+    font-size: 12px;
+    font-style: italic;
     background-color: white;
-    background-image: url('/src/assets/images/icons/search.png');
+    // background-image: url('/src/assets/images/icons/search.png');
     background-position: 10px 10px; 
     background-repeat: no-repeat;
-    padding: 7px 20px 7px 40px;
+    padding: 7px 20px 7px 5px;
   }
 .tabledatarow{
     span{
         font-size: 12px;
-        opacity: 1;
+        font-weight: normal;
     }
     img{
-        transition: transform .5s;
-        opacity: 1;
+        transition: transform .3s;
     }
 }
 .tabledatarow:hover{
 img{
-        -ms-transform: scale(2); /* IE 9 */
-        -webkit-transform: scale(2); /* Safari 3-8 */
-        transform: scale(2); 
-        border-radius: 50%;
+        -ms-transform: scale(1.7); /* IE 9 */
+        -webkit-transform: scale(1.7); /* Safari 3-8 */
+        transform: scale(1.7); 
 }
 }
 table tr:nth-of-type(odd){
     background-color: rgba(239,239,242,0.4);
-    border-radius: 20px;
 }
   
