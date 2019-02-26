@@ -18,7 +18,7 @@ export class PersonService {
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.apiurl = "http://localhost:3000/";
     } else {
-      this.apiurl = "https://workloads.openebs.ci/api/";
+      this.apiurl = "https://workloads.openebs.ci/";
     }
   }
 
