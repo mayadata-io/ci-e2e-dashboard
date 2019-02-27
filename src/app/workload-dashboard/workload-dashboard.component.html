@@ -206,13 +206,13 @@
                                   <td class="tablerowtext">3</td>
                                   <td>
                                       <span [ngClass]="{
-                                        'display':minioStatus === 'Running',
-                                        'hide':minioStatus !== 'Running'
+                                        'display':miniocstorStatus === 'Running',
+                                        'hide':miniocstorStatus !== 'Running'
                                       }"
                                 style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                             <span [ngClass]="{
-                                        'display':minioStatus !== 'Running',
-                                        'hide':minioStatus === 'Running'
+                                        'display':miniocstorStatus !== 'Running',
+                                        'hide':miniocstorStatus === 'Running'
                                       }"
                               style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                   </td>
