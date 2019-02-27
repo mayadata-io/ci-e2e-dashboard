@@ -124,7 +124,6 @@ input {
 .head-top-icon{
     a:nth-child(1):hover{
         color: red;
-
     }
     a:nth-child(2):hover{
         color: black;
@@ -132,4 +131,14 @@ input {
     a:nth-child(3):hover{
         color: black;
     }
+}
+.subscribeLine{
+    padding-top: 15px; 
+    padding-bottom: 10px;
+}
+.joinLine{
+    color: #999; padding-bottom: 10px;
 }   
+.subscribeBtn{
+    font-size:14px;width: 100%;padding-bottom: 0.5rem;padding-top: 0.5rem;
+}

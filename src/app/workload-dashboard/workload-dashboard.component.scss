@@ -1,5 +1,12 @@
+.workloadContainer{
+    height:100%;
+    background-color:#EFF2F6;
+}
 h5{
     color: #DFE2E5;
+}
+th i{
+    color: linear-gradient
 }
 h5{
     color: #7491AB;
@@ -85,12 +92,6 @@ h5{
     text-align: center;
     // text-decoration-style: solid;
 }
-.active{
-  color: #495057;
-}
-.inactive{
-    color:#ced4da;
-}
 .dashboardbox{
     font-style: normal;
     line-height: normal;
@@ -139,13 +140,20 @@ h5{
 img{
         -ms-transform: scale(1.7); /* IE 9 */
         -webkit-transform: scale(1.7); /* Safari 3-8 */
-        transform: scale(1.7); 
-}
-td a{
-    font-weight: 600;
+        transform: scale(1.7);
 }
 }
 table tr:nth-of-type(odd){
     background-color: rgba(239,239,242,0.4);
 }
-  
+.ciHeading{
+    padding-left:15px;
+    h1{
+        font-size: 18px;
+        color: #6179a0;
+    }
+    h2{
+        font-size: 14px;
+        color: #7F8FA4;
+    }
+}
