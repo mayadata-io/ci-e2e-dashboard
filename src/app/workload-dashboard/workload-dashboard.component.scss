@@ -35,9 +35,6 @@ h5{
 .hide{
     display: none;
 }
-p{
-    font-size: 0.8rem;
-}
 #myTable {
     font-style: normal;
     color: rgb(28, 41, 58);
@@ -135,6 +132,7 @@ p{
     }
     img{
         transition: transform .3s;
+        height: 25px;
     }
 }
 .tabledatarow:hover{
@@ -142,6 +140,9 @@ img{
         -ms-transform: scale(1.7); /* IE 9 */
         -webkit-transform: scale(1.7); /* Safari 3-8 */
         transform: scale(1.7); 
+}
+td a{
+    font-weight: 600;
 }
 }
 table tr:nth-of-type(odd){

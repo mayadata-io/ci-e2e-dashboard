@@ -4,15 +4,6 @@ import * as $ from "jquery";
 import { Subscription, Observable, timer } from "rxjs";
 import { Meta,Title } from "@angular/platform-browser";
 
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-
 @Component({
   selector: "app-workload-dashboard",
   templateUrl: "./workload-dashboard.component.html",
@@ -120,6 +111,14 @@ export class WorkloadDashboardComponent implements OnInit {
         if(res.status == 'Running'){
           this.cStorstatuscount=this.cStorstatuscount+1;
         }
+      });
+    });
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
       });
     });
   }

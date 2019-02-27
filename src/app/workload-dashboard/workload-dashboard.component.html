@@ -15,13 +15,13 @@
                             <tr class="headrow header"  >
                               <th class="headtext">Applications</th>
                               <th class="headtext"> Replicas</th>
-                              <th class="headtext"> OpenEbs V</th>
+                              <th class="headtext"> OpenEBS V</th>
                               <th class="headtext"> Replicas/pv</th>
                               <th class="headtext"> Status</th>
                               <th class="headtextaccess">  Access </th>
                             </tr>
                             <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/MongoDB.png" style="height:25px;"> MongoDB</a></td>
+                                <td><a><img src="/assets/images/workloads-logos/MongoDB.png" > MongoDB</a></td>
                                 <td class="tablerowtext">Statefulset-2 Replicas</td>
                                 <td class="tablerowtext">0.8.1-RC3</td>
                                 <td class="tablerowtext">3</td>
@@ -29,19 +29,19 @@
                                     <span [ngClass]="{
                                       'display':mongocstorStatus === 'Running',
                                       'hide':mongocstorStatus !== 'Running'}"
-                                      style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
+                                      style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
                                     </span>
                                     <span [ngClass]="{
                                       'display':mongocstorStatus !== 'Running',
                                       'hide':mongocstorStatus === 'Running'}"
-                                      style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                      style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
                                   <a class="dashboardbox" href="/mongo-cstor">Dashboard</a>
                                 </td>
                             </tr>
                             <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/NUODB.png" style="height:25px;"> nuodb</a></td>
+                                <td><a><img src="/assets/images/workloads-logos/NUODB.png" > Nuodb</a></td>
                                 <td class="tablerowtext">Statefulset-1 Replicas</td>
                                 <td class="tablerowtext">0.8.1-RC3</td>
                                 <td class="tablerowtext">3</td>
@@ -49,19 +49,19 @@
                                     <span [ngClass]="{
                                       'display':nuodbcstorStatus === 'Running',
                                       'hide':nuodbcstorStatus !== 'Running'}"
-                                      style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
+                                      style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
                                     </span>
                                     <span [ngClass]="{
                                       'display':nuodbcstorStatus !== 'Running',
                                       'hide':nuodbcstorStatus === 'Running'}"
-                                      style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                      style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
                                   <a class="dashboardbox" href="/nuodb-cstor">Dashboard</a>
                                 </td>
                             </tr>
                                 <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/Postgre.png" style="height:25px;"> Postgresql</a></td>
+                                <td><a><img src="/assets/images/workloads-logos/Postgre.png" > Postgresql</a></td>
                                 <td class="tablerowtext">Statefulset-2 Replicas</td>
                                 <td class="tablerowtext">0.8.1-RC3</td>
                                 <td class="tablerowtext">3</td>
@@ -70,19 +70,19 @@
                                       'display':postgresqlcstorStatus === 'Running',
                                       'hide':postgresqlcstorStatus !== 'Running'
                                     }"
-                                    style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                    style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                                     <span [ngClass]="{
                                       'display':postgresqlcstorStatus !== 'Running',
                                       'hide':postgresqlcstorStatus === 'Running'
                                     }"
-                                    style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                    style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
                                   <a class="dashboardbox" href="/postgresql-cstor">Dashboard</a>
                                 </td>
                             </tr>
                             <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/ElasticSearch.png" style="height:25px;"> Elasticsearch</a></td>
+                                  <td><a><img src="/assets/images/workloads-logos/ElasticSearch.png" > Elasticsearch</a></td>
                                   <td class="tablerowtext">Statefulset-1 Replicas</td>
                                   <td class="tablerowtext">0.8.1-RC3</td>
                                   <td class="tablerowtext">3</td>
@@ -91,19 +91,19 @@
                                         'display':elasticsearchcstorStatus === 'Running',
                                         'hide':elasticsearchcstorStatus !== 'Running'
                                       }"
-                                      style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                      style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                                       <span [ngClass]="{
                                         'display':elasticsearchcstorStatus !== 'Running',
                                         'hide':elasticsearchcstorStatus === 'Running'
                                       }"
-                                      style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                      style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                   </td>
                                   <td>
                                     <a class="dashboardbox" href="/logging">Dashboard</a>
                                   </td>
                             </tr>
                             <tr class="tabledatarow">
-                                    <td><a><img src="/assets/images/workloads-logos/Percona.png" style="height:25px;"> PerconaDB</a></td>
+                                    <td><a><img src="/assets/images/workloads-logos/Percona.png" > PerconaDB</a></td>
                                     <td class="tablerowtext">Deployment-1 Replicas</td>
                                     <td class="tablerowtext">0.8.1-RC3</td>
                                     <td class="tablerowtext">3</td>
@@ -112,17 +112,17 @@
                                           'display':perconacstorStatus === 'Running',
                                           'hide':perconacstorStatus !== 'Running'
                                         }"
-                                    style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                    style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                                     <span [ngClass]="{
                                           'display':perconacstorStatus !== 'Running',
                                           'hide':perconacstorStatus === 'Running'
                                         }"
-                                    style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                    style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                     </td>
                                     <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
                                   </tr>
                             <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/Cockroach.png" style="height:25px;"> CockroachDB</a></td>
+                              <td><a><img src="/assets/images/workloads-logos/Cockroach.png" > CockroachDB</a></td>
                               <td class="tablerowtext">Statefulset-2 Replicas</td>
                               <td class="tablerowtext">0.8.1-RC3</td>
                               <td class="tablerowtext">3</td>
@@ -131,18 +131,18 @@
                                     'display':cockdbcstorStatus === 'Running',
                                     'hide':cockdbcstorStatus !== 'Running'
                                   }"
-                            style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                            style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                         <span [ngClass]="{
                                     'display':cockdbcstorStatus !== 'Running',
                                     'hide':cockdbcstorStatus === 'Running'
                                   }"
-                          style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                          style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                               </td>
                               <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
                             </tr>
                         
                             <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/Redis.png" style="height:25px;"> Redis</a></td>
+                              <td><a><img src="/assets/images/workloads-logos/Redis.png" > Redis</a></td>
                               <td class="tablerowtext">Statefulset-2 Replicas</td>
                               <td class="tablerowtext">0.8.1-RC3</td>
                               <td class="tablerowtext">3</td>
@@ -151,17 +151,17 @@
                                     'display':rediscstorStatus === 'Running',
                                     'hide':rediscstorStatus !== 'Running'
                                   }"
-                            style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                            style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                         <span [ngClass]="{
                                     'display':rediscstorStatus !== 'Running',
                                     'hide':rediscstorStatus === 'Running'
                                   }"
-                          style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                          style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                               </td>
                               <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
                             </tr>
                             <tr class="tabledatarow">
-                                <td><a><img class="img-logo" src="/assets/images/workloads-logos/Prometheus.png" style="height:25px;"> Prometheus</a></td>
+                                <td><a><img class="img-logo" src="/assets/images/workloads-logos/Prometheus.png" > Prometheus</a></td>
                                 <td class="tablerowtext">Deployment-1 Replicas</td>
                                 <td class="tablerowtext">0.8.1-RC3</td>
                                 <td class="tablerowtext">3</td>
@@ -170,12 +170,12 @@
                                       'display':prometheuscstorStatus === 'Running',
                                       'hide':prometheuscstorStatus !== 'Running'
                                     }"
-                              style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                              style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                           <span [ngClass]="{
                                       'display':prometheuscstorStatus !== 'Running',
                                       'hide':prometheuscstorStatus === 'Running'
                                     }"
-                            style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                            style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
                               </tr>
@@ -189,18 +189,18 @@
                                         'display':grafanaStatus === 'Running',
                                         'hide':grafanaStatus !== 'Running'
                                       }"
-                                style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                             <span [ngClass]="{
                                         'display':grafanaStatus !== 'Running',
                                         'hide':grafanaStatus === 'Running'
                                       }"
-                              style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                              style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                   </td>
                                   <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
                                 </tr>
                                 
                                 <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/MINIO.png" style="height:25px;"> Minio</a></td>
+                                  <td><a><img src="/assets/images/workloads-logos/MINIO.png" > Minio</a></td>
                                   <td class="tablerowtext">Deployment-1 Replicas</td>
                                   <td class="tablerowtext">0.8.1-RC3</td>
                                   <td class="tablerowtext">3</td>
@@ -209,12 +209,12 @@
                                         'display':minioStatus === 'Running',
                                         'hide':minioStatus !== 'Running'
                                       }"
-                                style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                             <span [ngClass]="{
                                         'display':minioStatus !== 'Running',
                                         'hide':minioStatus === 'Running'
                                       }"
-                              style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                              style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                   </td>
                                   <td><a class="dashboardbox" href="/minio-cstor">Dashboard</a></td>
                                 </tr>
@@ -228,12 +228,12 @@
                                           'display':wordpressStatus === 'Running',
                                           'hide':wordpressStatus !== 'Running'
                                         }"
-                                  style="color:#539A49;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
+                                  style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
                               <span [ngClass]="{
                                           'display':wordpressStatus !== 'Running',
                                           'hide':wordpressStatus === 'Running'
                                         }"
-                                style="color: #D20000;font-family: 'Lato',sans-serif!important; font-style: normal;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
+                                style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                     </td>
                                     <td><a class="dashboardbox" href="/Wordpress-nfs">Dashboard</a></td>
                                   </tr>
