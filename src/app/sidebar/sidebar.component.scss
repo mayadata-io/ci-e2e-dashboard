@@ -112,3 +112,12 @@ li:focus{
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 }
+.sidebarBottom{
+  color:#00ABFF;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0; 
+}
+li i{
+  font-size:30px;
+}
