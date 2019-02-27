@@ -44,4 +44,7 @@ export class KubernetsService {
             }
         })
     }
+    getOpenebsVersion() {
+        return this.http.get<listNamespace>(this.apiurl + "pod/openebsversion");
+    }
 }

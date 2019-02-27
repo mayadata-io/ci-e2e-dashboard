@@ -1,117 +1,40 @@
- .nav-link1.active{ 
-    background: rgba(100,194,225,1);
-    background: -moz-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(100,194,225,1)), color-stop(100%, rgba(52,143,192,1)));
-    background: -webkit-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -o-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: -ms-linear-gradient(left, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    background: linear-gradient(to right, rgba(100,194,225,1) 0%, rgba(52,143,192,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c2e1', endColorstr='#348fc0', GradientType=1 );
+.workloadContainer{
+    height:100%;
+    background-color:#EFF2F6;
+}
 h5{
     color: #DFE2E5;
 }
+th i{
+    color: linear-gradient
 }
 h5{
     color: #7491AB;
 }
 
-.card{
-    margin-right: 2rem;
-    margin-bottom: 1rem;
-    width:14rem;
-
-    .card-body{
-        padding: 1rem;
-    }
-    .applications-color{
-        padding-top: 2rem;
-        background-image: -webkit-linear-gradient(270deg, #34ADFF 88%, #FFF 30%);
-    }
-    .elasticsearch-bg{
-        background-image: -webkit-linear-gradient(270deg, #F4BD19 88%, #FFF 30%);   
-    }
-    .postgresql-bg{
-        background-image: -webkit-linear-gradient(270deg, #336791 88%, #FFF 30%); 
-    }
-    .redis-bg{
-        background-image: -webkit-linear-gradient(270deg, #A41C13 88%, #FFF 30%); 
-    }
-    .grafana-bg{
-        background-image: -webkit-linear-gradient(270deg, rgb(238, 118, 70) 88%, #FFF 30%); 
-    }
-    .prometheus-bg{
-        background-image: -webkit-linear-gradient(270deg, #E6522C 88%, #FFF 30%); 
-    }
-    .cockdb-bg{
-        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
-    }
-    .percona-bg{
-        background-image: -webkit-linear-gradient(270deg, #d20000 88%, #FFF 30%); 
-    }
-    .mongo-bg{
-        background-image: -webkit-linear-gradient(270deg, #539A49 88%, #FFF 30%); 
-    }
-    .wordpress-bg{
-        background-image: -webkit-linear-gradient(270deg, #31373D 88%, #FFF 30%); 
-    }
-    .nuodb-bg{
-        background-image: -webkit-linear-gradient(270deg, #B5D118 88%, #FFF 30%);   
-    }
-    .mongo-bg{
-
-    }
-    .minio-bg{
-        background-image: -webkit-linear-gradient(270deg, #000 88%, #FFF 30%); 
-    }
-    .workload-title-img{
-        height: 28px;
-        width: auto;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-    .status-application{
-        width: 50%;
-        border-radius: 2rem;
-        margin:0 auto;
-        color: #fff;
-        font-size: 12px;
-    }
-    .status-active{
-        background-color: #539A49;
-    }
-    .status-inactive{
-        background-color:  #D20000;
-    }
-    .card-img-top{
-        height: 60px;
-        width: 60px;
-        border-radius:50%;
-        padding: 0.1rem;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-        background-color: #fff;
-    }
-    .list-group-item{
-        border-top:3px solid #B4DEFF;
-        border-bottom:3px solid #B4DEFF;
-        color: #354052;
-        padding-top:0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    .dashboard-hyperlink{
-        background-color: rgba(183, 224, 255, 0.4969);;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        color: #2197F0;
-
-        :hover{
-            text-decoration: underline;
-        }
-    }
+.status-active{
+    background-color: #539A49;
 }
-.nav-link1{
-    border: 1px solid  rgba(100,194,225,1);
-    height: 80px;
-    padding: 2px 20px;
+.status-inactive{
+    background-color:  #D20000;
+}
+
+.list-group-item{
+    border-top:3px solid #B4DEFF;
+    border-bottom:3px solid #B4DEFF;
+    color: #354052;
+    padding-top:0.5rem;
+    padding-bottom: 0.5rem;
+}
+.dashboard-hyperlink{
+    background-color: rgba(183, 224, 255, 0.4969);;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    color: #2197F0;
+
+    :hover{
+        text-decoration: underline;
+    }
 }
 .display{
     display: block;
@@ -119,26 +42,22 @@ h5{
 .hide{
     display: none;
 }
-p{
-    font-size: 0.8rem;
-}
-#workloadlist {
-    font-family:sans-serif;
+#myTable {
     font-style: normal;
     color: rgb(28, 41, 58);
     border-collapse: collapse;
     width: 100%;
-    border-radius: 15px 50px 30px;
-    border:solid white 1px;
+    // border-radius: 15px 50px 30px;
+    // border:solid white 1px;
     border-radius:6px;
-    border-spacing: 5px;
+    // border-spacing: 5px;
     min-width: 350px;
     margin-top: 2rem;
 }
-#workloadlist td{
+#myTable td{
     padding: 8px;
 }
-#workloadlist th {
+#myTable th {
     border-collapse: collapse;
     text-align: center;
     font-family: 'Open Sans',sans-serif!important;
@@ -148,104 +67,93 @@ p{
     padding-top: 10px;
     padding-bottom: 10px;
 }
-#workloadlist th:first-child{
+#myTable th:first-child{
     text-align: left
 }
-#workloadlist tr td:first-child{
+#myTable tr td:first-child{
     text-align: left
 }
-#workloadlist .headtext{
+#myTable .headtext{
     text-align: center;
 }
-#workloadlist .headrow{
-    border-bottom:0.5px solid rgba(100,194,225,1);
+#myTable .headrow{
+    border-bottom:2px solid #D0D3E2;
+    border-top:2px solid #D0D3E2;
+    background-color: rgb(255, 255, 255);
 }
-#workloadlist .tablerowtext{
+#myTable .tablerowtext{
     text-align: center;
-    font-family: 'Open Sans',sans-serif!important;
+    font-family: 'Lato',sans-serif;
     font-style: normal;
-    font-size: 13px;
+    font-size: 14px;
     color: #141823;
 }
-#workloadlist .tabledatarow{
-    border-bottom-width: 1px;
-    border-bottom-style: dotted;
-    border-bottom-color: rgba(100,194,225,1);
-}
-#workloadlist .tabledatarow{
+#myTable .tabledatarow{
     text-align: center;
-    text-decoration-style: solid;
-}
-.workloadmainbox{
-    margin-top: 50px;
-    margin-right:25px;
-    position: absolute;
-    width: 205.79px;
-    height: 330.62px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.workloadlogocolour{
-    position: absolute;
-    width: 100%;
-    height: 25%;
-    background-color: #D20000;
-}
-.workloadbalance{
-    margin-top: 90px;
-    width: 100%;
-    margin-top: 87px;
-    height: 215px;
-    text-align: center;
-}
-.workloadlogo{
-    background-color: white;
-    position: absolute;
-    border-radius: 50%;
-    border: 0.5px solid rgb(246, 247, 243);
-    margin-top: 35px;
-    margin-left: 76px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.workloadlogo img {
-    object-fit: fill;
-    padding-left: 3px;
-    border-top-width: 5px;
-    border-bottom-width: 1px;
-    width: 57px;
-    margin-top: 0px;
-    height: 55px;
-    padding-bottom: 2px;
-    height:58px;width:57px;
-}
-.active{
-  color: #495057;
-}
-.inactive{
-    color:#ced4da;
-}
-.viewtype{
-    font-size: 20px;
-    padding: 0.2rem
-}
-.jivacstor{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-family: Lato;
-    font-size: 12px;
-    text-align: center;
-    border-top-style: solid ;
-    border-bottom-style: solid;
-    border-color: #B4DEFF;
-    color: #354052;
+    // text-decoration-style: solid;
 }
 .dashboardbox{
-    font-size: 12px;
     font-style: normal;
     line-height: normal;
     font-size: 14px;
-    color: rgb(8, 8, 8);
+    color: #00ABFF;
     :hover{
         text-decoration-line: underline;
     }
 }
-
+.badge-gradient-success {
+    background-color: #B8F8E0;
+    color: #003E31;
+}
+.badge-gradient-danger {
+    background-color: #ffb8bd;
+    color: #700B0B;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #EFEFF2;
+    border-radius: 20px;
+  }
+  input[type=text] {
+    width: 18%;
+    box-sizing: border-box;
+    border: 2px solid #d0d3e2;
+    border-radius: 8px;
+    font-size: 12px;
+    font-style: italic;
+    background-color: white;
+    // background-image: url('/src/assets/images/icons/search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 7px 20px 7px 5px;
+  }
+.tabledatarow{
+    span{
+        font-size: 12px;
+        font-weight: normal;
+    }
+    img{
+        transition: transform .3s;
+        height: 25px;
+    }
+}
+.tabledatarow:hover{
+img{
+        -ms-transform: scale(1.7); /* IE 9 */
+        -webkit-transform: scale(1.7); /* Safari 3-8 */
+        transform: scale(1.7);
+}
+}
+table tr:nth-of-type(odd){
+    background-color: rgba(239,239,242,0.4);
+}
+.ciHeading{
+    padding-left:15px;
+    h1{
+        font-size: 18px;
+        color: #6179a0;
+    }
+    h2{
+        font-size: 14px;
+        color: #7F8FA4;
+    }
+}

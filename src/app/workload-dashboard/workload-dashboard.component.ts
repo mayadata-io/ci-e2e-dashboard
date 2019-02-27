@@ -9,6 +9,8 @@ import { Meta,Title } from "@angular/platform-browser";
   templateUrl: "./workload-dashboard.component.html",
   styleUrls: ["./workload-dashboard.component.scss"]
 })
+
+
 export class WorkloadDashboardComponent implements OnInit {
   public grafanaStatus: any;
   public mongocstorStatus: any;
@@ -24,6 +26,8 @@ export class WorkloadDashboardComponent implements OnInit {
   public jivastatuscount = 0;
   public cStorstatuscount =0; 
   public viewType:number = 0;  // 0: grid view 1:table view
+  public openebsVersion : any ;
+
 
   constructor(private kubernetsServices: KubernetsService, private meta: Meta,private titleService: Title) {
     this.titleService.setTitle( "workloads dashboard" );
@@ -34,10 +38,14 @@ export class WorkloadDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.kubernetsServices.getOpenebsVersion().subscribe( res => {
+      this.openebsVersion = res ;
+    })
     timer(0, 500000).subscribe(x => {
           this.jivastatuscount = 0;
            this.cStorstatuscount =0; 
-   
+  
       this.kubernetsServices.getAllstatus("percona-cstor").subscribe(res => {
         this.perconacstorStatus = res.status;
         if(res.status == 'Running'){
@@ -105,10 +113,13 @@ export class WorkloadDashboardComponent implements OnInit {
         }
       });
     });
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
   }
-
-  chooseViewType(viewtype:number){
-    this.viewType = viewtype;
-  }
-
 }

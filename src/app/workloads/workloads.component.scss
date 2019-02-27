@@ -37,38 +37,109 @@ padding-left: 15px;
 }
 
 .VLine{
-    border-left: 1.4px solid rgb(175, 210, 236);padding-left: 15px;
+    border-left: 1.4px solid rgb(175, 210, 236);padding-left: 50px;
 
 }
-    input[type='radio']:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: rgb(255, 255, 255);;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid #3F9BC8;
-        }
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: rgb(255, 255, 255);;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #3F9BC8;
+    }
 
-    input[type='radio']:checked:after {
-        width: 20px;
-        height: 20px;
-        border-radius: 15px;
-        top: -3px;
-        left: -2px;
-        padding: 2px;
-        position: relative;
-        background-color: #F05A2B;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 5px double rgb(255, 255, 255);
-       }
-   
-       
+input[type='radio']:checked:after {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    top: -3px;
+    left: -2px;
+    padding: 2px;
+    position: relative;
+    background-color: #F05A2B;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 5px double rgb(255, 255, 255);
+    }
+.loadGen{
+    font-size: 18px;
+}
+.goBtn{
+width: 50px;
+}
+.mayactlVol{
+    font-size: 14px;
+    font-style: italic;
+}
+.mayactlData{
+    font-size: 14px;
+}
+.fo-sz-12{
+    font-size: 12px;
+}
+.fo-sz-14{
+    font-size: 14px;
+}
+.fo-sz-15{
+    font-size: 15px;
+}
+.fo-sz-18{
+    font-size: 18px;
+}
+.line-h-8{
+    line-height: 0.8;
+}
+.litmusBox{
+    background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;
+}
+.litmusNote{
+    background-color:#F2F4F6;border-radius: 0.4rem;padding: 1rem;
+}
+.litmusCompleate{
+    width: 100px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
+}
+.litmusJob{
+    width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.litmusPod{
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.litPodStart{
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.litRunning{
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.jobCreated{
+    width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.litmusGoButton{
+    width:50px; visibility: hidden;margin-top: 7px;
+}
+.workloadImg{
+    color:#354052 ;max-width: 30ch;overflow: hidden;
+}      
 
     
