@@ -9,9 +9,9 @@ import { Meta,Title } from '@angular/platform-browser';
 
 const PIPELINE_MAP = {
   gke: 0,
-  packet: 1,
+  aks: 1,
   eks: 2,
-  aks: 3,
+  packet: 3,
   gcp: 4,
   aws: 5
 };
@@ -361,8 +361,8 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'PACKET') {
-      this.image = 'packet.svg'
+    else if (cloud == 'AKS') {
+      this.image = 'aks.svg'
       this.name = cloud;
       this.kubernetesVersion = "1.9.11";
       if (data != undefined) {

@@ -35,20 +35,20 @@
               <tr class="text-center">
                 <th>Trigger</th>
                 <th>Build</th>
-                <th style="text-align:center">E2E Pipelines</th>
+                <th class="text-center">E2E Pipelines</th>
               </tr>
               <tr class="text-center">
                 <td></td>
                 <td></td>
-                <td class="d-flex align-items-center justify-content-center" >
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="32px;" src="/assets/images/cloud/gke.png">
-                    <p style="font-size: 13px;">GKE</p>
+                <td class="d-flex align-items-center justify-content-center platform" >
+                  <span class="mx-4 disabled"><img class="platformImg" height="32px;" src="/assets/images/cloud/gke.png">
+                    <p>GKE</p>
                   </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="32px;" src="/assets/images/cloud/packet.png">
-                    <p style="font-size: 13px;">PACKET</p>
+                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg">
+                    <p style="font-size: 13px;">AKS</p>
                   </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="32px;" src="/assets/images/cloud/eks.png">
-                    <p style="font-size: 13px;">EKS</p>
+                  <span class="mx-4 disabled"><img class="platformImg" height="32px;" src="/assets/images/cloud/eks.png">
+                    <p>EKS</p>
                   </span>
                   
                 </td>
@@ -90,20 +90,20 @@
                       </ng-template>
                     </ng-template>
                   </span>
-                  <!-- Packet PIPELINES -->
+                  <!-- AKS PIPELINES -->
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}"
-                    [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('PACKET', i, restItems.dashboard);"
+                    [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][1]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'running';else donutGraphPacket" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
-                    <ng-template #donutGraphPacket>
-                      <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'pending';else statusGraphPacket" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                      <ng-template #statusGraphPacket>
+                    <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'running';else donutGraphAks" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
+                    <ng-template #donutGraphAks>
+                      <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'pending';else statusGraphAks" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
+                      <ng-template #statusGraphAks>
                         <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                           <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                           <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
                             stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
                           <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'packet')"
+                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')"
                             stroke-dashoffset="22.5"></circle>
                         </svg>
                   </ng-template> 

@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-white border px-0 ">
-  <div class="container-fluid" style="display: block">
+  <div class="container-fluid d-block">
     <div class="row">
         <div class="w-100 headbar">
           <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">    
             <ul class="navbar-nav mr-auto">
               <li>
-                <span style="margin-top:30px;" class="header-text">{{header}}</span>
+                <span class="header-text">{{header}}</span>
               </li>
             </ul>
             <ul class="navbar-nav mr-right ">
                 <li class="my-2  my-lg-0 form-inline head-top-icon">
-                    <a style="margin-right:15px;" placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-light fas fa-heart head-icons"></a>
-                    <a style="margin-right:15px; margin-left:15px;" data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="btn btn-sm btn-outline-light fas fa-envelope-open-text head-icons"></a>
-                    <a style="margin-left:15px;" ngbTooltip="Join Community"  placement="left" href="https://slack.openebs.io"  class="btn btn-sm btn-outline-light fab fa-slack head-icons"></a>
+                    <a placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-light fas fa-heart head-icons"></a>
+                    <a data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="btn btn-sm btn-outline-light fas fa-envelope-open-text head-icons mx-5"></a>
+                    <a ngbTooltip="Join Community"  placement="left" href="https://slack.openebs.io"  class="btn btn-sm btn-outline-light fab fa-slack head-icons"></a>
                 </li>
             </ul>
         </div>
@@ -22,22 +22,22 @@
 </nav>
 <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribe" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div style="width:120%" class="modal-content">
+    <div class="modal-content w-120">
 
       <div *ngIf="setFormChange == false; else second;">
-        <div class="modal-body" style="padding-bottom:2rem;padding-top:1.5rem">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span style="padding-right: 7px;">×</span></button>
+        <div class="modal-body pb-2 pt-2">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="pr-1">×</span></button>
           <div class="text-center">
             <i class="far fa-envelope-open"></i>
-            <h3 style="font-weight: bold; padding-top: 15px; padding-bottom: 10px;">Subscribe to our newsletter</h3>
-            <p style="color: #999; padding-bottom: 10px;">Join our subscribers list to get the latest newsletter and updates delivered directly to your inbox.</p>
+            <h3 class="font-weight-bold subscribeLine">Subscribe to our newsletter</h3>
+            <p class="joinLine">Join our subscribers list to get the latest newsletter and updates delivered directly to your inbox.</p>
           </div>
           <form class="form-view theme2 b-d" novalidate [formGroup]="leadForm" (ngSubmit)="formSubmit()">
-            <div class="d-flex flex-column justify-content-md-between mx-auto" style="width:80%">
+            <div class="d-flex flex-column justify-content-md-between mx-auto w-80">
               <div class="form-group required-control newsletter-input-1">
                 <div class="input-group">
-                  <div class="input-group-prepend" style="width:14%">
-                    <span class="input-group-text" style="padding-bottom:0.4rem;width:100%;background-color: #F3F4F5"
+                  <div class="input-group-prepend w-14">
+                    <span class="input-group-text w-100 bg-light pb-1"
                       id="basic-addon1"> <img class="my-0 mx-auto" src="/assets/images/icons/man.svg" alt=""></span>
                   </div>
                   <input maxlength="250" id="agilefield-1" name="first_name" id="agilefield-1" formControlName="name"
@@ -49,8 +49,8 @@
               </div>
               <div class="form-group required-control newsletter-input-2">
                 <div class="input-group">
-                  <div class="input-group-prepend" style="width:14%">
-                    <span class="input-group-text" style="padding-bottom:0.4rem;width:100%;background-color: #F3F4F5"
+                  <div class="input-group-prepend w-14">
+                    <span class="input-group-text p-0 w-100 bg-white" 
                       id="basic-addon1"> <img class="my-0" src="/assets/images/icons/envelope.svg" alt=""> </span>
                   </div>
                   <input maxlength="250" id="agilefield-3" name="email" type="email" id="agilefield-2" formControlName="email"
@@ -60,9 +60,9 @@
                   }">
                 </div>
               </div>
-              <div class="agile-group float-center" style="display: flex; justify-content: center; align-items: center;">
-                <button type="submit" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom" id="slacksubmit"
-                  data-toggle="modal" data-target="#openebsnewsletterthanks" [disabled]="!leadForm.valid" style="font-size:14px;width: 100%;padding-bottom: 0.5rem;padding-top: 0.5rem">Subscribe
+              <div class="agile-group float-centerd-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom subscribeBtn" id="slacksubmit"
+                  data-toggle="modal" data-target="#openebsnewsletterthanks" [disabled]="!leadForm.valid">Subscribe
                 </button>
               </div>
             </div>
@@ -70,11 +70,11 @@
         </div>
       </div>
       <ng-template #second>
-        <div class="modal-body text-center" style="padding:0;">
+        <div class="modal-body text-center p-0">
           <div class="modal-body pd-t-b-heading1">
               <img class=" m-t-b-2" src="/assets/images/icons/news.svg" alt="" height="80">
-            <img src="/assets/images/icons/check.svg" alt="" style="display:block;margin:25px auto">
-            <p class="mb-0" style="color: #7C7C7C">Thank you for signing up with OpenEBS Newsletter</p>
+            <img class="d-block m-2 " src="/assets/images/icons/check.svg" alt="">
+            <p class="mb-0 text-secondary" >Thank you for signing up with OpenEBS Newsletter</p>
           </div>
         </div>
       </ng-template>

@@ -4,7 +4,9 @@ h5{
 .cursor-pointer {
   cursor: pointer;
 }
-
+li i{
+  font-size:30px;
+}
 a,
 a:hover,
 a:focus {
@@ -118,6 +120,4 @@ li:focus{
   position: absolute;
   bottom: 0; 
 }
-li i{
-  font-size:30px;
-}
+
