@@ -1,0 +1,12 @@
+{
+  "SIDEBAR": {
+    "HOME": "Overview",
+    "DASHBOARD": "Ci/E2E Dashboard",
+    "WORKLOADS": "Workload Dashboard",
+    "ORGANISATION": "MayaData.Inc"
+  },
+  "WORKLOAD-DASHBOARD": {
+    "TITLE": "Live deployments of stateful applications",
+    "SUBTITLE": "Workloads using Openebs PVs"
+  }
+}
