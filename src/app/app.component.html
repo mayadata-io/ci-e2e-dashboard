@@ -9,11 +9,11 @@
             <div class="scrollbar bodyContent" id="scrollbar">
                 <router-outlet></router-outlet>
             </div>
-            <div class="row fixed-bottom" >
+            <div  *ngIf="vendor == 'false'" class="row fixed-bottom" >
                 <div class="col-md-12 text-right" >
                     <a href="https://docs.openebs.io/" target="_blank" placement="left" ngbTooltip="About Openebs">
                         <img src="assets/images/company-logos/openebs.svg" alt="">
-                        <span>&nbsp;v0.8.1&nbsp;&nbsp;</span>
+                        <span> v0.8.1 </span>
                     </a>
                 </div>
             </div>
