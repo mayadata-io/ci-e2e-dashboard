@@ -1,27 +1,9 @@
-import {
-  Router,
-  RouterEvent,
-  NavigationStart,
-  NavigationEnd,
-  NavigationError
-} from "@angular/router";
+import { Router } from "@angular/router";
 import * as $ from "jquery";
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  NgModule,
-  Pipe
-} from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
-  MinLengthValidator
-} from "@angular/forms";
+import { Component,OnInit } from "@angular/core";
+import { FormGroup,FormControl,Validators } from "@angular/forms";
 import { AgileService } from "../services/agile.services";
+import { TranslateModule, TranslateService } from 'angular-intl';
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -32,12 +14,13 @@ export class HeaderComponent implements OnInit {
   public header: string;
   leadForm: FormGroup;
   name: FormControl;
+  public vendor: any = false;
   email: FormControl;
   companyname: FormControl;
   isFormEmpty: boolean = false;
   setFormChange: boolean = false;
   mdTag: string = 'OpenEBS OE Newsletter';
-  constructor(private router: Router, private headerService: AgileService) {
+  constructor(private router: Router, private headerService: AgileService, public translateService: TranslateService) {
     router.events.subscribe(val => {
       this.currentRoute = this.router.url;
       if (this.currentRoute === "/") {
@@ -47,6 +30,9 @@ export class HeaderComponent implements OnInit {
       } else {
         this.header = "Workloads Dashboard";
       }
+    });
+    this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {
+      this.vendor = value;
     });
   }
 

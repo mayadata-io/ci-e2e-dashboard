@@ -6,7 +6,7 @@ import { WorkloadsComponent } from "./workloads/workloads.component";
 import { OverviewComponent } from "./overview/overview.component";
 
 const routes: Routes = [
-  //routes with out header and footer
+  //routes without header and footer
   { path: "", component: TableComponent },
   { path: "workload-dashboard", component: WorkloadDashboardComponent },
   { path: "mongo-jiva", component: WorkloadsComponent },
@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: "postgresql-jiva", component: WorkloadsComponent },
   { path: "postgresql-cstor", component: WorkloadsComponent },
   { path: "nuodb-cstor", component: WorkloadsComponent },
-
   { path: "overview", component: OverviewComponent },
   { path: ":workload", component: WorkloadsComponent }
 ];

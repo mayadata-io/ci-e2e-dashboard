@@ -61,8 +61,6 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
 })
 export class AppModule {
   constructor(public translateService: TranslateService) {
-    const defaultPrefix = 'default';
-    const browserLanguage = this.translateService.getBrowserLanguage();
-    this.translateService.setDefault(`${defaultPrefix}-${browserLanguage}`);
+    this.translateService.setDefault('default-en');
   }
  }
