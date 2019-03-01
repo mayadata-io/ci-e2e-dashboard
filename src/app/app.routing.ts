@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
 
 import { TableComponent } from "./table/table.component";
 import { WorkloadDashboardComponent } from "./workload-dashboard/workload-dashboard.component";
@@ -29,4 +30,9 @@ const routes: Routes = [
   { path: ":workload", component: WorkloadsComponent }
 ];
 
-export const Routing = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ],
+})
+
+export class AppRoutingModule  {}
