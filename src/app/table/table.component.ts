@@ -10,12 +10,12 @@ import { Router } from "@angular/router";
 import { TranslateService } from 'angular-intl';
 
 const PIPELINE_MAP = {
-  gke: 0,
-  aks: 1,
-  eks: 2,
-  packet: 3,
-  gcp: 4,
-  aws: 5
+  packet1: 0,
+  packet2: 1,
+  packet3: 2,
+  // packet: 3,
+  // gcp: 4,
+  // aws: 5
 };
 
 @Component({
@@ -84,7 +84,7 @@ export class TableComponent implements OnInit {
               break;
             }
           }
-        this.detailPannel('GKE', this.initialCount, data);
+        this.detailPannel('PACKET1', this.initialCount, data);
         index = 0;
       }
     }, 500);
@@ -362,8 +362,8 @@ export class TableComponent implements OnInit {
     setTimeout( () => {
       this.showSpinnerDetails = false;
     }, 500);
-    if (cloud == 'GKE') {
-      this.image = 'gke.svg'
+    if (cloud == 'PACKET1') {
+      this.image = 'packet.svg'
       this.name = cloud;
       this.kubernetesVersion = "1.9.7";
       if (data != undefined) {
@@ -374,8 +374,8 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'AKS') {
-      this.image = 'aks.svg'
+    else if (cloud == 'PACKET2') {
+      this.image = 'packet.svg'
       this.name = cloud;
       this.kubernetesVersion = "1.9.11";
       if (data != undefined) {
@@ -386,51 +386,14 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'EKS') {
-      this.image = 'eks.svg'
+    else if (cloud == 'PACKET3') {
+      this.image = 'packet.svg'
       this.name = cloud;
       this.kubernetesVersion = "1.10.3";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][2][index].jobs != undefined) {
           var pipelineData = data['pipelines'][2]
           this.status = 3;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-    else if (cloud == 'Packet') {
-      this.image = 'packet.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.0";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][3][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][3]
-          this.status = 4;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-    else if (cloud == 'GCP') {
-      this.image = 'gcp.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.11.1";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][4][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][4]
-        this.status = 5;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-
-    else if (cloud == 'AWS') {
-      this.image = 'aws.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.0";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][5][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][5]
-          this.status = 6;
           this.detailsDatas(index, pipelineData, data)
         }
       }

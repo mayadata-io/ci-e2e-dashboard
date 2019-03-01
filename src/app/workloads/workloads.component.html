@@ -65,13 +65,13 @@
             <br>
             <div class="col-md-12 d-flex justify-content-around workloads my-3">          
               <div class="workload-deatils mx-2 divideLine text-secondary w-33"  *ngFor="let pvc of pvcarray">
-                  <img src="/assets/images/workloads-logos/{{workloadName}}.svg" height="28" alt="">
+                  <img src="/assets/images/workloads-logos/{{workloadName}}.png" height="30" alt="">
                 <div *ngFor="let statefulset of statefullSets">
                   <p *ngIf="statefulset.pvc === pvc.name ">
                     <span placement="bottom"
                       ngbTooltip="{{statefulset.name}}">
                       {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
-                    <img height:13px; [ngClass]="{
+                    <img height="13" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
                   }"
@@ -80,7 +80,7 @@
                     'display':statefulset.status !== 'Running',
                     'hide':statefulset.status === 'Running'
                   }"
-                      src="/assets/images/icons/inactive.png" alt="" height:13px;>
+                      src="/assets/images/icons/inactive.png" alt="" height="13">
                   </p>
                 </div>
                 <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" class="mr-2">
@@ -130,7 +130,7 @@
             <hr>
               <p class="mb-0 p-2 bg-white pr-0 loadGen">Load Generation</p>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-                <div class="d-flex align-items-end justify-content-between w-60 text-secondary">
+                <div class="d-flex align-items-end justify-content-between w-50 text-secondary">
                   <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
                     Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom goBtn" 
                     (click)="save()">Go</button>
@@ -142,7 +142,7 @@
                 </div>
               </div>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-                <div class="d-flex align-items-end justify-content-between w-60 text-secondary">
+                <div class="d-flex align-items-end justify-content-between w-50 text-secondary">
                   <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
                     Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom goBtn"
                     (click)="read()">Go</button>
@@ -197,16 +197,10 @@
     </div>
 
     <div class="col-md-4">
-      <!-- <div class="row my-2">
-      <div class="col-md-12">
-        <img src="/assets/images/company-logos/litmuslogo.svg" alt="">
-        <p>Run the live chaos test</p>
-      </div>
-      </div> -->
       <div class="row my-2 " >
         <div class="col-md-12 pr-0">
 
-          <div class="bg-white text-center rounded shadow-lg pt-6 pb-4">
+          <div class="bg-white text-center rounded shadow pt-6 pb-4">
             <img class="w-55" src="/assets/images/company-logos/litmuslogo.svg" alt="">
             <p class="mb-0 font-italic text-secondary fo-sz-12" >Run live chaos test</p>
           </div>
@@ -217,9 +211,6 @@
             role="alert" *ngIf="isAlert">
             {{ alertMessage }}
           </div>
-          <!-- <div id="captchaform"> -->
-          
-          <!-- </div> -->
           <table class="table table-borderless bg-white pt-1 mb-0 rounded" id="captchaform">
             <tbody class="text-secondary fo-sz-12">
               <tr>
