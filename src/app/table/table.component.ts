@@ -364,8 +364,8 @@ export class TableComponent implements OnInit {
     }, 500);
     if (cloud == 'PACKET1') {
       this.image = 'packet.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.9.7";
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.11.8";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][0][index].jobs != undefined) {
           var pipelineData = data['pipelines'][0]
@@ -376,8 +376,8 @@ export class TableComponent implements OnInit {
     }
     else if (cloud == 'PACKET2') {
       this.image = 'packet.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.9.11";
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.12.6";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][1][index].jobs != undefined) {
           var pipelineData = data['pipelines'][1]
@@ -388,8 +388,8 @@ export class TableComponent implements OnInit {
     }
     else if (cloud == 'PACKET3') {
       this.image = 'packet.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.3";
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.13.4";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][2][index].jobs != undefined) {
           var pipelineData = data['pipelines'][2]
