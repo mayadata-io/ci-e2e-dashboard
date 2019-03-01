@@ -15,11 +15,11 @@ export class AgileService {
   constructor(private http: HttpClient) {
     this.host = window.location.host;
     if (this.host == "localhost:4200") {
-      this.apiurl = "https://localhost:3000/";
+      this.apiurl = "http://localhost:3000/";
     } else if (this.host == "staging.openebs.io") {
-      this.apiurl = "https://workloads.openebs.ci/";
+      this.apiurl = "http://workloads.openebs.ci/";
     } else {
-      this.apiurl = "https://workloads.openebs.ci/";
+      this.apiurl = "http://workloads.openebs.ci/";
     }
   }
 
