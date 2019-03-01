@@ -26,6 +26,7 @@ const PIPELINE_MAP = {
 export class TableComponent implements OnInit {
 
   id: any;
+  setDetail: any;
   host: any;
   items = [];
   restItems: any;
@@ -74,7 +75,7 @@ export class TableComponent implements OnInit {
     // TODO
     var index = 1;
     this.getRestItems();
-    setInterval(() => {
+    this.setDetail = setInterval(() => {
       if (index == 1) {
         var data = this.getRestItems();
           for (var i = 0; i < data.pipelines[0].length; i++) {
@@ -122,6 +123,7 @@ export class TableComponent implements OnInit {
   ngOnDestroy() {
     if (this.id) {
       clearInterval(this.id);
+      clearInterval(this.setDetail);
     }
   }
 
