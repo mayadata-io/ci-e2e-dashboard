@@ -17,9 +17,9 @@ export class AgileService {
     if (this.host == "localhost:4200") {
       this.apiurl = "http://localhost:3000/";
     } else if (this.host == "staging.openebs.io") {
-      this.apiurl = "http://workloads.openebs.ci/";
+      this.apiurl = "https://staging.mayadata.io/api/";
     } else {
-      this.apiurl = "http://workloads.openebs.ci/";
+      this.apiurl = "https://openebs.io/api/";
     }
   }
 
