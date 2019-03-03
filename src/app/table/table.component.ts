@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta,Title } from '@angular/platform-browser';
+import { Router } from "@angular/router";
+import { TranslateService } from 'angular-intl';
 
 const PIPELINE_MAP = {
   gke: 0,
@@ -24,6 +26,7 @@ const PIPELINE_MAP = {
 export class TableComponent implements OnInit {
 
   id: any;
+  setDetail: any;
   host: any;
   items = [];
   restItems: any;
@@ -31,7 +34,16 @@ export class TableComponent implements OnInit {
   initialCount = 0;
   public showSpinnerTable:boolean = true; 
   public showSpinnerDetails:boolean = true; 
-  constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
+  public vendor: any = false;
+  constructor(private router: Router, private http: HttpClient,private meta:Meta,private titleService: Title, public translateService: TranslateService ) {
+    // Routing to overview page is vendor is true
+    this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {
+      this.vendor = value;
+      if (this.vendor == "true") {
+        this.router.navigate(['/overview']);
+      }
+    });
+    // ------------------
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.restItemsUrl = "http://localhost:3000";
@@ -63,7 +75,7 @@ export class TableComponent implements OnInit {
     // TODO
     var index = 1;
     this.getRestItems();
-    setInterval(() => {
+    this.setDetail = setInterval(() => {
       if (index == 1) {
         var data = this.getRestItems();
           for (var i = 0; i < data.pipelines[0].length; i++) {
@@ -111,6 +123,7 @@ export class TableComponent implements OnInit {
   ngOnDestroy() {
     if (this.id) {
       clearInterval(this.id);
+      clearInterval(this.setDetail);
     }
   }
 

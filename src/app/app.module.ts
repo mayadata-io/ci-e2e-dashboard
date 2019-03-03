@@ -6,7 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TranslateModule, TranslateService } from 'angular-intl';
-import { Routing } from './app.routing';
+import { AppRoutingModule } from './app.routing';
 
 import { PersonService } from './services/savereaddelete.service';
 import { KubernetsService } from './services/kubernetes.service';
@@ -40,7 +40,7 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
   imports: [
     BrowserModule,
     HttpClientModule,
-    Routing,
+    AppRoutingModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
@@ -61,8 +61,6 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
 })
 export class AppModule {
   constructor(public translateService: TranslateService) {
-    const defaultPrefix = 'default';
-    const browserLanguage = this.translateService.getBrowserLanguage();
-    this.translateService.setDefault(`${defaultPrefix}-${browserLanguage}`);
+    this.translateService.setDefault('default-en');
   }
  }
