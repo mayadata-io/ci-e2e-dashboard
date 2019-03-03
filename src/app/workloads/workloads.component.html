@@ -71,7 +71,7 @@
                     <span placement="bottom"
                       ngbTooltip="{{statefulset.name}}">
                       {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
-                    <img height:13px; [ngClass]="{
+                    <img height="13" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
                   }"
@@ -80,7 +80,7 @@
                     'display':statefulset.status !== 'Running',
                     'hide':statefulset.status === 'Running'
                   }"
-                      src="/assets/images/icons/inactive.png" alt="" height:13px;>
+                      src="/assets/images/icons/inactive.png" alt="" height="13">
                   </p>
                 </div>
                 <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" class="mr-2">
@@ -130,7 +130,7 @@
             <hr>
               <p class="mb-0 p-2 bg-white pr-0 loadGen">Load Generation</p>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-                <div class="d-flex align-items-end justify-content-between w-60 text-secondary">
+                <div class="d-flex align-items-end justify-content-between W-80 text-secondary">
                   <p class="mb-0" placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
                     Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom goBtn" 
                     (click)="save()">Go</button>
@@ -142,7 +142,7 @@
                 </div>
               </div>
               <div class="d-flex align-items-end justify-content-between p-2 bg-white">
-                <div class="d-flex align-items-end justify-content-between w-60 text-secondary">
+                <div class="d-flex align-items-end justify-content-between W-80 text-secondary">
                   <p class="mb-0" placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
                     Operations</p> <button class="btn btn-pill btn-secondary action-button btn-sm btn-outline-custom goBtn"
                     (click)="read()">Go</button>
