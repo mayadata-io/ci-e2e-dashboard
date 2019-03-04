@@ -2,6 +2,15 @@
     height:100%;
     background-color:#EFF2F6;
 }
+.workloadDashBg{
+    height: 88vh;
+    margin-right: 2px;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+  }
 h5{
     color: #DFE2E5;
 }
