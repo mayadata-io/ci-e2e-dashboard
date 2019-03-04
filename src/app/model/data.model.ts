@@ -239,3 +239,11 @@ export interface jobname{
   jobname:string;
   litmusName:string;
 }
+
+export interface allApplication{
+  status: string;
+  name: string;
+  namespace: string;
+  kind: string;
+  apiurl: string;
+}
