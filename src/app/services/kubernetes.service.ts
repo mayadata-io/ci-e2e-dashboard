@@ -59,7 +59,7 @@ export class KubernetsService {
     }
 
     getAllApplication(){
-        return this.http.get<allApplication>(this.apiurl + "pod/statuses")
+        return this.http.get<allApplication>(this.workloadApiUrl + "pod/statuses")
     }
     getGitLabApplication(){
         return this.http.get<allApplication>(this.gitLabApiUrl + "pod/statuses")
