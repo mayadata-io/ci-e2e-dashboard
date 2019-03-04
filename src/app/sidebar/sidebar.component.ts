@@ -3,7 +3,6 @@ import { KubernetsService } from "../services/kubernetes.service";
 // import { jiva,cstor } from "../model/data.model";
 import { RouterLinkActive } from '@angular/router';
 import { TranslateModule, TranslateService } from 'angular-intl';
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
