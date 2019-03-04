@@ -10,12 +10,9 @@ import { Router } from "@angular/router";
 import { TranslateService } from 'angular-intl';
 
 const PIPELINE_MAP = {
-  packet1: 0,
-  packet2: 1,
-  packet3: 2,
-  // packet: 3,
-  // gcp: 4,
-  // aws: 5
+  PACKETK8SV11: 0,
+  PACKETK8SV12: 1,
+  PACKETK8SV13: 2,
 };
 
 @Component({
@@ -84,7 +81,7 @@ export class TableComponent implements OnInit {
               break;
             }
           }
-        this.detailPannel('PACKET1', this.initialCount, data);
+        this.detailPannel('PACKETK8SV11', this.initialCount, data);
         index = 0;
       }
     }, 500);
@@ -362,7 +359,7 @@ export class TableComponent implements OnInit {
     setTimeout( () => {
       this.showSpinnerDetails = false;
     }, 500);
-    if (cloud == 'PACKET1') {
+    if (cloud == 'PACKETK8SV11') {
       this.image = 'packet.svg'
       this.name = 'PACKET';
       this.kubernetesVersion = "1.11.8";
@@ -374,7 +371,7 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'PACKET2') {
+    else if (cloud == 'PACKETK8SV12') {
       this.image = 'packet.svg'
       this.name = 'PACKET';
       this.kubernetesVersion = "1.12.6";
@@ -386,7 +383,7 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'PACKET3') {
+    else if (cloud == 'PACKETK8SV13') {
       this.image = 'packet.svg'
       this.name = 'PACKET';
       this.kubernetesVersion = "1.13.4";
