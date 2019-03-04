@@ -8,7 +8,7 @@
                 <span class="header-text">{{header}}</span>
               </li>
             </ul>
-            <ul class="navbar-nav mr-right ">
+            <ul *ngIf="vendor == 'false'" class="navbar-nav mr-right">
                 <li class="my-2  my-lg-0 form-inline head-top-icon">
                     <a placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-light fas fa-heart head-icons"></a>
                     <a data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="btn btn-sm btn-outline-light fas fa-envelope-open-text head-icons mx-5"></a>

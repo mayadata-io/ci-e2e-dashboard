@@ -14,229 +14,52 @@
                         <table class="table" id="myTable" >
                             <tr class="headrow header"  >
                               <th class="headtext">Applications</th>
-                              <th class="headtext"> Replicas</th>
+                              <th class="headtext"> Kind</th>
                               <th class="headtext"> OpenEBS V</th>
                               <th class="headtext"> Replicas/pv</th>
                               <th class="headtext"> Status</th>
                               <th class="headtextaccess"> <i class="fas fa-link"></i> Access </th>
                             </tr>
-                            <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/mongo.png" > MongoDB</a></td>
-                                <td class="tablerowtext">Statefulset-2 Replicas</td>
+                            <tr class="tabledatarow" *ngFor="let app of allApplications">
+                                <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png" > {{app.name}}</a></td>
+                                <td class="tablerowtext">{{app.kind}}</td>
                                 <td class="tablerowtext">0.8.1</td>
                                 <td class="tablerowtext">3</td>
                                 <td>
                                     <span [ngClass]="{
-                                      'display':mongocstorStatus === 'Running',
-                                      'hide':mongocstorStatus !== 'Running'}"
+                                      'display':app.status === 'Running',
+                                      'hide':app.status !== 'Running'}"
                                       style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
                                     </span>
                                     <span [ngClass]="{
-                                      'display':mongocstorStatus !== 'Running',
-                                      'hide':mongocstorStatus === 'Running'}"
+                                      'display':app.status !== 'Running',
+                                      'hide':app.status === 'Running'}"
                                       style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
-                                  <a class="dashboardbox" href="/mongo-cstor">Dashboard</a>
+                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="kubernetsServices.setApiUrl(app.apiurl)">Dashboard</a>
                                 </td>
                             </tr>
-                            <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/nuodb.png" > Nuodb</a></td>
-                                <td class="tablerowtext">Statefulset-1 Replicas</td>
+                            <tr class="tabledatarow" *ngFor="let app of gitlabApplication">
+                                <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png" > {{app.name}}</a></td>
+                                <td class="tablerowtext">{{app.kind}}</td>
                                 <td class="tablerowtext">0.8.1</td>
                                 <td class="tablerowtext">3</td>
                                 <td>
                                     <span [ngClass]="{
-                                      'display':nuodbcstorStatus === 'Running',
-                                      'hide':nuodbcstorStatus !== 'Running'}"
+                                      'display':app.status === 'Running',
+                                      'hide':app.status !== 'Running'}"
                                       style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
                                     </span>
                                     <span [ngClass]="{
-                                      'display':nuodbcstorStatus !== 'Running',
-                                      'hide':nuodbcstorStatus === 'Running'}"
+                                      'display':app.status !== 'Running',
+                                      'hide':app.status === 'Running'}"
                                       style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
-                                  <a class="dashboardbox" href="/nuodb-cstor">Dashboard</a>
+                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="kubernetsServices.setApiUrl(app.apiurl)">Dashboard</a>
                                 </td>
                             </tr>
-                                <tr class="tabledatarow">
-                                <td><a><img src="/assets/images/workloads-logos/postgresql.png" > Postgresql</a></td>
-                                <td class="tablerowtext">Statefulset-2 Replicas</td>
-                                <td class="tablerowtext">0.8.1</td>
-                                <td class="tablerowtext">3</td>
-                                <td>
-                                    <span [ngClass]="{
-                                      'display':postgresqlcstorStatus === 'Running',
-                                      'hide':postgresqlcstorStatus !== 'Running'
-                                    }"
-                                    style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                                    <span [ngClass]="{
-                                      'display':postgresqlcstorStatus !== 'Running',
-                                      'hide':postgresqlcstorStatus === 'Running'
-                                    }"
-                                    style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                </td>
-                                <td>
-                                  <a class="dashboardbox" href="/postgresql-cstor">Dashboard</a>
-                                </td>
-                            </tr>
-                            <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/elasticSearch.png" > Elasticsearch</a></td>
-                                  <td class="tablerowtext">Statefulset-1 Replicas</td>
-                                  <td class="tablerowtext">0.8.1</td>
-                                  <td class="tablerowtext">3</td>
-                                  <td>
-                                      <span [ngClass]="{
-                                        'display':elasticsearchcstorStatus === 'Running',
-                                        'hide':elasticsearchcstorStatus !== 'Running'
-                                      }"
-                                      style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                                      <span [ngClass]="{
-                                        'display':elasticsearchcstorStatus !== 'Running',
-                                        'hide':elasticsearchcstorStatus === 'Running'
-                                      }"
-                                      style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                  </td>
-                                  <td>
-                                    <a class="dashboardbox" href="/logging">Dashboard</a>
-                                  </td>
-                            </tr>
-                            <tr class="tabledatarow">
-                                    <td><a><img src="/assets/images/workloads-logos/percona.png" > PerconaDB</a></td>
-                                    <td class="tablerowtext">Deployment-1 Replicas</td>
-                                    <td class="tablerowtext">0.8.1</td>
-                                    <td class="tablerowtext">3</td>
-                                    <td>
-                                        <span [ngClass]="{
-                                          'display':perconacstorStatus === 'Running',
-                                          'hide':perconacstorStatus !== 'Running'
-                                        }"
-                                    style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                                    <span [ngClass]="{
-                                          'display':perconacstorStatus !== 'Running',
-                                          'hide':perconacstorStatus === 'Running'
-                                        }"
-                                    style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                    </td>
-                                    <td><a class="dashboardbox" href="/percona-cstor">Dashboard</a></td>
-                                  </tr>
-                            <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/cockroach.png" > CockroachDB</a></td>
-                              <td class="tablerowtext">Statefulset-2 Replicas</td>
-                              <td class="tablerowtext">0.8.1</td>
-                              <td class="tablerowtext">3</td>
-                              <td>
-                                  <span [ngClass]="{
-                                    'display':cockdbcstorStatus === 'Running',
-                                    'hide':cockdbcstorStatus !== 'Running'
-                                  }"
-                            style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                        <span [ngClass]="{
-                                    'display':cockdbcstorStatus !== 'Running',
-                                    'hide':cockdbcstorStatus === 'Running'
-                                  }"
-                          style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                              </td>
-                              <td><a class="dashboardbox" href="/cockroachdb-cstor "> Dashboard</a> </td>
-                            </tr>
-                        
-                            <tr class="tabledatarow">
-                              <td><a><img src="/assets/images/workloads-logos/redis.png" > Redis</a></td>
-                              <td class="tablerowtext">Statefulset-2 Replicas</td>
-                              <td class="tablerowtext">0.8.1</td>
-                              <td class="tablerowtext">3</td>
-                              <td>
-                                  <span [ngClass]="{
-                                    'display':rediscstorStatus === 'Running',
-                                    'hide':rediscstorStatus !== 'Running'
-                                  }"
-                            style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                        <span [ngClass]="{
-                                    'display':rediscstorStatus !== 'Running',
-                                    'hide':rediscstorStatus === 'Running'
-                                  }"
-                          style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                              </td>
-                              <td><a class="dashboardbox"  href="/redis-cstor">Dashboard</a></td>
-                            </tr>
-                            <tr class="tabledatarow">
-                                <td><a><img class="img-logo" src="/assets/images/workloads-logos/prometheus.png" > Prometheus</a></td>
-                                <td class="tablerowtext">Deployment-1 Replicas</td>
-                                <td class="tablerowtext">0.8.1</td>
-                                <td class="tablerowtext">3</td>
-                                <td>
-                                    <span [ngClass]="{
-                                      'display':prometheuscstorStatus === 'Running',
-                                      'hide':prometheuscstorStatus !== 'Running'
-                                    }"
-                              style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                          <span [ngClass]="{
-                                      'display':prometheuscstorStatus !== 'Running',
-                                      'hide':prometheuscstorStatus === 'Running'
-                                    }"
-                            style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                </td>
-                                <td><a class="dashboardbox" href="/prometheus-cstor">Dashboard</a></td>
-                              </tr>
-                              <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/grafana.png" height="18"> Grafana</a></td>
-                                  <td class="tablerowtext">Deployment-1 Replicas</td>
-                                  <td class="tablerowtext">0.8.1</td>
-                                  <td class="tablerowtext">3</td>
-                                  <td>
-                                      <span [ngClass]="{
-                                        'display':grafanaStatus === 'Running',
-                                        'hide':grafanaStatus !== 'Running'
-                                      }"
-                                style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                            <span [ngClass]="{
-                                        'display':grafanaStatus !== 'Running',
-                                        'hide':grafanaStatus === 'Running'
-                                      }"
-                              style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                  </td>
-                                  <td><a class="dashboardbox" href="/grafana-cstor">Dashboard</a></td>
-                                </tr>
-                                
-                                <tr class="tabledatarow">
-                                  <td><a><img src="/assets/images/workloads-logos/minio.png" > Minio</a></td>
-                                  <td class="tablerowtext">Deployment-1 Replicas</td>
-                                  <td class="tablerowtext">0.8.1</td>
-                                  <td class="tablerowtext">3</td>
-                                  <td>
-                                      <span [ngClass]="{
-                                        'display':miniocstorStatus === 'Running',
-                                        'hide':miniocstorStatus !== 'Running'
-                                      }"
-                                style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                            <span [ngClass]="{
-                                        'display':miniocstorStatus !== 'Running',
-                                        'hide':miniocstorStatus === 'Running'
-                                      }"
-                              style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                  </td>
-                                  <td><a class="dashboardbox" href="/minio-cstor">Dashboard</a></td>
-                                </tr>
-                                <tr class="tabledatarow">
-                                    <td><a><img src="/assets/images/workloads-logos/wordpress.png" height="20"> Wordpress</a></td>
-                                    <td class="tablerowtext">Deployment-1 Replicas</td>
-                                    <td class="tablerowtext">0.8.1</td>
-                                    <td class="tablerowtext">3</td>
-                                    <td>
-                                        <span [ngClass]="{
-                                          'display':wordpressStatus === 'Running',
-                                          'hide':wordpressStatus !== 'Running'
-                                        }"
-                                  style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span></span>
-                              <span [ngClass]="{
-                                          'display':wordpressStatus !== 'Running',
-                                          'hide':wordpressStatus === 'Running'
-                                        }"
-                                style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                    </td>
-                                    <td><a class="dashboardbox" href="/Wordpress-nfs">Dashboard</a></td>
-                                  </tr>
                         </table> 
                       </div>
                   </div> 

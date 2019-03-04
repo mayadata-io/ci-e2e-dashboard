@@ -1,9 +1,11 @@
 {
+  "VENDOR" : "false",
   "SIDEBAR": {
     "HOME": "Overview",
     "DASHBOARD": "Ci/E2E Dashboard",
     "WORKLOADS": "Workload Dashboard",
-    "ORGANISATION": "MayaData.Inc"
+    "ORGANISATION": "MayaData.Inc",
+    "DASHBOARD-URL": ""
   },
   "WORKLOAD-DASHBOARD": {
     "TITLE": "Live deployments of stateful applications",
