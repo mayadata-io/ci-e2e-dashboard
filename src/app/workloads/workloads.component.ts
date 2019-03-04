@@ -166,9 +166,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
 
     // this.routeSub = this.route.params.subscribe(params =>{
     // });
-    this.kubernetsServices.getOpenebsVersion().subscribe( res => {
-      this.openebsVersion = res ;
-    })
 
     this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
