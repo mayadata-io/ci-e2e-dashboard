@@ -77,6 +77,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public selectedApplication = "";
   public writeStatus = false;
   public readStatus = false;
+  public openebsVersion : any ;
   public alphabet = [
     "a",
     "b",

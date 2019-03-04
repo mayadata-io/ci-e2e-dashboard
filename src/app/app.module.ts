@@ -5,7 +5,8 @@ import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { Routing } from './app.routing';
+import { TranslateModule, TranslateService } from 'angular-intl';
+import { AppRoutingModule } from './app.routing';
 
 import { PersonService } from './services/savereaddelete.service';
 import { KubernetsService } from './services/kubernetes.service';
@@ -39,11 +40,12 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
   imports: [
     BrowserModule,
     HttpClientModule,
-    Routing,
+    AppRoutingModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    TranslateModule.forRoot({ path: '/assets/languages/' })
   ],
   providers: [
     PersonService,
@@ -57,4 +59,8 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
   bootstrap: [AppComponent],
   exports: [RouterModule,RouterLinkActive]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(public translateService: TranslateService) {
+    this.translateService.setDefault('default-en');
+  }
+ }

@@ -20,12 +20,10 @@
         </li>
         <li style="pointer-events:none;" class="nav-item">
           <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
-         
           </a>
         </li>
         <li style="pointer-events:none; cursor:pointer;" class="nav-item">
           <a class="nav-link" href="#references" role="tab" data-toggle="tab">
-      
           </a>
         </li>
       </ul>
@@ -37,20 +35,20 @@
               <tr class="text-center">
                 <th>Trigger</th>
                 <th>Build</th>
-                <th style="text-align:center">E2E Pipelines</th>
+                <th class="text-center">E2E Pipelines (PACKET) </th>
               </tr>
               <tr class="text-center">
                 <td></td>
                 <td></td>
-                <td class="d-flex align-items-center justify-content-center" >
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/gke.svg">
-                    <p style="font-size: 13px;">GKE</p>
+                <td class="d-flex align-items-center justify-content-center platform " style="pointer-events: none;" >
+                  <span class="mx-4"><img class="platformImg" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p style="font-size: 13px;">1.11.8</p>
                   </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/aks.svg">
-                    <p style="font-size: 13px;">AKS</p>
+                  <span class="mx-4"><img style="padding:2px;" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p style="font-size: 13px;">1.12.6</p>
                   </span>
-                  <span style="pointer-events: none;" class="mx-4"><img style="padding:2px;" height="26px;" src="/assets/images/cloud/eks.svg">
-                    <p style="font-size: 13px;">EKS</p>
+                  <span class="mx-4"><img class="platformImg" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p style="font-size: 13px;">1.13.4</p>
                   </span>
                   
                 </td>
@@ -75,7 +73,7 @@
                 <td class="d-flex justify-content-center">
                   <!-- GKE PIPELINES -->
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][0]) }}"
-                    [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('GKE', i, restItems.dashboard);"
+                    [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="detailPannel('PACKETK8SV11', i, restItems.dashboard);"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][0]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
                     <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][0]) == 'running';else donutGraphGke" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
                     <ng-template #donutGraphGke>
@@ -86,7 +84,7 @@
                           <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
                             stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
                           <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'gke')"
+                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'PACKETK8SV11')"
                             stroke-dashoffset="22.5"></circle>
                         </svg>
                       </ng-template>
@@ -94,7 +92,7 @@
                   </span>
                   <!-- AKS PIPELINES -->
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][1]) }}"
-                    [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('AKS', i, restItems.dashboard);"
+                    [ngClass]="{'highlight': (status == 2 && i==rowCount())}" (click)="detailPannel('PACKETK8SV12', i, restItems.dashboard);"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][1]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
                     <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][1]) == 'running';else donutGraphAks" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
                     <ng-template #donutGraphAks>
@@ -105,7 +103,7 @@
                           <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
                             stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
                           <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'aks')"
+                            stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'PACKETK8SV12')"
                             stroke-dashoffset="22.5"></circle>
                         </svg>
                   </ng-template> 
@@ -113,7 +111,7 @@
                   </span>
                   <!-- EKS PIPELINES -->
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, restItems.dashboard['pipelines'][2]) }}"
-                    [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('EKS', i, restItems.dashboard);"
+                    [ngClass]="{'highlight': (status == 3 && i==rowCount())}" (click)="detailPannel('PACKETK8SV13', i, restItems.dashboard);"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, restItems.dashboard['pipelines'][2]) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
                     <i *ngIf="pipelineTooltip(i, restItems.dashboard['pipelines'][2]) == 'running';else donutGraphEks" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i>
                     <ng-template #donutGraphEks>
@@ -124,7 +122,7 @@
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
                         stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
                       <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-                        stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'eks')"
+                        stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, restItems.dashboard, 'PACKETK8SV13')"
                         stroke-dashoffset="22.5"></circle>
                     </svg>
                   </ng-template>  

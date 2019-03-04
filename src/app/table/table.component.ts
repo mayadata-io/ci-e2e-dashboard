@@ -6,14 +6,13 @@ import * as $ from 'jquery';
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta,Title } from '@angular/platform-browser';
+import { Router } from "@angular/router";
+import { TranslateService } from 'angular-intl';
 
 const PIPELINE_MAP = {
-  gke: 0,
-  aks: 1,
-  eks: 2,
-  packet: 3,
-  gcp: 4,
-  aws: 5
+  PACKETK8SV11: 0,
+  PACKETK8SV12: 1,
+  PACKETK8SV13: 2,
 };
 
 @Component({
@@ -24,6 +23,7 @@ const PIPELINE_MAP = {
 export class TableComponent implements OnInit {
 
   id: any;
+  setDetail: any;
   host: any;
   items = [];
   restItems: any;
@@ -31,7 +31,16 @@ export class TableComponent implements OnInit {
   initialCount = 0;
   public showSpinnerTable:boolean = true; 
   public showSpinnerDetails:boolean = true; 
-  constructor(private http: HttpClient,private meta:Meta,private titleService: Title ) {
+  public vendor: any = false;
+  constructor(private router: Router, private http: HttpClient,private meta:Meta,private titleService: Title, public translateService: TranslateService ) {
+    // Routing to overview page is vendor is true
+    this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {
+      this.vendor = value;
+      if (this.vendor == "true") {
+        this.router.navigate(['/overview']);
+      }
+    });
+    // ------------------
     this.host = window.location.host;
     if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.restItemsUrl = "http://localhost:3000";
@@ -63,7 +72,7 @@ export class TableComponent implements OnInit {
     // TODO
     var index = 1;
     this.getRestItems();
-    setInterval(() => {
+    this.setDetail = setInterval(() => {
       if (index == 1) {
         var data = this.getRestItems();
           for (var i = 0; i < data.pipelines[0].length; i++) {
@@ -72,7 +81,7 @@ export class TableComponent implements OnInit {
               break;
             }
           }
-        this.detailPannel('GKE', this.initialCount, data);
+        this.detailPannel('PACKETK8SV11', this.initialCount, data);
         index = 0;
       }
     }, 500);
@@ -111,6 +120,7 @@ export class TableComponent implements OnInit {
   ngOnDestroy() {
     if (this.id) {
       clearInterval(this.id);
+      clearInterval(this.setDetail);
     }
   }
 
@@ -349,10 +359,10 @@ export class TableComponent implements OnInit {
     setTimeout( () => {
       this.showSpinnerDetails = false;
     }, 500);
-    if (cloud == 'GKE') {
-      this.image = 'gke.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.9.7";
+    if (cloud == 'PACKETK8SV11') {
+      this.image = 'packet.svg'
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.11.8";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][0][index].jobs != undefined) {
           var pipelineData = data['pipelines'][0]
@@ -361,10 +371,10 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'AKS') {
-      this.image = 'aks.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.9.11";
+    else if (cloud == 'PACKETK8SV12') {
+      this.image = 'packet.svg'
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.12.6";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][1][index].jobs != undefined) {
           var pipelineData = data['pipelines'][1]
@@ -373,51 +383,14 @@ export class TableComponent implements OnInit {
         }
       }
     }
-    else if (cloud == 'EKS') {
-      this.image = 'eks.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.3";
+    else if (cloud == 'PACKETK8SV13') {
+      this.image = 'packet.svg'
+      this.name = 'PACKET';
+      this.kubernetesVersion = "1.13.4";
       if (data != undefined) {
         if (data.build[index].jobs != undefined && data['pipelines'][2][index].jobs != undefined) {
           var pipelineData = data['pipelines'][2]
           this.status = 3;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-    else if (cloud == 'Packet') {
-      this.image = 'packet.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.0";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][3][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][3]
-          this.status = 4;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-    else if (cloud == 'GCP') {
-      this.image = 'gcp.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.11.1";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][4][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][4]
-        this.status = 5;
-          this.detailsDatas(index, pipelineData, data)
-        }
-      }
-    }
-
-    else if (cloud == 'AWS') {
-      this.image = 'aws.svg'
-      this.name = cloud;
-      this.kubernetesVersion = "1.10.0";
-      if (data != undefined) {
-        if (data.build[index].jobs != undefined && data['pipelines'][5][index].jobs != undefined) {
-          var pipelineData = data['pipelines'][5]
-          this.status = 6;
           this.detailsDatas(index, pipelineData, data)
         }
       }
