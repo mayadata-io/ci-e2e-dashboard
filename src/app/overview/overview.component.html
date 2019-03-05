@@ -1,27 +1,55 @@
-<div class="col-md-12" style="overflow-y: scroll;height: 900px;">
+<div class="col-md-12 " style="overflow-y: scroll;height: 88vh;padding-bottom: 10px;font-family: 'Lato', sans-serif;">
   <div class="bg-white p-5">
-    <h1 class="my-3 text-center" >CI/E2E Portal Overview</h1>
-    <h3 class="my-2">CI/E2E dashboard:</h3>
-    <p class="py-3" style="color:#54576b">This CI/E2E portal is built to be used both by OpenEBS developer and user community. Developers and users get
-      the
-      detailed test report across various release branches include the master branch. </p>
-    <img class="img-fluid" src="/assets/images/cidashboard.png" style="padding-right:20px;padding-left:5px" alt="">
-    <p class="py-5" style="color:#54576b">The successful builds of OpenEBS from master are deployed onto various live deployments that are hosted on
-      Kubernetes cluster deployed currently on GKE. These reference stateful workloads are deployed for both the
-      storage
-      engines Jiva and cStor. </p>
-      <img class="img-fluid" src="/assets/images/workload-dashboard.png" style="padding-right:20px;padding-left:5px" alt="">
+    <h1 class="my-3 text-center border rounded shadow-sm" >CI/E2E Portal Overview</h1>
+    <h3>Workloads-Dashboard</h3>
+    <div class="row my-5 border-left border-right rounded ">
+        <div class="col-md-8 ">
+            <img class="img-overview shadow-lg" src="/assets/images/workload-dashboard.png"  alt="">
+        </div>
+      <div class="col-md-4 text-left">
+          <p class="py-5" style="color:#54576b">The successful builds of OpenEBS from master are deployed onto various live deployments that are hosted on
+              Kubernetes cluster deployed currently on GKE. These reference stateful workloads are deployed for both the
+              storage
+              engines Jiva and cStor. </p>
+      </div>
+    </div>
+    <h3 class="my-5">CI/E2E dashboard:</h3>
+    <div class="row my-5 py-5 border-left border-right rounded">
+      <div class="col-md-3 text-center ">
+          <p class="py-3" style="color:#54576b">This CI/E2E portal is built to be used both by OpenEBS developer and user community. Developers and users get
+            the
+            detailed test report across various release branches include the master branch. 
+          </p>
+      </div>
+      <div class="col-md-9 text-center">
+          <img class="img-overview shadow-lg" src="/assets/images/cidashboard.svg" alt="">
+      </div>
+    </div>
     <h3 class="pt-5 ">Stateful workloads using OpenEBS</h3>
-    <p class="py-3" style="color:54576b">This portal also provides resource summary dashboard for each stateful workload.</p>
-    <img class="img-fluid" src="/assets/images/mongo-dashboard.png" style="padding-right:20px;padding-left:5px" alt="">
-    <p class="py-5" style="color:#54576b">As shown above the users can see the details (status of each replica and on which node it is running) of both
-      application and OpenEBS pods (controllers & replicas)</p>
+    <div class="row my-5  text-left border-left border-right rounded">
+        <div class="col-md-8">
+            <img class="img-overview shadow-lg" src="/assets/images/mongo-dashboard.png"  alt="">
+        </div>
+        <div class="col-md-4">
+            <p class="py-3" style="color:54576b">This portal also provides resource summary dashboard for each stateful workload.</p>
+            <p class="py-5" style="color:#54576b">As shown above the users can see the details (status of each replica and on which node it is running) of both
+                application and OpenEBS pods (controllers & replicas)</p>
+        </div>
+    </div>    
     <h3 class="my-2">Running chaos tests on live deployments:</h3>
-    <p class="py-3" style="color:#54576b">End users can run ready chaos tests against the live deployment by choosing the test on the portal itself. When
-      the test is run, they can see the status of Kubernetes resources changing accordingly in the real time and how
-      OpenEBS continues to provide data availability to the stateful application.</p>
-      <img class="img-fluid" src="/assets/images/complete-litmus.png" style="padding-right:20px;padding-left:5px" alt="">
+    <div class="row my-5  text-center border-left border-right rounded">
+      <div class="col-md-5">
+          <p class="py-3" style="color:#54576b">End users can run ready chaos tests against the live deployment by choosing the test on the portal itself. When
+              the test is run, they can see the status of Kubernetes resources changing accordingly in the real time and how
+              OpenEBS continues to provide data availability to the stateful application.</p>
+      </div>
+      <div class="col-md-7 text-center my-2">
+          <img class="img-overview shadow-lg my-auto" src="/assets/images/complete-litmus.png" height="20" alt="">
+      </div>
+    </div>
       <h3 class="pt-5 " style="margin-bottom:2rem;">Chaos test result</h3>
-      <img class="img-fluid" src="/assets/images/runnig-litmus-test.png" style="padding-right:20px;padding-left:5px" alt="">
+      <div class=" text-center border-left border-right rounded">
+      <img class="img-overview shadow-lg" src="/assets/images/runnig-litmus-test.png"  alt="">
+    </div>
   </div>
 </div>
