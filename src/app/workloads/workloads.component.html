@@ -64,7 +64,7 @@
             </div>
             <br>
             <div class="col-md-12 d-flex justify-content-around workloads my-3">          
-              <div class="workload-deatils mx-2 divideLine text-secondary w-33"  *ngFor="let pvc of pvcarray">
+              <div class="workload-deatils mx-2 divideLine text-secondary w-25"  *ngFor="let pvc of pvcarray">
                   <img src="/assets/images/workloads-logos/{{workloadName}}.png" height="30" alt="">
                 <div *ngFor="let statefulset of statefullSets">
                   <p *ngIf="statefulset.pvc === pvc.name ">
