@@ -48,12 +48,9 @@ export class TableComponent implements OnInit {
   public clusterCleanup: any;
   public appDeprovision: any;
   public kubernetesVersion: any;
-  public awsData: any;
-  public eksData: any;
-  public aksData: any;
-  public gcpData: any;
-  public gkeData: any;
-  public packetData: any;
+  public packetV11Data: any;
+  public packetV12Data: any;
+  public packetV13Data: any;
   public buildData: any;
   public vendor: any = false;
 
@@ -89,17 +86,17 @@ export class TableComponent implements OnInit {
     });
 
     this.getData = timer(0, 5000).subscribe(x => {
-      this.DashboardDatas.getEksDetails().subscribe(data => {
+      this.DashboardDatas.getPacketv11Details().subscribe(data => {
         this.showSpinnerTable = false;
-        this.eksData = data;
+        this.packetV11Data = data;
       });
-      this.DashboardDatas.getAksDetails().subscribe(data => {
+      this.DashboardDatas.getPacketv12Details().subscribe(data => {
         this.showSpinnerTable = false;
-        this.aksData = data;
+        this.packetV12Data = data;
       });
-      this.DashboardDatas.getGkeDetails().subscribe(data => {
+      this.DashboardDatas.getPacketv13Details().subscribe(data => {
         this.showSpinnerTable = false;
-        this.gkeData = data;
+        this.packetV13Data = data;
       });
       this.DashboardDatas.getBuildDetails().subscribe(data => {
         this.showSpinnerTable = false;
@@ -108,9 +105,9 @@ export class TableComponent implements OnInit {
     });
 
     this.selectCell = timer(0, 1000).subscribe(x => {
-      if (this.index == 1 && this.buildData != undefined && this.gkeData != undefined) {
+      if (this.index == 1 && this.buildData != undefined && this.packetV11Data != undefined) {
         this.index = 0;
-        this.detailPannel(0, this.gkeData.dashboard, this.buildData.dashboard, 'gke');
+        this.detailPannel(0, this.packetV11Data.dashboard, this.buildData.dashboard, 'packetv11');
       }
     });
     
@@ -143,6 +140,14 @@ export class TableComponent implements OnInit {
     else if (status == "failed") return "fa fa-exclamation-triangle";
     else if (status == "running") return "fa fa-circle-o-notch fa-spin";
   }
+  ifFail(index, data) {
+    if(data[index].status == "pending") {
+      return "fa fa-clock-o btn btn-txt btn-outline-warning"
+    } else {
+      return "fa fa-ban fa-fw"
+    }
+}
+  
   buttonStatusClass(status) {
     if (status == "success") return "btn btn-txt btn-outline-success";
     else if (status == "pending")
@@ -257,6 +262,8 @@ export class TableComponent implements OnInit {
         return "pending"
       } else if(data[index].status == "cancelled") {
         return "cancelled"
+      } else if(data[index].status == "none") {
+        return ""
       } else {
         var passedJobs = this.passed(data[index].jobs)
         var failedJobs = this.failed(data[index].jobs)
@@ -264,6 +271,34 @@ export class TableComponent implements OnInit {
       }
     } catch (e) {
       return "n/a"
+    }
+  }
+  pipelineStatus(index, data) {
+    try {
+      if(data[index].status == "running") {
+        return "running"
+      } else if(data[index].status == "pending") {
+        return "pending"
+      } else if(data[index].status == "cancelled") {
+        return "cancelled"
+      } else if(data[index].status == "none") {
+        console.log("none data ........................................")
+        return "none"
+      } else if(data[index].status == "created") {
+        return "created"
+      } else if(data[index].status == "failed") {
+        return "failed"
+      }
+    } catch (e) {
+      return "n/a"
+    }
+  }  
+
+  pipelineClass(status){
+    if(status == "none"){
+      return "fa fa-ban"
+    } else if(status == "pending"){
+      return "fa fa-clock-o btn btn-txt btn-outline-warning"
     }
   }
 
@@ -296,27 +331,27 @@ export class TableComponent implements OnInit {
     setTimeout( () => {
       this.showSpinnerDetails = false;
     }, 500);
-    if (cloud == "gke") {
-      this.image = 'gke.svg'
-      this.name = "GKE";
-      this.kubernetesVersion = "1.9.7";
+    if (cloud == "packetv11") {
+      this.image = 'packet.svg'
+      this.name = "PACKET";
+      this.kubernetesVersion = "1.11.8";
       this.status = 1;
       this.detailsDatas(index, pipelineData, buildData)
-    } else if (cloud == "aks") {
-      this.image = 'aks.svg'
-      this.name = "AKS";
-      this.kubernetesVersion = "1.9.11";
+    } else if (cloud == "packetv12") {
+      this.image = 'packet.svg'
+      this.name = "PACKET";
+      this.kubernetesVersion = "1.12.6";
       this.status = 2;
       this.detailsDatas(index, pipelineData, buildData)
-    } else if (cloud == "eks") {
-      this.image = 'eks.svg'
-      this.name = "EKS";
-      this.kubernetesVersion = "1.10.3";
+    } else if (cloud == "packetv13") {
+      this.image = 'packet.svg'
+      this.name = "PACKET";
+      this.kubernetesVersion = "1.13.4";
       this.status = 3;
       this.detailsDatas(index, pipelineData, buildData)
     }
   }
-}
+  }
 
   detailsDatas(index, pipelineData, buildData) {
     this.commitMessage = buildData[index].jobs[0].message;
@@ -784,19 +819,19 @@ export class TableComponent implements OnInit {
   }
 
   gitlabStageBuildClass(status) {
-    if (status === "SUCCESS") {
+    if (status === "Success") {
       return "gitlab_stage_build_success";
     }
-    else if (status === "CANCELED" || status === "SKIPPED") {
+    else if (status === "CANCELED" || status === "Skipped") {
       return "gitlab_stage_build_skipped";
     }
-    else if (status === "PENDING") {
+    else if (status === "Pending") {
       return "gitlab_stage_build_pending";
     }
-    else if (status === "RUNNING") {
+    else if (status === "Running") {
       return "gitlab_stage_build_running";
     }
-    else if (status === "FAILED") {
+    else if (status === "Failed") {
       return "gitlab_stage_build_failed";
     }
   }

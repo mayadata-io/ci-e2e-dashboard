@@ -8,19 +8,19 @@ export class DashboardData {
 
     private apiurl: string;
     constructor(private http: HttpClient, private meta:Meta,private titleService: Title) {
-        this.apiurl = "http://147.75.102.37:30002";
+        this.apiurl = "https://openebs.ci/api";
     }
 
-    getEksDetails() {
-        return this.http.get<any[]>(this.apiurl + "/eks");
+    getPacketv11Details() {
+        return this.http.get<any[]>(this.apiurl + "/packet/v11");
     }
 
-    getAksDetails() {
-        return this.http.get<any[]>(this.apiurl + "/aks");
+    getPacketv12Details() {
+        return this.http.get<any[]>(this.apiurl + "/packet/v12");
     }
 
-    getGkeDetails() {
-        return this.http.get<any[]>(this.apiurl + "/gke");
+    getPacketv13Details() {
+        return this.http.get<any[]>(this.apiurl + "/packet/v13");
     }
     getBuildDetails() {
         return this.http.get<any[]>(this.apiurl + "/build");
