@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <div class="row d-flex justify-content-between bg-white my-2 rounded shadow-sm" >
           <div class="d-flex flex-column my-3 mx-2 "  >
-            <img src="/assets/images/workload-logo/{{workloadName}}.svg" alt="" height="40" class="mb-2">
+            <img src="/assets/images/workload-logo/{{workloadName}}.png" alt="" height="40" class="mb-2">
             <div class="ml-2">
               <p class="mb-0 fo-sz-12 text-dark">{{applicationType}} 
                 Replica
@@ -29,7 +29,7 @@
                 <p class="mb-0 fo-sz-12 text-dark"> &nbsp;&nbsp;1.10.7</p>
               </div>
               <p class=" mb-0 fo-sz-12 text-dark">Namespace: {{namespace}} </p>
-              <p class=" mb-0 fo-sz-12 workloadImg">Image: {{workloadImage}}</p>
+              <!-- <p class=" mb-0 fo-sz-12 workloadImg">Image: {{workloadImage}}</p> -->
             </div>
           </div>
         </div>
@@ -64,13 +64,14 @@
             </div>
             <br>
             <div class="col-md-12 d-flex justify-content-around workloads my-3">          
-              <div class="workload-deatils mx-2 divideLine text-secondary w-33"  *ngFor="let pvc of pvcarray">
-                  <img src="/assets/images/workloads-logos/{{workloadName}}.png" height="30" alt="">
+              <div class="workload-deatils mx-2 divideLine text-secondary w-33"  *ngFor="let pvc of pvcarray">                
                 <div *ngFor="let statefulset of statefullSets">
-                  <p *ngIf="statefulset.pvc === pvc.name ">
+                  <div *ngIf="statefulset.pvc === pvc.name ">
+                <img src="/assets/images/workloads-logos/{{statefulset.imageName}}.png" height="30" alt="">
+                  <p >
                     <span placement="bottom"
                       ngbTooltip="{{statefulset.name}}">
-                      {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
+                      {{statefulset.imageName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                     <img height="13" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
@@ -82,12 +83,14 @@
                   }"
                       src="/assets/images/icons/inactive.png" alt="" height="13">
                   </p>
+                </div> 
                 </div>
                 <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" class="mr-2">
                 <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
-                  <p *ngIf="jivaContrller.pvc === pvc.name">
+                  <div *ngIf="jivaContrller.pvc == pvc.name">
+                    <p *ngIf="jivaContrller.name.indexOf(pvc.volumeName)==0">
                     <span
-                      placement="bottom" ngbTooltip="{{jivaContrller.name}}">target</span> on <span placement="bottom"
+                      placement="bottom" ngbTooltip="{{jivaContrller.name}}">Target</span> on <span placement="bottom"
                       ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span>
                     <img height="13" class="ml-2" [ngClass]="{
                   'display':jivaContrller.status === 'Running',
@@ -99,24 +102,8 @@
                   'hide':jivaContrller.status === 'Running'
                 }"
                       src="/assets/images/icons/inactive.png" alt="" height="13" class="ml-2">
-                  </p>
-                </div>
-                <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
-                  <p *ngIf="jivaReplica.pvc === pvc.name">
-                    <span
-                      placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom"
-                      ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span>
-                    <img height="13" class="ml-2" [ngClass]="{
-                    'display':jivaReplica.status === 'Running',
-                    'hide':jivaReplica.status !== 'Running'
-                  }"
-                      src="/assets/images/icons/active.png" alt="">
-                    <img [ngClass]="{
-                    'display':jivaReplica.status !== 'Running',
-                    'hide':jivaReplica.status === 'Running'
-                  }"
-                      src="/assets/images/icons/inactive.png" alt="" height="13" class="ml-2">
-                  </p>
+                    </p>
+                    </div>
                 </div>
               </div>
               <hr>
@@ -154,6 +141,7 @@
                 </div>
               </div>
             </div>
+
           </div>
           <div class="row bg-white" >
             <div class="col-md-12 ">

@@ -14,20 +14,7 @@ import {
 
 
 export class WorkloadDashboardComponent implements OnInit {
-  public grafanaStatus: any;
-  public mongocstorStatus: any;
-  public perconacstorStatus: any;
-  public prometheuscstorStatus: any;
-  public cockdbcstorStatus: any;
-  public wordpressStatus: any;
-  public rediscstorStatus: any;
-  public elasticsearchcstorStatus:any;
-  public postgresqlcstorStatus:any;
-  public nuodbcstorStatus:any;
-  public miniocstorStatus:any;
-  public jivastatuscount = 0;
-  public cStorstatuscount =0; 
-  public viewType:number = 0;  // 0: grid view 1:table view
+
   public openebsVersion : any ;
   public allApplications: allApplication;
   public gitlabApplication : allApplication;
@@ -38,9 +25,11 @@ export class WorkloadDashboardComponent implements OnInit {
       name: "description",
       content: "Live Deployments of all the application "
     });
+    
   }
 
   ngOnInit() {
+
 
     timer(0, 500000).subscribe(x => {
       this.kubernetsServices.getOpenebsVersion().subscribe( res => {
@@ -64,5 +53,10 @@ export class WorkloadDashboardComponent implements OnInit {
         });
       });
     });
+  }
+
+  setApiUrl(apiurl: string){
+    localStorage.setItem('apiurlkey' , apiurl);
+    this.kubernetsServices.setApiUrl(localStorage.getItem('apiurlkey'));
   }
 }
