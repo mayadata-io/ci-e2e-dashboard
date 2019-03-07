@@ -38,6 +38,7 @@ export interface yaml {
   openebsEngine: string;
   applicationType: string;
   dashboardurl: string;
+  urlApi:string;
 }
 export interface statefulSet {
   kind: string;
@@ -49,6 +50,7 @@ export interface statefulSet {
   nodeName: string;
   adjacency: string;
   dockerImage: string;
+  imageName: string;
 }
 
 export interface jivaReplica {
@@ -104,6 +106,7 @@ export interface overAllStatus {
       adjacency: string;
       dockerImage: string;
       node:string;
+      imageName: string;
     }
   ];
   jivaReplica: [
@@ -246,4 +249,9 @@ export interface allApplication{
   namespace: string;
   kind: string;
   apiurl: string;
+  Deployment: {};
+  statefulSet: {};
+  group: string;
+  numberOfDeployment:number;
+  numberOfStatefulset:number;
 }
