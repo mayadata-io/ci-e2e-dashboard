@@ -12,6 +12,7 @@ import { PersonService } from './services/savereaddelete.service';
 import { KubernetsService } from './services/kubernetes.service';
 import { LitmusService } from './services/litmus.services';
 import { AgileService } from './services/agile.services';
+import { DashboardData } from './services/ci-dashboard.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -54,7 +55,8 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
     HttpClient,
     Meta,
     Title,
-    AgileService
+    AgileService,
+    DashboardData
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule,RouterLinkActive]
