@@ -167,6 +167,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     // this.routeSub = this.route.params.subscribe(params =>{
     // });
 
+
     this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
@@ -175,6 +176,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.dashboardurl = res.dashboardurl;
       this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
+      //  this.kubernetsServices.setApiUrl(res.urlApi);
     });
     this.aFormGroup = this.formBuilder.group({
       recaptcha: ['', Validators.required]
@@ -215,8 +217,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.pvc = res.pvc;
           this.pvctemp = res.pvc;
           this.pvcarray = this.pvctemp.pvc;
-          this.workloadImage = this.statefullSets[0].dockerImage;
-          this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
+          // this.workloadImage = this.statefullSets[0].dockerImage;
+          // this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
           this.openebsversion = this.jivaContrllers[0].openebsjivaversion.split(
             ":"
           )[1];

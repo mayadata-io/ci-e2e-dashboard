@@ -8,12 +8,17 @@ export class KubernetsService {
 
     private apiurl: string;
     private host: string;
-    private gitLabApiUrl: string = 'https://workload-gitlab.openebs.ci/';
-    private workloadApiUrl: string = "https://workloads.openebs.ci/"
+    private gitLabApiUrl: string = '';
     constructor(private http: HttpClient) {
         this.host = window.location.host;
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
             this.apiurl = "http://localhost:3000/";
+        }else if(this.host.toString().indexOf("workload-dashboard") == 0){
+            this.apiurl = `/workloads/`;
+            this.gitLabApiUrl = '';
+        }else{
+            this.apiurl = `https://workloads.openebs.ci/`;
+            this.gitLabApiUrl = 'https://workload-gitlab.openebs.ci/';
         }
     }
     
@@ -57,7 +62,7 @@ export class KubernetsService {
     }
 
     getAllApplication(){
-        return this.http.get<allApplication>(this.workloadApiUrl + "pod/statuses")
+        return this.http.get<allApplication>(this.apiurl + "pod/statuses")
     }
     getGitLabApplication(){
         return this.http.get<allApplication>(this.gitLabApiUrl + "pod/statuses")
