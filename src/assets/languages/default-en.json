@@ -2,7 +2,7 @@
   "VENDOR" : "false",
   "SIDEBAR": {
     "HOME": "Overview",
-    "DASHBOARD": "Ci/E2E Dashboard",
+    "DASHBOARD": "CI/E2E Dashboard",
     "WORKLOADS": "Workload Dashboard",
     "ORGANISATION": "MayaData.Inc",
     "DASHBOARD-URL": ""

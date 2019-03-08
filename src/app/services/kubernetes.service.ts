@@ -14,7 +14,7 @@ export class KubernetsService {
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
             this.apiurl = "http://localhost:3000/";
         }else if(this.host.toString().indexOf("workload-dashboard") == 0){
-            this.apiurl = this.host + `/workloads/`;
+            this.apiurl = `/workloads/`;
             this.gitLabApiUrl = '';
         }else{
             this.apiurl = `https://workloads.openebs.ci/`;
