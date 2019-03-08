@@ -5,8 +5,9 @@
 
 .detail {
   background-color: white;
-  height: 885px;
+  height: 88vh;
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
 .details {
@@ -300,13 +301,13 @@ a:hover {
 	overflow: auto;
 }
 
-#scrollbar::-webkit-scrollbar
+::-webkit-scrollbar
 {
   width: 5px;
   height: 5px;
 }
 
-#scrollbar::-webkit-scrollbar-thumb
+::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0,0,0,.3);
