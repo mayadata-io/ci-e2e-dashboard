@@ -94,6 +94,7 @@ export interface pvc {
 }
 export interface overAllStatus {
   status: string;
+  openebsAppName: string;
   statefulSet: [
     {
       kind: string;
