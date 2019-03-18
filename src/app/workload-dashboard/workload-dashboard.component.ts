@@ -1,12 +1,9 @@
-
 import { Component, OnInit } from "@angular/core";
 import { KubernetsService } from "../services/kubernetes.service";
 import * as $ from "jquery";
 import { Subscription, Observable, timer } from "rxjs";
 import { Meta,Title } from "@angular/platform-browser";
-import {
- allApplication
-} from "../model/data.model";
+import { allApplication } from "../model/data.model";
 import { map } from 'rxjs/operators';
 @Component({
  selector: "app-workload-dashboard",
@@ -32,7 +29,7 @@ export class WorkloadDashboardComponent implements OnInit {
 
  ngOnInit() {
   
-   timer(0, 500000).subscribe(x => {
+   timer(0, 300000).subscribe(x => {
 
      this.kubernetsServices.getAllApplication().subscribe( res => {
        for (let index = 0; index < res.length; index++) {
@@ -54,7 +51,6 @@ export class WorkloadDashboardComponent implements OnInit {
 
  setApiUrl(apiurl: string){
    localStorage.setItem('apiurlkey' , apiurl);
-   console.log("hgvjhgvjhgvjhgjhgh")
    this.kubernetsServices.setApiUrl(localStorage.getItem('apiurlkey'));
  }
 }

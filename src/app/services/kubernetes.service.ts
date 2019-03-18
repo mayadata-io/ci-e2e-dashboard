@@ -13,13 +13,10 @@ export class KubernetsService {
    private apiurl: string;
    private host: string;
    private clusterDomain:any;
-   // private workloadapi = `http://localhost:4000/`
    private requestservice :any;
    constructor(private http: HttpClient) {
 
-
        this.host = window.location.host;
-       console.log(this.host);
        if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
         this.http.get("http://localhost:4000/workloads/").subscribe(res => {
             this.clusterDomain =res;
@@ -34,13 +31,11 @@ export class KubernetsService {
   
    setApiUrl(apiUrl: string){
        this.apiurl = apiUrl;
-       console.log(this.apiurl);
    }
    getApiUrl(){
        return this.apiurl;
    }
-   getJivaVolumeDetails(workloadname:string,openebsengine:string) {
-       console.log(this.apiurl);
+   getVolumeDetails(workloadname:string,openebsengine:string) {
        return this.http.get(this.apiurl + "openebs/volume",{
            params:{
                workloadname:workloadname,
@@ -56,9 +51,6 @@ export class KubernetsService {
                volumenamespace: volumenamespace
            }
        });
-   }
-   getListNamespaces() {
-       return this.http.get<listNamespace>(this.apiurl + "pod/applications")
    }
 
    getAllstatus(namespaces: string) {
