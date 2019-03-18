@@ -305,7 +305,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
   public listVolume() {
     this.kubernetsServices
-      .getJivaVolumeDetails(this.workloadName, this.openebsEngine)
+      .getVolumeDetails(this.workloadName, this.openebsEngine)
       .subscribe(res => {
         this.jivaDetail = res;
         this.jivas = this.jivaDetail;
