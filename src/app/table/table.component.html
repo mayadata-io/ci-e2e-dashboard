@@ -1,7 +1,7 @@
 <div class="row">
   <!-- table pannel start -->
   <div class="col-sm-8">
-    <div class="body border">
+    <div class="body border h-100">
       <div class="container">
         <div class="details">
           <h1>CI and E2E summary for commits</h1>
@@ -27,7 +27,7 @@
         </li>
       </ul>
       <!-- Tab panes -->
-      <div class="table container tab-content scrollbar" id="scrollbar">
+      <div class="table container tab-content scrollbar mb-0" id="scrollbar">
         <div role="tabpanel" class="tab-pane active" id="profile">
           <table id="data" class="table table-borderless">
             <thead>
@@ -71,11 +71,10 @@
 
                 <td class="d-flex justify-content-center">
                
-                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}" (click)="detailPannel(i, packetV11Data.dashboard, buildData.dashboard, 'packetv11');"
-                    [ngClass]="{'highlight': (status == 1 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV11Data.dashboard) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                    <i *ngIf="pipelineTooltip(i, packetV11Data.dashboard) == 'running';else donutGraphPacketV11" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
-                    <ng-template #donutGraphPacketV11>
-                      <i *ngIf="pipelineTooltip(i, packetV11Data.dashboard) == 'pending';else statusGraphPacketV11" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
+                    <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}" (click)="detailPannel(i, packetV11Data.dashboard, buildData.dashboard, 'packetv11');"[ngClass]="{'highlight': (status == 1 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV11Data.dashboard) === 'pending' ? 'none' : 'initial' }" style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
+                    <i *ngIf="pipelineTooltip(i, packetV11Data.dashboard) == 'running';else errorGraphPacketV11" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
+                      <ng-template #errorGraphPacketV11>
+                        <i *ngIf="pipelineTooltip(i, packetV11Data.dashboard) == '';else statusGraphPacketV11" style="font-size:19px; cursor: pointer" class='fa fa-ban text-dark'></i>
                       <ng-template #statusGraphPacketV11>
                         <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                           <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
@@ -89,13 +88,13 @@
                   </ng-template>
                       </span>
 
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV12Data.dashboard) }}" (click)="detailPannel(i, packetV12Data.dashboard, buildData.dashboard, 'packetv12');"
-                  [ngClass]="{'highlight': (status == 2 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV12Data.dashboard) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                  <i *ngIf="pipelineTooltip(i, packetV12Data.dashboard) == 'running';else donutGraphPacketv12" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
-                  <ng-template #donutGraphPacketv12>
-                    <i *ngIf="pipelineTooltip(i, packetV12Data.dashboard) == 'pending';else statusGraphPacketv12" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                      <ng-template #statusGraphPacketv12>
-                      <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}" (click)="detailPannel(i, packetV12Data.dashboard, buildData.dashboard, 'packetv12');" 
+                  [ngClass]="{'highlight': (status == 2 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV12Data.dashboard) === 'pending' ? 'none' : 'initial' }" style="padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor: pointer;">
+                  <i *ngIf="pipelineTooltip(i, packetV12Data.dashboard) == 'running';else errorGraphPacketV12" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
+                    <ng-template #errorGraphPacketV12>
+                        <i *ngIf="pipelineTooltip(i, packetV12Data.dashboard) == '';else statusGraphPacketV12" style="font-size:19px; cursor: pointer" class='fa fa-ban text-dark'></i>
+                      <ng-template #statusGraphPacketV12>
+                        <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                         <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                         <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
                           stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5"></circle>
@@ -107,12 +106,12 @@
                 </ng-template>
                     </span>
 
-                <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV13Data.dashboard) }}" (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv13');"
-                [ngClass]="{'highlight': (status == 3 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV13Data.dashboard) === 'pending' ? 'none' : 'initial' }" style="cursor:pointer; padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;">
-                <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'running';else donutGraphPacketv13" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
-                <ng-template #donutGraphPacketv13>
-                  <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'pending';else statusGraphPacketv13" style="font-size:19px;" class='fa fa-clock-o btn btn-txt btn-outline-warning'></i>
-                      <ng-template #statusGraphPacketv13>
+                <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}" (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv13');"
+                [ngClass]="{'highlight': (status == 3 && i==rowCount())}" [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV13Data.dashboard) === 'pending' ? 'none' : 'initial' }" style="padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor: pointer;">
+                <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'running';else errorGraphPacketV13" style="font-size:19px;" class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary'></i> 
+                    <ng-template #errorGraphPacketV13>
+                        <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == '';else statusGraphPacketV13" style="font-size:19px; cursor: pointer" class='fa fa-ban text-dark'></i>
+                      <ng-template #statusGraphPacketV13>
                     <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
                       <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                       <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
@@ -138,7 +137,24 @@
 
 
   <!-- Detail pannel start -->
-  <div class="col-sm-4 px-0">   
+  <div class="col-sm-4 px-0">
+
+    <!-- Pipeline details not present START -->
+    <div class="detail container border " *ngIf="status == 'NA'; else DetailPipelinePanel" >
+        <app-lodding-spinners  *ngIf="showSpinnerDetails; else hideDetailPanelNA"></app-lodding-spinners>
+        <ng-template #hideDetailPanelNA>
+      <div class="pt-5 text-center detailNA" style="vertical-align: middle;">
+        <div class="">
+          <img src="/assets/images/icons/connection_error.svg" alt="" height="120">
+        </div>
+        <div>
+              <h1>Selected pipeline details not present </h1>
+        </div>
+      </div>
+    </ng-template>
+    </div>   
+    <!-- Pipeline details not present END -->
+    <ng-template #DetailPipelinePanel>
     <div class="detail container border">
         <app-lodding-spinners  *ngIf="showSpinnerDetails; else hideDetailPanel"></app-lodding-spinners>
         <ng-template #hideDetailPanel>
@@ -428,6 +444,7 @@
       </div>
     </ng-template>
     </div>
+  </ng-template>
     
   </div>
   <!-- detail pannel End -->

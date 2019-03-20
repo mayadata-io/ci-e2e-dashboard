@@ -67,7 +67,7 @@ export class TableComponent implements OnInit {
     });
     // ------------------
   }
-
+  
   ngOnInit() {
     localStorage.removeItem('row');
 
@@ -112,7 +112,7 @@ export class TableComponent implements OnInit {
     });
     
   }
-
+  
   ngOnDestroy() {
     this.getData.unsubscribe();
     this.selectCell.unsubscribe();
@@ -179,7 +179,8 @@ export class TableComponent implements OnInit {
   buildWeburl(index, buildItems) {
     try {
       if (buildItems[index].web_url) {
-        return buildItems[index].web_url;
+        var generatedURL = buildItems[index].web_url.replace("openebs100.io","openebs.ci");
+        return generatedURL;
       } else {
         return "#";
       }
@@ -253,7 +254,6 @@ export class TableComponent implements OnInit {
       return "0 0";
     }
   }
-
   pipelineTooltip(index, data) {
     try {
       if(data[index].status == "running") {
@@ -262,7 +262,7 @@ export class TableComponent implements OnInit {
         return "pending"
       } else if(data[index].status == "cancelled") {
         return "cancelled"
-      } else if(data[index].status == "none") {
+      }else if(data[index].status == "" || data[index].status == "none") {
         return ""
       } else {
         var passedJobs = this.passed(data[index].jobs)
@@ -323,14 +323,14 @@ export class TableComponent implements OnInit {
   }
 
   detailPannel(index, pipelineData, buildData, cloud) {
-    if (pipelineData[index].status == "none") {
-      this.pipelineDetailStatus = true;
-    } else {
     this.pipelineDetailStatus = false;
     this.showSpinnerDetails = true;
     setTimeout( () => {
       this.showSpinnerDetails = false;
     }, 500);
+    if (pipelineData[index].status == "none" || pipelineData[index].status == "") {
+      this.status = 'NA';
+    } else {
     if (cloud == "packetv11") {
       this.image = 'packet.svg'
       this.name = "PACKET";
@@ -358,7 +358,7 @@ export class TableComponent implements OnInit {
     this.pullRequest = this.pullRequestURL(buildData[index])
     this.commitUser = this.commitUsr(buildData[index].jobs[0].author_name, pipelineData[index].sha);
     this.rating = this.ratingCalculation(pipelineData[index].jobs)
-    this.gitlabPipelineUrl = pipelineData[index].web_url;
+    this.gitlabPipelineUrl = this.gitlabPipelineURL(pipelineData[index].web_url);
     this.log_url = pipelineData[index].kibana_url;
     this.totalJobs = pipelineData[index].jobs.length;
     this.executedJobs = this.executed(pipelineData[index].jobs)
@@ -372,6 +372,9 @@ export class TableComponent implements OnInit {
     this.appDeprovision = this.getAppDeprovisionStatus(pipelineData[index].jobs)
     this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
 
+  }
+  gitlabPipelineURL(url){
+    return url.replace("openebs100.io","openebs.ci");
   }
 
   getClusterSetupStatus(data) {
