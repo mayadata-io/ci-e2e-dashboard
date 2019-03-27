@@ -176,7 +176,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       this.dashboardurl = res.dashboardurl;
       this.openebsengine = res.openebsEngine;
       this.titleService.setTitle(this.workloadName + " dashboard | OpenEBS.io");
-      //  this.kubernetsServices.setApiUrl(res.urlApi);
     });
     this.aFormGroup = this.formBuilder.group({
       recaptcha: ['', Validators.required]

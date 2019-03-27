@@ -70,7 +70,6 @@ export class TableComponent implements OnInit {
   
   ngOnInit() {
     localStorage.removeItem('row');
-
     //Highlight the row
     $('#data').on('click', 'tbody tr', function(e) {
      $(this).addClass('row_color').siblings().removeClass('row_color');
@@ -282,7 +281,6 @@ export class TableComponent implements OnInit {
       } else if(data[index].status == "cancelled") {
         return "cancelled"
       } else if(data[index].status == "none") {
-        console.log("none data ........................................")
         return "none"
       } else if(data[index].status == "created") {
         return "created"
