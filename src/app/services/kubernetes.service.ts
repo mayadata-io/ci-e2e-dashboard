@@ -4,7 +4,6 @@ import { Subject } from "rxjs";
 import {Observable} from "rxjs/Observable";
 import { forkJoin } from "rxjs/observable/forkJoin";
 import 'rxjs/add/operator/map'
-
 import { overAllStatus, listNamespace, status,allApplication } from "../model/data.model";
 
 @Injectable()

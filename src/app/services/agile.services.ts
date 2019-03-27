@@ -1,10 +1,6 @@
-
 import { Injectable } from "@angular/core";
-
 import { HttpClient } from "@angular/common/http";
-
 import { Observable } from "rxjs/Observable";
-
 import { contactDetails } from "../model/data.model";
 
 @Injectable()
@@ -27,12 +23,7 @@ export class AgileService {
  headerHeading(heading: string) {
    return heading;
  }
- saveFormdata(
-   firstName: string,
-   emailId: string,
-   companyName: string,
-   addtag: string
- ) {
+ saveFormdata( firstName: string, emailId: string, companyName: string, addtag: string) {
    const contactAdd: contactDetails = {
      name: firstName,
      email: emailId,
