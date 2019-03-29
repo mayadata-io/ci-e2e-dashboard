@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router,ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
@@ -35,16 +35,16 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private timeUnsub: ISubscription;
   private litmustimeUnsub: ISubscription;
   private litmusUnsub: ISubscription;
-  private routeSub : ISubscription;
-  private personalSub : ISubscription;
-  private pvcDetails : ISubscription;
+  private routeSub: ISubscription;
+  private personalSub: ISubscription;
+  private pvcDetails: ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
-  public numberController: any= 0;
-  public numberReplica:any = 0;
+  public numberController: any = 0;
+  public numberReplica: any = 0;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -77,7 +77,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public selectedApplication = "";
   public writeStatus = false;
   public readStatus = false;
-  public openebsVersion : any ;
+  public openebsVersion: any;
   public alphabet = [
     "a",
     "b",
@@ -120,14 +120,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public litmusJobName: string = "";
   public litmusLog: litmuslog;
   public litmusStarted: boolean = false;
-  public litmusGoBtn:boolean = true;
-  public litmusGetResponse:boolean = true;
+  public litmusGoBtn: boolean = true;
+  public litmusGetResponse: boolean = true;
   public setlitmus: any;
   public litmusName: string;
   public openebsengine: any;
   public countstatus: any = 0;
   public numberNode = new Set();
-  public showSpinner:boolean = true; 
+  public showSpinner: boolean = true;
   public aFormGroup: FormGroup;
   public readonly siteKey = '6LfhZXwUAAAAAJ3CT-iZUjqHFHBnQXAggxMt96Z6';
   public captchaIsLoaded = false;
@@ -140,7 +140,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     private kubernetsServices: KubernetsService,
     private litmusServies: LitmusService,
     private titleService: Title,
-    private route : ActivatedRoute,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder
 
   ) {
@@ -163,11 +163,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    // this.routeSub = this.route.params.subscribe(params =>{
-    // });
-
-
     this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
@@ -179,7 +174,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     });
     this.aFormGroup = this.formBuilder.group({
       recaptcha: ['', Validators.required]
-        });
+    });
 
     for (let j = 0; j < 100; j++) {
       for (let i = 0; i < 10; i++) {
@@ -206,9 +201,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.timeUnsub = timer(0, 50000).subscribe(x => {
       this.podUnsub = this.kubernetsServices
         .getPodDetails(this.currentRoute[1], this.currentRoute[1])
-        .subscribe(res => {          
+        .subscribe(res => {
           this.showSpinner = false;
-          this.litmusGetResponse=false;
+          this.litmusGetResponse = false;
           this.statefullSets = res.statefulSet;
           this.applicationPods = res.applicationPod;
           this.jivaContrllers = res.jivaController;
@@ -225,19 +220,19 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
           this.numberController = this.jivaContrllers.length;
-          if(this.numberController>=1){
-          this.litmusGoBtn = false;
-         }
-        //  else if(this.numberController == undefined ){
-        //   this.litmusGoBtn = false;
-        //   this.appPersent = false;
-        //   this.litmusGetResponse=false;
-        //  }
+          if (this.numberController >= 1) {
+            this.litmusGoBtn = false;
+          }
+          //  else if(this.numberController == undefined ){
+          //   this.litmusGoBtn = false;
+          //   this.appPersent = false;
+          //   this.litmusGetResponse=false;
+          //  }
 
-          if(this.openebsengine == "cStor"){
-            this.numberReplica = this.numberController*3;
-          
-          }else if(this.openebsengine == "Jiva"){
+          if (this.openebsengine == "cStor") {
+            this.numberReplica = this.numberController * 3;
+
+          } else if (this.openebsengine == "Jiva") {
             this.numberReplica = this.jivaReplicas.length;
           }
 
@@ -280,14 +275,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           }
         });
     });
-  this.pvcDetails = this.kubernetsServices
+    this.pvcDetails = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
-        this.litmuspod = res.statefulSet;        
-        for(let i=0;i<res.jivaController.length;i++){
+        this.litmuspod = res.statefulSet;
+        for (let i = 0; i < res.jivaController.length; i++) {
           this.numberNode.add(res.jivaController[i].node);
         }
-        for(let i=0;i<res.jivaReplica.length;i++){
+        for (let i = 0; i < res.jivaReplica.length; i++) {
           this.numberNode.add(res.jivaReplica[i].node);
         }
       });
@@ -399,11 +394,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         this.litmusStarted = true;
         this.litmusGoBtn = true;
         this.litmusLog = res;
-
         if (this.litmusLog.completesstatus == true) {
           this.litmusStarted = false;
           this.litmusGoBtn = false;
-          
         }
       });
   }
@@ -411,12 +404,12 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public runAlert() {
     this.isAlert = true;
     setTimeout(
-      function() {
+      function () {
         $(".alert")
           .animate({ opacity: 0, bottom: "40px" }, 7000)
           .hide("slow");
         setTimeout(
-          function() {
+          function () {
             this.isAlert = false;
           }.bind(this),
           600
@@ -442,8 +435,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.litmusStarted = true;
     this.captchaSuccess = true;
     this.captchaIsExpired = false;
-    console.log(this.captchaSuccess);
-    (<HTMLInputElement> document.getElementById("litmusGo")).style.visibility = "visible";
-    // (<HTMLInputElement> document.getElementById("captchaform")).disabled =true;
+    (<HTMLInputElement>document.getElementById("litmusGo")).style.visibility = "visible";
   };
 }
