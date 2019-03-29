@@ -111,9 +111,44 @@ li:focus{
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 }
 .sidebarBottom{
-  color:#00ABFF;
+  color:#004ED6;
   font-size: 14px;
   position: absolute;
   bottom: 0; 
 }
+.ciCdAnime{
+  box-sizing: border-box;
+  .line1{
+    background: #212428; padding-top:8px; border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
+  }
+  .line2{
+    background: #212428; padding-top:1px;border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
+  }
+  .line3{
+    background: #212428; padding-top:17px;border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
+  }
+}
+.ciCd:hover{
+  .line1{
+     padding-top:15px; transition: 500ms;
+  }
+  .line2{
+     padding-top:10px; transition: 500ms;
+  }
+  .line3{
+     padding-top:5px; transition: 500ms;
+  }
+}
+.ciCd:active{
+  .line1{
+     padding-top:5px; transition: 50ms;
+  }
+  .line2{
+     padding-top:15px; transition: 50ms;
+  }
+  .line3{
+     padding-top:8px; transition: 50ms;
+  }
+}
+
 

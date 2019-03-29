@@ -14,17 +14,17 @@
                         <table class="table" id="myTable" >
                             <tr class="headrow header"  >
                               <th class="headtext">Applications</th>
+                              <th class="headtext">Group/Standalone</th>
                               <th class="headtext"> Kind</th>
-                              <th class="headtext"> OpenEBS V</th>
-                              <th class="headtext"> Replicas/pv</th>
+                              <th class="headtext"> OpenEBS Version</th>
                               <th class="headtext"> Status</th>
                               <th class="headtextaccess"> <i class="fas fa-link"></i> Access </th>
                             </tr>
                             <tr class="tabledatarow" *ngFor="let app of allApplications">
                                 <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png" > {{app.name}}</a></td>
-                                <td class="tablerowtext">{{app.kind}}</td>
+                                <td class="tablerowtext">{{app.group}}</td>
+                                <td class="tablerowtext">deploy: {{app.numberOfDeployment}} | sts: {{app.numberOfStatefulset}}</td>
                                 <td class="tablerowtext">0.8.1</td>
-                                <td class="tablerowtext">3</td>
                                 <td>
                                     <span [ngClass]="{
                                       'display':app.status === 'Running',
@@ -37,14 +37,14 @@
                                       style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
-                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="kubernetsServices.setApiUrl(app.apiurl)">Dashboard</a>
+                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="setApiUrl(app.apiurl)">Dashboard</a>
                                 </td>
                             </tr>
                             <tr class="tabledatarow" *ngFor="let app of gitlabApplication">
                                 <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png" > {{app.name}}</a></td>
-                                <td class="tablerowtext">{{app.kind}}</td>
+                                <td class="tablerowtext">{{app.group}}</td>
+                                <td class="tablerowtext">deploy: {{app.numberOfDeployment}} | sts: {{app.numberOfStatefulset}}</td>
                                 <td class="tablerowtext">0.8.1</td>
-                                <td class="tablerowtext">3</td>
                                 <td>
                                     <span [ngClass]="{
                                       'display':app.status === 'Running',
@@ -57,7 +57,7 @@
                                       style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
                                 </td>
                                 <td>
-                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="kubernetsServices.setApiUrl(app.apiurl)">Dashboard</a>
+                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="setApiUrl(app.apiurl)">Dashboard</a>
                                 </td>
                             </tr>
                         </table> 
