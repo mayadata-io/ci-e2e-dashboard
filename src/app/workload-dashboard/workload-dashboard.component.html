@@ -10,6 +10,8 @@
                           <h2>Workloads using Openebs PVs</h2>
                           <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search applications.." title="Type in a name">     
                         </div>
+                        <app-lodding-spinners class="row spinners" *ngIf="showSpinner; else hideSipnnerTable"></app-lodding-spinners>
+                    <ng-template #hideSipnnerTable>
                       <div class="row">
                         <table class="table" id="myTable" >
                             <tr class="headrow header"  >
@@ -40,28 +42,9 @@
                                   <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="setApiUrl(app.apiurl)">Dashboard</a>
                                 </td>
                             </tr>
-                            <tr class="tabledatarow" *ngFor="let app of gitlabApplication">
-                                <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png" > {{app.name}}</a></td>
-                                <td class="tablerowtext">{{app.group}}</td>
-                                <td class="tablerowtext">deploy: {{app.numberOfDeployment}} | sts: {{app.numberOfStatefulset}}</td>
-                                <td class="tablerowtext">0.8.1</td>
-                                <td>
-                                    <span [ngClass]="{
-                                      'display':app.status === 'Running',
-                                      'hide':app.status !== 'Running'}"
-                                      style="color:#539A49;"> <span class="badge badge-pill badge-gradient-success" >Active</span>
-                                    </span>
-                                    <span [ngClass]="{
-                                      'display':app.status !== 'Running',
-                                      'hide':app.status === 'Running'}"
-                                      style="color: #D20000;"> <span class="badge badge-pill badge-gradient-danger" >Inactive</span></span>
-                                </td>
-                                <td>
-                                  <a class="dashboardbox" routerLink="/{{app.namespace}}" (click)="setApiUrl(app.apiurl)">Dashboard</a>
-                                </td>
-                            </tr>
-                        </table> 
+                        </table>
                       </div>
+                   </ng-template>
                   </div> 
               </div>
            </div>

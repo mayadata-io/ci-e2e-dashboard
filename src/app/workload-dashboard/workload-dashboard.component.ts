@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { KubernetsService } from "../services/kubernetes.service";
 import * as $ from "jquery";
 import { Subscription, Observable, timer } from "rxjs";
 import { Meta,Title } from "@angular/platform-browser";
 import { allApplication } from "../model/data.model";
-import { map } from 'rxjs/operators';
+import { map, concatMap } from 'rxjs/operators';
+import { ISubscription } from "rxjs/Subscription";
 @Component({
  selector: "app-workload-dashboard",
  templateUrl: "./workload-dashboard.component.html",
@@ -12,12 +13,13 @@ import { map } from 'rxjs/operators';
 })
 
 
-export class WorkloadDashboardComponent implements OnInit {
+export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
  public openebsVersion : any ;
- public allApplications: allApplication;
- public gitlabApplication : allApplication;
+ public allApplications: allApplication[];
  public responseapp : any = []
+ private timerSub: ISubscription;
+ public showSpinner: boolean = true;
  constructor(private kubernetsServices: KubernetsService, private meta: Meta,private titleService: Title) {
    this.titleService.setTitle( "workloads dashboard" );
    this.meta.updateTag({
@@ -29,14 +31,16 @@ export class WorkloadDashboardComponent implements OnInit {
 
  ngOnInit() {
   
-   timer(0, 300000).subscribe(x => {
-
-     this.kubernetsServices.getAllApplication().subscribe( res => {
-       for (let index = 0; index < res.length; index++) {
-           this.responseapp = this.responseapp.concat(res[index])  
-       }  
-       this.allApplications = this.responseapp; 
-     });
+  this.timerSub = timer(0, 3000)
+      .pipe(concatMap(() => this.kubernetsServices.getAllApplication()))
+      .subscribe(res => {
+       const arrayOfApplication = [].concat(...res)
+       if( arrayOfApplication == []){
+        this.showSpinner = true;
+       }else{
+       this.allApplications = arrayOfApplication; 
+       this.showSpinner = false;
+       }
    });
 
    $(document).ready(function(){
@@ -52,5 +56,9 @@ export class WorkloadDashboardComponent implements OnInit {
  setApiUrl(apiurl: string){
    localStorage.setItem('apiurlkey' , apiurl);
    this.kubernetsServices.setApiUrl(localStorage.getItem('apiurlkey'));
+ }
+
+ ngOnDestroy() {
+  this.timerSub.unsubscribe();
  }
 }
