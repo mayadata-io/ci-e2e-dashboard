@@ -22,7 +22,8 @@ import {
   yaml,
   runnigPos,
   completes,
-  litmuslog
+  litmuslog,
+  mayapvc
 } from "../model/data.model";
 import { ISubscription } from "rxjs/Subscription";
 @Component({
@@ -61,7 +62,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public workloadName: any;
   public openebsEngine: any;
   public dashboardurl: any;
-  public pvc: pvc[] = [];
+  public pvc: pvc;
+  public mayapvc: mayapvc;
   public pvctemp;
   public pvcarray;
   public namespace = "";
@@ -279,6 +281,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
         this.litmuspod = res.statefulSet;
+        this.mayapvc = res.pvc.pvc
         for (let i = 0; i < res.jivaController.length; i++) {
           this.numberNode.add(res.jivaController[i].node);
         }
@@ -299,7 +302,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
   public listVolume() {
     this.kubernetsServices
-      .getVolumeDetails(this.workloadName, this.openebsEngine)
+      .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayapvc)
       .subscribe(res => {
         this.jivaDetail = res;
         this.jivas = this.jivaDetail;

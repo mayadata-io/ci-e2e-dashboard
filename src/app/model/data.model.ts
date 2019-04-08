@@ -85,12 +85,16 @@ export interface applicationPod {
 }
 export interface pvc {
   numberofPvc: number;
-  pvc: [
+  pvc: 
     {
       name: string;
       volumeName: string;
     }
-  ];
+}
+
+export interface mayapvc {
+      name: string;
+      volumeName: string;
 }
 export interface overAllStatus {
   status: string;
@@ -147,17 +151,15 @@ export interface overAllStatus {
       dockerImage: string;
     }
   ];
-  pvc: [
+  pvc: 
     {
       numberofPvc: number;
-      pvc: [
+      pvc:
         {
           name: string;
           volumeName: string;
         }
-      ];
     }
-  ];
 }
 
 export interface litmusstatus {
