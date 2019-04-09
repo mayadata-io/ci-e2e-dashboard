@@ -83,8 +83,8 @@ export interface applicationPod {
   status: string;
   dockerImage: string;
 }
-export interface pvc {
-  numberofPvc: number;
+export interface pvcs {
+  numberofPVC: number;
   pvc: 
     {
       name: string;
@@ -151,9 +151,9 @@ export interface overAllStatus {
       dockerImage: string;
     }
   ];
-  pvc: 
+  pvcs: 
     {
-      numberofPvc: number;
+      numberofPVC: number;
       pvc:
         {
           name: string;
