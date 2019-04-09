@@ -15,26 +15,32 @@
 .details {
   padding: 5px;
 }
+
 ul .active {
   background-image: linear-gradient(#64c2e1, #348fc0);
+
   h3 {
     color: #d3d3d3;
   }
 }
+
 h1 {
   font-size: 1.2em;
   color: #54576b;
 }
+
 h2 {
   font-size: 0.9em;
   color: #949bb3;
 }
+
 h3 {
   font-size: 0.8em;
   text-align: left;
   padding-left: 20px;
   color: #949bb3;
 }
+
 h4 {
   font-size: 2.6em;
   text-align: left;
@@ -42,12 +48,14 @@ h4 {
   color: #3a3d54;
   font-weight: 10;
 }
+
 h5 {
   font-size: 1.2em;
   color: #54576b;
   display: block;
   text-align: center;
 }
+
 h6 {
   position: inherit;
   word-break: normal;
@@ -62,11 +70,13 @@ p {
   text-align: center;
   margin-bottom: 0;
 }
+
 tr {
   font-size: 0.9em;
   color: #54576b;
   border-bottom: 1px solid #d3d3d3;
 }
+
 .btn-txt {
   padding: 0px;
   border-width: 0px;
@@ -85,6 +95,7 @@ tr {
   margin-top: 2px;
   max-height: 63vh;
 }
+
 .button {
   margin-right: auto;
   margin-left: auto;
@@ -120,6 +131,7 @@ img {
     left: 0;
     overflow: hidden;
   }
+
   &-bottom {
     padding: 0;
     display: block;
@@ -142,7 +154,7 @@ img {
 
 .btn-outline-success:not(:disabled):not(.disabled):active,
 .btn-outline-success:not(:disabled):not(.disabled).active,
-.show > .btn-outline-success.dropdown-toggle {
+.show>.btn-outline-success.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #28a745;
@@ -150,7 +162,7 @@ img {
 
 .btn-outline-danger:not(:disabled):not(.disabled):active,
 .btn-outline-danger:not(:disabled):not(.disabled).active,
-.show > .btn-outline-danger.dropdown-toggle {
+.show>.btn-outline-danger.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #dc3545;
@@ -158,7 +170,7 @@ img {
 
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
-.show > .btn-outline-secondary.dropdown-toggle {
+.show>.btn-outline-secondary.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #6c757d;
@@ -166,7 +178,7 @@ img {
 
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
-.show > .btn-outline-primary.dropdown-toggle {
+.show>.btn-outline-primary.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #007bff;
@@ -174,7 +186,7 @@ img {
 
 .btn-outline-warning:not(:disabled):not(.disabled):active,
 .btn-outline-warning:not(:disabled):not(.disabled).active,
-.show > .btn-outline-warning.dropdown-toggle {
+.show>.btn-outline-warning.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #ffc107;
@@ -182,7 +194,7 @@ img {
 
 .btn-outline-dark:not(:disabled):not(.disabled):active,
 .btn-outline-dark:not(:disabled):not(.disabled).active,
-.show > .btn-outline-dark.dropdown-toggle {
+.show>.btn-outline-dark.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #343a40;
@@ -206,6 +218,7 @@ img {
   .statusbutton {
     font-size: 13px !important;
   }
+
   @media only screen and (max-width: 1400px) {
     .statusbutton {
       font-size: 11px !important;
@@ -229,7 +242,8 @@ img {
 a:hover {
   text-decoration: none;
 }
-.dropBtn:hover{
+
+.dropBtn:hover {
   border: 1px blue solid;
 }
 
@@ -241,6 +255,7 @@ a:hover {
 .highlight {
   border-bottom: 5px solid #654cf9;
 }
+
 .row_color {
   // background-color: #F2F4F6;
   background-color: #ededed;
@@ -261,86 +276,100 @@ a:hover {
 }
 
 .gitlab_stage_build_status {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
-.gitlab_stage_primary{
-    border-radius: 24px;
-    padding: 0.3rem 0rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
-    width: 90%;
-    font-size:12px;
-    text-align: center;
+
+.gitlab_stage_primary {
+  border-radius: 24px;
+  padding: 0.3rem 0rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  width: 90%;
+  font-size: 12px;
+  text-align: center;
 }
+
 .gitlab_stage_build_success {
   background-color: #ecf4e0;
   color: #335500;
 
 }
+
 .gitlab_stage_build_failed {
   background-color: #fce0e0;
   color: #760606;
 }
+
 .gitlab_stage_build_running {
-    background: rgba(108,138,255,0.55);
+  background: rgba(108, 138, 255, 0.55);
   color: #0000a1;
 }
+
 .gitlab_stage_build_skipped {
-  background-color: rgba(201,202,206,0.55);
+  background-color: rgba(201, 202, 206, 0.55);
   color: #4e5672;
 }
+
 .gitlab_stage_build_pending {
-  background-color: rgba(232,223,17,0.55);
+  background-color: rgba(232, 223, 17, 0.55);
   color: #656204;
 }
 
-.scrollbar
-{
-	height: 895px;
-	overflow: auto;
+.scrollbar {
+  height: 895px;
+  overflow: auto;
 }
 
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #C0C0C0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #C0C0C0;
 }
+
 .btn.btn-link i {
   -webkit-transform: scaleY(-1);
   transform: scaleY(-1);
 }
-.btn.btn-link.collapsed i{
+
+.btn.btn-link.collapsed i {
   -webkit-transform: scaleY(1);
   transform: scaleY(1);
 
 }
-.dropData{
+
+.dropData {
   padding: 0;
   vertical-align: middle;
   align-items: center;
 }
-.platformImg{
+
+.platformImg {
   padding: 2px;
 }
-.platform{
-  p{
+
+.platform {
+  p {
     font-size: 13px;
   }
 }
-.disclk{
+
+.disclk {
   pointer-events: none;
 }
-.detailNA{
+
+.detailNA {
   position: relative;
   top: 20%;
+}
+
+.pipeline-status-icon {
+  font-size: 19px;
 }
