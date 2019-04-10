@@ -11,18 +11,18 @@
       <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
           <a class="nav-link active " href="#profile" role="tab" data-toggle="tab">
-            <h3 style="color:white">BRANCH</h3>
-            <h4 style="font-size: 2em">Master</h4>
-            <h3 *ngIf="undefined !== buildData" style="color:white">Builds in last one week:
+            <h3 class="text-white">BRANCH</h3>
+            <h4 class="font-size-32">Master</h4>
+            <h3 *ngIf="undefined !== buildData" class="text-white">Builds in last one week:
               {{ masterBuildsCount(buildData.dashboard) }}
             </h3>
           </a>
         </li>
-        <li style="pointer-events:none;" class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">
           </a>
         </li>
-        <li style="pointer-events:none; cursor:pointer;" class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="#references" role="tab" data-toggle="tab">
           </a>
         </li>
@@ -40,15 +40,15 @@
               <tr class="text-center">
                 <td></td>
                 <td></td>
-                <td class="d-flex align-items-center justify-content-center platform " style="pointer-events: none;">
-                  <span class="mx-4"><img class="platformImg" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p style="font-size: 13px;">1.11.8</p>
+                <td class="d-flex align-items-center justify-content-center platform ">
+                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p class="font-size-13">1.11.8</p>
                   </span>
-                  <span class="mx-4"><img style="padding:2px;" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p style="font-size: 13px;">1.12.6</p>
+                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p class="font-size-13">1.12.6</p>
                   </span>
-                  <span class="mx-4"><img class="platformImg" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p style="font-size: 13px;">1.13.4</p>
+                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p class="font-size-13">1.13.4</p>
                   </span>
 
                 </td>
@@ -61,15 +61,15 @@
                   <a class="githubCommit" href="{{pullRequestURL(buildData.dashboard[i])}}" target="_blank">
                     {{ getCommitName(i, buildData.dashboard) }}/#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}
                   </a>
-                  <p style="font-size: 12px;">Commit: {{ updated(i, buildData.dashboard) }}</p>
+                  <p class="font-size-12">Commit: {{ updated(i, buildData.dashboard) }}</p>
                 </td>
 
                 <td>
                   <button placement="bottom" ngbTooltip="{{buildTooltip(i, buildData.dashboard)}}"
                     [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
                     (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV11.dashboard, buildData.dashboard, 'packetV11'); ">
-                    <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
-                    <a style="margin-left:5px; font-size:15px">{{buildStatus(i, buildData.dashboard)}}</a>
+                    <i class="font-size-13" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
+                    <a class="ml-1 font-size-15">{{buildStatus(i, buildData.dashboard)}}</a>
                   </button>
                 </td>
 
@@ -182,7 +182,7 @@
     <div class="detail container border " *ngIf="status == 'NA'; else DetailPipelinePanel">
       <app-lodding-spinners *ngIf="showSpinnerDetails; else hideDetailPanelNA"></app-lodding-spinners>
       <ng-template #hideDetailPanelNA>
-        <div class="pt-5 text-center detailNA" style="vertical-align: middle;">
+        <div class="pt-5 text-center detailNA vertical-align-middle">
           <div class="">
             <img src="/assets/images/icons/connection_error.svg" alt="" height="120">
           </div>
@@ -201,51 +201,49 @@
             <img src="/assets/images/cloud/{{ image }}">
             <h5>{{ name }}</h5>
             <h6>Kubernetes {{ kubernetesVersion }}</h6>
-            <button style="margin-right:4px; margin-top:20px;" type="button" class="btn btn-outline-custom"
-              data-toggle="collapse" href="#gitlabStageToggle" role="button" aria-controls="gitlabStageToggle"><span
+            <button type="button" class="btn btn-outline-custom mr-1 mt-4" data-toggle="collapse"
+              href="#gitlabStageToggle" role="button" aria-controls="gitlabStageToggle"><span
                 class="statusbutton gitlabButton">GITLAB STAGES</span></button>
-            <button (click)="clickit(log_url)" style="margin-left:4px; margin-top:20px;" type="button"
-              class="btn btn-outline-custom"><span class="statusbutton litmusButton">E2E LOGS</span></button>
+            <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4"><span
+                class="statusbutton litmusButton">E2E LOGS</span></button>
           </div>
 
           <div class="collapse" id="gitlabStageToggle">
             <hr>
             <table class="px-3 table table-borderless">
               <thead>
-                <tr style="border-bottom: none">
-                  <th style="padding: 0px;">
-                    <p style="font-size:11px; text-align: left;  padding-bottom:10px;">GITLAB
+                <tr class="border-bottom-0">
+                  <th class="p-0">
+                    <p class="font-size-11 text-center pb-2">GITLAB
                       STAGES</p>
-                    <hr style="margin-top: 5px;margin-bottom: 5px;">
+                    <hr class="mt-1 mb-1">
                   </th>
-                  <th style="padding: 0px;">
-                    <p style="font-size:11px; text-align: center;  padding-bottom:10px;width:100%">STATUS</p>
-                    <hr style="margin-top: 5px;margin-bottom: 5px;">
+                  <th class="p-0">
+                    <p class="font-size-11 text-left pb-2 w-100">STATUS</p>
+                    <hr class="mt-1 mb-1">
                   </th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr *ngIf="clusterSetupStatus.jobCount != 0" style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr *ngIf="clusterSetupStatus.jobCount != 0" class="border-bottom-0">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER SETUP</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0"><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(clusterSetupStatus.status)'>{{ clusterSetupStatus.status }}</span>
                   </td>
-                  <td class="dropData" style="padding: 0;width: 13px;">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseCSS" aria-expanded="false" aria-controls="collapseCSS"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseCSS" aria-expanded="false" aria-controls="collapseCSS">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="accordion" id="colCSS">
                   <td colspan="2" id="collapseCSS" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colCSS">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight font-size-13 text-secondary">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ clusterSetupStatus.successJobCount }} </span>
                         </span>
@@ -261,27 +259,25 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="border-top" *ngIf="providerInfraSetup.jobCount != 0" style="border-bottom: none">
+                <tr class="border-top border-bottom-0" *ngIf="providerInfraSetup.jobCount != 0">
 
-                  <td style="padding: 0px;vertical-align: middle;">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">PROVIDER INFRA SETUP</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: all;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(providerInfraSetup.status)'>{{ providerInfraSetup.status }}</span>
                   </td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapsePIS" aria-expanded="false" aria-controls="collapsePIS"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapsePIS" aria-expanded="false" aria-controls="collapsePIS">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="accordion   " id="colPIS">
                   <td colspan="2" id="collapsePIS" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colPIS">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight text-secondary font-size-13">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ providerInfraSetup.successJobCount }} </span>
                         </span>
@@ -299,27 +295,25 @@
                 </tr>
 
 
-                <tr class="border-top" *ngIf="statefulAppDeploy.jobCount != 0" style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr class="border-top border-bottom-0" *ngIf="statefulAppDeploy.jobCount != 0">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">STATEFUL APP DEPLOY</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0"><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(statefulAppDeploy.status)'>{{ statefulAppDeploy.status }}</span>
 
                   </td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed " type="button" data-toggle="collapse"
-                      data-target="#collapseSAD" aria-expanded="false" aria-controls="collapseSAD"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseSAD" aria-expanded="false" aria-controls="collapseSAD">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button></td>
                 </tr>
 
                 <tr class="accordion    " id="colSAD">
                   <td colspan="2" id="collapseSAD" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colSAD">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight font-size-13 text-secondary">
                       <div class="px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ statefulAppDeploy.successJobCount }} </span>
                         </span>
@@ -335,25 +329,23 @@
                   </td>
                 </tr>
 
-                <tr class="border-top" *ngIf="appFunctionTest.jobCount != 0" style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr class="border-top border-bottom-0" *ngIf="appFunctionTest.jobCount != 0">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP FUNCTION TEST</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0"><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appFunctionTest.status)'>{{ appFunctionTest.status }}</span></td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseAFT" aria-expanded="false" aria-controls="collapseAFT"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseAFT" aria-expanded="false" aria-controls="collapseAFT">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="accordion    " id="colAFT">
                   <td colspan="2" id="collapseAFT" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colAFT">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight font-size-13 text-secondary">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ appFunctionTest.successJobCount }} </span>
                         </span>
@@ -368,25 +360,23 @@
                   </td>
                 </tr>
 
-                <tr class="border-top" *ngIf="appChaosTest.jobCount != 0" style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr class="border-top border-bottom-0" *ngIf="appChaosTest.jobCount != 0">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP CHAOS TEST</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appChaosTest.status)'>{{ appChaosTest.status }}</span></td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseACT" aria-expanded="false" aria-controls="collapseACT"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseACT" aria-expanded="false" aria-controls="collapseACT">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="accordion    " id="colACT">
                   <td colspan="2" id="collapseACT" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colACT">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight p-0">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ appChaosTest.successJobCount }} </span> </span>
                       </div>
@@ -400,17 +390,16 @@
                   </td>
                 </tr>
 
-                <tr class="border-top" *ngIf="appDeprovision.jobCount != 0 " style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr class="border-top border-bottom-0" *ngIf="appDeprovision.jobCount != 0 ">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">APP-DEPROVISION</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span
-                      class="gitlab_stage_primary"
+                  <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appDeprovision.status)'>{{ appDeprovision.status }}</span></td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseAD" aria-expanded="false" aria-controls="collapseAD" style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseAD" aria-expanded="false" aria-controls="collapseAD">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
@@ -418,7 +407,7 @@
                 <tr class="accordion    " id="colAD">
                   <td colspan="2" id="collapseAD" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colAD">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight p-0">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center ">
                         <span>Success : <span class="text-success ">{{ appDeprovision.successJobCount }} </span> </span>
                       </div>
@@ -432,25 +421,23 @@
                   </td>
                 </tr>
 
-                <tr class="border-top" *ngIf="clusterCleanup.jobCount != 0" style="border-bottom: none">
-                  <td style="padding: 0px;vertical-align: middle;">
+                <tr class="border-top border-bottom-0" *ngIf="clusterCleanup.jobCount != 0">
+                  <td class="p-0 vertical-align-middle">
                     <h6 (click)="clickit(gitlabPipelineUrl)" class="gitlab_stages">CLUSTER CLEANUP</h6>
                   </td>
-                  <td class="gitlab_stage_build_status" style="padding: 0px; pointer-events: none;"><span
-                      class="gitlab_stage_primary "
+                  <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary "
                       [ngClass]='gitlabStageBuildClass(clusterCleanup.status)'>{{ clusterCleanup.status }}</span></td>
-                  <td class="dropData" style="padding: 0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseCCup" aria-expanded="false" aria-controls="collapseCCup"
-                      style="padding: 0px;">
-                      <i class="fa fa-chevron-down" style="font-size: 13px; color: #2399f1"></i>
+                  <td class="dropData p-0">
+                    <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
+                      data-target="#collapseCCup" aria-expanded="false" aria-controls="collapseCCup">
+                      <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="accordion    " id="colCCup">
                   <td colspan="2" id="collapseCCup" class="collapse p-0" aria-labelledby="headingOne"
                     data-parent="#colCCup">
-                    <div class="d-flex bd-highlight" style="font-size: 13px;color: #7f8fa4">
+                    <div class="d-flex bd-highlight p-0">
                       <div class=" px-2 py-1 flex-fill d-flex justify-content-center">
                         <span>Success : <span class="text-success ">{{ clusterCleanup.successJobCount }} </span> </span>
                       </div>
@@ -472,30 +459,30 @@
             <div class="col-sm-12">
               <div>
                 <div class="star-ratings-css">
-                  <div style="padding-left:8px;" class="star-ratings-css-top" [style.width]=rating>
+                  <div class="star-ratings-css-top padding-left-8" [style.width]=rating>
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                  <div style="padding-left:8px;" class="star-ratings-css-bottom">
+                  <div class="star-ratings-css-bottom padding-left-8">
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 </div>
-                <p style="font-size:13px; padding-top:8px;">RATING</p>
+                <p class="font-size-13 padding-top-8">RATING</p>
               </div>
             </div>
-            <div class="col-sm-12 d-flex" style="padding-top:10px;">
+            <div class="col-sm-12 d-flex pt-2">
               <div class="w-25">
-                <h5 style="color:black;font-size:15px;">{{ totalJobs }}</h5>
-                <h6 style="font-size:13px;">TOTAL</h6>
+                <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
+                <h6 class="font-size-13">TOTAL</h6>
               </div>
               <div class="w-25">
-                <h5 style="color:blue;font-size:15px;">{{ executedJobs }}</h5>
-                <h6 style="font-size:13px;">EXECUTED</h6>
+                <h5 class="text-primary font-size-15">{{ executedJobs }}</h5>
+                <h6 class="font-size-13">EXECUTED</h6>
               </div>
               <div class="w-25">
-                <h5 style="color:green;font-size:15px;">{{ passedJobs }}</h5>
-                <h6 style="font-size:13px;">PASSED</h6>
+                <h5 class="text-success font-size-15">{{ passedJobs }}</h5>
+                <h6 class="font-size-13">PASSED</h6>
               </div>
               <div class="w-25">
-                <h5 style="color:red;font-size:15px;">{{ failedJobs }}</h5>
-                <h6 style="font-size:13px;">FAILED</h6>
+                <h5 class="text-danger font-size-15">{{ failedJobs }}</h5>
+                <h6 class="font-size-13">FAILED</h6>
               </div>
             </div>
           </div>
@@ -506,14 +493,14 @@
               <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
             </div>
             <div class="col-sm-8">
-              <h6 style="margin-top:10px;">{{ commitUser }}</h6>
-              <h6 class="scrollbar" id="scrollbar" style="font-size:14px; height:50px;">{{ commitMessage }}</h6>
+              <h6 class="mt-2">{{ commitUser }}</h6>
+              <h6 class="scrollbar font-size-15 height-50" id="scrollbar">{{ commitMessage }}</h6>
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-sm-4 text-center">
-              <a style=" cursor: pointer; color: #007bff" target="_blank"
+              <a class="text-primary" target="_blank"
                 href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline
                 Images</a>
             </div>
