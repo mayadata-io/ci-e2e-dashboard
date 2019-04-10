@@ -58,15 +58,16 @@
               <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center"
                 *ngFor="let post of buildData.dashboard; let i = index" [attr.data-index]="i">
                 <td>
-                  <a style="cursor:pointer; color:#5C93E8"
-                    (click)="detailPannel(i, packetV11Data.dashboard, buildData.dashboard, 'packetV11');">
-                    {{ getCommitName(i, buildData.dashboard) }}/{{ getCommit(i, buildData.dashboard) | slice:0:8 }}
+                  <a style="cursor:pointer; color:#5C93E8" href="{{pullRequestURL(buildData.dashboard[i])}}"
+                    target="_blank">
+                    {{ getCommitName(i, buildData.dashboard) }}/#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}
                   </a>
                   <p style="font-size: 12px;">Commit: {{ updated(i, buildData.dashboard) }}</p>
                 </td>
 
                 <td>
-                  <button [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
+                  <button placement="bottom" ngbTooltip="{{buildTooltip(i, buildData.dashboard)}}"
+                    [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
                     (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV11.dashboard, buildData.dashboard, 'packetV11'); ">
                     <i style="font-size:13px" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
                     <a style="margin-left:5px; font-size:15px">{{buildStatus(i, buildData.dashboard)}}</a>
