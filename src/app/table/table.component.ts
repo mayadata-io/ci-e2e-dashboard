@@ -155,6 +155,31 @@ export class TableComponent implements OnInit {
     else if (status == "n/a")
       return "btn btn-txt btn-outline-secondary";
   }
+  buildTooltip(index, build) {
+    try {
+      if (build[index].status == "success") {
+        var sort_id = (build[index].sha).slice(0, 8)
+        var name: any = "";
+        if (build[index].project == "maya") {
+          name = "m-apiserver"
+        }
+        else if (build[index].project == "jiva") {
+          name = "jiva"
+        }
+        else if (build[index].project == "cStor") {
+          name = "cstor-pool"
+        }
+        else if (build[index].project == "istgt") {
+          name = "cstor-istgt"
+        }
+        return "Docker Image:-" + name + ":" + sort_id
+      } else if (build[index].status == "failed") {
+        return "Build failed";
+      }
+    } catch (e) {
+      return "n/a"
+    }
+  }
 
   //Get master build count
   masterBuildsCount(data) {
@@ -357,399 +382,63 @@ export class TableComponent implements OnInit {
     this.executedJobs = this.executed(pipelineData[index].jobs)
     this.passedJobs = this.passed(pipelineData[index].jobs)
     this.failedJobs = this.failed(pipelineData[index].jobs)
-    this.clusterSetupStatus = this.getClusterSetupStatus(pipelineData[index].jobs)
-    this.providerInfraSetup = this.getProviderInfraSetupStatus(pipelineData[index].jobs)
-    this.statefulAppDeploy = this.getStatefulAppDeployStatus(pipelineData[index].jobs)
-    this.appFunctionTest = this.getAppFunctionTestStatus(pipelineData[index].jobs)
-    this.appChaosTest = this.getAppChaosTestStatus(pipelineData[index].jobs)
-    this.appDeprovision = this.getAppDeprovisionStatus(pipelineData[index].jobs)
-    this.clusterCleanup = this.getClusterCleanupStatus(pipelineData[index].jobs)
+    let gitlabStages = ["CLUSTER-SETUP", "PROVIDER-INFRA-SETUP", "STATEFUL-APP-DEPLOY", "APP-FUNC-TEST", "APP-CHAOS-TEST", "APP-DEPROVISION", "CLUSTER-CLEANUP"];
+    this.clusterSetupStatus = this.getStageStatus(gitlabStages[0], pipelineData[index].jobs)
+    this.providerInfraSetup = this.getStageStatus(gitlabStages[1], pipelineData[index].jobs)
+    this.statefulAppDeploy = this.getStageStatus(gitlabStages[2], pipelineData[index].jobs)
+    this.appFunctionTest = this.getStageStatus(gitlabStages[3], pipelineData[index].jobs)
+    this.appChaosTest = this.getStageStatus(gitlabStages[4], pipelineData[index].jobs)
+    this.appDeprovision = this.getStageStatus(gitlabStages[5], pipelineData[index].jobs)
+    this.clusterCleanup = this.getStageStatus(gitlabStages[6], pipelineData[index].jobs)
   }
+  getStageStatus(stageName, data) {
+    var statusObj = {
+      status: "",
+      successJobCount: 0,
+      failedJobCount: 0,
+      skippedJobCount: 0,
+      jobCount: 0,
+      runningJobCount: 0
+    }
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].stage == stageName) {
+        statusObj.jobCount++;
+      }
+      if (data[i].stage == stageName && data[i].status == "running") {
+        statusObj.runningJobCount++;
+      }
+      if (data[i].stage == stageName && data[i].status == "failed") {
+        statusObj.failedJobCount++;
+      }
+      if (data[i].stage == stageName && data[i].status == "skipped") {
+        statusObj.skippedJobCount++;
+      }
+      if (data[i].stage == stageName && data[i].status == "canceled") {
+        statusObj.status = "CANCELLED"
+      }
+      if (data[i].stage == stageName) {
+        if (data[i].status == "created" || data[i].status == "pending") {
+          statusObj.status = "Pending"
+        }
+      }
+      if (data[i].stage == stageName && data[i].status == "success") {
+        statusObj.successJobCount++;
+      }
+    }
+    if (statusObj.runningJobCount > 0) {
+      statusObj.status = "Running"
+    } else if (statusObj.successJobCount == statusObj.jobCount) {
+      statusObj.status = "Success"
+    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
+      statusObj.status = "Skipped"
+    } else if (statusObj.runningJobCount == 0 && statusObj.failedJobCount > 0) {
+      statusObj.status = "Failed"
+    }
+    return statusObj;
+  }
+
   gitlabPipelineURL(url) {
     return url.replace("openebs100.io", "openebs.ci");
-  }
-
-  getClusterSetupStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-SETUP" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-
-
-  getProviderInfraSetupStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "PROVIDER-INFRA-SETUP" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-
-  getStatefulAppDeployStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "STATEFUL-APP-DEPLOY" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-  getAppFunctionTestStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-FUNC-TEST" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-
-  getAppChaosTestStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-CHAOS-TEST" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-  getAppDeprovisionStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "APP-DEPROVISION" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
-  }
-  getClusterCleanupStatus(data) {
-    var statusObj = {
-      status: "",
-      successJobCount: 0,
-      failedJobCount: 0,
-      skippedJobCount: 0,
-      jobCount: 0
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP") {
-        statusObj.jobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "running") {
-        statusObj.status = "Running"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "failed") {
-        statusObj.failedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "skipped") {
-        statusObj.skippedJobCount++;
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "canceled") {
-        statusObj.status = "CANCELLED"
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP") {
-        if (data[i].status == "created" || data[i].status == "pending") {
-          statusObj.status = "Pending"
-        }
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].stage == "CLUSTER-CLEANUP" && data[i].status == "success") {
-        statusObj.successJobCount++;
-      }
-    }
-    if (statusObj.successJobCount == statusObj.jobCount) {
-      statusObj.status = "Success"
-    } else if (statusObj.skippedJobCount == statusObj.jobCount) {
-      statusObj.status = "Skipped"
-    } else if (statusObj.failedJobCount > 0) {
-      statusObj.status = "Failed"
-    }
-    return statusObj;
   }
 
   pullRequestURL(data) {
