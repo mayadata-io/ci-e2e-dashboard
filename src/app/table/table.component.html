@@ -58,7 +58,7 @@
               <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center"
                 *ngFor="let post of buildData.dashboard; let i = index" [attr.data-index]="i">
                 <td>
-                  <a class="githubCommit" href="{{pullRequestURL(buildData.dashboard[i])}}" target="_blank">
+                  <a class="github-commit" href="{{pullRequestURL(buildData.dashboard[i])}}" target="_blank">
                     {{ getCommitName(i, buildData.dashboard) }}/#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}
                   </a>
                   <p class="font-size-12">Commit: {{ updated(i, buildData.dashboard) }}</p>
@@ -182,7 +182,7 @@
     <div class="detail container border " *ngIf="status == 'NA'; else DetailPipelinePanel">
       <app-lodding-spinners *ngIf="showSpinnerDetails; else hideDetailPanelNA"></app-lodding-spinners>
       <ng-template #hideDetailPanelNA>
-        <div class="pt-5 text-center detailNA vertical-align-middle">
+        <div class="pt-5 text-center detail-na vertical-align-middle">
           <div class="">
             <img src="/assets/images/icons/connection_error.svg" alt="" height="120">
           </div>
@@ -203,9 +203,9 @@
             <h6>Kubernetes {{ kubernetesVersion }}</h6>
             <button type="button" class="btn btn-outline-custom mr-1 mt-4" data-toggle="collapse"
               href="#gitlabStageToggle" role="button" aria-controls="gitlabStageToggle"><span
-                class="statusbutton gitlabButton">GITLAB STAGES</span></button>
+                class="status-button gitlab-stage-button">GITLAB STAGES</span></button>
             <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4"><span
-                class="statusbutton litmusButton">E2E LOGS</span></button>
+                class="status-button e2e-logs-button">E2E LOGS</span></button>
           </div>
 
           <div class="collapse" id="gitlabStageToggle">
@@ -233,7 +233,7 @@
                   <td class="gitlab_stage_build_status p-0"><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(clusterSetupStatus.status)'>{{ clusterSetupStatus.status }}</span>
                   </td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseCSS" aria-expanded="false" aria-controls="collapseCSS">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -267,7 +267,7 @@
                   <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(providerInfraSetup.status)'>{{ providerInfraSetup.status }}</span>
                   </td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapsePIS" aria-expanded="false" aria-controls="collapsePIS">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -303,7 +303,7 @@
                       [ngClass]='gitlabStageBuildClass(statefulAppDeploy.status)'>{{ statefulAppDeploy.status }}</span>
 
                   </td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseSAD" aria-expanded="false" aria-controls="collapseSAD">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -335,7 +335,7 @@
                   </td>
                   <td class="gitlab_stage_build_status p-0"><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appFunctionTest.status)'>{{ appFunctionTest.status }}</span></td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseAFT" aria-expanded="false" aria-controls="collapseAFT">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -366,7 +366,7 @@
                   </td>
                   <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appChaosTest.status)'>{{ appChaosTest.status }}</span></td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseACT" aria-expanded="false" aria-controls="collapseACT">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -396,7 +396,7 @@
                   </td>
                   <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary"
                       [ngClass]='gitlabStageBuildClass(appDeprovision.status)'>{{ appDeprovision.status }}</span></td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseAD" aria-expanded="false" aria-controls="collapseAD">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
@@ -427,7 +427,7 @@
                   </td>
                   <td class="gitlab_stage_build_status p-0 "><span class="gitlab_stage_primary "
                       [ngClass]='gitlabStageBuildClass(clusterCleanup.status)'>{{ clusterCleanup.status }}</span></td>
-                  <td class="dropData p-0">
+                  <td class="drop-data p-0">
                     <button class="btn btn-link collapsed p-0" type="button" data-toggle="collapse"
                       data-target="#collapseCCup" aria-expanded="false" aria-controls="collapseCCup">
                       <i class="fa fa-chevron-down font-size-13 arrow-color-blue"></i>
