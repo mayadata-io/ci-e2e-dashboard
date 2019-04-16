@@ -1,12 +1,15 @@
-h5{
+h5 {
   font-size: 18px;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }
-li i{
-  font-size:30px;
+
+li .sidebar-logo {
+  font-size: 30px;
 }
+
 a,
 a:hover,
 a:focus {
@@ -34,17 +37,11 @@ a:focus {
 
 #sidebar ul li a:hover {
   border-radius: 10px;
-  // background: rgb(13, 92, 170);
 }
 
-#sidebar ul li:active > a {
-  // background-color: rgb(34, 95, 156);
+#sidebar ul li:active>a {
   border-radius: 10px;
 }
-
-// .menu .list-group-item:last-child {
-//   border-bottom: 10;
-// }
 
 img {
   padding-right: 15px;
@@ -64,6 +61,11 @@ ul {
   top: 0px;
   left: 0px;
   display: inline-block;
+  background-image: url('/assets/images/company-logos/sideimg.svg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
 }
 
 #sidebar.active {
@@ -81,74 +83,108 @@ a[data-toggle="collapse"] {
   right: 10px;
   transform: translateY(-50%);
 }
-.bgColor{
-  background-image: url('/assets/images/company-logos/sideimg.svg');
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-}
+
 #sidebar {
   border: none;
-  li:active{
-  color: #64c2e1;
+
+  li:active {
+    color: #64c2e1;
+  }
+
+  li:focus {
+    outline: #64c2e1;
+    border-radius: 20px;
+    color: #00ABFF;
+  }
 }
-li:focus{
-  outline:#64c2e1  ;
-  border-radius: 20px;
-  color: #00ABFF;
-  
+
+.workload-item:hover {
+  .fa-dharmachakra {
+    transform: rotate(120deg);
+    transition: 1.5s;
+  }
 }
-}
-.dharma:hover{
-.fa-dharmachakra{
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-}
-.sidebarBottom{
-  color:#004ED6;
+
+.sidebar-bottom {
+  color: #004ED6;
   font-size: 14px;
   position: absolute;
-  bottom: 0; 
+  bottom: 0;
 }
-.ciCdAnime{
-  box-sizing: border-box;
-  .line1{
-    background: #212428; padding-top:8px; border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
+
+.cicd-graph-logo {
+  .vertical-bar-1 {
+    background: #212428;
+    padding-top: 8px;
+    border-radius: 2px;
+    transition: 700ms;
+    padding-left: 2px;
+    padding-right: 2px;
   }
-  .line2{
-    background: #212428; padding-top:1px;border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
+
+  .vertical-bar-2 {
+    background: #212428;
+    padding-top: 1px;
+    border-radius: 2px;
+    transition: 700ms;
+    padding-left: 2px;
+    padding-right: 2px;
   }
-  .line3{
-    background: #212428; padding-top:17px;border-radius: 2px; transition: 700ms; padding-left: 2px;padding-right: 2px;
-  }
-}
-.ciCd:hover{
-  .line1{
-     padding-top:15px; transition: 500ms;
-  }
-  .line2{
-     padding-top:10px; transition: 500ms;
-  }
-  .line3{
-     padding-top:5px; transition: 500ms;
-  }
-}
-.ciCd:active{
-  .line1{
-     padding-top:5px; transition: 50ms;
-  }
-  .line2{
-     padding-top:15px; transition: 50ms;
-  }
-  .line3{
-     padding-top:8px; transition: 50ms;
+
+  .vertical-bar-3 {
+    background: #212428;
+    padding-top: 17px;
+    border-radius: 2px;
+    transition: 700ms;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 }
 
+.cicd:hover {
+  .vertical-bar-1 {
+    padding-top: 15px;
+    transition: 500ms;
+  }
 
+  .vertical-bar-2 {
+    padding-top: 10px;
+    transition: 500ms;
+  }
+
+  .vertical-bar-3 {
+    padding-top: 5px;
+    transition: 500ms;
+  }
+}
+
+.active-link {
+  outline: #64c2e1;
+  color: #00ABFF;
+
+  .vertical-bar-1,
+  .vertical-bar-2,
+  .vertical-bar-3 {
+    background: #00ABFF;
+  }
+}
+
+.cicd:active {
+  .vertical-bar-1 {
+    padding-top: 5px;
+    transition: 50ms;
+    background: #00ABFF;
+  }
+
+  .vertical-bar-2 {
+    padding-top: 15px;
+    transition: 50ms;
+    background: #00ABFF;
+  }
+
+  .vertical-bar-3 {
+    padding-top: 8px;
+    transition: 50ms;
+    background: #00ABFF;
+  }
+}
