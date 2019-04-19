@@ -10,16 +10,10 @@ export class PersonService {
   private personDetails: personDetails[] = [];
   private yamls: yaml;
   private apiurl: string;
-  private host: string;
   private rnumber = Math.floor(Math.random() * 10000000);
 
   constructor(private http: HttpClient) {
-    this.host = window.location.host;
-    if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-      this.apiurl = "http://localhost:3000/";
-    } else {
-      this.apiurl = "https://workloads.openebs.ci/";
-    }
+    this.apiurl = localStorage.getItem('apiurlkey')
   }
 
 

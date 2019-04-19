@@ -12,7 +12,6 @@ import { ISubscription } from "rxjs/Subscription";
  styleUrls: ["./workload-dashboard.component.scss"]
 })
 
-
 export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
  public openebsVersion : any ;

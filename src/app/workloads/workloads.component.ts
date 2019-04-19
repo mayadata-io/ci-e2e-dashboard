@@ -32,13 +32,14 @@ import { ISubscription } from "rxjs/Subscription";
   styleUrls: ["./workloads.component.scss"]
 })
 export class WorkloadsComponent implements OnInit, OnDestroy {
-  private podUnsub: ISubscription;
-  private timeUnsub: ISubscription;
-  private litmustimeUnsub: ISubscription;
-  private litmusUnsub: ISubscription;
+  private podUnsub$: ISubscription;
+  private timeUnsub$: ISubscription;
+  private litmustimeUnsub$: ISubscription;
+  private litmusUnsub$: ISubscription;
   private routeSub: ISubscription;
-  private personalSub: ISubscription;
-  private pvcDetails: ISubscription;
+  private personalSub$: ISubscription;
+  private pvcDetails$: ISubscription;
+  private mayactlVolumeList$: ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
@@ -46,6 +47,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public numberstatefullSets = 0;
   public numberController: any = 0;
   public numberReplica: any = 0;
+  public kubeletVersion: string;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -165,7 +167,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
+    this.personalSub$ = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
       this.workloadyaml = res.workloadyaml;
@@ -200,8 +202,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       $(".hide-custom").hide();
     }
 
-    this.timeUnsub = timer(0, 50000).subscribe(x => {
-      this.podUnsub = this.kubernetsServices
+    this.timeUnsub$ = timer(0, 50000).subscribe(x => {
+      this.podUnsub$ = this.kubernetsServices
         .getPodDetails(this.currentRoute[1], this.currentRoute[1])
         .subscribe(res => {
           this.showSpinner = false;
@@ -215,13 +217,10 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.pvcarray = this.pvctemp.pvc;
           // this.workloadImage = this.statefullSets[0].dockerImage;
           // this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
-          this.openebsversion = this.jivaContrllers[0].openebsjivaversion.split(
-            ":"
-          )[1];
+          this.openebsversion = this.jivaContrllers[0].openebsVersion
           this.namespace = this.statefullSets[0].namespace;
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
-          this.numberController = this.jivaContrllers.length;
           if (this.numberController >= 1) {
             this.litmusGoBtn = false;
           }
@@ -230,13 +229,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           //   this.appPersent = false;
           //   this.litmusGetResponse=false;
           //  }
-
-          if (this.openebsengine == "cStor") {
-            this.numberReplica = this.numberController * 3;
-
-          } else if (this.openebsengine == "Jiva") {
-            this.numberReplica = this.jivaReplicas.length;
-          }
 
           if (this.overallStatus == "Running") {
             this.runningStatus = true;
@@ -254,8 +246,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         });
     });
 
-    this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
-      this.litmusUnsub = this.litmusServies
+    this.litmustimeUnsub$ = timer(0, 5000).subscribe(x => {
+      this.litmusUnsub$ = this.litmusServies
         .getJobName(this.currentRoute[1])
         .subscribe(res => {
           if (JSON.stringify(res.jobname) != undefined) {
@@ -277,29 +269,41 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           }
         });
     });
-    this.pvcDetails = this.kubernetsServices
+    this.pvcDetails$ = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
         this.litmuspod = res.statefulSet;
         this.mayapvc = res.pvcs.pvc
+        this.kubeletVersion = res.pvcs.nodes[0].kubeletVersion
         for (let i = 0; i < res.jivaController.length; i++) {
           this.numberNode.add(res.jivaController[i].node);
         }
         for (let i = 0; i < res.jivaReplica.length; i++) {
           this.numberNode.add(res.jivaReplica[i].node);
         }
+
+        this.mayactlVolumeList$ = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayapvc)
+        .subscribe(res => {
+          let response = Object.entries(res);
+          this.numberController = response.length;
+          for(let i in res){
+            this.numberReplica = this.numberReplica + parseInt(res[i].replicas);
+          }
+        })
       });
+
   }
 
   ngOnDestroy() {
-    this.podUnsub.unsubscribe();
-    this.timeUnsub.unsubscribe();
+    this.podUnsub$.unsubscribe();
+    this.timeUnsub$.unsubscribe();
     // this.routeSub.unsubscribe();
-    this.pvcDetails.unsubscribe();
-    this.personalSub.unsubscribe();
-    this.litmusUnsub.unsubscribe();
-    this.litmustimeUnsub.unsubscribe();
-  }
+    this.pvcDetails$.unsubscribe();
+    this.personalSub$.unsubscribe();
+    this.litmusUnsub$.unsubscribe();
+    this.litmustimeUnsub$.unsubscribe();
+    this.mayactlVolumeList$.unsubscribe();
+    }
   public listVolume() {
     this.kubernetsServices
       .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayapvc)
@@ -354,10 +358,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           break;
         }
       }
-      console.log(volume.trim());
-      console.log(this.namespace);
-      console.log(this.openebsEngine);
-      console.log(type);
       if (this.openebsEngine == "cstor") {
         this.litmusServies
           .runChaosTestService(
@@ -393,7 +393,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.litmusServies
       .getLitmusStatus(this.currentRoute[1], job)
       .subscribe(res => {
-        console.log(res);
         this.litmusStarted = true;
         this.litmusGoBtn = true;
         this.litmusLog = res;
