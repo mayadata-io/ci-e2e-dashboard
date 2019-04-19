@@ -23,25 +23,24 @@
         <div class="d-flex flex-column my-auto VLine ">
           <div class="d-flex justify-content-between">
             <div class="d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
+              <div class="d-flex align-items-end mb-3">
                 <img src="/assets/images/company-logos/k8slogo.svg" alt="" height="30">
-                <p class="mb-0 font-size-12 text-dark"> &nbsp;&nbsp;1.10.7</p>
+                <p class="mb-0 font-size-12 text-dark"> {{kubeletVersion}}</p>
               </div>
               <p class=" mb-0 font-size-12 text-dark">Namespace: {{namespace}} </p>
-              <!-- <p class=" mb-0 font-size-12 workloadImg">Image: {{workloadImage}}</p> -->
             </div>
           </div>
         </div>
         <div class="d-flex flex-column my-auto pr-4">
           <div class="d-flex flex-column ">
-            <div class="d-flex align-items-center mb-3 ml-4">
+            <div class="d-flex align-items-end mb-3 ml-4">
               <img src="/assets/images/company-logos/openebs-logo-mule.svg" alt="" height="30">
-              <p class="mb-0 font-size-12 text-dark"> &nbsp;&nbsp; {{openebsengine}} -0.8.1</p>
+              <p class="mb-0 font-size-12 text-dark"> {{openebsengine}} - {{openebsversion}}</p>
             </div>
             <p class="ml-4 mb-0 font-size-12 text-dark">Controller {{numberController}} &nbsp;&nbsp;Replicas
               {{numberReplica}}&nbsp;&nbsp;
-              Zones <span>{{numberNode.size}}</span> </p>
-            <p class="ml-4 mb-0 font-size-12 text-dark" *ngIf="workloadName == 'wordpress'">NFS Controller -1 </p>
+              Zones <span>{{numberReplica}}</span> </p>
+              <p class="ml-4 mb-0 font-size-12 text-dark" *ngIf="workloadName == 'nfs'">NFS Controller -1 </p>
           </div>
         </div>
       </div>
@@ -69,8 +68,8 @@
               </div>
             </div>
             <br>
-            <div class="col-md-12 d-flex justify-content-around workloads my-3">
-              <div class="workload-deatils mx-2 divideLine text-secondary w-33" *ngFor="let pvc of pvcarray">
+            <div class="col-md-12 d-flex flex-wrap workloads my-3">
+              <div class="workload-deatils mx-2 text-secondary w-33"  *ngFor="let pvc of pvcarray">  
                 <div *ngFor="let statefulset of statefullSets">
                   <div *ngIf="statefulset.pvc === pvc.name ">
                     <img src="/assets/images/workloads-logos/{{statefulset.imageName}}.png" height="30" alt="">
@@ -81,13 +80,15 @@
                       <img height="13" [ngClass]="{
                     'display':statefulset.status === 'Running',
                     'hide':statefulset.status !== 'Running'
-                  }" src="/assets/images/icons/active.png" alt="">
-                      <img [ngClass]="{
+                  }" class="ml-2"
+                      src="/assets/images/icons/active.png" alt="">
+                    <img [ngClass]="{
                     'display':statefulset.status !== 'Running',
                     'hide':statefulset.status === 'Running'
-                  }" src="/assets/images/icons/inactive.png" alt="" height="13">
-                    </p>
-                  </div>
+                  }" 
+                      src="/assets/images/icons/inactive.png" alt="" height="13">
+                  </p>
+                </div> 
                 </div>
                 <img src="/assets/images/company-logos/mule-without-tagline.png" height="28" alt="" class="mr-2">
                 <div *ngFor="let jivaContrller of jivaContrllers;let i = index">

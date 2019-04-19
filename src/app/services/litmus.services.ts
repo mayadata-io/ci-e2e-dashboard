@@ -6,17 +6,9 @@ import { litmusstatus,litmuslog,jobname } from "../model/data.model";
 @Injectable()
 export class LitmusService {
   private apiurl: string;
-  private host: string;
+  
   constructor(private http: HttpClient) {
-    this.host = window.location.host;
-    if (
-      this.host.toString().indexOf("localhost") + 1 &&
-      this.host.toString().indexOf(":")
-    ) {
-      this.apiurl = "http://localhost:3000/";
-    } else {
-      this.apiurl = "https://workloads.openebs.ci/";
-    }
+    this.apiurl = localStorage.getItem('apiurlkey')
   }
 
   runChaosTestService(type: string, volumename: string, appnamespace: string, targetnamespace: string, appname: string) {
