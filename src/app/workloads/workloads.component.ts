@@ -32,14 +32,14 @@ import { ISubscription } from "rxjs/Subscription";
   styleUrls: ["./workloads.component.scss"]
 })
 export class WorkloadsComponent implements OnInit, OnDestroy {
-  private podUnsub$: ISubscription;
-  private timeUnsub$: ISubscription;
-  private litmustimeUnsub$: ISubscription;
-  private litmusUnsub$: ISubscription;
+  private podUnsub: ISubscription;
+  private timeUnsub: ISubscription;
+  private litmustimeUnsub: ISubscription;
+  private litmusUnsub: ISubscription;
   private routeSub: ISubscription;
-  private personalSub$: ISubscription;
-  private pvcDetails$: ISubscription;
-  private mayactlVolumeList$: ISubscription;
+  private personalSub: ISubscription;
+  private pvcDetails: ISubscription;
+  private mayactlVolumeList: ISubscription;
   jivaDetail;
   jivas;
   private windowWidth;
@@ -167,7 +167,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.personalSub$ = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
+    this.personalSub = this.personService.getYamls(this.currentRoute[1]).subscribe(res => {
       this.workloadName = res.workloadName;
       this.namespaceyaml = res.nameSpaceyaml;
       this.workloadyaml = res.workloadyaml;
@@ -202,8 +202,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       $(".hide-custom").hide();
     }
 
-    this.timeUnsub$ = timer(0, 50000).subscribe(x => {
-      this.podUnsub$ = this.kubernetsServices
+    this.timeUnsub = timer(0, 50000).subscribe(x => {
+      this.podUnsub = this.kubernetsServices
         .getPodDetails(this.currentRoute[1], this.currentRoute[1])
         .subscribe(res => {
           this.showSpinner = false;
@@ -246,8 +246,8 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
         });
     });
 
-    this.litmustimeUnsub$ = timer(0, 5000).subscribe(x => {
-      this.litmusUnsub$ = this.litmusServies
+    this.litmustimeUnsub = timer(0, 5000).subscribe(x => {
+      this.litmusUnsub = this.litmusServies
         .getJobName(this.currentRoute[1])
         .subscribe(res => {
           if (JSON.stringify(res.jobname) != undefined) {
@@ -269,7 +269,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           }
         });
     });
-    this.pvcDetails$ = this.kubernetsServices
+    this.pvcDetails = this.kubernetsServices
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
         this.litmuspod = res.statefulSet;
@@ -282,7 +282,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.numberNode.add(res.jivaReplica[i].node);
         }
 
-        this.mayactlVolumeList$ = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayapvc)
+        this.mayactlVolumeList = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayapvc)
         .subscribe(res => {
           let response = Object.entries(res);
           this.numberController = response.length;
@@ -291,18 +291,17 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           }
         })
       });
-
   }
 
   ngOnDestroy() {
-    this.podUnsub$.unsubscribe();
-    this.timeUnsub$.unsubscribe();
+    this.podUnsub.unsubscribe();
+    this.timeUnsub.unsubscribe();
     // this.routeSub.unsubscribe();
-    this.pvcDetails$.unsubscribe();
-    this.personalSub$.unsubscribe();
-    this.litmusUnsub$.unsubscribe();
-    this.litmustimeUnsub$.unsubscribe();
-    this.mayactlVolumeList$.unsubscribe();
+    this.pvcDetails.unsubscribe();
+    this.personalSub.unsubscribe();
+    this.litmusUnsub.unsubscribe();
+    this.litmustimeUnsub.unsubscribe();
+    this.mayactlVolumeList.unsubscribe();
     }
   public listVolume() {
     this.kubernetsServices
