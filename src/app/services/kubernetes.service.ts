@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { Observable } from "rxjs/Observable";
 import { forkJoin } from "rxjs/observable/forkJoin";
 import 'rxjs/add/operator/map'
-import { overAllStatus, listNamespace, status, allApplication } from "../model/data.model";
+import { overAllStatus, listNamespace, status, allApplication, mayapvc } from "../model/data.model";
 import { concatMap, mergeMap } from "rxjs/operators";
 
 @Injectable()
@@ -23,15 +23,15 @@ export class KubernetsService {
     getApiUrl() {
         return this.apiurl;
     }
-    getVolumeDetails(workloadname: string, openebsengine: string) {
+    getVolumeDetails(workloadname: string, openebsengine: string, pvcDetails: mayapvc) {
         return this.http.get(this.apiurl + "openebs/volume", {
             params: {
                 workloadname: workloadname,
-                openebsengine: openebsengine
+                openebsengine: openebsengine,
+                pvcDetails: JSON.stringify(pvcDetails)
             }
         });
     }
-
     getPodDetails(appnamespace: string, volumenamespace: string) {
         return this.http.get<overAllStatus>(this.apiurl + "pods/sequence", {
             params: {
@@ -41,20 +41,9 @@ export class KubernetsService {
         });
     }
 
-    getAllstatus(namespaces: string) {
-        return this.http.get<status>(this.apiurl + "pod/status", {
-            params: {
-                namespace: namespaces,
-            }
-        })
-    }
-    getOpenebsVersion() {
-        return this.http.get<listNamespace>(this.apiurl + "pod/openebsversion");
-    }
-
     getAllApplication() {
         this.requestservice = []
-        this.host = window.location.host
+        this.host = window.location.host;
         let url = '';
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
             url = "http://localhost:4000/workloads";

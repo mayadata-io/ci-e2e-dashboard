@@ -3,9 +3,9 @@
     <div class="col-md-8">
       <div class="row d-flex justify-content-between bg-white my-2 rounded shadow-sm">
         <div class="d-flex flex-column my-3 mx-2 ">
-          <img src="/assets/images/workload-logo/{{workloadName}}.png" alt="" height="40" class="mb-2">
+          <img src="/assets/images/workload-logo/{{workloadName}}.png" alt="" height="50" class="mb-2">
           <div class="ml-2">
-            <p class="mb-0 font-size-12 text-dark">{{applicationType}}
+            <p class="mb-0 fo-sz-12 text-dark">{{applicationType}}
               Replica
               {{numberstatefullSets}} Zones {{numberstatefullSets}}</p>
           </div>
@@ -222,7 +222,7 @@
                   <div class="custom-select1 hide-custom">
                     <hr>
                     <p class="text-lg-left pl-1">Select Application :</p>
-                    <div *ngFor="let statefulset of litmus-pod">
+                    <div *ngFor="let statefulset of litmuspod">
                       <td>
                         <input type="radio" name="ApplicationSelect" value="{{statefulset.pvc}}"
                           (change)="onAppSelect($event.target.value)">
@@ -288,7 +288,7 @@
                   </p>
                   <p *ngIf="litmusLog.runnigstatus === true">wait for sometime check status at left panel </p>
                   <p class="d-flex  align-items-center" *ngIf="litmusLog.completesstatus === true">
-                    <span class="litmus-compleate" placement="bottom"
+                    <span class="litmus-complete" placement="bottom"
                       ngbTooltip="{{litmusLog.podname}}">{{litmusLog.podname}}</span>
                     litmus test is completed </p>
                 </div>
