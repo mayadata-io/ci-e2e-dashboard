@@ -200,14 +200,14 @@ img {
   border-color: #343a40;
 }
 
-.gitlabButton {
+.gitlab-stage-button {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: bold;
   font-size: 15px;
 }
 
-.litmusButton {
+.e2e-logs-button {
   padding-left: 25px;
   padding-right: 25px;
   font-weight: bold;
@@ -215,12 +215,12 @@ img {
 }
 
 @media only screen and (max-width: 1500px) {
-  .statusbutton {
+  .status-button {
     font-size: 13px !important;
   }
 
   @media only screen and (max-width: 1400px) {
-    .statusbutton {
+    .status-button {
       font-size: 11px !important;
       padding-left: 14px;
       padding-right: 14px;
@@ -345,14 +345,10 @@ a:hover {
 
 }
 
-.dropData {
+.drop-data {
   padding: 0;
   vertical-align: middle;
   align-items: center;
-}
-
-.platformImg {
-  padding: 2px;
 }
 
 .platform {
@@ -361,11 +357,7 @@ a:hover {
   }
 }
 
-.disclk {
-  pointer-events: none;
-}
-
-.detailNA {
+.detail-na {
   position: relative;
   top: 20%;
 }
@@ -374,7 +366,47 @@ a:hover {
   font-size: 19px;
 }
 
-.githubCommit {
+.github-commit {
   cursor: pointer;
   color: #5C93E8;
+}
+
+.font-size-11 {
+  font-size: 11px;
+}
+
+.font-size-12 {
+  font-size: 12px;
+}
+
+.font-size-13 {
+  font-size: 13px;
+}
+
+.font-size-15 {
+  font-size: 15px;
+}
+
+.font-size-32 {
+  font-size: 32px;
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.arrow-color-blue {
+  color: #2399f1;
+}
+
+.padding-left-8 {
+  padding-left: 8px;
+}
+
+.padding-top-8 {
+  padding-top: 8px;
+}
+
+.height-50 {
+  height: 50px;
 }
