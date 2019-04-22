@@ -215,20 +215,14 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.pvc = res.pvcs;
           this.pvctemp = res.pvcs;
           this.pvcarray = this.pvctemp.pvc;
-          // this.workloadImage = this.statefullSets[0].dockerImage;
-          // this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
           this.openebsversion = this.jivaContrllers[0].openebsVersion
           this.namespace = this.statefullSets[0].namespace;
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
+
           if (this.numberController >= 1) {
             this.litmusGoBtn = false;
           }
-          //  else if(this.numberController == undefined ){
-          //   this.litmusGoBtn = false;
-          //   this.appPersent = false;
-          //   this.litmusGetResponse=false;
-          //  }
 
           if (this.overallStatus == "Running") {
             this.runningStatus = true;
@@ -240,6 +234,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           } else {
             this.unknownStatus = true;
           }
+          
           error => {
             this.unknownStatus = true;
           };
