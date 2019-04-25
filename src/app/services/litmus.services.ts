@@ -5,14 +5,14 @@ import { litmusstatus,litmuslog,jobname } from "../model/data.model";
 
 @Injectable()
 export class LitmusService {
-  private apiurl: string;
+  private apiUrl: string;
   
   constructor(private http: HttpClient) {
-    this.apiurl = localStorage.getItem('apiurlkey')
+    this.apiUrl = localStorage.getItem('apiUrlKey')
   }
 
   runChaosTestService(type: string, volumename: string, appnamespace: string, targetnamespace: string, appname: string) {
-    return this.http.get( this.apiurl + 
+    return this.http.get( this.apiUrl +
        "litmus?app=" + appname + 
        "&type=" + type +
        "&appnamespace=" + appnamespace +
@@ -21,7 +21,7 @@ export class LitmusService {
     );
   }
   getLitmusStatus1(appnamespace: string) {
-    return this.http.get<litmusstatus>(this.apiurl + "litmus/litmusstatus", {
+    return this.http.get<litmusstatus>(this.apiUrl + "litmus/litmusstatus", {
       params: {
         appnamespace: appnamespace
       }
@@ -29,7 +29,7 @@ export class LitmusService {
   }
   getLitmusStatus(appnamespace: string,jobname: string) {
     console.log(jobname);
-    return this.http.get<litmuslog>(this.apiurl + "litmus/litstatus", {
+    return this.http.get<litmuslog>(this.apiUrl + "litmus/litstatus", {
       params: {
         appnamespace: appnamespace,
         jobname:jobname
@@ -37,7 +37,7 @@ export class LitmusService {
     });
   }
   getJobName( nameSpace: string){
-    return this.http.get<jobname>(this.apiurl + "litmus/getjob", {
+    return this.http.get<jobname>(this.apiUrl + "litmus/getjob", {
       params: {
         nameSpace: nameSpace
       }

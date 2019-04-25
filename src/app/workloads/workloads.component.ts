@@ -40,9 +40,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private personalSub: ISubscription;
   private pvcDetails: ISubscription;
   private mayactlVolumeList: ISubscription;
-  jivaDetail;
-  jivas;
-  private windowWidth;
+  private jivaDetail;
+  private jivas;
+  public windowWidth
   private rnumber = Math.floor(Math.random() * 10000000);
   public numberstatefullSets = 0;
   public numberController: any = 0;
@@ -69,8 +69,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public pvctemp;
   public pvcarray;
   public namespace = "";
-  public dockerImage = "";
-  public openebsversion = "";
   public workloadImage = "";
   public overallStatus = "";
   public runningStatus = false;
@@ -215,7 +213,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.pvc = res.pvcs;
           this.pvctemp = res.pvcs;
           this.pvcarray = this.pvctemp.pvc;
-          this.openebsversion = this.jivaContrllers[0].openebsVersion
+          this.openebsVersion = this.jivaContrllers[0].openebsVersion
           this.namespace = this.statefullSets[0].namespace;
           this.overallStatus = res.status;
           this.numberstatefullSets = this.statefullSets.length;
