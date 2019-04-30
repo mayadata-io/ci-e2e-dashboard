@@ -1,57 +1,60 @@
-<div class="wrapper bgColor pt-3">
-        <div class="text-center" >
-            <a href="/">
-                <img src="/assets/images/company-logos/dashboard-logo.png"  alt="" class="p-0" height="80">
-            </a>
+<div class="wrapper pt-3">
+  <div class="text-center">
+    <a href="/">
+      <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
+    </a>
+  </div>
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <ul class="list-unstyled components mt-5">
+      <li class="item cursor-pointer rounded-left button text-center mt-5 " routerLink="/overview"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+        <div class="text-center">
+          <i class="fas fa-home sidebar-logo"></i>
         </div>
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <ul class="list-unstyled components mt-5" id="menu1">
-                <li class="item cursor-pointer sidebarItems rounded-left button text-center mt-5" routerLink="/overview" routerLinkActive="active"> 
-                    <div class="text-center">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="text-center mt-2" >
-                        <h5 translate>SIDEBAR.HOME</h5>
-                    </div>
-                </li>
-                <li *ngIf="vendor == 'false'" class="item cursor-pointer sidebarItems rounded-left button text-center mt-5 ciCd" routerLink="/" [routerLinkActiveOptions]="{ exact : true }"
-                    routerLinkActive="active" >
-                    <div class="text-center">
-                        <div class="ciCdAnime">
-                            <span class="line1 ">.</span>
-                            <span class="line2 mx-1 ">.</span>
-                            <span class="line3 ">.</span>
-                        </div>
-                    </div>
-                    <div class=" mt-2" >
-                        <h5 translate>SIDEBAR.DASHBOARD</h5>
-                    </div>
-                </li>
-                <li>
-                    <a *ngIf="vendor == 'true'" class="item cursor-pointer sidebarItems rounded-left button text-center mt-5" target="_blank" href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
-                        <div class="text-center">
-                            <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
-                        </div>
-                        <div class="mt-2" >
-                            <h5 translate>SIDEBAR.DASHBOARD</h5>
-                        </div>
-                    </a>
-                </li>
-                <li class="item cursor-pointer sidebarItems rounded-left button dharma mt-5" routerLink="workload-dashboard" routerLinkActive="active">
-                    <div class="text-center">
-                        <i class="fas fa-dharmachakra"></i>
-                    </div>
-                    <div class="text-center mt-2" >
-                        <h5 translate>SIDEBAR.WORKLOADS</h5>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    
-       <div class="container text-center sidebarBottom">
-                    <a href="https://mayadata.io/" target="_blank">
-                        <p translate>SIDEBAR.ORGANISATION</p>
-                    </a>
-                </div>
-    </div>
+        <div class="text-center mt-2">
+          <h5 translate>SIDEBAR.HOME</h5>
+        </div>
+      </li>
+      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left button text-center mt-5 cicd" routerLink="/"
+        [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
+        <div class="text-center">
+          <div class="cicd-graph-logo">
+            <span class="vertical-bar-1 ">.</span>
+            <span class="vertical-bar-2 mx-1 ">.</span>
+            <span class="vertical-bar-3 ">.</span>
+          </div>
+        </div>
+        <div class=" mt-2">
+          <h5 translate>SIDEBAR.DASHBOARD</h5>
+        </div>
+      </li>
+      <li>
+        <a *ngIf="vendor == 'true'" class="item cursor-pointer rounded-left button text-center mt-5" target="_blank"
+          href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
+          <div class="text-center">
+            <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
+          </div>
+          <div class="mt-2">
+            <h5 translate>SIDEBAR.DASHBOARD</h5>
+          </div>
+        </a>
+      </li>
+      <li class="item cursor-pointer rounded-left button workload-item mt-5" routerLink="workload-dashboard"
+        routerLinkActive="active-link">
+        <div class="text-center">
+          <i class="fas fa-dharmachakra sidebar-logo"></i>
+        </div>
+        <div class="text-center mt-2">
+          <h5 translate>SIDEBAR.WORKLOADS</h5>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container text-center sidebar-bottom">
+    <a href="https://mayadata.io/" target="_blank">
+      <p translate>SIDEBAR.ORGANISATION</p>
+    </a>
+  </div>
+</div>
