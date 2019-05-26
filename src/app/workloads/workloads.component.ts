@@ -23,7 +23,7 @@ import {
   runnigPos,
   completes,
   litmuslog,
-  mayapvc
+  mayaPvc
 } from "../model/data.model";
 import { ISubscription } from "rxjs/Subscription";
 @Component({
@@ -44,7 +44,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private jivas;
   public windowWidth
   private rnumber = Math.floor(Math.random() * 10000000);
-  public numberstatefullSets = 0;
+  public numberOfStatefullSets = 0;
   public numberController: any = 0;
   public numberReplica: any = 0;
   public kubeletVersion: string;
@@ -65,9 +65,9 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public openebsEngine: any;
   public dashboardurl: any;
   public pvc: pvcs;
-  public mayapvc: mayapvc;
-  public pvctemp;
-  public pvcarray;
+  public mayaPvc: mayaPvc;
+  public pvcTemp;
+  public pvcArray;
   public namespace = "";
   public workloadImage = "";
   public overallStatus = "";
@@ -211,12 +211,12 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.jivaContrllers = res.jivaController;
           this.jivaReplicas = res.jivaReplica;
           this.pvc = res.pvcs;
-          this.pvctemp = res.pvcs;
-          this.pvcarray = this.pvctemp.pvc;
+          this.pvcTemp = res.pvcs;
+          this.pvcArray = this.pvcTemp.pvc;
           this.openebsVersion = this.jivaContrllers[0].openebsVersion
           this.namespace = this.statefullSets[0].namespace;
           this.overallStatus = res.status;
-          this.numberstatefullSets = this.statefullSets.length;
+          this.numberOfStatefullSets = this.statefullSets.length;
 
           if (this.numberController >= 1) {
             this.litmusGoBtn = false;
@@ -266,7 +266,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
         this.litmuspod = res.statefulSet;
-        this.mayapvc = res.pvcs.pvc
+        this.mayaPvc = res.pvcs.pvc
         this.kubeletVersion = res.pvcs.nodes[0].kubeletVersion
         for (let i = 0; i < res.jivaController.length; i++) {
           this.numberNode.add(res.jivaController[i].node);
@@ -275,7 +275,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.numberNode.add(res.jivaReplica[i].node);
         }
 
-        this.mayactlVolumeList = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayapvc)
+        this.mayactlVolumeList = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayaPvc)
         .subscribe(res => {
           let response = Object.entries(res);
           this.numberController = response.length;
@@ -298,7 +298,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     }
   public listVolume() {
     this.kubernetsServices
-      .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayapvc)
+      .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayaPvc)
       .subscribe(res => {
         this.jivaDetail = res;
         this.jivas = this.jivaDetail;

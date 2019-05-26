@@ -13,22 +13,22 @@ export class AgileService {
    this.host = window.location.host;
    if (this.host == "localhost:4200") {
      this.agileApiUrl = "http://localhost:3000/";
-   } else if (this.host == "staging.openebs.io") {
+   } else if (this.host == "staging.openebs.ci") {
      this.agileApiUrl = "https://staging.mayadata.io/api/";
    } else {
-     this.agileApiUrl = "https://openebs.io/api/";
+     this.agileApiUrl = "https://openebs.com/api/";
    }
  }
 
  headerHeading(heading: string) {
    return heading;
  }
- saveFormdata( firstName: string, emailId: string, companyName: string, addtag: string) {
+ saveFormdata( firstName: string, emailId: string, companyName: string, addTag: string) {
    const contactAdd: contactDetails = {
      name: firstName,
      email: emailId,
      company: companyName,
-     tag: addtag
+     tag: addTag
    };
    this.http
      .post<{ message: string }>(this.agileApiUrl + "openebs/formsubmit", contactAdd)

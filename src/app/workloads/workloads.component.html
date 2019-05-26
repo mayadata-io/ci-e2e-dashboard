@@ -7,7 +7,7 @@
           <div class="ml-2">
             <p class="mb-0 fo-sz-12 text-dark">{{applicationType}}
               Replica
-              {{numberstatefullSets}} Zones {{numberstatefullSets}}</p>
+              {{numberOfStatefullSets}} Zones {{numberOfStatefullSets}}</p>
           </div>
 
           <div class="d-flex">
@@ -69,7 +69,7 @@
             </div>
             <br>
             <div class="col-md-12 d-flex flex-wrap workloads my-3">
-              <div class="workload-deatils mx-2 text-secondary w-33"  *ngFor="let pvc of pvcarray">  
+              <div class="workload-deatils mx-2 text-secondary w-33"  *ngFor="let pvc of pvcArray">
                 <div *ngFor="let statefulset of statefullSets">
                   <div *ngIf="statefulset.pvc === pvc.name ">
                     <img src="/assets/images/workloads-logos/{{statefulset.imageName}}.png" height="30" alt="">

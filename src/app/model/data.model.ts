@@ -92,7 +92,7 @@ export interface pvcs {
     }
 }
 
-export interface mayapvc {
+export interface mayaPvc {
       name: string;
       volumeName: string;
 }
@@ -242,7 +242,7 @@ export interface litmuslog {
   runnigstatus: boolean;
   completesstatus: boolean;
 }
-export interface jobname{
+export interface jobName{
   jobname:string;
   litmusName:string;
 }

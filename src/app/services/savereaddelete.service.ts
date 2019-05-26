@@ -55,7 +55,7 @@ export class PersonService {
         this.deletePersonDetails.push(deletePersonDetails);
       });
   }
-  getpersonDetails() {
+  getPersonDetails() {
     return this.http.get<{ message: string; posts: personDetails[] }>(
       this.apiUrl + "person/read/" + this.rnumber
     );

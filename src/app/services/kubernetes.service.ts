@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 import { Observable } from "rxjs/Observable";
 import { forkJoin } from "rxjs/observable/forkJoin";
 import 'rxjs/add/operator/map'
-import { overAllStatus, listNamespace, status, allApplication, mayapvc } from "../model/data.model";
+import { overAllStatus, listNamespace, status, allApplication, mayaPvc } from "../model/data.model";
 import { concatMap, mergeMap } from "rxjs/operators";
 
 @Injectable()
@@ -23,20 +23,20 @@ export class KubernetsService {
     getApiUrl() {
         return this.apiUrl;
     }
-    getVolumeDetails(workloadname: string, openebsengine: string, pvcDetails: mayapvc) {
+    getVolumeDetails(workloadName: string, openebsEngine: string, pvcDetails: mayaPvc) {
         return this.http.get(this.apiUrl + "openebs/volume", {
             params: {
-                workloadname: workloadname,
-                openebsengine: openebsengine,
+                workloadname: workloadName,
+                openebsengine: openebsEngine,
                 pvcDetails: JSON.stringify(pvcDetails)
             }
         });
     }
-    getPodDetails(appnamespace: string, volumenamespace: string) {
+    getPodDetails(appNamespace: string, volumeNamespace: string) {
         return this.http.get<overAllStatus>(this.apiUrl + "pods/sequence", {
             params: {
-                appnamespace: appnamespace,
-                volumenamespace: volumenamespace
+                appnamespace: appNamespace,
+                volumenamespace: volumeNamespace
             }
         });
     }
