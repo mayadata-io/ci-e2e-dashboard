@@ -2,7 +2,8 @@
   "VENDOR" : "false",
   "SIDEBAR": {
     "HOME": "Overview",
-    "DASHBOARD": "CI/E2E Dashboard",
+    "DASHBOARD": "Upstream Pipelines",
+    "DASHBOARD-MDAP": "Enterprise Pipelines",
     "WORKLOADS": "Workload Dashboard",
     "ORGANISATION": "MayaData Inc",
     "DASHBOARD-URL": ""
