@@ -12,12 +12,10 @@ import { ISubscription } from "rxjs/Subscription";
   styleUrls: ["./workload-dashboard.component.scss"]
 })
 
-
 export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
   public openebsVersion: any;
   public allApplications: allApplication[];
-  public responseapp: any = []
   private timerSub: ISubscription;
   public showSpinner: boolean = true;
   constructor(private kubernetsServices: KubernetsService, private meta: Meta, private titleService: Title) {
@@ -53,9 +51,9 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  setApiUrl(apiurl: string) {
-    localStorage.setItem('apiurlkey', apiurl);
-    this.kubernetsServices.setApiUrl(localStorage.getItem('apiurlkey'));
+  setApiUrl(apiUrl: string) {
+    localStorage.setItem('apiUrlKey', apiUrl);
+    this.kubernetsServices.setApiUrl(localStorage.getItem('apiUrlKey'));
   }
 
   ngOnDestroy() {

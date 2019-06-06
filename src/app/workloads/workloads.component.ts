@@ -23,7 +23,7 @@ import {
   runnigPos,
   completes,
   litmuslog,
-  mayapvc
+  mayaPvc
 } from "../model/data.model";
 import { ISubscription } from "rxjs/Subscription";
 @Component({
@@ -39,13 +39,15 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   private routeSub: ISubscription;
   private personalSub: ISubscription;
   private pvcDetails: ISubscription;
-  jivaDetail;
-  jivas;
-  private windowWidth;
+  private mayactlVolumeList: ISubscription;
+  private jivaDetail;
+  private jivas;
+  public windowWidth
   private rnumber = Math.floor(Math.random() * 10000000);
-  public numberstatefullSets = 0;
+  public numberOfStatefullSets = 0;
   public numberController: any = 0;
   public numberReplica: any = 0;
+  public kubeletVersion: string;
   public completes: completes[] = [];
   public runnigPos: runnigPos[] = [];
   public statefullSets: statefulSet[] = [];
@@ -63,12 +65,10 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
   public openebsEngine: any;
   public dashboardurl: any;
   public pvc: pvcs;
-  public mayapvc: mayapvc;
-  public pvctemp;
-  public pvcarray;
+  public mayaPvc: mayaPvc;
+  public pvcTemp;
+  public pvcArray;
   public namespace = "";
-  public dockerImage = "";
-  public openebsversion = "";
   public workloadImage = "";
   public overallStatus = "";
   public runningStatus = false;
@@ -211,31 +211,15 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           this.jivaContrllers = res.jivaController;
           this.jivaReplicas = res.jivaReplica;
           this.pvc = res.pvcs;
-          this.pvctemp = res.pvcs;
-          this.pvcarray = this.pvctemp.pvc;
-          // this.workloadImage = this.statefullSets[0].dockerImage;
-          // this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
-          this.openebsversion = this.jivaContrllers[0].openebsjivaversion.split(
-            ":"
-          )[1];
+          this.pvcTemp = res.pvcs;
+          this.pvcArray = this.pvcTemp.pvc;
+          this.openebsVersion = this.jivaContrllers[0].openebsVersion
           this.namespace = this.statefullSets[0].namespace;
           this.overallStatus = res.status;
-          this.numberstatefullSets = this.statefullSets.length;
-          this.numberController = this.jivaContrllers.length;
+          this.numberOfStatefullSets = this.statefullSets.length;
+
           if (this.numberController >= 1) {
             this.litmusGoBtn = false;
-          }
-          //  else if(this.numberController == undefined ){
-          //   this.litmusGoBtn = false;
-          //   this.appPersent = false;
-          //   this.litmusGetResponse=false;
-          //  }
-
-          if (this.openebsengine == "cStor") {
-            this.numberReplica = this.numberController * 3;
-
-          } else if (this.openebsengine == "Jiva") {
-            this.numberReplica = this.jivaReplicas.length;
           }
 
           if (this.overallStatus == "Running") {
@@ -248,6 +232,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           } else {
             this.unknownStatus = true;
           }
+          
           error => {
             this.unknownStatus = true;
           };
@@ -281,13 +266,23 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
       .getPodDetails(this.currentRoute[1], this.currentRoute[1])
       .subscribe(res => {
         this.litmuspod = res.statefulSet;
-        this.mayapvc = res.pvcs.pvc
+        this.mayaPvc = res.pvcs.pvc
+        this.kubeletVersion = res.pvcs.nodes[0].kubeletVersion
         for (let i = 0; i < res.jivaController.length; i++) {
           this.numberNode.add(res.jivaController[i].node);
         }
         for (let i = 0; i < res.jivaReplica.length; i++) {
           this.numberNode.add(res.jivaReplica[i].node);
         }
+
+        this.mayactlVolumeList = this.kubernetsServices.getVolumeDetails(this.workloadName,this.openebsEngine,this.mayaPvc)
+        .subscribe(res => {
+          let response = Object.entries(res);
+          this.numberController = response.length;
+          for(let i in res){
+            this.numberReplica = this.numberReplica + parseInt(res[i].replicas);
+          }
+        })
       });
   }
 
@@ -299,10 +294,11 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.personalSub.unsubscribe();
     this.litmusUnsub.unsubscribe();
     this.litmustimeUnsub.unsubscribe();
-  }
+    this.mayactlVolumeList.unsubscribe();
+    }
   public listVolume() {
     this.kubernetsServices
-      .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayapvc)
+      .getVolumeDetails(this.workloadName, this.openebsEngine, this.mayaPvc)
       .subscribe(res => {
         this.jivaDetail = res;
         this.jivas = this.jivaDetail;
@@ -354,10 +350,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           break;
         }
       }
-      console.log(volume.trim());
-      console.log(this.namespace);
-      console.log(this.openebsEngine);
-      console.log(type);
       if (this.openebsEngine == "cstor") {
         this.litmusServies
           .runChaosTestService(
@@ -393,7 +385,6 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
     this.litmusServies
       .getLitmusStatus(this.currentRoute[1], job)
       .subscribe(res => {
-        console.log(res);
         this.litmusStarted = true;
         this.litmusGoBtn = true;
         this.litmusLog = res;

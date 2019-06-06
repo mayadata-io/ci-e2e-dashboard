@@ -4,45 +4,45 @@ import { Subject } from "rxjs";
 import { Observable } from "rxjs/Observable";
 import { forkJoin } from "rxjs/observable/forkJoin";
 import 'rxjs/add/operator/map'
-import { overAllStatus, listNamespace, status, allApplication, mayapvc } from "../model/data.model";
+import { overAllStatus, listNamespace, status, allApplication, mayaPvc } from "../model/data.model";
 import { concatMap, mergeMap } from "rxjs/operators";
 
 @Injectable()
 export class KubernetsService {
 
-    private apiurl: string;
+    private apiUrl: string;
     private host: string;
-    private requestservice: any;
+    private collectionOfApplication: any;
     constructor(private http: HttpClient) {
-        this.apiurl = localStorage.getItem('apiurlkey')
+        this.apiUrl = localStorage.getItem('apiUrlKey')
     }
 
     setApiUrl(apiUrl: string) {
-        this.apiurl = apiUrl;
+        this.apiUrl = apiUrl;
     }
     getApiUrl() {
-        return this.apiurl;
+        return this.apiUrl;
     }
-    getVolumeDetails(workloadname: string, openebsengine: string, pvcDetails: mayapvc) {
-        return this.http.get(this.apiurl + "openebs/volume", {
+    getVolumeDetails(workloadName: string, openebsEngine: string, pvcDetails: mayaPvc) {
+        return this.http.get(this.apiUrl + "openebs/volume", {
             params: {
-                workloadname: workloadname,
-                openebsengine: openebsengine,
+                workloadname: workloadName,
+                openebsengine: openebsEngine,
                 pvcDetails: JSON.stringify(pvcDetails)
             }
         });
     }
-    getPodDetails(appnamespace: string, volumenamespace: string) {
-        return this.http.get<overAllStatus>(this.apiurl + "pods/sequence", {
+    getPodDetails(appNamespace: string, volumeNamespace: string) {
+        return this.http.get<overAllStatus>(this.apiUrl + "pods/sequence", {
             params: {
-                appnamespace: appnamespace,
-                volumenamespace: volumenamespace
+                appnamespace: appNamespace,
+                volumenamespace: volumeNamespace
             }
         });
     }
 
     getAllApplication() {
-        this.requestservice = []
+        this.collectionOfApplication = []
         this.host = window.location.host;
         let url = '';
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
@@ -52,9 +52,9 @@ export class KubernetsService {
         }
         return this.http.get(url).pipe(mergeMap((clusterDomain: any[]) => {
             clusterDomain.forEach(element => {
-                this.requestservice.push(this.http.get<allApplication[]>(element + "pod/statuses").map(res => res));
+                this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses").map(res => res));
             })
-            return forkJoin(this.requestservice);
+            return forkJoin(this.collectionOfApplication);
         }));
     }
 }
