@@ -2,10 +2,11 @@
   "VENDOR" : "false",
   "SIDEBAR": {
     "HOME": "Overview",
-    "DASHBOARD": "Upstream Pipelines",
+    "DASHBOARD": "CI/E2E Dashboard",
     "DASHBOARD-MDAP": "Enterprise Pipelines",
     "WORKLOADS": "Workload Dashboard",
     "ORGANISATION": "MayaData Inc",
+    "MDAPE2E-URL":"https://app.mayaonline.io/mdape2e",
     "DASHBOARD-URL": ""
   },
   "WORKLOAD-DASHBOARD": {

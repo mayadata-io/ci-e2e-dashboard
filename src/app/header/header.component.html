@@ -6,7 +6,9 @@
             <ul class="navbar-nav mr-auto">
               <li>
                 <span class="header-text">{{header}}</span>
-                <button *ngIf="currentRoute == '/'" type="button" class="btn btn-outline-light btn-sm ml-5 btn-mdap" (click)="clickit(mdape2eURL)">Enterprise Pipelines</button>
+                <a *ngIf="mdape2e" class="ml-5" target="_blank" href="{{ 'SIDEBAR.MDAPE2E-URL' | translate }}">
+                  <button type="button" class="btn btn-outline-light btn-sm btn-mdap" translate>SIDEBAR.DASHBOARD-MDAP</button>
+                </a>
               </li>
             </ul>
             <ul *ngIf="vendor == 'false'" class="navbar-nav mr-right">

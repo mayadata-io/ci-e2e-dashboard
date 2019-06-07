@@ -31,20 +31,6 @@
           <h5 translate>SIDEBAR.DASHBOARD</h5>
         </div>
       </li>
-      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left button text-center mt-5 cicd">
-        <a href="https://app.mayaonline.io/mdape2e" target="_blank">
-        <div class="text-center">
-          <div class="cicd-graph-logo">
-            <span class="vertical-bar-1 ">.</span>
-            <span class="vertical-bar-2 mx-1 ">.</span>
-            <span class="vertical-bar-3 ">.</span>
-          </div>
-        </div>
-        <div class=" mt-2">
-          <h5 translate>SIDEBAR.DASHBOARD-MDAP</h5>
-        </div>
-      </a>
-      </li>
       <li>
         <a *ngIf="vendor == 'true'" class="item cursor-pointer rounded-left button text-center mt-5" target="_blank"
           href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
