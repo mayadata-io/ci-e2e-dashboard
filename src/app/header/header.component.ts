@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   name: FormControl;
   public vendor: any = false;
   email: FormControl;
+  mdape2eURL = 'https://app.mayaonline.io/mdape2e';
   companyname: FormControl;
   isFormEmpty: boolean = false;
   setFormChange: boolean = false;
