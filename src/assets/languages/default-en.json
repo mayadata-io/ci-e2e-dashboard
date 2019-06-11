@@ -4,6 +4,7 @@
     "HOME": "Overview",
     "DASHBOARD": "CI/E2E Dashboard",
     "DASHBOARD-MDAP": "Enterprise Pipelines",
+    "MDAP":"E2E pipelines for Release branches",
     "WORKLOADS": "Workload Dashboard",
     "ORGANISATION": "MayaData Inc",
     "MDAPE2E-URL":"https://app.mayaonline.io/mdape2e",
