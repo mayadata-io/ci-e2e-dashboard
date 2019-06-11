@@ -20,15 +20,19 @@ export class HeaderComponent implements OnInit {
   isFormEmpty: boolean = false;
   setFormChange: boolean = false;
   mdTag: string = 'OpenEBS OE Newsletter';
+  mdape2e :boolean = false;
   constructor(private router: Router, private headerService: AgileService, public translateService: TranslateService) {
     router.events.subscribe(val => {
       this.currentRoute = this.router.url;
       if (this.currentRoute === "/") {
-        this.header = "CI/E2E Dashboard For Master branch of OpenEBS";
+        this.header = "E2E pipelines For Master branch";
+        this.mdape2e = true;
       } else if (this.currentRoute === "/overview") {
         this.header = "Overview";
+        this.mdape2e = false;
       } else {
         this.header = "Workloads Dashboard";
+        this.mdape2e = false;
       }
     });
     this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {

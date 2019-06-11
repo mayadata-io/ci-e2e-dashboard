@@ -71,7 +71,7 @@ export interface jivaController {
   vsm: string;
   nodeName: string;
   status: string;
-  openebsjivaversion: string;
+  openebsVersion: string;
   adjacency: string;
 }
 
@@ -92,7 +92,7 @@ export interface pvcs {
     }
 }
 
-export interface mayapvc {
+export interface mayaPvc {
       name: string;
       volumeName: string;
 }
@@ -136,7 +136,7 @@ export interface overAllStatus {
       vsm: string;
       nodeName: string;
       status: string;
-      openebsjivaversion: string;
+      openebsVersion: string;
       adjacency: string;
       node:string;
     }
@@ -158,7 +158,8 @@ export interface overAllStatus {
         {
           name: string;
           volumeName: string;
-        }
+        },
+      nodes:any
     }
 }
 
@@ -241,7 +242,7 @@ export interface litmuslog {
   runnigstatus: boolean;
   completesstatus: boolean;
 }
-export interface jobname{
+export interface jobName{
   jobname:string;
   litmusName:string;
 }
