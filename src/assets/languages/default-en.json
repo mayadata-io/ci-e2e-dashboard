@@ -8,6 +8,7 @@
     "WORKLOADS": "Workload Dashboard",
     "ORGANISATION": "MayaData Inc",
     "MDAPE2E-URL":"https://app.mayaonline.io/mdape2e",
+    "MDAPE2E-TOOLTIP":"Click here to view Enterprise Pipelines",
     "DASHBOARD-URL": ""
   },
   "WORKLOAD-DASHBOARD": {
