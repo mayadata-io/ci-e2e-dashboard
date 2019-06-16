@@ -8,7 +8,7 @@
                 <span class="header-text" style="margin-right: 9rem">{{header}}</span>
                 <a *ngIf="mdape2e" class="ml-2" target="_blank" href="{{ 'SIDEBAR.MDAPE2E-URL' | translate }}">
                   <button type="button" class="btn btn-outline-light btn-sm mdap-link " placement="bottom"
-                  ngbTooltip="Click To View Enterprise Pipelies" translate>SIDEBAR.MDAP</button>
+                  ngbTooltip="{{ 'SIDEBAR.MDAPE2E-TOOLTIP' | translate }}" translate>SIDEBAR.MDAP</button>
                 </a>
               </li>
             </ul>
@@ -16,7 +16,7 @@
                 <li class="my-2  my-lg-0 form-inline head-top-icon">
                     <a placement="bottom" ngbTooltip="Like Us!" href="https://github.com/openebs/openebs/stargazers" target="_blank" class="btn btn-sm btn-outline-light fas fa-heart head-icons"></a>
                     <a data-toggle="modal" data-target="#subscribeModal" placement="bottom" ngbTooltip="Subscribe to our news letter" class="btn btn-sm btn-outline-light fas fa-envelope-open-text head-icons mx-5"></a>
-                    <a ngbTooltip="Join Community"  placement="left" href="https://slack.openebs.io"  class="btn btn-sm btn-outline-light fab fa-slack head-icons"></a>
+                    <a ngbTooltip="Join Community"  placement="left" href="https://slack.openebs.io" target="_blank" class="btn btn-sm btn-outline-light fab fa-slack head-icons"></a>
                 </li>
             </ul>
         </div>
