@@ -105,7 +105,7 @@
                     </ng-template>
                   </span>
 
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}"
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV12Data.dashboard) }}"
                     (click)="detailPannel(i, packetV12Data.dashboard, buildData.dashboard, 'packetv12');"
                     [ngClass]="{'highlight': (status == 2 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV12Data.dashboard) === 'pending' ? 'none' : 'initial' }"
@@ -134,7 +134,7 @@
                     </ng-template>
                   </span>
 
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV11Data.dashboard) }}"
+                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV13Data.dashboard) }}"
                     (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv13');"
                     [ngClass]="{'highlight': (status == 3 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV13Data.dashboard) === 'pending' ? 'none' : 'initial' }"
