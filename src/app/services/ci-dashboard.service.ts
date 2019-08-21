@@ -30,6 +30,10 @@ export class DashboardData {
     getPacketv13Details() {
         return this.http.get<any[]>(this.apiurl + "/packet/v13");
     }
+    getKonvoyDetails() {
+        return this.http.get<any[]>(this.apiurl + "/konvoy");
+    }
+
     getBuildDetails() {
         return this.http.get<any[]>(this.apiurl + "/build");
     }
