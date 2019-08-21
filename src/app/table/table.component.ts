@@ -51,6 +51,7 @@ export class TableComponent implements OnInit {
   public packetV11Data: any;
   public packetV12Data: any;
   public packetV13Data: any;
+  public konvoyData: any;
   public buildData: any;
   public vendor: any = false;
 
@@ -93,6 +94,10 @@ export class TableComponent implements OnInit {
       this.DashboardDatas.getPacketv13Details().subscribe(data => {
         this.showSpinnerTable = false;
         this.packetV13Data = data;
+      });
+      this.DashboardDatas.getKonvoyDetails().subscribe(data => {
+        this.showSpinnerTable = false;
+        this.konvoyData = data;
       });
       this.DashboardDatas.getBuildDetails().subscribe(data => {
         this.showSpinnerTable = false;
@@ -366,6 +371,12 @@ export class TableComponent implements OnInit {
         this.name = "PACKET";
         this.kubernetesVersion = "1.13.4";
         this.status = 3;
+        this.detailsDatas(index, pipelineData, buildData)
+      } else if (cloud == "konvoy") {
+        this.image = 'D2IQ.svg'
+        this.name = "KONVOY";
+        this.kubernetesVersion = "1.15";
+        this.status = 4;
         this.detailsDatas(index, pipelineData, buildData)
       }
     }
