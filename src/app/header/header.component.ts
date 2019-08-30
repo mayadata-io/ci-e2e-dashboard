@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     router.events.subscribe(val => {
       this.currentRoute = this.router.url;
       if (this.currentRoute === "/") {
-        this.header = "E2E pipelines For Master branch";
+        this.header = "E2E pipelines for master branch";
         this.mdape2e = true;
       } else if (this.currentRoute === "/overview") {
         this.header = "Overview";
