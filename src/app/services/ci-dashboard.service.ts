@@ -19,12 +19,12 @@ export class DashboardData {
         }
     }
 
-    getPacketv11Details() {
-        return this.http.get<any[]>(this.apiurl + "/packet/v11");
+    getPacketv15Details() {
+        return this.http.get<any[]>(this.apiurl + "/packet/v15");
     }
 
-    getPacketv12Details() {
-        return this.http.get<any[]>(this.apiurl + "/packet/v12");
+    getPacketv14Details() {
+        return this.http.get<any[]>(this.apiurl + "/packet/v14");
     }
 
     getPacketv13Details() {
