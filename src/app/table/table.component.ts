@@ -48,8 +48,8 @@ export class TableComponent implements OnInit {
   public clusterCleanup: any;
   public appDeprovision: any;
   public kubernetesVersion: any;
-  public packetV11Data: any;
-  public packetV12Data: any;
+  public packetV15Data: any;
+  public packetV14Data: any;
   public packetV13Data: any;
   public konvoyData: any;
   public buildData: any;
@@ -83,13 +83,13 @@ export class TableComponent implements OnInit {
     });
 
     this.getData = timer(0, 5000).subscribe(x => {
-      this.DashboardDatas.getPacketv11Details().subscribe(data => {
+      this.DashboardDatas.getPacketv15Details().subscribe(data => {
         this.showSpinnerTable = false;
-        this.packetV11Data = data;
+        this.packetV15Data = data;
       });
-      this.DashboardDatas.getPacketv12Details().subscribe(data => {
+      this.DashboardDatas.getPacketv14Details().subscribe(data => {
         this.showSpinnerTable = false;
-        this.packetV12Data = data;
+        this.packetV14Data = data;
       });
       this.DashboardDatas.getPacketv13Details().subscribe(data => {
         this.showSpinnerTable = false;
@@ -105,9 +105,9 @@ export class TableComponent implements OnInit {
       });
     });
     this.selectCell = timer(0, 1000).subscribe(x => {
-      if (this.index == 1 && this.buildData != undefined && this.packetV11Data != undefined) {
+      if (this.index == 1 && this.buildData != undefined && this.packetV13Data != undefined) {
         this.index = 0;
-        this.detailPannel(0, this.packetV11Data.dashboard, this.buildData.dashboard, 'packetv11');
+        this.detailPannel(0, this.packetV13Data.dashboard, this.buildData.dashboard, 'packetv13');
       }
     });
   }
@@ -354,23 +354,23 @@ export class TableComponent implements OnInit {
     if (pipelineData[index].status == "none" || pipelineData[index].status == "") {
       this.status = 'NA';
     } else {
-      if (cloud == "packetv11") {
+      if (cloud == "packetv15") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.11.8";
-        this.status = 1;
+        this.kubernetesVersion = "1.15.3";
+        this.status = 3;
         this.detailsDatas(index, pipelineData, buildData)
-      } else if (cloud == "packetv12") {
+      } else if (cloud == "packetv14") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.12.6";
+        this.kubernetesVersion = "1.14.5";
         this.status = 2;
         this.detailsDatas(index, pipelineData, buildData)
       } else if (cloud == "packetv13") {
         this.image = 'packet.svg'
         this.name = "PACKET";
         this.kubernetesVersion = "1.13.4";
-        this.status = 3;
+        this.status = 1;
         this.detailsDatas(index, pipelineData, buildData)
       } else if (cloud == "konvoy") {
         this.image = 'D2IQ.svg'
