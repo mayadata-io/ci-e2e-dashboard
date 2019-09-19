@@ -11,16 +11,18 @@
       <div class="body-content" id="scrollbar">
         <router-outlet></router-outlet>
       </div>
-      <div *ngIf="vendor == 'false'" class="col-md-12 bg-light footer-row border-top">
+      <div *ngIf="vendor == 'false'" class="col-md-12 bg-light footer-row border-top" > 
         <div>
-          <p class="m-0 text-secondary">Copyright ©2019 MayaData Inc.</p>
+          <p class="text-secondary m-0 p-0">Copyright ©2019 MayaData Inc.</p>
         </div>
-        <div class="float-right pr-2" style="position: absolute;right: 0;">
-          <a href="https://docs.openebs.io/" target="_blank" placement="left" ngbTooltip="About Openebs">
-            <img src="assets/images/company-logos/openebs.svg" alt="" height="15">
-            <span> v1.0 </span>
-          </a>
+        <!-- <div class="float-right pb-1" style="position: absolute;right: 0;"> -->
+        <div class="d-flex" style="position: absolute ; right:0;">
+          <p style="margin-top: 2px;margin-bottom: 0px;font-style: 10px;" class="text-secondary"> Powered by </p>
+          <p class="m-0 p-0">
+            <img src="assets/images/workload-logo/gitlab.svg" alt="" height="27">
+          </p>
         </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
