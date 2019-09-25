@@ -1,29 +1,15 @@
 <div class="row">
   <!-- table pannel start -->
-  <div class="col-sm-8">
+  <div class="col-sm-8 pr-0">
     <div class="body border h-100">
-      <div class="container">
-        <div class="details">
-          <h1>CI and E2E summary for commits</h1>
-          <h2>Summary of build status and E2E pipeline status on OpenEBS repository</h2>
-        </div>
-      </div>
-      <ul class="nav nav-tabs nav-justified" role="tablist">
+      <ul class="nav nav-tabs nav-justified mt-1" role="tablist">
         <li class="nav-item">
           <a class="nav-link active " href="#profile" role="tab" data-toggle="tab">
-            <h3 class="text-white">BRANCH</h3>
-            <h4 class="font-size-32">Master</h4>
-            <h3 *ngIf="undefined !== buildData" class="text-white">Builds in last one week:
+            <h3 class="text-white"></h3>
+            <h4 class="font-size-32">CI/E2E Summary of OpenEBS Development Builds</h4>
+            <h3 *ngIf="undefined !== buildData" class="text-white font-size-15">Builds in last one week:
               {{ masterBuildsCount(buildData.dashboard) }}
             </h3>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled cursor-default" href="#buzz" role="tab" data-toggle="tab">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled cursor-default" href="#references" role="tab" data-toggle="tab">
           </a>
         </li>
       </ul>
@@ -35,7 +21,7 @@
               <tr class="text-center">
                 <th>Trigger</th>
                 <th>Build</th>
-                <th class="text-center">E2E Pipelines (PACKET) </th>
+                <th class="text-center">E2E Pipelines</th>
               </tr>
               <tr class="text-center">
                 <td></td>
@@ -232,11 +218,25 @@
             <img src="/assets/images/cloud/{{ image }}">
             <h5>{{ name }}</h5>
             <h6>Kubernetes {{ kubernetesVersion }}</h6>
+
+
             <button type="button" class="btn btn-outline-custom mr-1 mt-4" data-toggle="collapse"
-              href="#gitlabStageToggle" role="button" aria-controls="gitlabStageToggle"><span
-                class="status-button gitlab-stage-button">GITLAB STAGES</span></button>
-            <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4"><span
-                class="status-button e2e-logs-button">E2E LOGS</span></button>
+              href="#gitlabStageToggle" role="button" aria-controls="gitlabStageToggle">
+              <span class="text-center">
+                <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
+                  height="30">
+              </span>
+              <span class="status-button gitlab-stage-button">GITLAB STAGES</span>
+            </button>
+
+
+
+            <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4">
+              <span class="text-center">
+                <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 "
+                  height="30">
+              </span>
+              <span class="status-button e2e-logs-button">E2E LOGS</span></button>
           </div>
 
           <div class="collapse" id="gitlabStageToggle">
