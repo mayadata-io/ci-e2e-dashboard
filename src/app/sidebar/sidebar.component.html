@@ -4,45 +4,35 @@
   </div>
   <!-- Sidebar -->
   <nav id="sidebar">
-    <ul class="list-unstyled components mt-5">
-      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left button text-center mt-5 cicd" routerLink="/"
+    <ul class="list-unstyled components">
+      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom" routerLink="/"
         [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
-        <div class="text-center">
-          <img src="/assets/images/company-logos/e2epipe.svg" alt="" height="40px" class="pr-0">
-        </div>
-        <div class=" mt-2">
-          <h5>Master Branch </h5>
+        <div class="">
+          <h5 class="mb-0">Development Branch</h5>
         </div>
       </li>
-      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left button text-center mt-5 cicd">
-        <a href="https://app.mayaonline.io/mdape2e" target="_blank" class="border-0" placement="bottom"
-        ngbTooltip="{{ 'SIDEBAR.MDAPE2E-TOOLTIP' | translate }}">
-          <div class="text-center">
-              <img src="/assets/images/company-logos/e2epipe.svg" alt="" height="40px" class="pr-0">
-          </div>
-          <div class=" mt-2">
-            <h5>Release Branch</h5>
+      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom">
+        <a href="https://app.mayaonline.io/mdape2e" target="_blank" class="border-0 p-0" >
+          <div class="">
+            <h5 class="mb-0">Stable Releases</h5>
           </div>
         </a>
       </li>
       <li>
-        <a *ngIf="vendor == 'true'" class="item cursor-pointer rounded-left button text-center mt-5" target="_blank"
+        <a *ngIf="vendor == 'true'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom" target="_blank"
           href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
           <div class="text-center">
             <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
           </div>
-          <div class="mt-2">
-            <h5 translate>SIDEBAR.DASHBOARD</h5>
+          <div class="">
+            <h5 class="mb-0" translate>SIDEBAR.DASHBOARD</h5>
           </div>
         </a>
       </li>
-      <li class="item cursor-pointer rounded-left button workload-item mt-5" routerLink="workload-dashboard"
+      <li class="item cursor-pointer rounded-left py-4 button workload-item border-bottom" routerLink="workload-dashboard"
         routerLinkActive="active-link">
-        <div class="text-center">
-          <i class="fas fa-dharmachakra sidebar-logo"></i>
-        </div>
-        <div class="text-center mt-2">
-          <h5 translate>SIDEBAR.WORKLOADS</h5>
+        <div class="text-center ">
+          <h5 class="mb-0" translate>SIDEBAR.WORKLOADS</h5>
         </div>
       </li>
     </ul>

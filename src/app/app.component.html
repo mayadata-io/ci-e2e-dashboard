@@ -1,25 +1,29 @@
 <!-- <div class="container-fluid"> -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2 p-0 scrollbar bg-light" id="scrollbar" >
+    <div class="col-md-2 p-0 scrollbar bg-white" id="scrollbar" >
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-md-10 p-0 dashboard-body">
-      <app-header></app-header>
-      <div class="fixed-bottom bg-white ">
-      </div>
-      <div class="body-content" id="scrollbar">
+      <!-- <app-header></app-header> -->
+      <div id="scrollbar">
         <router-outlet></router-outlet>
       </div>
     </div>
-    <div class="col-12 m-0 p-0" style="position: absolute;bottom: 0;background-color: #7149c2">
-      <div class="row">
-        <div class="col-9">
-          <img src="/assets/images/company-logos/mayadata-white.svg" alt="" height="20" class="pl-5">
+    <div class="col-md-12 footer-row">
+      <div class="row pt-2">
+        <div class="col-5 py-2">
+          <span class="footer-text">Copyright © 2019 MayaData Inc.</span>
         </div>
-        <div class="col-3 text-right">
-          <span style="font-size: 15px;">Powered by</span>
-          <img src="assets/images/workload-logo/gitlab-text-white.svg" alt="" height="30">
+        <div class="col-3">
+          <div class="d-flex">
+            <img src="assets/images/company-logos/openebs-logo-mule.svg" alt="" height="30">
+            <img src="assets/images/company-logos/cncf-sandbox.png" alt="" height="30">
+          </div>
+        </div>
+        <div class="col-4 text-right ">
+          <span class="footer-text">Powered by</span>
+          <img src="assets/images/workload-logo/gitlab-text-white.svg" alt="" height="40">
         </div>
 
       </div>
