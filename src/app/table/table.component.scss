@@ -1,3 +1,9 @@
+// @media screen and (max-device-width: 480px) and (orientation: portrait){
+//   .ix{
+//     display: inline-block;
+//   }
+// }
+
 .body {
   background-color: white;
   border-radius: 5px;
@@ -5,7 +11,7 @@
 
 .detail {
   background-color: white;
-  height: 97vh;
+  height: 94vh;
   border-radius: 5px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -412,4 +418,7 @@ a:hover {
 }
 .cursor-default{
   cursor: default;
+}
+#data tr{
+  padding: 20px 5px;
 }
