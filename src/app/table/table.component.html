@@ -1,12 +1,13 @@
-<div class="row">
+<!-- <div class="container"> -->
+<div class="row ix">
   <!-- table pannel start -->
-  <div class="col-sm-8 pr-0">
-    <div class="body border h-100">
-      <ul class="nav nav-tabs nav-justified mt-1" role="tablist">
+  <div class="col-sm-12 col-md-8  pr-0">
+    <div class="body border">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
           <a class="nav-link active " href="#profile" role="tab" data-toggle="tab">
             <h3 class="text-white"></h3>
-            <h4 class="font-size-32">CI/E2E Summary of OpenEBS Development Builds</h4>
+            <h4 class="font-size-32 text-left">CI/E2E Summary of OpenEBS Development Builds</h4>
             <h3 *ngIf="undefined !== buildData" class="text-white font-size-15">Builds in last one week:
               {{ masterBuildsCount(buildData.dashboard) }}
             </h3>
@@ -193,7 +194,7 @@
 
 
   <!-- Detail pannel start -->
-  <div class="col-sm-4 px-0">
+  <div class="col-sm-12 col-md-4  px-0">
 
     <!-- Pipeline details not present START -->
     <div class="detail container border " *ngIf="status == 'NA'; else DetailPipelinePanel">
@@ -487,7 +488,7 @@
 
           <hr>
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-12">
               <div>
                 <div class="star-ratings-css">
                   <div class="star-ratings-css-top padding-left-8" [style.width]=rating>
@@ -498,7 +499,7 @@
                 <p class="font-size-13 padding-top-8">RATING</p>
               </div>
             </div>
-            <div class="col-sm-12 d-flex pt-2">
+            <div class="col-12 d-flex pt-2">
               <div class="w-25">
                 <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
                 <h6 class="font-size-13">TOTAL</h6>
@@ -519,23 +520,23 @@
           </div>
           <hr>
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-4">
               <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
               <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
             </div>
-            <div class="col-sm-8">
+            <div class="col-8">
               <h6 class="mt-2">{{ commitUser }}</h6>
               <h6 class="scrollbar font-size-15 height-50" id="scrollbar">{{ commitMessage }}</h6>
             </div>
           </div>
           <hr>
           <div class="row">
-            <div class="col-sm-4 text-center">
+            <div class="col-4 text-center">
               <a class="text-primary" target="_blank"
                 href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline
                 Images</a>
             </div>
-            <div class="col-sm-8 text-center">
+            <div class="col-8 text-center">
               <p>Container images used to run this pipeline</p>
             </div>
           </div>
@@ -546,3 +547,4 @@
   </div>
   <!-- detail pannel End -->
 </div>
+<!-- </div> -->
