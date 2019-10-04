@@ -5,7 +5,7 @@
 
 .detail {
   background-color: white;
-  height: 97vh;
+  height: 94vh;
   border-radius: 5px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -412,4 +412,7 @@ a:hover {
 }
 .cursor-default{
   cursor: default;
+}
+#data tr{
+  padding: 20px 5px;
 }
