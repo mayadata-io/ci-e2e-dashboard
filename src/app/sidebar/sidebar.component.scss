@@ -22,9 +22,9 @@ a:focus {
   transition: all 0.3s;
 }
 
-#sidebar ul.components {
-  padding: 0;
-}
+// #sidebar ul.components {
+//   padding: 0;
+// }
 
 #sidebar ul li a {
   border: 2px solid;
@@ -50,6 +50,7 @@ img {
 ul {
   margin-top: 0px;
   font-size: 12px !important;
+  width: max-content;
 }
 
 .wrapper {
