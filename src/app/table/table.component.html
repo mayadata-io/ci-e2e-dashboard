@@ -15,13 +15,14 @@
 
 <div class="row">
   <!-- table pannel start -->
-  <div class="col-sm-8 pr-0">
-    <div class="body border h-100">
-      <ul class="nav nav-tabs nav-justified mt-1" role="tablist">
+  <div class="col-sm-12 col-md-8  pr-0">
+    <div class="body border">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="nav-item">
           <a class="nav-link active " href="#profile" role="tab" data-toggle="tab">
             <h3 class="text-white"></h3>
-            <h4 class="font-size-32">CI/E2E Summary of OpenEBS Development Builds</h4>
+            <h4 class=" d-none d-md-block font-size-32 text-left">CI/E2E Summary of OpenEBS Development Builds</h4>
+            <div class="d-block d-md-none text-dark">CI/E2E Summary of OpenEBS Development Builds</div>
             <h3 *ngIf="undefined !== buildData" class="text-white font-size-15">Builds in last one week:
               {{ masterBuildsCount(buildData.dashboard) }}
             </h3>
@@ -41,7 +42,7 @@
               <tr class="text-center">
                 <td></td>
                 <td></td>
-                <td class="d-flex align-items-center justify-content-center platform ml-2">
+                <td class="d-flex align-items-center justify-content-center platform">
                   <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
                     <p class="font-size-13">1.13.4</p>
                   </span>
@@ -63,9 +64,10 @@
                 *ngFor="let post of buildData.dashboard; let i = index" [attr.data-index]="i">
                 <td>
                   <a class="github-commit" href="{{pullRequestURL(buildData.dashboard[i])}}" target="_blank">
-                    {{ getCommitName(i, buildData.dashboard) }}/#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}
+                    <span>{{ getCommitName(i, buildData.dashboard) }}</span> <span class="d-none d-md-inline">
+                      /#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}</span>
                   </a>
-                  <p class="font-size-12">Commit: {{ updated(i, buildData.dashboard) }}</p>
+                  <p class="font-size-12 d-none d-md-block">Commit: {{ updated(i, buildData.dashboard) }}</p>
                 </td>
 
                 <td>
@@ -73,11 +75,13 @@
                     [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
                     (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV13.dashboard, buildData.dashboard, 'packetV13'); ">
                     <i class="font-size-13" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
-                    <a class="ml-1 font-size-15">{{buildStatus(i, buildData.dashboard)}}</a>
+                    <a class="ml-1 font-size-15 d-none d-md-inline">{{buildStatus(i, buildData.dashboard)}}</a>
                   </button>
                 </td>
 
                 <td class="d-flex justify-content-center">
+                  <!--                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer"
+ -->
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV13Data.dashboard) }}"
                     (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv13');"
@@ -113,7 +117,7 @@
                     (click)="detailPannel(i, packetV14Data.dashboard, buildData.dashboard, 'packetv14');"
                     [ngClass]="{'highlight': (status == 2 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV14Data.dashboard) === 'pending' ? 'none' : 'initial' }"
-                    style="padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor: pointer;">
+                    style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
                     <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'running';else errorGraphPacketV14"
                       class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
                     <ng-template #errorGraphPacketV14>
@@ -142,7 +146,7 @@
                     (click)="detailPannel(i, packetV15Data.dashboard, buildData.dashboard, 'packetv15');"
                     [ngClass]="{'highlight': (status == 3 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV15Data.dashboard) === 'pending' ? 'none' : 'initial' }"
-                    style="padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor: pointer;">
+                    style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
                     <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'running';else errorGraphPacketV15"
                       class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
                     <ng-template #errorGraphPacketV15>
@@ -171,7 +175,7 @@
                     (click)="detailPannel(i, konvoyData.dashboard, buildData.dashboard, 'konvoy');"
                     [ngClass]="{'highlight': (status == 4 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, konvoyData.dashboard) === 'pending' ? 'none' : 'initial' }"
-                    style="padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor: pointer;">
+                    style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
                     <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'running';else errorGraphkonvoy"
                       class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
                     <ng-template #errorGraphkonvoy>
@@ -208,7 +212,7 @@
 
 
   <!-- Detail pannel start -->
-  <div class="col-sm-4 px-0">
+  <div class="col-sm-12 col-md-4  px-0">
 
     <!-- Pipeline details not present START -->
     <div class="detail container border " *ngIf="status == 'NA'; else DetailPipelinePanel">
@@ -531,6 +535,7 @@
 
 
             <div class="col-sm-12 d-flex pt-2">
+
               <div class="w-25">
                 <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
                 <h6 class="font-size-13">TOTAL</h6>
@@ -551,23 +556,23 @@
           </div>
           <hr>
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-4">
               <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
               <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
             </div>
-            <div class="col-sm-8">
+            <div class="col-8">
               <h6 class="mt-2">{{ commitUser }}</h6>
               <h6 class="scrollbar font-size-15 height-50" id="scrollbar">{{ commitMessage }}</h6>
             </div>
           </div>
           <hr>
           <div class="row">
-            <div class="col-sm-4 text-center">
+            <div class="col-4 text-center">
               <a class="text-primary" target="_blank"
                 href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline
                 Images</a>
             </div>
-            <div class="col-sm-8 text-center">
+            <div class="col-8 text-center">
               <p>Container images used to run this pipeline</p>
             </div>
           </div>
@@ -578,3 +583,4 @@
   </div>
   <!-- detail pannel End -->
 </div>
+<!-- </div> -->

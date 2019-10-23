@@ -4,7 +4,9 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <meta name="viewport" content="width=1280,initial-scale=0.2, maximum-scale=1.0">
+    <!-- <meta name="viewport" content="width=1280,initial-scale=0.2, maximum-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92076314-8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -22,7 +24,7 @@
         /* CSS Loader */
         body,
         html {
-            height: 95%;
+            height: 100%;
         }
 
         .app-loading {
@@ -84,7 +86,7 @@
 
 </head>
 
-<body style=" background-color: #EFF2F6; font-family: sans-serif;overflow-x: hidden;overflow-y: hidden;">
+<body style=" background-color: #EFF2F6; font-family: sans-serif;overflow-x: hidden;overflow-y: scroll;">
     <app-root>
         <!-- loading layout replaced by app after startup -->
         <div class="app-loading">

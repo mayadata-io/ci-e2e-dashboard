@@ -1,40 +1,49 @@
 <div class="wrapper ">
   <div class="text-center bg-white border-bottom py-2">
-      <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
+    <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
   </div>
   <!-- Sidebar -->
-  <nav id="sidebar">
-    <ul class="list-unstyled components">
-      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom" routerLink="/"
-        [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
-        <div class="">
-          <h5 class="mb-0">Development Branch</h5>
-        </div>
-      </li>
-      <li *ngIf="vendor == 'false'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom">
-        <a href="https://app.mayaonline.io/mdape2e" target="_blank" class="border-0 p-0" >
-          <div class="">
-            <h5 class="mb-0">Stable Releases</h5>
+  <nav class="navbar navbar-expand-lg navbar-light p-md-0">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="sidebar">
+      <ul class="list-unstyled justify-content-center w-100">
+        <li *ngIf="vendor == 'false'"
+          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" routerLink="/"
+          [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
+          <div>
+            <h5>Development Branch</h5>
           </div>
-        </a>
-      </li>
-      <li>
-        <a *ngIf="vendor == 'true'" class="item cursor-pointer rounded-left py-4 button text-center border-bottom" target="_blank"
-          href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
-          <div class="text-center">
-            <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
+        </li>
+        <li *ngIf="vendor == 'false'"
+          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom">
+          <a href="https://ci.mayadata.io" target="_blank" class="border-0 p-0">
+            <div>
+              <h5>Stable Releases</h5>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a *ngIf="vendor == 'true'"
+            class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" target="_blank"
+            href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
+            <div class="text-center">
+              <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
+            </div>
+            <div>
+              <h5 translate>SIDEBAR.DASHBOARD</h5>
+            </div>
+          </a>
+        </li>
+        <li class="item cursor-pointer rounded-left py-md-4 py-sm-1 button workload-item border-bottom"
+          routerLink="workload-dashboard" routerLinkActive="active-link">
+          <div class="text-center ">
+            <h5 translate>SIDEBAR.WORKLOADS</h5>
           </div>
-          <div class="">
-            <h5 class="mb-0" translate>SIDEBAR.DASHBOARD</h5>
-          </div>
-        </a>
-      </li>
-      <li class="item cursor-pointer rounded-left py-4 button workload-item border-bottom" routerLink="workload-dashboard"
-        routerLinkActive="active-link">
-        <div class="text-center ">
-          <h5 class="mb-0" translate>SIDEBAR.WORKLOADS</h5>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </nav>
 </div>
