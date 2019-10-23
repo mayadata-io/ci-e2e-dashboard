@@ -1,13 +1,11 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { Subscription, Observable, timer, from } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
-// import Chart from 'chart.js'
+import Chart from 'chart.js'
 import * as moment from 'moment';
 import * as dateformat from 'dateformat';
 import * as $ from 'jquery';
 import { DashboardData } from "../services/ci-dashboard.service";
-// import { HttpClient } from "@angular/common/http";
-// import { map } from "rxjs/operators";
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from "@angular/router";
 import { TranslateService } from 'angular-intl';
@@ -68,7 +66,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     localStorage.removeItem('row');
     //Highlight the row
     $('#data').on('click', 'tbody tr', function (e) {
@@ -401,6 +399,7 @@ export class TableComponent implements OnInit {
     this.appChaosTest = this.getStageStatus(gitlabStages[4], pipelineData[index].jobs)
     this.appDeprovision = this.getStageStatus(gitlabStages[5], pipelineData[index].jobs)
     this.clusterCleanup = this.getStageStatus(gitlabStages[6], pipelineData[index].jobs)
+    this.barChart(pipelineData[index]);
   }
   getStageStatus(stageName, data) {
     var statusObj = {
@@ -501,5 +500,93 @@ export class TableComponent implements OnInit {
     else if (status === "Failed") {
       return "gitlab_stage_build_failed";
     }
+  }
+
+  barChart(pipeline) {
+    $('#chart').empty();
+    $('#chart').html('<canvas id="myChart"></canvas>'); // then load chart.
+
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: this.getJobsName(pipeline,'labels'),
+        datasets: [{
+          label: this.name + '  PipelineID :  ' + pipeline.id+ '  ',
+          data: this.getJobsName(pipeline,'data'),
+          backgroundColor: this.getJobsName(pipeline,'bgcolor'),
+          borderColor: this.getJobsName(pipeline,'bordercolor'),
+          borderWidth: 2
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Duration of Jobs'
+        },
+        responsive: true,
+        pointLabelFontSize : 5,
+        tooltips: {
+          mode: 'nearest'
+        },
+        scales: {
+          yAxes: [{
+            id: 'left-y-axis',
+            type: 'linear',
+            position: 'left',
+            scaleLabel: {
+              display: true,
+              labelString: 'Time in Minutes'
+            }
+          }]
+        }
+      }
+    });
+
+  }
+  getJobsName(pipeline, data) {
+    let sampleArray = []
+    let diff = []; 
+    let bgColor = [];
+    let borderColor = [];
+    sampleArray.length = 0;
+    diff.length = 0;
+    bgColor.length = 0;
+    borderColor.length = 0;
+    pipeline.jobs.forEach(job => {
+      sampleArray.push(this.genJobName(job.name));
+      var startedAt = moment(job.started_at, 'YYYY-M-DD,HH:mm:ss');
+      var finishedAt = moment(job.finished_at, 'YYYY-M-DD,HH:mm:ss');
+      var difference = moment.duration((finishedAt.diff(startedAt, 'second')), "second").asMinutes();
+      diff.push(difference.toFixed(2));
+      let color;
+      if (job.status == "success") {
+        color = "138,177,255";
+      }
+      else if (job.status == "failed") {
+        color = "255,184,189";
+      }
+      else if (job.status == "skipped"){
+        color = "169,169,169";
+      }else {
+        color = "35,36,35"
+      }
+      
+      bgColor.push(`rgba(${color},1)`)
+      borderColor.push(`rgba(${color},1)`)
+
+    });
+    if (data == 'labels') {
+      return sampleArray
+    } else if (data == 'data') {
+      return diff
+    } else if (data == 'bgcolor') {
+      return bgColor
+    } else if (data == 'bordercolor') {
+      return borderColor
+    } else 'N/A'
+  }
+  genJobName(name){
+    return name;
   }
 }

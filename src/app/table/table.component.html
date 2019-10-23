@@ -1,5 +1,19 @@
-<!-- <div class="container"> -->
-<div class="row ix">
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div id="chart">
+        <!-- <canvas id="myChart"></canvas> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
   <!-- table pannel start -->
   <div class="col-sm-12 col-md-8  pr-0">
     <div class="body border">
@@ -491,7 +505,7 @@
 
           <hr>
           <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-sm-12">
               <div>
                 <div class="star-ratings-css">
                   <div class="star-ratings-css-top padding-left-8" [style.width]=rating>
@@ -501,8 +515,27 @@
                 </div>
                 <p class="font-size-13 padding-top-8">RATING</p>
               </div>
+            </div> -->
+
+
+            <div class="col-md-12 p-0 mx-2">
+              <div class="hovereffect">
+               <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-xl">
+                 <img src="/assets/images/graph.png" alt="" height="170px">
+                 <div class="overlay">
+                   <p class="text-info">View Pipeline in Detail </p>
+                 </div>
+               </button>
+              </div>
             </div>
-            <div class="col-12 d-flex pt-2">
+
+
+
+
+
+
+            <div class="col-sm-12 d-flex pt-2">
+
               <div class="w-25">
                 <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
                 <h6 class="font-size-13">TOTAL</h6>
