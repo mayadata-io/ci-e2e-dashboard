@@ -66,7 +66,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     localStorage.removeItem('row');
     //Highlight the row
     $('#data').on('click', 'tbody tr', function (e) {
@@ -510,12 +510,12 @@ export class TableComponent implements OnInit {
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: this.getJobsName(pipeline,'labels'),
+        labels: this.getJobsName(pipeline, 'labels'),
         datasets: [{
-          label: this.name + '  PipelineID :  ' + pipeline.id+ '  ',
-          data: this.getJobsName(pipeline,'data'),
-          backgroundColor: this.getJobsName(pipeline,'bgcolor'),
-          borderColor: this.getJobsName(pipeline,'bordercolor'),
+          label: this.name + '  PipelineID :  ' + pipeline.id + '  ',
+          data: this.getJobsName(pipeline, 'data'),
+          backgroundColor: this.getJobsName(pipeline, 'bgcolor'),
+          borderColor: this.getJobsName(pipeline, 'bordercolor'),
           borderWidth: 2
         }]
       },
@@ -525,7 +525,7 @@ export class TableComponent implements OnInit {
           text: 'Duration of Jobs'
         },
         responsive: true,
-        pointLabelFontSize : 5,
+        pointLabelFontSize: 5,
         tooltips: {
           mode: 'nearest'
         },
@@ -542,11 +542,26 @@ export class TableComponent implements OnInit {
         }
       }
     });
-
+    /**
+     * Clicking Bar graphs open gitlab job logs page.
+     */
+    document.getElementById("myChart").onclick = function (evt) {
+      try {
+        var activePoints = myChart.getElementsAtEvent(evt);
+        var firstPoint = activePoints[0];
+        var label = myChart.data.labels[firstPoint._index];
+        var getJobId = pipeline.jobs.filter(job => job.name === label)[0]
+        var pipelineURL = pipeline.web_url.split('pipelines/')
+        var url = pipelineURL[0] + '-/jobs/' + getJobId.id
+        window.open(url, '_blank');
+      } catch (error) {
+        console.log('Got issue in fetching job URL', error)
+      }
+    };
   }
   getJobsName(pipeline, data) {
     let sampleArray = []
-    let diff = []; 
+    let diff = [];
     let bgColor = [];
     let borderColor = [];
     sampleArray.length = 0;
@@ -566,12 +581,12 @@ export class TableComponent implements OnInit {
       else if (job.status == "failed") {
         color = "255,184,189";
       }
-      else if (job.status == "skipped"){
+      else if (job.status == "skipped") {
         color = "169,169,169";
-      }else {
+      } else {
         color = "35,36,35"
       }
-      
+
       bgColor.push(`rgba(${color},1)`)
       borderColor.push(`rgba(${color},1)`)
 
@@ -586,7 +601,7 @@ export class TableComponent implements OnInit {
       return borderColor
     } else 'N/A'
   }
-  genJobName(name){
+  genJobName(name) {
     return name;
   }
 }
