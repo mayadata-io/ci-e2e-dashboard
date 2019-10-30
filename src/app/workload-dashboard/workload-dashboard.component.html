@@ -30,7 +30,7 @@
                       <td class="workload-table-row-data">deploy: {{app.numberOfDeployment}} | sts:
                         {{app.numberOfStatefulset}}
                       </td>
-                      <td class="workload-table-row-data">0.8.1</td>
+                      <td class="workload-table-row-data">{{openEbsVersion}}</td>
                       <td>
                         <span [ngClass]="{
                                       'display':app.status === 'Running',

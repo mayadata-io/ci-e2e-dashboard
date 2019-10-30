@@ -18,6 +18,7 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
   public allApplications: allApplication[];
   private timerSub: ISubscription;
   public showSpinner: boolean = true;
+  openEbsVersion :any ;
   constructor(private kubernetsServices: KubernetsService, private meta: Meta, private titleService: Title) {
     this.titleService.setTitle("workloads dashboard");
     this.meta.updateTag({
@@ -36,7 +37,9 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         if (arrayOfApplication == []) {
           this.showSpinner = true;
         } else {
-          this.allApplications = arrayOfApplication;
+          this.allApplications = arrayOfApplication.filter(app => app.podStatus.length !== 0);
+          let namespace = this.allApplications[0].namespace;
+          this.getOpenebsVersion(namespace);
           this.showSpinner = false;
         }
       });
@@ -49,6 +52,15 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         });
       });
     });
+  }
+  getOpenebsVersion(namespace: string){
+    try {
+      let ver = this.kubernetsServices.getPodDetails(namespace , namespace).subscribe(res =>{
+        this.openEbsVersion = res.jivaController[0].openebsVersion
+      })
+    } catch (err) {
+      console.log('issue in fetching openebs version' ,err);
+    }
   }
 
   setApiUrl(apiUrl: string) {
