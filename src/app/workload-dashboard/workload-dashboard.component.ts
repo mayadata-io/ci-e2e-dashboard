@@ -14,7 +14,7 @@ import { ISubscription } from "rxjs/Subscription";
 
 export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
-  public openebsVersion: any;
+  public openEBSVersion: any;
   public allApplications: allApplication[];
   private timerSub: ISubscription;
   public showSpinner: boolean = true;
@@ -36,7 +36,9 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         if (arrayOfApplication == []) {
           this.showSpinner = true;
         } else {
-          this.allApplications = arrayOfApplication;
+          this.allApplications = arrayOfApplication.filter(app => app.podStatus.length !== 0);
+          let namespace = this.allApplications[0].namespace;
+          this.getOpenEBSVersion(namespace);
           this.showSpinner = false;
         }
       });
@@ -49,6 +51,15 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         });
       });
     });
+  }
+  getOpenEBSVersion(namespace: string){
+    try {
+      this.kubernetsServices.getPodDetails(namespace , namespace).subscribe(res =>{
+        this.openEBSVersion = res.jivaController[0].openebsVersion
+      })
+    } catch (err) {
+      console.log('issue in fetching openebs version' ,err);
+    }
   }
 
   setApiUrl(apiUrl: string) {
