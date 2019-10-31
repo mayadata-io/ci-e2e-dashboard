@@ -282,7 +282,7 @@ export class TableComponent implements OnInit {
         return "running"
       } else if (data[index].status == "pending") {
         return "pending"
-      } else if (data[index].status == "cancelled") {
+      } else if (data[index].status == "canceled") {
         return "cancelled"
       } else if (data[index].status == "" || data[index].status == "none") {
         return ""
