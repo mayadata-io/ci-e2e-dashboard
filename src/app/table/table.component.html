@@ -128,7 +128,7 @@
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphPacketV14>
                         <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'pending';else cancelGraphPacketV14"
-                          class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
+                          class='fas fa-exclamation-triangle btn-txt btn-outline-warning pipeline-status-icon'></i>
                         <ng-template #cancelGraphPacketV14>
                           <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'cancelled';else statusSuccessGraphPacketV14"
                             class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
@@ -161,7 +161,7 @@
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphPacketV15>
                         <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'pending';else cancelGraphPacketV15"
-                          class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
+                          class='fas fa-exclamation-triangle btn-txt btn-outline-warning pipeline-status-icon'></i>
                         <ng-template #cancelGraphPacketV15>
                           <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'cancelled';else statusSuccessGraphPacketV15"
                             class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
@@ -194,7 +194,7 @@
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphkonvoy>
                         <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'pending';else cancelGraphKonvoy"
-                          class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
+                          class='fas fa-exclamation-triangle btn-txt btn-outline-warning pipeline-status-icon'></i>
                         <ng-template #cancelGraphKonvoy>
                           <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'cancelled';else statusSuccessGraphkonvoy"
                             class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
