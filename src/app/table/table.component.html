@@ -94,21 +94,24 @@
                       <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == '';else statusGraphPacketV13"
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphPacketV13>
-                        <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'pending';else statusSuccessGraphPacketV13"
-                          class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
-                        <ng-template #statusSuccessGraphPacketV13>
-                          <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                            <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                            </circle>
-                            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#009400" stroke-width="6"
-                              [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV13Data.dashboard)"
-                              stroke-dashoffset="22.5"></circle>
-                          </svg>
+                        <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'pending';else cancelGraphPacketV13"
+                          class='fas fa-exclamation-triangle btn-txt btn-outline-warning pipeline-status-icon'></i>
+                        <ng-template #cancelGraphPacketV13>
+                          <i *ngIf="pipelineTooltip(i, packetV13Data.dashboard) == 'cancelled';else statusSuccessGraphPacketV13"
+                            class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
+                          <ng-template #statusSuccessGraphPacketV13>
+                            <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                              </circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#009400" stroke-width="6"
+                                [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV13Data.dashboard)"
+                                stroke-dashoffset="22.5"></circle>
+                            </svg>
+                          </ng-template>
                         </ng-template>
-
                       </ng-template>
                     </ng-template>
                   </span>
@@ -124,19 +127,23 @@
                       <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == '';else statusGraphPacketV14"
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphPacketV14>
-                        <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'pending';else statusSuccessGraphPacketV14"
+                        <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'pending';else cancelGraphPacketV14"
                           class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
-                        <ng-template #statusSuccessGraphPacketV14>
-                          <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                            <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                            </circle>
-                            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#009400" stroke-width="6"
-                              [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV14Data.dashboard)"
-                              stroke-dashoffset="22.5"></circle>
-                          </svg>
+                        <ng-template #cancelGraphPacketV14>
+                          <i *ngIf="pipelineTooltip(i, packetV14Data.dashboard) == 'cancelled';else statusSuccessGraphPacketV14"
+                            class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
+                          <ng-template #statusSuccessGraphPacketV14>
+                            <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                              </circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#009400" stroke-width="6"
+                                [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV14Data.dashboard)"
+                                stroke-dashoffset="22.5"></circle>
+                            </svg>
+                          </ng-template>
                         </ng-template>
                       </ng-template>
                     </ng-template>
@@ -153,19 +160,23 @@
                       <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == '';else statusGraphPacketV15"
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphPacketV15>
-                        <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'pending';else statusSuccessGraphPacketV15"
+                        <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'pending';else cancelGraphPacketV15"
                           class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
-                        <ng-template #statusSuccessGraphPacketV15>
-                          <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                            <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                            </circle>
-                            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#009400" stroke-width="6"
-                              [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV15Data.dashboard)"
-                              stroke-dashoffset="22.5"></circle>
-                          </svg>
+                        <ng-template #cancelGraphPacketV15>
+                          <i *ngIf="pipelineTooltip(i, packetV15Data.dashboard) == 'cancelled';else statusSuccessGraphPacketV15"
+                            class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
+                          <ng-template #statusSuccessGraphPacketV15>
+                            <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                              </circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#009400" stroke-width="6"
+                                [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV15Data.dashboard)"
+                                stroke-dashoffset="22.5"></circle>
+                            </svg>
+                          </ng-template>
                         </ng-template>
                       </ng-template>
                     </ng-template>
@@ -182,19 +193,23 @@
                       <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == '';else statusGraphkonvoy"
                         class='fa fa-ban text-dark pipeline-status-icon'></i>
                       <ng-template #statusGraphkonvoy>
-                        <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'pending';else statusSuccessGraphkonvoy"
+                        <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'pending';else cancelGraphKonvoy"
                           class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
-                        <ng-template #statusSuccessGraphkonvoy>
-                          <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                            <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                            </circle>
-                            <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                              stroke="#009400" stroke-width="6"
-                              [attr.stroke-dasharray]="getJobPercentFromPipeline(i, konvoyData.dashboard)"
-                              stroke-dashoffset="22.5"></circle>
-                          </svg>
+                        <ng-template #cancelGraphKonvoy>
+                          <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'cancelled';else statusSuccessGraphkonvoy"
+                            class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
+                          <ng-template #statusSuccessGraphkonvoy>
+                            <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
+                              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                              </circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                                stroke="#009400" stroke-width="6"
+                                [attr.stroke-dasharray]="getJobPercentFromPipeline(i, konvoyData.dashboard)"
+                                stroke-dashoffset="22.5"></circle>
+                            </svg>
+                          </ng-template>
                         </ng-template>
                       </ng-template>
                     </ng-template>
@@ -237,57 +252,33 @@
             <img src="/assets/images/cloud/{{ image }}">
             <h5>{{ name }}</h5>
             <h6>Kubernetes {{ kubernetesVersion }}</h6>
-
-
-            <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button" (click)="clickit(gitlabPipelineUrl)">
+            <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button"
+              (click)="clickit(gitlabPipelineUrl)">
               <span class="text-center">
                 <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
                   height="30">
               </span>
               <span class="status-button gitlab-stage-button">GITLAB STAGES</span>
             </button>
-
-
-
             <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4">
               <span class="text-center">
                 <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 " height="30">
               </span>
               <span class="status-button e2e-logs-button">E2E LOGS</span></button>
           </div>
-           <hr>
+          <hr>
           <div class="row">
-            <!-- <div class="col-sm-12">
-              <div>
-                <div class="star-ratings-css">
-                  <div class="star-ratings-css-top padding-left-8" [style.width]=rating>
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                  <div class="star-ratings-css-bottom padding-left-8">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                </div>
-                <p class="font-size-13 padding-top-8">RATING</p>
-              </div>
-            </div> -->
-
-
             <div class="col-md-12 p-0 mx-2">
               <div class="hovereffect">
-               <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-xl">
-                 <img src="/assets/images/graph.png" alt="" height="170px">
-                 <div class="overlay">
-                   <p class="text-info">View Pipeline in Detail </p>
-                 </div>
-               </button>
+                <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-xl">
+                  <img src="/assets/images/graph.png" alt="">
+                  <div class="overlay">
+                    <p class="text-info">View Pipeline in Detail </p>
+                  </div>
+                </button>
               </div>
             </div>
-
-
-
-
-
-
             <div class="col-sm-12 d-flex pt-2">
-
               <div class="w-25">
                 <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
                 <h6 class="font-size-13">TOTAL</h6>
