@@ -28,7 +28,7 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    let namespace ;
     this.timerSub = timer(0, 3000)
       .pipe(concatMap(() => this.kubernetsServices.getAllApplication()))
       .subscribe(res => {
@@ -37,12 +37,16 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
           this.showSpinner = true;
         } else {
           this.allApplications = arrayOfApplication.filter(app => app.podStatus.length !== 0);
-          let namespace = this.allApplications[0].namespace;
-          this.getOpenEBSVersion(namespace);
+           namespace = this.allApplications[0].namespace;
           this.showSpinner = false;
         }
       });
-
+      setTimeout(() => {
+        if (namespace) {
+          console.log(namespace , 'inside.......................func');
+          this.getOpenEBSVersion(namespace);
+        }
+      }, 3000);
     $(document).ready(function () {
       $("#myInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
