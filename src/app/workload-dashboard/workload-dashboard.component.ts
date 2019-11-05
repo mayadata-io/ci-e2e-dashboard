@@ -14,7 +14,7 @@ import { ISubscription } from "rxjs/Subscription";
 
 export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
-  public openebsVersion: any;
+  public openEBSVersion: any;
   public allApplications: allApplication[];
   private timerSub: ISubscription;
   public showSpinner: boolean = true;
@@ -28,7 +28,6 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.timerSub = timer(0, 3000)
       .pipe(concatMap(() => this.kubernetsServices.getAllApplication()))
       .subscribe(res => {
@@ -36,11 +35,16 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         if (arrayOfApplication == []) {
           this.showSpinner = true;
         } else {
-          this.allApplications = arrayOfApplication;
-          this.showSpinner = false;
+          try {
+            this.allApplications = arrayOfApplication.filter(app => app.podStatus.length !== 0);
+            this.setApiUrl(this.allApplications[0].apiurl)
+            this.getOpenEBSVersion(this.allApplications[0].namespace);
+            this.showSpinner = false;
+          } catch (error) {
+            console.log('error' , error);
+          }
         }
       });
-
     $(document).ready(function () {
       $("#myInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -49,6 +53,15 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
         });
       });
     });
+  }
+  getOpenEBSVersion(namespace: string){
+    try {
+      this.kubernetsServices.getPodDetails(namespace , namespace).subscribe(res =>{
+        this.openEBSVersion = res.jivaController[0].openebsVersion
+      })
+    } catch (err) {
+      console.log('issue in fetching openebs version' ,err);
+    }
   }
 
   setApiUrl(apiUrl: string) {
