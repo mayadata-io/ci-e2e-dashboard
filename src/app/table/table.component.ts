@@ -105,7 +105,7 @@ export class TableComponent implements OnInit {
     this.selectCell = timer(0, 1000).subscribe(x => {
       if (this.index == 1 && this.buildData != undefined && this.packetV13Data != undefined) {
         this.index = 0;
-        this.detailPannel(0, this.packetV13Data.dashboard, this.buildData.dashboard, 'packetv13');
+        this.detailPannel(0, this.packetV13Data.dashboard, this.buildData.dashboard, 'packetv14');
       }
     });
   }
@@ -356,24 +356,24 @@ export class TableComponent implements OnInit {
         this.image = 'packet.svg'
         this.name = "PACKET";
         this.kubernetesVersion = "1.15.3";
-        this.status = 3;
+        this.status = 2;
         this.detailsDatas(index, pipelineData, buildData)
       } else if (cloud == "packetv14") {
         this.image = 'packet.svg'
         this.name = "PACKET";
         this.kubernetesVersion = "1.14.5";
-        this.status = 2;
+        this.status = 1;
         this.detailsDatas(index, pipelineData, buildData)
-      } else if (cloud == "packetv13") {
+      } else if (cloud == "packetv16") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.13.4";
-        this.status = 1;
+        this.kubernetesVersion = "1.16.1";
+        this.status = 3;
         this.detailsDatas(index, pipelineData, buildData)
       } else if (cloud == "konvoy") {
         this.image = 'D2IQ.svg'
         this.name = "KONVOY";
-        this.kubernetesVersion = "1.15";
+        this.kubernetesVersion = "1.15.5";
         this.status = 4;
         this.detailsDatas(index, pipelineData, buildData)
       }

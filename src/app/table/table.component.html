@@ -44,16 +44,16 @@
                 <td></td>
                 <td class="d-flex align-items-center justify-content-center platform">
                   <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p class="font-size-13">1.13.4</p>
-                  </span>
-                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
                     <p class="font-size-13">1.14.5</p>
                   </span>
                   <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
                     <p class="font-size-13">1.15.3</p>
                   </span>
-                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/cloud/D2IQ.svg">
-                    <p class="font-size-13">Konvoy</p>
+                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p class="font-size-13">1.16.1</p>
+                  </span>
+                  <span class="mx-2"><img class="p-0" height="30" src="/assets/images/cloud/D2IQ.svg">
+                    <p class="font-size-13">Konvoy(1.15.5)</p>
                   </span>
 
                 </td>
@@ -73,7 +73,7 @@
                 <td>
                   <button placement="bottom" ngbTooltip="{{buildTooltip(i, buildData.dashboard)}}"
                     [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
-                    (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV13.dashboard, buildData.dashboard, 'packetV13'); ">
+                    (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV13.dashboard, buildData.dashboard, 'packetV14'); ">
                     <i class="font-size-13" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
                     <a class="ml-1 font-size-15 d-none d-md-inline">{{buildStatus(i, buildData.dashboard)}}</a>
                   </button>
@@ -84,7 +84,7 @@
  -->
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV13Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv13');"
+                    (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv14');"
                     [ngClass]="{'highlight': (status == 1 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV13Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
@@ -117,7 +117,7 @@
                   </span>
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV14Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV14Data.dashboard, buildData.dashboard, 'packetv14');"
+                    (click)="detailPannel(i, packetV14Data.dashboard, buildData.dashboard, 'packetv15');"
                     [ngClass]="{'highlight': (status == 2 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV14Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
@@ -150,7 +150,7 @@
                   </span>
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV15Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV15Data.dashboard, buildData.dashboard, 'packetv15');"
+                    (click)="detailPannel(i, packetV15Data.dashboard, buildData.dashboard, 'packetv16');"
                     [ngClass]="{'highlight': (status == 3 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV15Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
