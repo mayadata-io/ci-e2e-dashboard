@@ -24,6 +24,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-spinners.component';
+import { StableReleaseComponent } from './stable-release/stable-release.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
     BannerComponent,
     WorkloadsComponent,
     OverviewComponent,
-    LoddingSpinnersComponent
+    LoddingSpinnersComponent,
+    StableReleaseComponent,
   ],
   imports: [
     BrowserModule,

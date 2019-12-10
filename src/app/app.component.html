@@ -1,12 +1,12 @@
 <!-- <div class="container-fluid"> -->
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" style="height: -webkit-fill-available;">
 		<div class="col-sm-12 col-md-2  p-0 scrollbar bg-white" id="scrollbar">
 			<app-sidebar></app-sidebar>
 		</div>
 		<div class="col-md-10 col-sm-12 p-0 dashboard-body">
 			<!-- <app-header></app-header> -->
-			<div id="scrollbar">
+			<div id="scrollbar" style="height: 100%;">
 				<router-outlet></router-outlet>
 			</div>
 		</div>

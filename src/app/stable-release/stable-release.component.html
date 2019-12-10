@@ -1,0 +1,26 @@
+<div class="container-fluid bg-white h-100">
+  <div class="row">
+    <div class="col-md-12 bg-primary text-white rounded py-5" > <h4>Heading Content</h4></div>
+  </div>
+<div class="row">
+  <div class="col-md-8 border">
+    <table class="table">
+      <thead>
+        <th>Pipelie_ID</th>
+        <th>Release Version</th>
+        <th>Status</th>
+        <!-- <th>e2e pipeline</th> -->
+      </thead>
+      <tbody>
+        <tr *ngFor="let pipeline of openshiftRelease.dashboard">
+          <td><a href={{pipeline.web_url}} target="_blank">{{pipeline.id}}</a></td>
+          <td>{{pipeline.release_tag}}</td>
+          <td>{{pipeline.status}}</td>
+          <!-- <td *ngIf="pipeline.jobs !== 'null'">{{pipeli}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4 border">Detail</div>
+</div>
+</div>

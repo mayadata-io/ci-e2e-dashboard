@@ -430,7 +430,7 @@ a:hover {
   position: relative;
   text-align: center;
   cursor: default;
-  background: #42b078;
+  background: #ffffff;
 }
 
 .hovereffect .overlay {
@@ -458,7 +458,7 @@ a:hover {
 
 .hovereffect:hover img {
   opacity: 0.4;
-  filter: alpha(opacity=40);
+  filter: alpha(opacity=60);
   -webkit-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 }
