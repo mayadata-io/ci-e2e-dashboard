@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe } from '@angular/core';
-import { Subscription, Observable, timer, from } from "rxjs";
+import { Subscription, Observable, timer, from, pipe } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import Chart from 'chart.js'
 import * as moment from 'moment';
@@ -25,13 +25,147 @@ export class StableReleaseComponent implements OnInit {
 
   private getData: ISubscription;
   public openshiftRelease: any;
+  pageLoaded: boolean = false;
+  selectedPipeline: any;
+  activePipeline: object;
+  doNut: boolean = false;
 
   ngOnInit() {
-    this.getData = timer(0, 5000).subscribe(x => {
-      this.DashboardDatas.getOpenshiftReleaseDetails().subscribe(res => {        
+    this.getData = timer(0, 15000000).subscribe(x => {
+      this.DashboardDatas.getOpenshiftReleaseDetails().subscribe(res => {
         this.openshiftRelease = res;
-        console.log(this.openshiftRelease);
+        if (this.openshiftRelease) {
+          this.pageLoaded = true;
+        }
+        this.getJobDetails(this.openshiftRelease.dashboard[0]);
+        console.log('activePipeline', this.activePipeline);
       });
     })
+  }
+  getJobDetails(pipeline) {
+    this.activePipeline = {
+      id : pipeline.id,
+      status : pipeline.status,
+      webURL : pipeline.web_url,
+      version : pipeline.release_tag
+    }
+    console.log(pipeline);
+    var stages = [];
+    var obj = [];
+    pipeline.jobs.forEach(job => {
+      if (!stages.includes(job.stage)) {
+        stages.push(job.stage);
+      }
+    });
+    stages.forEach(stage => {
+      const stageObj = {
+        stageName: stage,
+        allJobs: pipeline.jobs.filter(job => job.stage == stage),
+        status: this.stageStatusForObj(stage, pipeline.jobs),
+        noOfSuccessJobs: pipeline.jobs.filter(job => job.stage == stage).filter(job => job.status == "success").length,
+        noOfFailedJobs: pipeline.jobs.filter(job => job.stage == stage).filter(job => job.status == "failed").length
+      };
+      obj.push(stageObj);
+    })
+    this.selectedPipeline =  obj;
+  }
+
+
+  stageStatusForObj(stage, jobs) {
+    let stageJobs = jobs.filter(job => job.stage == stage);
+    // console.log('forStageObj',stageJobs);
+    let successJ = stageJobs.filter(j => j.status == "success").length
+    let failedLength = stageJobs.filter(j => j.status == "failed").length
+    let canceledLength = stageJobs.filter(j => j.status == "canceled").length
+    let runningLength = stageJobs.filter(j => j.status == "running").length
+    let skippedLength = stageJobs.filter(j => j.status == "skipped").length
+    if (runningLength) {
+      return "running"
+    } else if (canceledLength) {
+      return "canceled"
+    } else if (skippedLength) {
+      return "skipped"
+    } else if (failedLength) {
+      return "failed"
+    } else {
+      return 'success'
+    }
+  }
+
+  statusIcon(status) {
+    switch (status) {
+      case "success":
+        return "far fa-check-circle text-success mx-2 font-size-18";
+      case "failed":
+        return "far fa-times-circle text-danger mx-2 font-size-18";
+      case "running":
+        return "fas fa-circle-notch text-secondary mx-2 font-size-18";
+      default:
+        return "far fa-dot-circle text-warning mx-2 font-size-18";
+    }
+
+  }
+
+  getJobPercentForPipeline(data){
+    try {
+      if (data.status == "success") {
+        return "95 5";
+      }
+      else if (data.status == "pending") {
+        return "0 0";
+      }
+      else if (data.status == "failed" || data.status == "canceled") {
+        var count = 0;
+        for (var j = 0; j < data.jobs.length; j++) {
+          if (data.jobs[j].status == "success") {
+            count++;
+          }
+        }
+        var percentage = (count / data.jobs.length) * 100;
+        return `${percentage} ${100 - percentage}`
+      }
+      else if (data.status == "running") {
+        return "95 5";
+      }
+    }
+    catch {
+      return "0 0";
+    }
+
+  }
+
+  pipelineTooltip(data) {
+    try {
+      if (data.status == "running") {
+        return "running"
+      } else if (data.status == "none") {
+        return ""
+      } else {
+        var passedJobs = this.passed(data.jobs)
+        var failedJobs = this.failed(data.jobs)
+        return "Passed: " + passedJobs + " Failed: " + failedJobs;
+      }
+    } catch (e) {
+      return "n/a"
+    }
+  }
+  passed(data) {
+    var passed = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status === ("success")) {
+        passed = passed + 1;
+      }
+    }
+    return passed;
+  }
+
+  failed(data) {
+    var failed = 0;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status === ("failed")) {
+        failed = failed + 1;
+      }
+    }
+    return failed;
   }
 }

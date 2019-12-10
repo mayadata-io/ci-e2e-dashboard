@@ -1,0 +1,74 @@
+* {
+  font-family: "lato";
+}
+.heading-row{
+  background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );
+}
+ul {
+  list-style-type: none;
+}
+.font-size-18 {
+  font-size: 18px;
+}
+.font-size-16 {
+  font-size: 16px;
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.job-link-line-left {
+  margin: 0;
+  position: relative;
+  top: 10px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  border-top-left-radius: 10px;
+  flex: auto;
+  height: 10px;
+  max-width: 5px;
+  white-space: nowrap;
+}
+.job-link-line-right {
+  margin: 0;
+  position: relative;
+  top: 10px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  // border-top-left-radius: 10px;
+  flex: auto;
+  height: 10px;
+  min-width: 10px;
+  max-width: auto;
+  white-space: nowrap;
+}
+.gitlab-job-image {
+  position: relative;
+  height: 25px;
+  top: -3px;
+}
+.stage-jobs-content{
+  border-left: 1px solid #dee2e6 ;
+}
+.stage-jobs-content:hover{
+border-color: #62b9f3;
+}
+.job-row:hover {
+  .job-name {
+    color: #007bff;
+  }
+  .job-link-line-right{
+    border-top-color: #62b9f3;
+  }
+  .job-link-line-left{
+    border-top-color: #62b9f3;
+  }
+  i {
+    text-shadow: 1px 1px 60px;
+    font-weight: 900;
+  }
+  img{
+    box-shadow:0px 250px 15px -35px rgba(0,0,0,.25);
+  }
+}
