@@ -156,9 +156,7 @@ export class StableReleaseComponent implements OnInit {
       startedAt: this.startedAt(pipeline),
       finishedAt: this.finishedAt(pipeline),
       duration: this.duration(pipeline)
-    }
-    console.log(this.activePipeline);
-    
+    }    
     var stages = [];
     var obj = [];
     pipeline.jobs.forEach(job => {
@@ -257,7 +255,7 @@ export class StableReleaseComponent implements OnInit {
       return "n/a"
     }
   }
-  
+
   passed(data) {
     var passed = 0;
     for (var i = 0; i < data.length; i++) {
