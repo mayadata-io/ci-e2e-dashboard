@@ -37,4 +37,8 @@ export class DashboardData {
     getBuildDetails() {
         return this.http.get<any[]>(this.apiurl + "/build");
     }
+
+    getOpenshiftReleaseDetails() {
+        return this.http.get<any[]>(this.apiurl + "/openshift/release");
+    }
 }
