@@ -24,32 +24,150 @@ export class StableReleaseComponent implements OnInit {
 
 
   private getData: ISubscription;
+  private selectCell: ISubscription;
   public openshiftRelease: any;
   pageLoaded: boolean = false;
   selectedPipeline: any;
   activePipeline: object;
   doNut: boolean = false;
+  public status: any = 1;
+  index: boolean = true;
+  public initialCount: any = 0;
+  detailPannelReady: boolean = false;
+
+
+
+
 
   ngOnInit() {
-    this.getData = timer(0, 15000000).subscribe(x => {
+    localStorage.removeItem('rowop');
+    //Highlight the row
+    $('#data').on('click', 'tbody tr', function (e) {
+      $(this).addClass('row_color').siblings().removeClass('row_color');
+      // Store selected row in localStorage
+      var selectedRow = $(this).index();
+      localStorage.setItem('rowop', selectedRow);
+      // Highlight the cell
+      $("#data span").removeClass("highlight");
+      var clickedCell = $(e.target).closest("span");
+      clickedCell.addClass("highlight");
+    });
+
+    this.getData = timer(0, 10000).subscribe(x => {
       this.DashboardDatas.getOpenshiftReleaseDetails().subscribe(res => {
         this.openshiftRelease = res;
         if (this.openshiftRelease) {
           this.pageLoaded = true;
+          if (this.index){
+              this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
+              this.index = false;
+          }
+          // this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
+
         }
-        this.getJobDetails(this.openshiftRelease.dashboard[0]);
-        console.log('activePipeline', this.activePipeline);
       });
     })
   }
-  getJobDetails(pipeline) {
-    this.activePipeline = {
-      id : pipeline.id,
-      status : pipeline.status,
-      webURL : pipeline.web_url,
-      version : pipeline.release_tag
+
+  ngOnDestroy() {
+    this.getData.unsubscribe();
+    // this.selectCell.unsubscribe();
+  }
+
+  rowCount() {
+    var rowValue = localStorage.getItem('rowop');
+    if (rowValue == null) {
+      rowValue = (this.initialCount).toString();
     }
-    console.log(pipeline);
+    return rowValue;
+  }
+
+  urlOpenNewTab(url) {
+    window.open(url, "_blank");
+  }
+  // Updated returns commit id
+  triggered(data) {
+    try {
+      var now = moment(dateformat((new Date()), "IST:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
+      var buildTime = moment(data.jobs[0].created_at, 'YYYY-M-DD,HH:mm:ss');
+      var difference = moment.duration((now.diff(buildTime, 'second')), "second");
+      var days = difference.days();
+      var hours = difference.hours();
+      var minutes = difference.hours();
+      if (days != 0) {
+        return days + "d " + hours + "h" + " ago";
+      }
+      return hours + "h " + minutes + "m" + " ago";
+    } catch (e) {
+      console.log("error",e);
+      return "_";
+    }
+  }
+  startedAt(data ){
+    try {
+      var date = data.jobs[0].started_at
+      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+      return dateFormat;
+    } catch (error) {
+      console.log("error",error);
+      return "_";
+    }
+  }
+  finishedAt(data ){
+    try {
+      var date = data.jobs[data.jobs.length-1].finished_at
+      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+      return dateFormat;
+    } catch (error) {
+      console.log("error",error);
+      return "_";
+    }
+  }
+  duration(data) {
+    try {
+      var startedAt = moment(data.jobs[0].started_at, 'YYYY-M-DD,HH:mm:ss');
+      var finishedAt = moment(data.jobs[data.jobs.length-1].finished_at, 'YYYY-M-DD,HH:mm:ss');
+      var difference = moment.duration((finishedAt.diff(startedAt, 'second')), "second");
+      console.log("diff",difference);
+      
+      var days = difference.days();
+      var hours = difference.hours();
+      var minutes = difference.minutes();
+      var seconds = difference.seconds();
+      let status = data.status;
+      if (status == 'success' || status == 'failed') {
+        if (days != 0) {
+          return days + "d :" + hours + "h :" + minutes + "m :" + seconds + "sec";
+        } else if (hours != 0) {
+          return hours + "h :" + minutes + "m :" + seconds + "sec";
+        }
+        return minutes + "m :" + seconds + "sec";
+      } else if (status == 'canceled') { return 'Cancelled' }
+      else if (status == 'running') { return 'Running' }
+      return "_"
+    } catch (e) {
+      console.log('error' + e);
+    }
+  }
+
+  getJobDetails(pipeline, row) {
+    this.initialCount = row;
+    this.activePipeline = {
+      id: pipeline.id,
+      status: pipeline.status,
+      webURL: pipeline.web_url,
+      version: pipeline.release_tag,
+      logURL: pipeline.kibana_url,
+      jobs: pipeline.jobs.length,
+      successJobs: this.passed(pipeline.jobs),
+      failedJobs: this.failed(pipeline.jobs),
+      triggered : this.triggered(pipeline),
+      startedAt: this.startedAt(pipeline),
+      finishedAt: this.finishedAt(pipeline),
+      duration: this.duration(pipeline)
+    }
+    console.log(this.activePipeline);
+    
     var stages = [];
     var obj = [];
     pipeline.jobs.forEach(job => {
@@ -67,7 +185,8 @@ export class StableReleaseComponent implements OnInit {
       };
       obj.push(stageObj);
     })
-    this.selectedPipeline =  obj;
+    this.selectedPipeline = obj;
+    this.detailPannelReady = true;
   }
 
 
@@ -99,14 +218,14 @@ export class StableReleaseComponent implements OnInit {
       case "failed":
         return "far fa-times-circle text-danger mx-2 font-size-18";
       case "running":
-        return "fas fa-circle-notch text-secondary mx-2 font-size-18";
+        return "fas fa-circle-notch text-secondary mx-2 font-size-18 fa-spin";
       default:
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
 
   }
 
-  getJobPercentForPipeline(data){
+  getJobPercentForPipeline(data) {
     try {
       if (data.status == "success") {
         return "95 5";

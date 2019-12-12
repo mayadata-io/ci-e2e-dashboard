@@ -1,125 +1,201 @@
 <div class="container-fluid bg-white h-100">
   <div class="row">
     <div class="col-md-12 heading-row text-white py-2 mb-2">
-      <h4>Heading Content</h4>
+      <h4>CI/E2E Summary of OpeneEBS Release Pipelines</h4>
     </div>
   </div>
-  <div class="row" *ngIf="pageLoaded">
-    <div class="col-md-7 border">
-      <table class="table">
+  <div class="row">
+    <div class="col-md-7 table-pipelines-section">
+      <table class="table" id="data">
         <thead>
-          <th>Pipelie_ID</th>
-          <th>Status</th>
-          <th class="text-center">e2e-pipelines</th>
+          <th>Pipeline_ID</th>
+          <th>Release_version</th>
+          <th class="text-center">Openshift 4.2</th>
         </thead>
         <tbody>
-          <tr *ngFor="let pipeline of openshiftRelease.dashboard">
+          <tr *ngFor="let pipeline of openshiftRelease.dashboard; let i = index"
+            [ngClass]="{'row_color': i==rowCount()}" [attr.data-index]="i">
             <td><a href={{pipeline.web_url}} target="_blank">{{pipeline.id}}</a></td>
-            <td>{{pipeline.status}}</td>
+            <td>{{pipeline.release_tag}}</td>
             <td class="text-center">
-              <a (click)="getJobDetails(pipeline)" ngbTooltip="{{ pipelineTooltip(pipeline)}}" placement="right">
-                <svg width="25" height="25" viewBox="0 0 42 42" class="donut">
-                  <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff">
-                  </circle>
-                  <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-                    stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                  </circle>
-                  <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                    stroke="#009400" stroke-width="6" [attr.stroke-dasharray]="getJobPercentForPipeline(pipeline)"
-                    stroke-dashoffset="22.5">
-                  </circle>
-                </svg>
-              </a>
+              <span [ngClass]="{'highlight': (status == 1 && i==rowCount())}" (click)="getJobDetails(pipeline,i)"
+                ngbTooltip="{{ pipelineTooltip(pipeline)}}" placement="right" class="pb-2">
+                <i *ngIf="pipelineTooltip(pipeline) == 'running';else donutSuccessFail"
+                  class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary font-size-25'></i>
+                <ng-template #donutSuccessFail>
+
+                  <svg width="25" height="25" viewBox="0 0 42 42" class="donut">
+
+                    <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff">
+                    </circle>
+                    <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                      stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                    </circle>
+                    <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
+                      stroke="#009400" stroke-width="6" [attr.stroke-dasharray]="getJobPercentForPipeline(pipeline)"
+                      stroke-dashoffset="22.5">
+                    </circle>
+                  </svg>
+                </ng-template>
+              </span>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-md-5 shadow">
-      <div class="row mb-2">
-        <div class="col-md-12">
-          <div class="d-flex justify-content-around">
-            <div class="text-center">
-              <img src="/src/assets/images/cloud/openshift.png" alt="Openshift-logo" class="rounded-circle shadow"
-                height="80px">
-              <h5 class="my-auto">Openshift 4.2</h5>
+      <div>
+        <div class="row my-2">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-around">
+              <div class="text-center">
+                <img src="/src/assets/images/cloud/openshift.png" alt="Openshift-logo" class="rounded-circle shadow"
+                  height="80px">
+                <h5 class="my-2">Openshift 4.2</h5>
+              </div>
+              <!-- <div>
+                <ul>
+                  <li>
+                    Id : {{activePipeline.id}}
+                  </li>
+                  <li>
+                    status : {{activePipeline.status}}
+                  </li>
+                  <li>
+                    version : {{activePipeline.version}}
+                  </li>
+                </ul>
+              </div> -->
             </div>
+          </div>
+        </div>
+
+
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+              aria-selected="true">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+              aria-selected="false">Jobs</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <!-- Overview Nav bar  -->
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="d-flex justify-content-around mt-2">
+              <div>
+                <span class="font-weight-bold">Pipeliene #{{activePipeline.id}} </span><span>triggered {{activePipeline.triggered}} .</span>
+              </div>
+              <div>
+                <button type="button" class="rounded btn-outline-primary"> <i
+                    [ngClass]=statusIcon(activePipeline.status)></i> {{activePipeline.status}}</button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-around my-2">
+              <div>
+
+                <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button"
+                  (click)="urlOpenNewTab(activePipeline.webURL)">
+                  <span class="text-center">
+                    <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
+                      height="30">
+                  </span>
+                  <span class="mx-2">GITLAB STAGES</span>
+                </button> </div>
+              <div>
+                <button (click)="urlOpenNewTab(activePipeline.logURL)" type="button"
+                  class="btn btn-outline-custom ml-1 mt-4">
+                  <span class="text-center">
+                    <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 "
+                      height="30">
+                  </span>
+                  <span class="mx-2">E2E LOGS</span>
+                </button>
+              </div>
+            </div>
+
+            <hr>
+            <div class="d-flex justify-content-around mt-3">
+              <div class=" rounded bg-white d-block px-2 py-1">
+                <span class="d-block text-center text-primary">{{activePipeline.jobs}}</span>
+                <span>total</span>
+              </div>
+              <div class=" rounded bg-white d-block px-2 py-1">
+                <span class="d-block text-center">{{activePipeline.successJobs+activePipeline.failedJobs}}</span>
+                <span>Executed</span>
+              </div>
+
+              <div class=" rounded bg-white d-block px-2 py-1">
+                <span class="d-block text-center text-success">{{activePipeline.successJobs}}</span>
+                <span>Success</span>
+              </div>
+
+              <div class=" rounded bg-white d-block px-2 py-1">
+                <span class="d-block text-center text-danger">{{activePipeline.failedJobs}}</span>
+                <span>Failed</span>
+              </div>
+            </div>
+            <hr>
+
             <div>
               <ul>
-                <li>
-                  Id : {{activePipeline.id}}
+                <li class="my-2">
+                  <span>Started_At : </span> <span>{{activePipeline.startedAt}}</span>
                 </li>
-                <li>
-                  status : {{activePipeline.status}}
+                <li class="my-2">
+                  <span>Finished_At : </span> <span>{{activePipeline.finishedAt}}</span>
                 </li>
-                <li>
-                  version : {{activePipeline.version}}
+                <li class="my-2">
+                  <span>Duration : </span> <span>{{activePipeline.duration}}</span>
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-      </div>
 
-
-
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-            aria-selected="true">Overview</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false">Jobs</a>
-        </li>
-      </ul>
-
-      <div class="tab-content" id="myTabContent">
-        <!-- Overview Nav bar  -->
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div *ngIf="doNut">
-            <canvas id="myChart" width="400" height="400"></canvas>
           </div>
 
-        </div>
-
-        <!-- Jobs Nav bar  -->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row mt-1">
-            <div class="col-md-12">
-              <ul class="p-0">
-                <li *ngFor="let stage of selectedPipeline">
-                  <div class="badge badge-pill badge-light border py-1"><i [ngClass]=statusIcon(stage.status)></i> <span
-                      class="font-size-16">
-                      {{stage.stageName}}</span></div>
-                  <div class="ml-3 py-3 stage-jobs-content">
-                    <ul class="p-0">
-                      <li *ngFor="let job of stage.allJobs"
-                        class="font-size-14 job-row my-1 d-flex justify-content-between">
-                        <div class="job-link-line-left"></div>
-                        <div class="badge badge-pill border font-size-14 font-weight-normal job-name">{{job.name}}</div>
-                        <div class="job-link-line-right"></div>
-                        <div class="d-flex">
-                          <div><i [ngClass]=statusIcon(job.status)></i></div>
-                          <div class="job-link-line-right"></div>
-                          <div> <a href="https://gitlab.openebs.ci/openebs/e2e-openshift/-/jobs/{{job.id}}"
-                              target="_blank">
-                              <img src="/src/assets/images/workload-logo/gitlab-notxt.svg" alt="gitlab-logo"
-                                class="gitlab-job-image"></a>
+          <!-- Jobs Nav bar  -->
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row mt-1 jobs-content-section">
+              <div class="col-md-12">
+                <ul class="p-0">
+                  <li *ngFor="let stage of selectedPipeline">
+                    <div class="badge badge-pill badge-light border py-1"><i [ngClass]=statusIcon(stage.status)></i>
+                      <span class="font-size-16">
+                        {{stage.stageName}}</span></div>
+                    <div class="ml-3 py-3 stage-jobs-content">
+                      <ul class="p-0">
+                        <li *ngFor="let job of stage.allJobs"
+                          class="font-size-14 job-row my-1 d-flex justify-content-between">
+                          <div class="job-link-line-left"></div>
+                          <div class="badge badge-pill border font-size-14 font-weight-normal job-name">{{job.name}}
                           </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
+                          <div class="job-link-line-right"></div>
+                          <div class="d-flex">
+                            <div><i [ngClass]=statusIcon(job.status)></i></div>
+                            <div class="job-link-line-right"></div>
+                            <div> <a href="https://gitlab.openebs.ci/openebs/e2e-openshift/-/jobs/{{job.id}}"
+                                target="_blank">
+                                <img src="/src/assets/images/workload-logo/gitlab-notxt.svg" alt="gitlab-logo"
+                                  class="gitlab-job-image"></a>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
+
         </div>
 
+
       </div>
-
-
     </div>
   </div>
 </div>

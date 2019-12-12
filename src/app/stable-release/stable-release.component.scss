@@ -4,6 +4,15 @@
 .heading-row{
   background-image: radial-gradient( circle farthest-corner at 12.3% 19.3%,  rgba(85,88,218,1) 0%, rgba(95,209,249,1) 100.2% );
 }
+.highlight {
+  border-bottom: 5px solid #654cf9;
+}
+
+.row_color {
+  // background-color: #F2F4F6;
+  background-color: #ededed;
+}
+
 ul {
   list-style-type: none;
 }
@@ -15,6 +24,9 @@ ul {
 }
 .font-size-14 {
   font-size: 14px;
+}
+.font-size-25{
+  font-size:25px;
 }
 .job-link-line-left {
   margin: 0;
@@ -71,4 +83,25 @@ border-color: #62b9f3;
   img{
     box-shadow:0px 250px 15px -35px rgba(0,0,0,.25);
   }
+}
+
+.btn-outline-custom:hover {
+  color: #fff;
+  background-image: linear-gradient(#1991eb, #2da1f8);
+  border-color: #1585d8;
+}
+
+.btn-outline-custom {
+  color: #354052;
+  background-color: transparent;
+  background-image: none;
+  border-color: #dfe3e9;
+}
+.table-pipelines-section{
+  height: 90vh;
+  overflow-y: auto;
+}
+.jobs-content-section{
+  height: 65vh;
+  overflow-y: auto;
 }
