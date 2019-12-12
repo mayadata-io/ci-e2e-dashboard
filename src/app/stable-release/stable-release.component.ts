@@ -16,12 +16,11 @@ import { TranslateService } from 'angular-intl';
 })
 export class StableReleaseComponent implements OnInit {
 
-  constructor(private router: Router, private DashboardDatas: DashboardData, private meta: Meta, private titleService: Title, public translateService: TranslateService) {
+  constructor(private DashboardDatas: DashboardData, private meta: Meta, private titleService: Title) {
     this.meta.addTag({ name: 'description', content: 'Openebs.ci is the CI and E2E portal for OpenEBS github PRs. Using this portal, OpenEBS community uses this portal to find the build quality against each PR that is merged. It also hosts stateful application workloads with various deployment scenarios. The example workloads include MongoDB, Percona, WordPress, Prometheus, Redis, CockroachDB etc.' });
     this.meta.addTag({ name: 'keywords', content: 'Openebs,EBS,workload,mongo,jiva,cstor' });
     this.titleService.setTitle("CI/E2E dashboard for OpenEBS");
   }
-
 
   private getData: ISubscription;
   private selectCell: ISubscription;
@@ -34,10 +33,6 @@ export class StableReleaseComponent implements OnInit {
   index: boolean = true;
   public initialCount: any = 0;
   detailPannelReady: boolean = false;
-
-
-
-
 
   ngOnInit() {
     localStorage.removeItem('rowop');
@@ -62,8 +57,6 @@ export class StableReleaseComponent implements OnInit {
               this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
               this.index = false;
           }
-          // this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
-
         }
       });
     })
@@ -71,7 +64,6 @@ export class StableReleaseComponent implements OnInit {
 
   ngOnDestroy() {
     this.getData.unsubscribe();
-    // this.selectCell.unsubscribe();
   }
 
   rowCount() {
@@ -123,13 +115,12 @@ export class StableReleaseComponent implements OnInit {
       return "_";
     }
   }
+
   duration(data) {
     try {
       var startedAt = moment(data.jobs[0].started_at, 'YYYY-M-DD,HH:mm:ss');
       var finishedAt = moment(data.jobs[data.jobs.length-1].finished_at, 'YYYY-M-DD,HH:mm:ss');
       var difference = moment.duration((finishedAt.diff(startedAt, 'second')), "second");
-      console.log("diff",difference);
-      
       var days = difference.days();
       var hours = difference.hours();
       var minutes = difference.minutes();
@@ -222,7 +213,6 @@ export class StableReleaseComponent implements OnInit {
       default:
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
-
   }
 
   getJobPercentForPipeline(data) {
@@ -250,7 +240,6 @@ export class StableReleaseComponent implements OnInit {
     catch {
       return "0 0";
     }
-
   }
 
   pipelineTooltip(data) {
@@ -268,6 +257,7 @@ export class StableReleaseComponent implements OnInit {
       return "n/a"
     }
   }
+  
   passed(data) {
     var passed = 0;
     for (var i = 0; i < data.length; i++) {
