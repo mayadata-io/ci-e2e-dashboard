@@ -107,9 +107,14 @@ export class StableReleaseComponent implements OnInit {
   }
   finishedAt(data ){
     try {
+      if (data.status == 'success' || data.status == 'failed'){
       var date = data.jobs[data.jobs.length-1].finished_at
       var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
       return dateFormat;
+      }else{
+        // Capatilize ref : https://www.freecodecamp.org/forum/t/how-to-capitalize-the-first-letter-of-a-string-in-javascript/18405
+        return data.status.charAt(0).toUpperCase()+data.status.slice(1);
+      }
     } catch (error) {
       console.log("error",error);
       return "_";
