@@ -33,6 +33,7 @@ export class StableReleaseComponent implements OnInit {
   index: boolean = true;
   public initialCount: any = 0;
   detailPannelReady: boolean = false;
+  currentPlatform: any = 'openshift';
 
   ngOnInit() {
     localStorage.removeItem('rowop');
@@ -48,20 +49,45 @@ export class StableReleaseComponent implements OnInit {
       clickedCell.addClass("highlight");
     });
 
-    this.getData = timer(0, 10000).subscribe(x => {
-      this.DashboardDatas.getOpenshiftReleaseDetails().subscribe(res => {
-        this.openshiftRelease = res;
-        if (this.openshiftRelease) {
-          this.pageLoaded = true;
-          if (this.index){
-              this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
-              this.index = false;
-          }
-        }
-      });
-    })
+    this.checkoutPlatform("openshift");
   }
 
+  checkoutPlatform(platform) {
+    if (platform !== this.currentPlatform) {
+      this.getData.unsubscribe();
+      this.index = true;
+    }
+    if (platform) {
+      this.currentPlatform = platform;
+      this.getData = timer(0, 10000).subscribe(x => {
+        this.DashboardDatas.getEndPointData(platform).subscribe(res => {
+          this.openshiftRelease = res;
+          if (this.openshiftRelease) {
+            this.pageLoaded = true;
+            if (this.index) {
+              this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
+              this.index = false;
+            }
+
+          }
+        });
+      })
+      // this.currentPlatform = platform;
+    } else {
+      console.error;
+    }
+
+  }
+  getPlatformName(platform) {
+    switch (platform) {
+      case 'openshift':
+        return 'Openshift 4.2'
+      case 'konvoy':
+        return 'Konvoy'
+      default:
+        break;
+    }
+  }
   ngOnDestroy() {
     this.getData.unsubscribe();
   }
@@ -91,32 +117,32 @@ export class StableReleaseComponent implements OnInit {
       }
       return hours + "h " + minutes + "m" + " ago";
     } catch (e) {
-      console.log("error",e);
+      console.log("error", e);
       return "_";
     }
   }
-  startedAt(data ){
+  startedAt(data) {
     try {
       var date = data.jobs[0].started_at
       var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
       return dateFormat;
     } catch (error) {
-      console.log("error",error);
+      console.log("error", error);
       return "_";
     }
   }
-  finishedAt(data ){
+  finishedAt(data) {
     try {
-      if (data.status == 'success' || data.status == 'failed'){
-      var date = data.jobs[data.jobs.length-1].finished_at
-      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
-      return dateFormat;
-      }else{
+      if (data.status == 'success' || data.status == 'failed') {
+        var date = data.jobs[data.jobs.length - 1].finished_at
+        var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+        return dateFormat;
+      } else {
         // Capatilize ref : https://www.freecodecamp.org/forum/t/how-to-capitalize-the-first-letter-of-a-string-in-javascript/18405
-        return data.status.charAt(0).toUpperCase()+data.status.slice(1);
+        return data.status.charAt(0).toUpperCase() + data.status.slice(1);
       }
     } catch (error) {
-      console.log("error",error);
+      console.log("error", error);
       return "_";
     }
   }
@@ -124,7 +150,7 @@ export class StableReleaseComponent implements OnInit {
   duration(data) {
     try {
       var startedAt = moment(data.jobs[0].started_at, 'YYYY-M-DD,HH:mm:ss');
-      var finishedAt = moment(data.jobs[data.jobs.length-1].finished_at, 'YYYY-M-DD,HH:mm:ss');
+      var finishedAt = moment(data.jobs[data.jobs.length - 1].finished_at, 'YYYY-M-DD,HH:mm:ss');
       var difference = moment.duration((finishedAt.diff(startedAt, 'second')), "second");
       var days = difference.days();
       var hours = difference.hours();
@@ -157,11 +183,11 @@ export class StableReleaseComponent implements OnInit {
       jobs: pipeline.jobs.length,
       successJobs: this.passed(pipeline.jobs),
       failedJobs: this.failed(pipeline.jobs),
-      triggered : this.triggered(pipeline),
+      triggered: this.triggered(pipeline),
       startedAt: this.startedAt(pipeline),
       finishedAt: this.finishedAt(pipeline),
       duration: this.duration(pipeline)
-    }    
+    }
     var stages = [];
     var obj = [];
     pipeline.jobs.forEach(job => {

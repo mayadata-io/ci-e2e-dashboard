@@ -23,9 +23,9 @@
             <h3 class="text-white"></h3>
             <h4 class=" d-none d-md-block font-size-32 text-left">CI/E2E Summary of OpenEBS Development Builds</h4>
             <div class="d-block d-md-none text-dark">CI/E2E Summary of OpenEBS Development Builds</div>
-            <h3 *ngIf="undefined !== buildData" class="text-white font-size-15">Builds in last one week:
+            <!-- <h3 *ngIf="undefined !== buildData" class="text-white font-size-15">Builds in last one week:
               {{ masterBuildsCount(buildData.dashboard) }}
-            </h3>
+            </h3> -->
           </a>
         </li>
       </ul>
@@ -35,56 +35,33 @@
           <table id="data" class="table table-borderless">
             <thead>
               <tr class="text-center">
-                <th>Trigger</th>
                 <th>Build</th>
                 <th class="text-center">E2E Pipelines</th>
               </tr>
               <tr class="text-center">
                 <td></td>
-                <td></td>
                 <td class="d-flex align-items-center justify-content-center platform">
                   <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p class="font-size-13">1.14.5</p>
-                  </span>
-                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
-                    <p class="font-size-13">1.15.3</p>
+                    <p class="font-size-13">1.15.2</p>
                   </span>
                   <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
                     <p class="font-size-13">1.16.1</p>
                   </span>
-                  <span class="mx-2"><img class="p-0" height="30" src="/assets/images/cloud/D2IQ.svg">
-                    <p class="font-size-13">Konvoy(1.15.5)</p>
+                  <span class="mx-4"><img class="p-0" height="30" src="/assets/images/company-logos/k8s.png">
+                    <p class="font-size-13">1.17.2</p>
                   </span>
-
                 </td>
               </tr>
             </thead>
-            <tbody *ngIf="undefined !== (packetV15Data && buildData && packetV14Data && packetV13Data)">
+            <tbody *ngIf="undefined !== (packetV15Data && packetV14Data && packetV13Data)">
               <tr [ngClass]="{'row_color': i==rowCount()}" class="text-center"
-                *ngFor="let post of buildData.dashboard; let i = index" [attr.data-index]="i">
+                *ngFor="let post of packetV15Data.dashboard; let i = index" [attr.data-index]="i">
                 <td>
-                  <a class="github-commit" href="{{pullRequestURL(buildData.dashboard[i])}}" target="_blank">
-                    <span>{{ getCommitName(i, buildData.dashboard) }}</span> <span class="d-none d-md-inline">
-                      /#{{ getCommit(i, buildData.dashboard) | slice:0:8 }}</span>
-                  </a>
-                  <p class="font-size-12 d-none d-md-block">Commit: {{ updated(i, buildData.dashboard) }}</p>
+                  ci
                 </td>
-
-                <td>
-                  <button placement="bottom" ngbTooltip="{{buildTooltip(i, buildData.dashboard)}}"
-                    [ngClass]="buttonStatusClass(buildStatus(i, buildData.dashboard))"
-                    (click)="clickit(buildWeburl(i, buildData.dashboard)); detailPannel(i, packetV13.dashboard, buildData.dashboard, 'packetV14'); ">
-                    <i class="font-size-13" [ngClass]="iconClass(buildStatus(i, buildData.dashboard))"></i>
-                    <a class="ml-1 font-size-15 d-none d-md-inline">{{buildStatus(i, buildData.dashboard)}}</a>
-                  </button>
-                </td>
-
                 <td class="d-flex justify-content-center">
-                  <!--                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer"
- -->
-
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV13Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV13Data.dashboard, buildData.dashboard, 'packetv14');"
+                    (click)="detailPannel(i, packetV13Data.dashboard, 'packetv14');"
                     [ngClass]="{'highlight': (status == 1 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV13Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
@@ -117,7 +94,7 @@
                   </span>
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV14Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV14Data.dashboard, buildData.dashboard, 'packetv15');"
+                    (click)="detailPannel(i, packetV14Data.dashboard, 'packetv15');"
                     [ngClass]="{'highlight': (status == 2 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV14Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
@@ -150,7 +127,7 @@
                   </span>
 
                   <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, packetV15Data.dashboard) }}"
-                    (click)="detailPannel(i, packetV15Data.dashboard, buildData.dashboard, 'packetv16');"
+                    (click)="detailPannel(i, packetV15Data.dashboard, 'packetv16');"
                     [ngClass]="{'highlight': (status == 3 && i==rowCount())}"
                     [ngStyle]="{'pointer-events': pipelineTooltip(i, packetV15Data.dashboard) === 'pending' ? 'none' : 'initial' }"
                     style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
@@ -174,39 +151,6 @@
                               <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
                                 stroke="#009400" stroke-width="6"
                                 [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV15Data.dashboard)"
-                                stroke-dashoffset="22.5"></circle>
-                            </svg>
-                          </ng-template>
-                        </ng-template>
-                      </ng-template>
-                    </ng-template>
-                  </span>
-
-                  <span placement="bottom" ngbTooltip="{{ pipelineTooltip(i, konvoyData.dashboard) }}"
-                    (click)="detailPannel(i, konvoyData.dashboard, buildData.dashboard, 'konvoy');"
-                    [ngClass]="{'highlight': (status == 4 && i==rowCount())}"
-                    [ngStyle]="{'pointer-events': pipelineTooltip(i, konvoyData.dashboard) === 'pending' ? 'none' : 'initial' }"
-                    style=" padding-bottom:10px;margin-left:31.9px; margin-right:31.9px;cursor:pointer">
-                    <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'running';else errorGraphkonvoy"
-                      class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary pipeline-status-icon'></i>
-                    <ng-template #errorGraphkonvoy>
-                      <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == '';else statusGraphkonvoy"
-                        class='fa fa-ban text-dark pipeline-status-icon'></i>
-                      <ng-template #statusGraphkonvoy>
-                        <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'pending';else cancelGraphKonvoy"
-                          class='fas fa-exclamation-triangle btn-txt btn-outline-warning pipeline-status-icon'></i>
-                        <ng-template #cancelGraphKonvoy>
-                          <i *ngIf="pipelineTooltip(i, konvoyData.dashboard) == 'cancelled';else statusSuccessGraphkonvoy"
-                            class='fas fa-minus-circle  btn-txt pipeline-status-icon padding-top-3'></i>
-                          <ng-template #statusSuccessGraphkonvoy>
-                            <svg width="20" height="20" viewBox="0 0 42 42" class="donut">
-                              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
-                              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                                stroke="#ff0000" stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
-                              </circle>
-                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent"
-                                stroke="#009400" stroke-width="6"
-                                [attr.stroke-dasharray]="getJobPercentFromPipeline(i, konvoyData.dashboard)"
                                 stroke-dashoffset="22.5"></circle>
                             </svg>
                           </ng-template>

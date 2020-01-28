@@ -81,31 +81,23 @@ export class TableComponent implements OnInit {
     });
 
     this.getData = timer(0, 5000).subscribe(x => {
-      this.DashboardDatas.getPacketv15Details().subscribe(data => {
-        this.showSpinnerTable = false;
-        this.packetV15Data = data;
-      });
-      this.DashboardDatas.getPacketv14Details().subscribe(data => {
-        this.showSpinnerTable = false;
-        this.packetV14Data = data;
-      });
-      this.DashboardDatas.getPacketv13Details().subscribe(data => {
+      this.DashboardDatas.getEndPointData("packet-antepenultimate").subscribe(data => {
         this.showSpinnerTable = false;
         this.packetV13Data = data;
       });
-      this.DashboardDatas.getKonvoyDetails().subscribe(data => {
+      this.DashboardDatas.getEndPointData("packet-penultimate").subscribe(data => {
         this.showSpinnerTable = false;
-        this.konvoyData = data;
+        this.packetV14Data = data;
       });
-      this.DashboardDatas.getBuildDetails().subscribe(data => {
+      this.DashboardDatas.getEndPointData("packet-ultimate").subscribe(data => {
         this.showSpinnerTable = false;
-        this.buildData = data;
+        this.packetV15Data = data;
       });
     });
     this.selectCell = timer(0, 1000).subscribe(x => {
-      if (this.index == 1 && this.buildData != undefined && this.packetV13Data != undefined) {
+      if (this.index == 1 && this.packetV13Data != undefined) {
         this.index = 0;
-        this.detailPannel(0, this.packetV13Data.dashboard, this.buildData.dashboard, 'packetv14');
+        this.detailPannel(0, this.packetV13Data.dashboard, 'packetv14');
       }
     });
   }
@@ -343,7 +335,7 @@ export class TableComponent implements OnInit {
     return failed;
   }
 
-  detailPannel(index, pipelineData, buildData, cloud) {
+  detailPannel(index, pipelineData, cloud) {
     this.pipelineDetailStatus = false;
     this.showSpinnerDetails = true;
     setTimeout(() => {
@@ -357,33 +349,33 @@ export class TableComponent implements OnInit {
         this.name = "PACKET";
         this.kubernetesVersion = "1.15.3";
         this.status = 2;
-        this.detailsDatas(index, pipelineData, buildData)
+        this.detailsDatas(index, pipelineData)
       } else if (cloud == "packetv14") {
         this.image = 'packet.svg'
         this.name = "PACKET";
         this.kubernetesVersion = "1.14.5";
         this.status = 1;
-        this.detailsDatas(index, pipelineData, buildData)
+        this.detailsDatas(index, pipelineData)
       } else if (cloud == "packetv16") {
         this.image = 'packet.svg'
         this.name = "PACKET";
         this.kubernetesVersion = "1.16.1";
         this.status = 3;
-        this.detailsDatas(index, pipelineData, buildData)
+        this.detailsDatas(index, pipelineData)
       } else if (cloud == "konvoy") {
         this.image = 'D2IQ.svg'
         this.name = "KONVOY";
         this.kubernetesVersion = "1.15.5";
         this.status = 4;
-        this.detailsDatas(index, pipelineData, buildData)
+        this.detailsDatas(index, pipelineData)
       }
     }
   }
 
-  detailsDatas(index, pipelineData, buildData) {
-    this.commitMessage = buildData[index].jobs[0].message;
-    this.pullRequest = this.pullRequestURL(buildData[index])
-    this.commitUser = this.commitUsr(buildData[index].jobs[0].author_name, pipelineData[index].sha);
+  detailsDatas(index, pipelineData) {
+    // this.commitMessage = buildData[index].jobs[0].message;
+    // this.pullRequest = this.pullRequestURL(buildData[index])
+    // this.commitUser = this.commitUsr(buildData[index].jobs[0].author_name, pipelineData[index].sha);
     this.rating = this.ratingCalculation(pipelineData[index].jobs)
     this.gitlabPipelineUrl = this.gitlabPipelineURL(pipelineData[index].web_url);
     this.log_url = pipelineData[index].kibana_url;

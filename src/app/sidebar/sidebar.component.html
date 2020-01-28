@@ -11,13 +11,13 @@
     <div class="collapse navbar-collapse" id="sidebar">
       <ul class="list-unstyled justify-content-center w-100">
         <li *ngIf="vendor == 'false'"
-          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" routerLink="/"
+          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" routerLink="/development"
           [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
           <div>
             <h5>Development Branch</h5>
           </div>
         </li>
-        <li *ngIf="vendor == 'false'" routerLink="/stable-release" [routerLinkActiveOptions]="{ exact : true }"
+        <li *ngIf="vendor == 'false'" routerLink="/" [routerLinkActiveOptions]="{ exact : true }"
           routerLinkActive="active-link"
           class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom">
           <div>
