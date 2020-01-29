@@ -72,9 +72,8 @@ export class StableReleaseComponent implements OnInit {
           }
         });
       })
-      // this.currentPlatform = platform;
     } else {
-      console.error;
+      console.error('Unable to find Selected Platform');
     }
 
   }
@@ -84,8 +83,6 @@ export class StableReleaseComponent implements OnInit {
         return 'Openshift 4.2'
       case 'konvoy':
         return 'Konvoy'
-      default:
-        break;
     }
   }
   ngOnDestroy() {

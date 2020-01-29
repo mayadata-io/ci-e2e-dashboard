@@ -373,9 +373,6 @@ export class TableComponent implements OnInit {
   }
 
   detailsDatas(index, pipelineData) {
-    // this.commitMessage = buildData[index].jobs[0].message;
-    // this.pullRequest = this.pullRequestURL(buildData[index])
-    // this.commitUser = this.commitUsr(buildData[index].jobs[0].author_name, pipelineData[index].sha);
     this.rating = this.ratingCalculation(pipelineData[index].jobs)
     this.gitlabPipelineUrl = this.gitlabPipelineURL(pipelineData[index].web_url);
     this.log_url = pipelineData[index].kibana_url;
