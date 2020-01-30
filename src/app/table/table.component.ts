@@ -576,8 +576,15 @@ export class TableComponent implements OnInit {
         color = "35,36,35"
       }
 
-      bgColor.push(`rgba(${color},1)`)
-      borderColor.push(`rgba(${color},1)`)
+      //  Gradient colour for bar graph
+      var ctx = <HTMLCanvasElement>document.getElementById('myChart');
+      var ctxx = ctx.getContext("2d");
+      var gradientFill = ctxx.createLinearGradient(0, 500, 30, 50);
+      for (let dec = 0.1; dec <= 1; dec=dec+0.1) {
+        gradientFill.addColorStop(dec, `rgba(${color},${dec})`);
+      }
+      bgColor.push(gradientFill);
+      borderColor.push(gradientFill)
 
     });
     if (data == 'labels') {
