@@ -1,44 +1,38 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-import { Meta,Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Injectable()
 export class DashboardData {
 
     private apiurl: string;
     host: any;
-    constructor(private http: HttpClient, private meta:Meta,private titleService: Title) {
+    constructor(private http: HttpClient, private meta: Meta, private titleService: Title) {
         this.host = window.location.host;
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-          this.apiurl = "http://localhost:3000";
-        } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci" ) {
+            this.apiurl = "http://localhost:3000";
+        } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci") {
             this.apiurl = "https://openebs.ci/api";
         } else {
-          this.apiurl = "https://staging.openebs.ci/api";
+            this.apiurl = "https://staging.openebs.ci/api";
         }
     }
-
-    getPacketv15Details() {
-        return this.http.get<any[]>(this.apiurl + "/packet/v15");
-    }
-
-    getPacketv14Details() {
-        return this.http.get<any[]>(this.apiurl + "/packet/v14");
-    }
-
-    getPacketv13Details() {
-        return this.http.get<any[]>(this.apiurl + "/packet/v13");
-    }
-    getKonvoyDetails() {
-        return this.http.get<any[]>(this.apiurl + "/konvoy");
-    }
-
-    getBuildDetails() {
-        return this.http.get<any[]>(this.apiurl + "/build");
-    }
-
-    getOpenshiftReleaseDetails() {
-        return this.http.get<any[]>(this.apiurl + "/openshift/release");
+    getEndPointData(platform) {
+        switch (platform) {
+            case "packet-ultimate":
+                return this.http.get<any[]>(this.apiurl + "/packet/ultimate");
+            case "packet-penultimate":
+                return this.http.get<any[]>(this.apiurl + "/packet/penultimate");
+            case "packet-antepenultimate":
+                return this.http.get<any[]>(this.apiurl + "/packet/antepenultimate");
+            case "konvoy":
+                return this.http.get<any[]>(this.apiurl + "/konvoy");
+            case "openshift":
+                return this.http.get<any[]>(this.apiurl + "/openshift/release");
+            default:
+                console.log('Unable To Find Platform');
+                break;
+        }
     }
 }

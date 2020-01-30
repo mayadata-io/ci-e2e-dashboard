@@ -9,8 +9,8 @@ import { StableReleaseComponent } from "./stable-release/stable-release.componen
 
 const routes: Routes = [
   //routes without header and footer
-  { path: "", component: TableComponent },
-  { path: "stable-release", component: StableReleaseComponent },
+  { path: "development", component: TableComponent },
+  { path: "", component: StableReleaseComponent },
   { path: "workload-dashboard", component: WorkloadDashboardComponent },
   { path: "mongo-jiva", component: WorkloadsComponent },
   { path: "mongo-cstor", component: WorkloadsComponent },
