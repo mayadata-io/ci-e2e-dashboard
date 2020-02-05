@@ -9,25 +9,25 @@
       </div>
     </div>
   </div>
-<div class="row">
-  <!-- <div class="col-md-5"></div> -->
-  <div class="col-md-7">
-    <div class="d-flex justify-content-center mb-2">
-      <div class="d-flex justify-content-between select-platform text-dark">
-        <div class="flex rounded shadow bg-white shadow-lg">
-          <div class="btn" [ngClass]="currentPlatform == 'openshift' ? 'btn-primary':'btn-disabled'"
-            (click)="checkoutPlatform('openshift')"><img src="/assets/images/cloud/openshift.png" alt="Platform-logo"
-              class="rounded-circle shadow" height="30px"><span class="mx-2">Openshift</span>
-          </div>
-          <div class="btn" [ngClass]="currentPlatform == 'konvoy' ? 'btn-primary' : 'btn-disabled'"
-            (click)="checkoutPlatform('konvoy')"><img src="/assets/images/cloud/konvoy.png" alt="Platform-logo"
-              class="rounded-circle shadow" height="30px"><span class="mx-2">Konvoy</span>
+  <div class="row">
+    <!-- <div class="col-md-5"></div> -->
+    <div class="col-md-7">
+      <div class="d-flex justify-content-center mb-2">
+        <div class="d-flex justify-content-between select-platform text-dark">
+          <div class="flex rounded shadow bg-white shadow-lg">
+            <div class="btn" [ngClass]="currentPlatform == 'openshift' ? 'btn-primary':'btn-disabled'"
+              (click)="checkoutPlatform('openshift')"><img src="/assets/images/cloud/openshift.png" alt="Platform-logo"
+                class="rounded-circle shadow" height="30px"><span class="mx-2">Openshift</span>
+            </div>
+            <div class="btn" [ngClass]="currentPlatform == 'konvoy' ? 'btn-primary' : 'btn-disabled'"
+              (click)="checkoutPlatform('konvoy')"><img src="/assets/images/cloud/konvoy.png" alt="Platform-logo"
+                class="rounded-circle shadow" height="30px"><span class="mx-2">Konvoy</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
   <div class="row" *ngIf='openshiftRelease.dashboard;else loadingSpinner'>
     <div class="col-md-7 table-pipelines-section">
       <table class="table" id="data">
@@ -65,54 +65,40 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-5 shadow">
+    <div class="col-md-5 shadow border-top">
       <div *ngIf="detailPannelReady">
         <div class="row my-2">
           <div class="col-md-12">
             <div class="d-flex justify-content-around">
               <div class="text-center">
                 <img src="/assets/images/cloud/{{currentPlatform}}.png" alt="Platform-logo"
-                  class="rounded-circle shadow" height="80px">
+                  class="rounded-circle shadow" height="80px" style="margin-top: -3rem;">
                 <h5 class="my-2">{{getPlatformName(currentPlatform)}}</h5>
               </div>
             </div>
           </div>
         </div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-              aria-selected="true">Overview</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-              aria-selected="false">Jobs</a>
-          </li>
-        </ul>
-
-        <div class="tab-content" id="myTabContent">
-          <!-- Overview Nav bar  -->
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="d-flex justify-content-around mt-2">
-              <div>
-                <span class="font-weight-bold">Pipeliene #{{activePipeline.id}} </span><span>triggered
-                  {{activePipeline.triggered}} .</span>
-              </div>
-              <div>
-                <button type="button" class="rounded btn-outline-primary"> <i
-                    [ngClass]=statusIcon(activePipeline.status)></i> {{activePipeline.status}}</button>
-              </div>
+        <!-- Overview Nav bar  -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="d-flex justify-content-around mt-2">
+            <div>
+              <span class="font-weight-bold">Pipeliene <a href={{activePipeline.webURL}}
+                  class="border border-primary rounded p-1"> #{{activePipeline.id}}</a> </span><span> triggered
+                {{activePipeline.triggered}} .</span>
             </div>
-            <div class="d-flex justify-content-around my-2">
-              <div>
+            <div>
+              <div class="rounded border p-1"> <i [ngClass]=statusIcon(activePipeline.status)></i>
+                {{activePipeline.status}}</div>
+            </div>
+          </div>
+          <div class="text-right"><button (click)="urlOpenNewTab(activePipeline.logURL)" type="button"
+              class="btn btn-outline-custom m-1">
+              <span class="mx-2">E2E LOGS</span>
+            </button></div>
+          <hr>
 
-                <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button"
-                  (click)="urlOpenNewTab(activePipeline.webURL)">
-                  <span class="text-center">
-                    <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
-                      height="30">
-                  </span>
-                  <span class="mx-2">GITLAB STAGES</span>
-                </button> </div>
+          <!-- E2E LOGS Button -->
+          <!-- <div class="d-flex justify-content-around my-2">
               <div>
                 <button (click)="urlOpenNewTab(activePipeline.logURL)" type="button"
                   class="btn btn-outline-custom ml-1 mt-4">
@@ -123,9 +109,9 @@
                   <span class="mx-2">E2E LOGS</span>
                 </button>
               </div>
-            </div>
+            </div> -->
 
-            <hr>
+          <!-- <hr>
             <div class="d-flex justify-content-around mt-3">
               <div class=" rounded bg-white d-block px-2 py-1">
                 <span class="d-block text-center text-primary">{{activePipeline.jobs}}</span>
@@ -145,8 +131,8 @@
                 <span>Failed</span>
               </div>
             </div>
-            <hr>
-            <div>
+            <hr> -->
+          <!-- <div>
               <ul>
                 <li class="my-3 d-flex justify-content-around">
                   <span class="font-weight-bold">Started_At : </span> <span>{{activePipeline.startedAt}}</span>
@@ -158,40 +144,38 @@
                   <span class="font-weight-bold">Duration : </span> <span>{{activePipeline.duration}}</span>
                 </li>
               </ul>
-            </div>
-          </div>
-          <!-- Jobs Nav bar  -->
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row mt-1 jobs-content-section">
-              <div class="col-md-12">
-                <ul class="p-0">
-                  <li *ngFor="let stage of selectedPipeline">
-                    <div class="badge badge-pill badge-light border py-1"><i [ngClass]=statusIcon(stage.status)></i>
-                      <span class="font-size-16">
-                        {{stage.stageName}}</span></div>
-                    <div class="ml-3 py-3 stage-jobs-content">
-                      <ul class="p-0">
-                        <li *ngFor="let job of stage.allJobs"
-                          class="font-size-14 job-row my-1 d-flex justify-content-between">
-                          <div class="job-link-line-left"></div>
-                          <div class="badge badge-pill border font-size-14 font-weight-normal job-name">{{job.name}}
+            </div> -->
+          <div class="row mt-1 jobs-content-section">
+            <div class="col-md-12">
+              <ul class="p-0">
+                <li *ngFor="let stage of selectedPipeline">
+                  <div class="badge badge-pill badge-light border py-1"><i [ngClass]=statusIcon(stage.status)></i>
+                    <span class="font-size-16">
+                      <span class="font-weight-bold">Stage:</span> {{stage.stageName}}</span></div>
+                  <div class="ml-3 py-3 stage-jobs-content">
+                    <ul class="p-0">
+                      <li *ngFor="let job of stage.allJobs"
+                        class="font-size-14 job-row my-1 d-flex justify-content-between">
+                        <div class="job-link-line-left"></div>
+                        <div class="badge badge-pill border font-size-14 font-weight-normal job-name"><a
+                            href={{job.github_readme}}>{{job.name}}</a>
+                        </div>
+                        <div class="job-link-line-right"></div>
+                        <div class="d-flex">
+                          <div ngbTooltip="{{job.status}}" placement="left"><i [ngClass]=statusIcon(job.status)></i>
                           </div>
                           <div class="job-link-line-right"></div>
-                          <div class="d-flex">
-                            <div><i [ngClass]=statusIcon(job.status)></i></div>
-                            <div class="job-link-line-right"></div>
-                            <div> <a href="https://gitlab.openebs.ci/openebs/e2e-{{currentPlatform}}/-/jobs/{{job.id}}"
-                                target="_blank">
-                                <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="gitlab-logo"
-                                  class="gitlab-job-image"></a>
-                            </div>
+                          <div> <a href="https://gitlab.openebs.ci/openebs/e2e-{{currentPlatform}}/-/jobs/{{job.id}}"
+                              target="_blank">
+                              <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="gitlab-logo"
+                                class="gitlab-job-image"></a>
                           </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
