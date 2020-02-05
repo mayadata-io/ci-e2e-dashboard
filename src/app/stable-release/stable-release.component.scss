@@ -84,9 +84,12 @@ ul {
 .stage-jobs-content:hover {
   border-color: #62b9f3;
 }
+.job-name a{
+  color: black !important;
+}
 .job-row:hover {
-  .job-name {
-    color: #007bff;
+  .job-name a {
+    color: #007bff !important;
   }
   .job-link-line-right {
     border-top-color: #62b9f3;
