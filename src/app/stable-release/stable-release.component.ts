@@ -59,6 +59,7 @@ export class StableReleaseComponent implements OnInit {
     }
     if (platform) {
       this.currentPlatform = platform;
+      this.openshiftRelease = "";
       this.getData = timer(0, 10000).subscribe(x => {
         this.DashboardDatas.getEndPointData(platform).subscribe(res => {
           this.openshiftRelease = res;
