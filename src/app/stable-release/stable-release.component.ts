@@ -235,7 +235,11 @@ export class StableReleaseComponent implements OnInit {
       case "failed":
         return "far fa-times-circle text-danger mx-2 font-size-18";
       case "running":
-        return "fas fa-circle-notch text-secondary mx-2 font-size-18 fa-spin";
+        return "fas fa-circle-notch text-primary mx-2 font-size-18 fa-spin";
+      case "skipped":
+        return "fas fa-angle-double-right text-secondary mx-2 font-size-18";
+      case "canceled":
+        return "fas fa-ban text-muted mx-2 font-size-18";
       default:
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
