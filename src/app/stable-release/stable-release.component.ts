@@ -122,7 +122,7 @@ export class StableReleaseComponent implements OnInit {
   startedAt(data) {
     try {
       var date = data.jobs[0].started_at
-      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').calendar();
       return dateFormat;
     } catch (error) {
       console.log("error", error);
