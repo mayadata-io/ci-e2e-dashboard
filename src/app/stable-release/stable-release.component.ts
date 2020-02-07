@@ -59,6 +59,7 @@ export class StableReleaseComponent implements OnInit {
     }
     if (platform) {
       this.currentPlatform = platform;
+      this.openshiftRelease = "";
       this.getData = timer(0, 10000).subscribe(x => {
         this.DashboardDatas.getEndPointData(platform).subscribe(res => {
           this.openshiftRelease = res;
@@ -121,7 +122,7 @@ export class StableReleaseComponent implements OnInit {
   startedAt(data) {
     try {
       var date = data.jobs[0].started_at
-      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').calendar();
       return dateFormat;
     } catch (error) {
       console.log("error", error);
@@ -235,7 +236,11 @@ export class StableReleaseComponent implements OnInit {
       case "failed":
         return "far fa-times-circle text-danger mx-2 font-size-18";
       case "running":
-        return "fas fa-circle-notch text-secondary mx-2 font-size-18 fa-spin";
+        return "fas fa-circle-notch text-primary mx-2 font-size-18 fa-spin";
+      case "skipped":
+        return "fas fa-angle-double-right text-secondary mx-2 font-size-18";
+      case "canceled":
+        return "fas fa-ban text-muted mx-2 font-size-18";
       default:
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }

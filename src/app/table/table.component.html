@@ -193,25 +193,30 @@
             <img src="/assets/images/cloud/{{ image }}">
             <h5>{{ name }}</h5>
             <h6>Kubernetes {{ kubernetesVersion }}</h6>
-            <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button"
-              (click)="clickit(gitlabPipelineUrl)">
-              <span class="text-center">
-                <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
-                  height="30">
-              </span>
-              <span class="status-button gitlab-stage-button">GITLAB STAGES</span>
-            </button>
-            <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4">
-              <span class="text-center">
-                <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 " height="30">
-              </span>
-              <span class="status-button e2e-logs-button">E2E LOGS</span></button>
+          </div>
+          <div>
+            <div class="d-flex justify-content-around">
+              <button type="button" class="btn btn-outline-custom mr-1 mt-4" href="" role="button"
+                (click)="clickit(gitlabPipelineUrl)">
+                <span class="text-center">
+                  <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="" class="rounded-circle border p-0"
+                    height="30">
+                </span>
+                <span class="status-button gitlab-stage-button">GITLAB STAGES</span>
+              </button>
+              <button (click)="clickit(log_url)" type="button" class="btn btn-outline-custom ml-1 mt-4">
+                <span class="text-center">
+                  <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 "
+                    height="30">
+                </span>
+                <span class="status-button e2e-logs-button">E2E LOGS</span></button>
+            </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-12 p-0 mx-2">
-              <div class="hovereffect">
-                <button type="button" data-toggle="modal" data-target=".bd-example-modal-xl">
+              <div class="hovereffect shadow rounded">
+                <button type="button" data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-link">
                   <img src="/assets/images/graph.png" alt="" class="p-0">
                   <div class="overlay">
                     <p class="text-primary">View Pipeline in Detail </p>
@@ -219,45 +224,23 @@
                 </button>
               </div>
             </div>
-            <div class="col-sm-12 d-flex pt-2">
-              <div class="w-25">
+            <div class="col-sm-12 d-flex justify-content-around pt-3">
+              <div>
                 <h5 class="text-dark font-size-15">{{ totalJobs }}</h5>
                 <h6 class="font-size-13">TOTAL</h6>
               </div>
-              <div class="w-25">
+              <div>
                 <h5 class="text-primary font-size-15">{{ executedJobs }}</h5>
                 <h6 class="font-size-13">EXECUTED</h6>
               </div>
-              <div class="w-25">
+              <div>
                 <h5 class="text-success font-size-15">{{ passedJobs }}</h5>
                 <h6 class="font-size-13">PASSED</h6>
               </div>
-              <div class="w-25">
+              <div>
                 <h5 class="text-danger font-size-15">{{ failedJobs }}</h5>
                 <h6 class="font-size-13">FAILED</h6>
               </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-4">
-              <h6><img height=55px; src="/assets/images/icons/pull-request.svg"></h6>
-              <h6><a href="{{ pullRequest }}" target="_blank">Pull Request</a></h6>
-            </div>
-            <div class="col-8">
-              <h6 class="mt-2">{{ commitUser }}</h6>
-              <h6 class="scrollbar font-size-15 height-50" id="scrollbar">{{ commitMessage }}</h6>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-4 text-center">
-              <a class="text-primary" target="_blank"
-                href="https://github.com/openebs/e2e-infrastructure/blob/master/baseline/baseline">Baseline
-                Images</a>
-            </div>
-            <div class="col-8 text-center">
-              <p>Container images used to run this pipeline</p>
             </div>
           </div>
         </ng-template>
