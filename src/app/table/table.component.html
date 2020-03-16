@@ -1,3 +1,71 @@
+<!-- <div class="row bg-white mt-3">
+  <div class="col-md-12">
+    <div class="border w-100 d-flex">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body text-center">
+          <img src="/assets/images/cloud/packet.svg">
+          <h5 class="card-title">PACKET</h5>
+          <h6>Kubernetes 1.14.5</h6>
+        </div>
+      </div>
+      <div class="w-100 p-2 d-flex justify-content-around" style="overflow-x: auto;">
+        <div class="h-100 border rounded" *ngFor="let post of packetV15Data.dashboard; let i = index"
+          [attr.data-index]="i">
+          <div class=" text-center">
+            <div>
+              <svg width="30" height="30" viewBox="0 0 42 42" class="donut">
+                <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                  stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+                </circle>
+                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                  stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV13Data.dashboard)"
+                  stroke-dashoffset="22.5"></circle>
+              </svg>
+            </div>
+            <h5 class="card-title">{{post.id}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container-fluid row">
+  <div class="col-md-2">
+    <div>
+      <div class="card-body text-center">
+        <img src="/assets/images/cloud/packet.svg">
+        <h5 class="card-title">PACKET</h5>
+        <h6>Kubernetes 1.14.5</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="d-flex justify-content-around h-100 ml-5" style="overflow-x: auto;">
+      <div class="h-100 border rounded" *ngFor="let post of packetV15Data.dashboard; let i = index"
+        [attr.data-index]="i">
+        <div class=" text-center">
+          <div>
+            <svg width="30" height="30" viewBox="0 0 42 42" class="donut">
+              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+                stroke-width="6" stroke-dasharray="95 5" stroke-dashoffset="22.5">
+              </circle>
+              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+                stroke-width="6" [attr.stroke-dasharray]="getJobPercentFromPipeline(i, packetV13Data.dashboard)"
+                stroke-dashoffset="22.5"></circle>
+            </svg>
+          </div>
+          <h5 class="card-title">{{post.id}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-xl">

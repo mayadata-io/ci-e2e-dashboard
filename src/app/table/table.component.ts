@@ -80,7 +80,7 @@ export class TableComponent implements OnInit {
       clickedCell.addClass("highlight");
     });
 
-    this.getData = timer(0, 5000).subscribe(x => {
+    this.getData = timer(0, 5000000).subscribe(x => {
       this.DashboardDatas.getEndPointData("packet-antepenultimate").subscribe(data => {
         this.showSpinnerTable = false;
         this.packetV13Data = data;
