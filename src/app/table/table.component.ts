@@ -391,7 +391,7 @@ export class TableComponent implements OnInit {
   stageStatusForObj(stage, jobs) {
     let stageJobs = jobs.filter(job => job.stage == stage);
     // console.log('forStageObj',stageJobs);
-    let successJ = stageJobs.filter(j => j.status == "success").length
+    let successJobs = stageJobs.filter(j => j.status == "success").length
     let failedLength = stageJobs.filter(j => j.status == "failed").length
     let canceledLength = stageJobs.filter(j => j.status == "canceled").length
     let runningLength = stageJobs.filter(j => j.status == "running").length
