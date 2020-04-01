@@ -154,7 +154,7 @@ img {
 
 .btn-outline-success:not(:disabled):not(.disabled):active,
 .btn-outline-success:not(:disabled):not(.disabled).active,
-.show>.btn-outline-success.dropdown-toggle {
+.show > .btn-outline-success.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #28a745;
@@ -162,7 +162,7 @@ img {
 
 .btn-outline-danger:not(:disabled):not(.disabled):active,
 .btn-outline-danger:not(:disabled):not(.disabled).active,
-.show>.btn-outline-danger.dropdown-toggle {
+.show > .btn-outline-danger.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #dc3545;
@@ -170,7 +170,7 @@ img {
 
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
-.show>.btn-outline-secondary.dropdown-toggle {
+.show > .btn-outline-secondary.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #6c757d;
@@ -178,7 +178,7 @@ img {
 
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
-.show>.btn-outline-primary.dropdown-toggle {
+.show > .btn-outline-primary.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #007bff;
@@ -186,7 +186,7 @@ img {
 
 .btn-outline-warning:not(:disabled):not(.disabled):active,
 .btn-outline-warning:not(:disabled):not(.disabled).active,
-.show>.btn-outline-warning.dropdown-toggle {
+.show > .btn-outline-warning.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #ffc107;
@@ -194,7 +194,7 @@ img {
 
 .btn-outline-dark:not(:disabled):not(.disabled):active,
 .btn-outline-dark:not(:disabled):not(.disabled).active,
-.show>.btn-outline-dark.dropdown-toggle {
+.show > .btn-outline-dark.dropdown-toggle {
   color: inherit;
   background-color: white;
   border-color: #343a40;
@@ -247,7 +247,6 @@ a:hover {
   border: 1px blue solid;
 }
 
-
 .fa {
   font-size: 17px;
 }
@@ -294,7 +293,6 @@ a:hover {
 .gitlab_stage_build_success {
   background-color: #ecf4e0;
   color: #335500;
-
 }
 
 .gitlab_stage_build_failed {
@@ -329,9 +327,9 @@ a:hover {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-  background-color: #C0C0C0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c0c0c0;
 }
 
 .btn.btn-link i {
@@ -342,7 +340,6 @@ a:hover {
 .btn.btn-link.collapsed i {
   -webkit-transform: scaleY(1);
   transform: scaleY(1);
-
 }
 
 .drop-data {
@@ -368,7 +365,7 @@ a:hover {
 
 .github-commit {
   cursor: pointer;
-  color: #5C93E8;
+  color: #5c93e8;
 }
 
 .font-size-11 {
@@ -414,7 +411,7 @@ a:hover {
 .height-50 {
   height: 50px;
 }
-.cursor-default{
+.cursor-default {
   cursor: default;
 }
 .modal-dialog {
@@ -450,8 +447,8 @@ a:hover {
   width: calc(100% + 20px);
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(-10px,0,0);
-  transform: translate3d(-10px,0,0);
+  -webkit-transform: translate3d(-10px, 0, 0);
+  transform: translate3d(-10px, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -459,8 +456,8 @@ a:hover {
 .hovereffect:hover img {
   opacity: 0.4;
   filter: alpha(opacity=60);
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 .hovereffect p {
   font-size: 17px;
@@ -468,13 +465,94 @@ a:hover {
   filter: alpha(opacity=0);
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(100%,0,0);
-  transform: translate3d(100%,0,0);
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
 }
 
 .hovereffect:hover p {
   opacity: 1;
   filter: alpha(opacity=100);
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.font-size-18 {
+  font-size: 18px;
+}
+.job-link-line-left {
+  margin: 0;
+  position: relative;
+  top: 10px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  border-top-left-radius: 10px;
+  flex: auto;
+  height: 10px;
+  max-width: 5px;
+  white-space: nowrap;
+}
+.job-link-line-right {
+  margin: 0;
+  position: relative;
+  top: 10px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(0, 0, 0, 0.12);
+  // border-top-left-radius: 10px;
+  flex: auto;
+  height: 10px;
+  min-width: 10px;
+  max-width: auto;
+  white-space: nowrap;
+}
+.highlight {
+  border-bottom: 5px solid #654cf9;
+}
+
+.row_color {
+  background-color: #ededed;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.jobs-content-section {
+  height: 53vh;
+  overflow-y: auto;
+}
+.gitlab-job-image {
+  position: relative;
+  height: 25px;
+  top: -5px;
+}
+.stage-jobs-content {
+  border-left: 1px solid #dee2e6;
+}
+.stage-jobs-content:hover {
+  border-color: #62b9f3;
+}
+.job-name{
+  color: black !important;
+}
+.job-row:hover {
+  .job-name {
+    color: #007bff !important;
+  }
+  .job-link-line-right {
+    border-top-color: #62b9f3;
+  }
+  .job-link-line-left {
+    border-top-color: #62b9f3;
+  }
+  i {
+    text-shadow: 1px 1px 60px;
+    font-weight: 900;
+  }
+  img {
+    box-shadow: 0px 250px 15px -35px rgba(0, 0, 0, 0.25);
+  }
 }
