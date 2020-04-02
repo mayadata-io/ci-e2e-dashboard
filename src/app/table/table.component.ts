@@ -52,6 +52,7 @@ export class TableComponent implements OnInit {
   public konvoyData: any;
   public buildData: any;
   public vendor: any = false;
+  activePipeline: any;
 
   constructor(private router: Router, private DashboardDatas: DashboardData, private meta: Meta, private titleService: Title, public translateService: TranslateService) {
     this.meta.addTag({ name: 'description', content: 'Openebs.ci is the CI and E2E portal for OpenEBS github PRs. Using this portal, OpenEBS community uses this portal to find the build quality against each PR that is merged. It also hosts stateful application workloads with various deployment scenarios. The example workloads include MongoDB, Percona, WordPress, Prometheus, Redis, CockroachDB etc.' });
@@ -80,7 +81,7 @@ export class TableComponent implements OnInit {
       clickedCell.addClass("highlight");
     });
 
-    this.getData = timer(0, 5000).subscribe(x => {
+    this.getData = timer(0, 500000).subscribe(x => {
       this.DashboardDatas.getEndPointData("packet-antepenultimate").subscribe(data => {
         this.showSpinnerTable = false;
         this.packetV13Data = data;
@@ -94,7 +95,7 @@ export class TableComponent implements OnInit {
         this.packetV15Data = data;
       });
     });
-    this.selectCell = timer(0, 1000).subscribe(x => {
+    this.selectCell = timer(0, 10000).subscribe(x => {
       if (this.index == 1 && this.packetV13Data != undefined) {
         this.index = 0;
         this.detailPannel(0, this.packetV13Data.dashboard, 'packetv14');
@@ -362,33 +363,86 @@ export class TableComponent implements OnInit {
         this.kubernetesVersion = "1.16.1";
         this.status = 3;
         this.detailsDatas(index, pipelineData)
-      } else if (cloud == "konvoy") {
-        this.image = 'D2IQ.svg'
-        this.name = "KONVOY";
-        this.kubernetesVersion = "1.15.5";
-        this.status = 4;
-        this.detailsDatas(index, pipelineData)
       }
+    }
+  }
+  genPipeStages(pipe) {
+
+    var stages = [];
+    var obj = [];
+    pipe.jobs.forEach(job => {
+      if (!stages.includes(job.stage)) {
+        stages.push(job.stage);
+      }
+    });
+    stages.forEach(stage => {
+      const stageObj = {
+        stageName: stage,
+        allJobs: pipe.jobs.filter(job => job.stage == stage),
+        status: this.stageStatusForObj(stage, pipe.jobs),
+        noOfSuccessJobs: pipe.jobs.filter(job => job.stage == stage).filter(job => job.status == "success").length,
+        noOfFailedJobs: pipe.jobs.filter(job => job.stage == stage).filter(job => job.status == "failed").length
+      };
+      obj.push(stageObj);
+    })
+    return obj
+  }
+
+  stageStatusForObj(stage, jobs) {
+    let stageJobs = jobs.filter(job => job.stage == stage);
+    // console.log('forStageObj',stageJobs);
+    let successJobs = stageJobs.filter(j => j.status == "success").length
+    let failedLength = stageJobs.filter(j => j.status == "failed").length
+    let canceledLength = stageJobs.filter(j => j.status == "canceled").length
+    let runningLength = stageJobs.filter(j => j.status == "running").length
+    let skippedLength = stageJobs.filter(j => j.status == "skipped").length
+    if (runningLength) {
+      return "running"
+    } else if (canceledLength) {
+      return "canceled"
+    } else if (skippedLength) {
+      return "skipped"
+    } else if (failedLength) {
+      return "failed"
+    } else {
+      return 'success'
+    }
+  }
+
+  statusIcon(status) {
+    switch (status) {
+      case "success":
+        return "far fa-check-circle text-success mx-2 font-size-18";
+      case "failed":
+        return "far fa-times-circle text-danger mx-2 font-size-18";
+      case "running":
+        return "fas fa-circle-notch text-primary mx-2 font-size-18 fa-spin";
+      case "skipped":
+        return "fas fa-angle-double-right text-secondary mx-2 font-size-18";
+      case "canceled":
+        return "fas fa-ban text-muted mx-2 font-size-18";
+      default:
+        return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
   }
 
   detailsDatas(index, pipelineData) {
-    this.rating = this.ratingCalculation(pipelineData[index].jobs)
+    let pipeData = pipelineData[index];
+    this.activePipeline = {
+      id: pipeData.id,
+      status: pipeData.status,
+      kibanaURL: pipeData.kibana_url,
+      gitlabURL: pipeData.web_url,
+      stageJobs: this.genPipeStages(pipeData),
+    }
+    // this.rating = this.ratingCalculation(pipelineData[index].jobs)
     this.gitlabPipelineUrl = this.gitlabPipelineURL(pipelineData[index].web_url);
     this.log_url = pipelineData[index].kibana_url;
     this.totalJobs = pipelineData[index].jobs.length;
     this.executedJobs = this.executed(pipelineData[index].jobs)
     this.passedJobs = this.passed(pipelineData[index].jobs)
     this.failedJobs = this.failed(pipelineData[index].jobs)
-    let gitlabStages = ["CLUSTER-SETUP", "PROVIDER-INFRA-SETUP", "STATEFUL-APP-DEPLOY", "APP-FUNC-TEST", "APP-CHAOS-TEST", "APP-DEPROVISION", "CLUSTER-CLEANUP"];
-    this.clusterSetupStatus = this.getStageStatus(gitlabStages[0], pipelineData[index].jobs)
-    this.providerInfraSetup = this.getStageStatus(gitlabStages[1], pipelineData[index].jobs)
-    this.statefulAppDeploy = this.getStageStatus(gitlabStages[2], pipelineData[index].jobs)
-    this.appFunctionTest = this.getStageStatus(gitlabStages[3], pipelineData[index].jobs)
-    this.appChaosTest = this.getStageStatus(gitlabStages[4], pipelineData[index].jobs)
-    this.appDeprovision = this.getStageStatus(gitlabStages[5], pipelineData[index].jobs)
-    this.clusterCleanup = this.getStageStatus(gitlabStages[6], pipelineData[index].jobs)
-    this.barChart(pipelineData[index]);
+    // this.barChart(pipelineData[index]); // disabled for BarChart Disabled
   }
   getStageStatus(stageName, data) {
     var statusObj = {
@@ -580,7 +634,7 @@ export class TableComponent implements OnInit {
       var ctx = <HTMLCanvasElement>document.getElementById('myChart');
       var ctxx = ctx.getContext("2d");
       var gradientFill = ctxx.createLinearGradient(0, 500, 30, 50);
-      for (let dec = 0.1; dec <= 1; dec=dec+0.1) {
+      for (let dec = 0.1; dec <= 1; dec = dec + 0.1) {
         gradientFill.addColorStop(dec, `rgba(${color},${dec})`);
       }
       bgColor.push(gradientFill);
