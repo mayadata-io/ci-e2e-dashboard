@@ -348,19 +348,19 @@ export class TableComponent implements OnInit {
       if (cloud == "packetv15") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.15.3";
+        this.kubernetesVersion = "1.17.4";
         this.status = 2;
         this.detailsDatas(index, pipelineData)
       } else if (cloud == "packetv14") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.14.5";
+        this.kubernetesVersion = "1.16.8";
         this.status = 1;
         this.detailsDatas(index, pipelineData)
       } else if (cloud == "packetv16") {
         this.image = 'packet.svg'
         this.name = "PACKET";
-        this.kubernetesVersion = "1.16.1";
+        this.kubernetesVersion = "1.18.1";
         this.status = 3;
         this.detailsDatas(index, pipelineData)
       }
