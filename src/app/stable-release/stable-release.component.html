@@ -8,8 +8,9 @@
         </div>
         <div class="col-md-4">
           <div class="d-flex justify-content-center">
-            <span class=" btn rounded border px-2 py-1" routerLink="/overview"><i
-                class="fas fa-book font-size-18"></i></span>
+            <!-- Disable Overview page button bcoz content need to update required -->
+            <!-- <span class=" btn rounded border px-2 py-1" routerLink="/overview"><i
+                class="fas fa-book font-size-18"></i></span> -->
           </div>
         </div>
       </div>
@@ -20,7 +21,7 @@
     <div class="col-md-7">
       <div class="d-flex justify-content-center mb-2">
         <div class="d-flex justify-content-between select-platform text-dark">
-          <div class="flex rounded shadow bg-white shadow-lg">
+          <div class="flex rounded bg-white border">
             <div class="btn" [ngClass]="currentPlatform == 'openshift' ? 'btn-primary':'btn-disabled'"
               (click)="checkoutPlatform('openshift')"><img src="/assets/images/cloud/openshift.png" alt="Platform-logo"
                 class="rounded-circle shadow" height="30px"><span class="mx-2">Openshift</span>
@@ -28,6 +29,9 @@
             <div class="btn" [ngClass]="currentPlatform == 'konvoy' ? 'btn-primary' : 'btn-disabled'"
               (click)="checkoutPlatform('konvoy')"><img src="/assets/images/cloud/konvoy.png" alt="Platform-logo"
                 class="rounded-circle shadow" height="30px"><span class="mx-2">Konvoy</span>
+            </div>
+            <div class="btn" [ngClass]="currentPlatform == 'nativek8s' ? 'btn-primary' : 'btn-disabled'"
+              (click)="checkoutPlatform('nativek8s')"><span >nativeK8s</span>
             </div>
           </div>
         </div>
@@ -77,7 +81,7 @@
           <div class="col-md-12">
             <div class="d-flex justify-content-around">
               <div class="text-center">
-                <img src="/assets/images/cloud/{{currentPlatform}}.png" alt="Platform-logo"
+                <img *ngIf="currentPlatform != 'nativek8s'" src="/assets/images/cloud/{{currentPlatform}}.png" alt="Platform-logo"
                   class="rounded-circle shadow" height="80px" style="margin-top: -3rem;">
                 <h5 class="my-2">{{getPlatformName(currentPlatform)}}</h5>
               </div>

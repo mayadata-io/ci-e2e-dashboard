@@ -84,6 +84,8 @@ export class StableReleaseComponent implements OnInit {
         return 'Openshift 4.2'
       case 'konvoy':
         return 'Konvoy'
+      case 'nativek8s':
+        return 'nativek8s'
     }
   }
   ngOnDestroy() {

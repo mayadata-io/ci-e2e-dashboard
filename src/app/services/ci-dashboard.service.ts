@@ -30,6 +30,8 @@ export class DashboardData {
                 return this.http.get<any[]>(this.apiurl + "/konvoy");
             case "openshift":
                 return this.http.get<any[]>(this.apiurl + "/openshift/release");
+            case "nativek8s":
+                return this.http.get<any[]>(this.apiurl + "/nativek8s");
             default:
                 console.log('Unable To Find Platform');
                 break;
