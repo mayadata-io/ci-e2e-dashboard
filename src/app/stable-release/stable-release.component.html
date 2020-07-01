@@ -24,14 +24,15 @@
           <div class="flex rounded bg-white border">
             <div class="btn" [ngClass]="currentPlatform == 'openshift' ? 'btn-primary':'btn-disabled'"
               (click)="checkoutPlatform('openshift')"><img src="/assets/images/cloud/openshift.png" alt="Platform-logo"
-                class="rounded-circle shadow" height="30px"><span class="mx-2">Openshift</span>
+                class="rounded-circle " height="30px"><span class="mx-2">Openshift</span>
             </div>
-            <div class="btn" [ngClass]="currentPlatform == 'konvoy' ? 'btn-primary' : 'btn-disabled'"
+            <div class="btn border-left border-right" [ngClass]="currentPlatform == 'konvoy' ? 'btn-primary' : 'btn-disabled'"
               (click)="checkoutPlatform('konvoy')"><img src="/assets/images/cloud/konvoy.png" alt="Platform-logo"
-                class="rounded-circle shadow" height="30px"><span class="mx-2">Konvoy</span>
+                class="rounded-circle " height="30px"><span class="mx-2">Konvoy</span>
             </div>
             <div class="btn" [ngClass]="currentPlatform == 'nativek8s' ? 'btn-primary' : 'btn-disabled'"
-              (click)="checkoutPlatform('nativek8s')"><span >nativeK8s</span>
+              (click)="checkoutPlatform('nativek8s')"><img src="/assets/images/cloud/nativek8s.svg" alt="Platform-logo"
+              class="rounded-circle  bg-white" height="30px"><span class="mx-2">nativek8s</span>
             </div>
           </div>
         </div>
@@ -81,7 +82,7 @@
           <div class="col-md-12">
             <div class="d-flex justify-content-around">
               <div class="text-center">
-                <img *ngIf="currentPlatform != 'nativek8s'" src="/assets/images/cloud/{{currentPlatform}}.png" alt="Platform-logo"
+                <img src="/assets/images/cloud/{{currentPlatform}}.png" alt="Platform-logo"
                   class="rounded-circle shadow" height="80px" style="margin-top: -3rem;">
                 <h5 class="my-2">{{getPlatformName(currentPlatform)}}</h5>
               </div>
