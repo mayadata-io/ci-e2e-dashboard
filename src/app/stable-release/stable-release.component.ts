@@ -85,7 +85,7 @@ export class StableReleaseComponent implements OnInit {
       case 'konvoy':
         return 'Konvoy'
       case 'nativek8s':
-        return 'k8s'
+        return 'K8s'
     }
   }
   ngOnDestroy() {
