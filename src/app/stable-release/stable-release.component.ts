@@ -81,7 +81,7 @@ export class StableReleaseComponent implements OnInit {
   getPlatformName(platform) {
     switch (platform) {
       case 'openshift':
-        return 'Openshift 4.2'
+        return 'Openshift 4.5'
       case 'konvoy':
         return 'Konvoy'
       case 'nativek8s':
