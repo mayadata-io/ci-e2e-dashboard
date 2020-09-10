@@ -102,7 +102,7 @@
           </div>
         </div>
         <hr>
-        <div class="d-flex justify-content-around">
+        <div class="d-flex ">
           <div>
             <span class="d-block"><span class="font-weight-bold">Started_At : </span>
               <span>{{activePipeline.startedAt}}</span>
@@ -112,7 +112,7 @@
                 [ngClass]=statusIcon(activePipeline.status)></i><span>{{activePipeline.finishedAt}}</span>
             </span>
           </div>
-          <div>
+          <!-- <div>
             <button (click)="urlOpenNewTab(activePipeline.logURL)" type="button"
               class="btn btn-outline-custom m-1 shadow-sm">
               <span class="text-center">
@@ -120,58 +120,9 @@
               </span>
               <span class="mx-2">E2E LOGS</span>
             </button>
-          </div>
+          </div> -->
         </div>
         <hr>
-
-        <!-- E2E LOGS Button -->
-        <!-- <div class="d-flex justify-content-around my-2">
-              <div>
-                <button (click)="urlOpenNewTab(activePipeline.logURL)" type="button"
-                  class="btn btn-outline-custom ml-1 mt-4">
-                  <span class="text-center">
-                    <img src="/assets/images/company-logos/logo.png" alt="" class="rounded-circle border p-1 "
-                      height="30">
-                  </span>
-                  <span class="mx-2">E2E LOGS</span>
-                </button>
-              </div>
-            </div> -->
-
-        <!-- <hr>
-            <div class="d-flex justify-content-around mt-3">
-              <div class=" rounded bg-white d-block px-2 py-1">
-                <span class="d-block text-center text-primary">{{activePipeline.jobs}}</span>
-                <span>total</span>
-              </div>
-              <div class=" rounded bg-white d-block px-2 py-1">
-                <span class="d-block text-center">{{activePipeline.successJobs+activePipeline.failedJobs}}</span>
-                <span>Executed</span>
-              </div>
-              <div class=" rounded bg-white d-block px-2 py-1">
-                <span class="d-block text-center text-success">{{activePipeline.successJobs}}</span>
-                <span>Success</span>
-              </div>
-
-              <div class=" rounded bg-white d-block px-2 py-1">
-                <span class="d-block text-center text-danger">{{activePipeline.failedJobs}}</span>
-                <span>Failed</span>
-              </div>
-            </div>
-            <hr> -->
-        <!-- <div>
-              <ul>
-                <li class="my-3 d-flex justify-content-around">
-                  <span class="font-weight-bold">Started_At : </span> <span>{{activePipeline.startedAt}}</span>
-                </li>
-                <li class="my-3 d-flex justify-content-around">
-                  <span class="font-weight-bold">Finished_At : </span> <span>{{activePipeline.finishedAt}}</span>
-                </li>
-                <li class="my-3 d-flex justify-content-around">
-                  <span class="font-weight-bold">Duration : </span> <span>{{activePipeline.duration}}</span>
-                </li>
-              </ul>
-            </div> -->
         <div class="row mt-1 jobs-content-section">
           <div class="col-md-12">
             <ul class="p-0">
