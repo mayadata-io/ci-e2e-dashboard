@@ -106,9 +106,13 @@ export class StableReleaseComponent implements OnInit {
   // Updated returns commit id
   triggered(data) {
     try {
-      var now = moment(dateformat((new Date()), "IST:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
+      var now = moment(dateformat((new Date()), "UTC:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
+      // console.log("now :", now);
       var buildTime = moment(data.jobs[0].created_at, 'YYYY-M-DD,HH:mm:ss');
+      // console.log("now :", now);
+
       var difference = moment.duration((now.diff(buildTime, 'second')), "second");
+      // let localTime = moment(difference).format('YYYY-MM-DD HH:mm:ss');
       var days = difference.days();
       var hours = difference.hours();
       var minutes = difference.hours();
@@ -124,8 +128,8 @@ export class StableReleaseComponent implements OnInit {
   startedAt(data) {
     try {
       var date = data.jobs[0].started_at
-      var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').calendar();
-      return dateFormat;
+      var dateFormat = moment.utc(date).local().calendar();      
+      return dateFormat
     } catch (error) {
       console.log("error", error);
       return "_";
@@ -135,7 +139,7 @@ export class StableReleaseComponent implements OnInit {
     try {
       if (data.status == 'success' || data.status == 'failed') {
         var date = data.jobs[data.jobs.length - 1].finished_at
-        var dateFormat = moment.utc(date, 'YYYY-M-DD,HH:mm:ss').local().calendar();
+        var dateFormat = moment.utc(date).local().calendar();
         return dateFormat;
       } else {
         // Capatilize ref : https://www.freecodecamp.org/forum/t/how-to-capitalize-the-first-letter-of-a-string-in-javascript/18405
