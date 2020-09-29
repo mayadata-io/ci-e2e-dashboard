@@ -107,12 +107,8 @@ export class StableReleaseComponent implements OnInit {
   triggered(data) {
     try {
       var now = moment(dateformat((new Date()), "UTC:yyyy-mm-dd'T'HH:MM:ss"), 'YYYY-M-DD,HH:mm:ss');
-      // console.log("now :", now);
       var buildTime = moment(data.jobs[0].created_at, 'YYYY-M-DD,HH:mm:ss');
-      // console.log("now :", now);
-
       var difference = moment.duration((now.diff(buildTime, 'second')), "second");
-      // let localTime = moment(difference).format('YYYY-MM-DD HH:mm:ss');
       var days = difference.days();
       var hours = difference.hours();
       var minutes = difference.hours();
