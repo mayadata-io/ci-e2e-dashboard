@@ -62,11 +62,13 @@ export class StableReleaseComponent implements OnInit {
       this.openshiftRelease = "";
       this.getData = timer(0, 10000).subscribe(x => {
         this.DashboardDatas.getEndPointData(platform).subscribe(res => {
-          this.openshiftRelease = res;
+          let pipelinesArray: any = res
+          let filterSkipped = pipelinesArray.dashboard.filter(res => res.status != "skipped")
+          this.openshiftRelease = filterSkipped;
           if (this.openshiftRelease) {
             this.pageLoaded = true;
             if (this.index) {
-              this.getJobDetails(this.openshiftRelease.dashboard[0], 0);
+              this.getJobDetails(this.openshiftRelease[0], 0);
               this.index = false;
             }
 
@@ -124,7 +126,7 @@ export class StableReleaseComponent implements OnInit {
   startedAt(data) {
     try {
       var date = data.jobs[0].started_at
-      var dateFormat = moment.utc(date).local().calendar();      
+      var dateFormat = moment.utc(date).local().calendar();
       return dateFormat
     } catch (error) {
       console.log("error", error);
