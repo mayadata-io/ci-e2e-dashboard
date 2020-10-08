@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf='openshiftRelease.dashboard;else loadingSpinner'>
+  <div class="row" *ngIf='openshiftRelease;else loadingSpinner'>
     <div class="col-md-7 table-pipelines-section">
       <table class="table" id="data">
         <thead>
@@ -48,7 +48,7 @@
           <th class="text-center">{{getPlatformName(currentPlatform)}}</th>
         </thead>
         <tbody>
-          <tr *ngFor="let pipeline of openshiftRelease.dashboard; let i = index"
+          <tr *ngFor="let pipeline of openshiftRelease; let i = index"
             [ngClass]="{'row_color': i==rowCount()}" [attr.data-index]="i">
             <td><a href={{pipeline.web_url}} target="_blank">{{pipeline.id}}</a></td>
             <td>{{pipeline.release_tag}}</td>
