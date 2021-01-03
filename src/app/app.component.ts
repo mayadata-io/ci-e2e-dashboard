@@ -13,5 +13,11 @@ export class AppComponent {
     this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {
       this.vendor = value;
     });
-   }
+  }
+
+  getYear() {
+    var d = new Date();
+    var n = d.getFullYear();
+    return n
+  }
 }
