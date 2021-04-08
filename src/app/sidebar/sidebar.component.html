@@ -1,8 +1,7 @@
-<div class="wrapper ">
+<!-- <div class="wrapper ">
   <div class="text-center bg-white border-bottom py-2">
     <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
   </div>
-  <!-- Sidebar -->
   <nav class="navbar navbar-expand-lg navbar-light p-md-0">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -36,13 +35,37 @@
             </div>
           </a>
         </li>
-        <!-- <li class="item cursor-pointer rounded-left py-md-4 py-sm-1 button workload-item border-bottom"
-          routerLink="workload-dashboard" routerLinkActive="active-link">
-          <div class="text-center ">
-            <h5 translate>SIDEBAR.WORKLOADS</h5>
-          </div>
-        </li> -->
       </ul>
     </div>
   </nav>
+</div> -->
+
+
+<div class="wrapper sidebar-style">
+  <div class="row my-3">
+    <div class="text-center mx-auto py-2">
+      <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
+    </div>
+  </div>
+  <div class="row mx-auto">
+    <ul class="list-group mx-auto w-100">
+      <li class=" px-0 sidebar-group">
+        <div class="px-4 py-3 active-sidebar-item">Storage Engines</div>
+        <ul class="mx-4">
+          <li class="storage-link-items">
+            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/cstor/openshift']">OpenEBS/cStor</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/jiva/openshift']">OpenEBS/jiva</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/cstor-csi/openshift']">OpenEBs/cstor-csi</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/jiva-operator/openshift']">OpenEBs/jiva-operator</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>

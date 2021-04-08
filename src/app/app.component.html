@@ -1,5 +1,5 @@
 <!-- <div class="container-fluid"> -->
-<div class="container-fluid">
+<!-- <div class="container-fluid">
 	<div class="row" style="height: -webkit-fill-available;">
 		<div class="col-sm-12 col-md-2  p-0 scrollbar bg-white" id="scrollbar">
 			<app-sidebar></app-sidebar>
@@ -32,4 +32,14 @@
 		</div>
 	</div>
 
+</div> -->
+<div class="container-fluid h-100">
+	<div class="row h-100">
+		<div class="col-3 p-0 h-100 sidebar">
+			<app-sidebar></app-sidebar>
+		</div>
+		<div class="col-9">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
 </div>
