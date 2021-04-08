@@ -25,6 +25,8 @@ import { WorkloadsComponent } from './workloads/workloads.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-spinners.component';
 import { StableReleaseComponent } from './stable-release/stable-release.component';
+import { PipelinesDashboardComponent } from './pipelines-dashboard/pipelines-dashboard.component';
+import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { StableReleaseComponent } from './stable-release/stable-release.componen
     OverviewComponent,
     LoddingSpinnersComponent,
     StableReleaseComponent,
+    PipelinesDashboardComponent,
+    PipelineTableComponent,
   ],
   imports: [
     BrowserModule,

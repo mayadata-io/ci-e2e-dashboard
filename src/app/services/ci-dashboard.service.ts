@@ -37,4 +37,11 @@ export class DashboardData {
                 break;
         }
     }
+    getAPIData(platform , branch){
+       var data = this.http.get<any[]>(this.apiurl + `/${platform}/${branch}`);
+    //    return this.http.get<any[]>( `https://openebs.ci/api/openshift/release`);
+              return data;
+       
+
+    }
 }

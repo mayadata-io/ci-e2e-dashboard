@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="rounded border px-2 py-2 bg-white my-3">
+    <div class="row">
+      <div class="col-6 my-auto">OpenEBS-{{Engine}} Pipelines</div>
+      <div class="col-6 d-flex justify-content-around">
+        <!-- <div type="button" class="btn btn-outline-primary" routerLinkActive="bg-primary shadow text-white" [routerLink]="['./all']" >All</div> -->
+        <div type="button" class="btn btn-outline-primary" routerLinkActive="bg-primary shadow text-white" [routerLink]="['./openshift']">
+          <img src="/assets/images/cloud/openshift.png" alt="Platform-logo" class="rounded-circle " height="20px"><span
+            class="mx-2">Openshift</span>
+        </div>
+        <div type="button" class="btn btn-outline-primary" routerLinkActive="bg-primary shadow text-white" [routerLink]="['./konvoy']"><img src="/assets/images/cloud/konvoy.png"
+            alt="Platform-logo" class="rounded-circle " height="20px"><span class="mx-2">Konvoy</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pipeline-data bg-white rounded border w-100 px-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>
