@@ -30,7 +30,7 @@ export class PipelineTableComponent implements OnInit {
     });
    }
   public url: any;
-  public pipData: any[];
+  public pipData: any;
   private Data: ISubscription;
   public platform : string;
   ngOnInit() {
