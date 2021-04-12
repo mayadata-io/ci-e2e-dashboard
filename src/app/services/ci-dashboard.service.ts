@@ -15,7 +15,7 @@ export class DashboardData {
         } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci") {
             this.apiurl = "https://openebs.ci/api";
         } else {
-            this.apiurl = "https://openebs.ci/api";
+            this.apiurl = "https://staging.openebs.ci/api";
         }
     }
     getEndPointData(platform) {
