@@ -1,47 +1,4 @@
-<!-- <div class="wrapper ">
-  <div class="text-center bg-white border-bottom py-2">
-    <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
-  </div>
-  <nav class="navbar navbar-expand-lg navbar-light p-md-0">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="sidebar">
-      <ul class="list-unstyled justify-content-center w-100">
-        <li *ngIf="vendor == 'false'" routerLink="/" [routerLinkActiveOptions]="{ exact : true }"
-          routerLinkActive="active-link"
-          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom">
-          <div>
-            <h5>Stable Releases</h5>
-          </div>
-        </li>
-        <li *ngIf="vendor == 'false'"
-          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" routerLink="/development"
-          [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
-          <div>
-            <h5>Development Branch</h5>
-          </div>
-        </li>
-        <li>
-          <a *ngIf="vendor == 'true'"
-            class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" target="_blank"
-            href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
-            <div class="text-center">
-              <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
-            </div>
-            <div>
-              <h5 translate>SIDEBAR.DASHBOARD</h5>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div> -->
-
-
-<div class="wrapper sidebar-style">
+<div class="wrapper sidebar-style ">
   <div class="row my-3">
     <div class="text-center mx-auto py-2">
       <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
@@ -53,19 +10,38 @@
         <div class="px-4 py-3 active-sidebar-item">Storage Engines</div>
         <ul class="mx-4">
           <li class="storage-link-items">
-            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/cstor/openshift']">OpenEBS/cStor</a>
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor'}"
+              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/openshift']">OpenEBS/cStor</a>
           </li>
           <li class="storage-link-items">
-            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/jiva/openshift']">OpenEBS/jiva</a>
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva'}"
+              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/openshift']">OpenEBS/jiva</a>
           </li>
           <li class="storage-link-items">
-            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/cstor-csi/openshift']">OpenEBs/cstor-csi</a>
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor-csi'}"
+              (click)="Engine='cstor-csi'" [routerLink]="['/openebs/cstor-csi/openshift']">OpenEBs/cstor-csi</a>
           </li>
           <li class="storage-link-items">
-            <a class="storage-engine-links" routerLinkActive="storage-engine-link-active" [routerLink]="['/openebs/jiva-operator/openshift']">OpenEBs/jiva-operator</a>
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva-operator'}"
+              (click)="Engine='jiva-operator'"
+              [routerLink]="['/openebs/jiva-operator/openshift']">OpenEBs/jiva-operator</a>
           </li>
         </ul>
       </li>
     </ul>
   </div>
+  <div class="mt-5 mx-auto sidebar-group py-1 rounded ">
+    <div class="d-flex justify-content-around storage-engine-links">
+      <div>GitLab</div>
+      <div *ngIf="status; else loadingIcon" class="badge rounded-pill btn-outline-light my-auto"><i
+          class="fas fa-circle mx-1" [ngClass]="getStatusClass(status.status)"
+          ></i>{{status.status}}</div>
+    </div>
+  </div>
 </div>
+
+<ng-template #loadingIcon>
+  <div class="text-center">
+    <i class="fas fa-circle-notch text-light fa-spin"></i>
+  </div>
+</ng-template>
