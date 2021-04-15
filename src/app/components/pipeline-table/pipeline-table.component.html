@@ -1,54 +1,71 @@
 <div>
-  <table class="table">
-    <thead>
-      <tr class="text-secondary">
-        <th scope="col">Pipeline</th>
-        <th scope="col">Tag</th>
-        <th scope="col">Trigger/Duration</th>
-        <th scope="col">Status</th>
-        <th scope="col">Access</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pipeline of pipData.dashboard">
-        <td class="pipeline-init-row">
-          <div class="d-flex justify-content-left">
-            <div class="platform-icon flex-shrink-0">
-              <img src="/assets/images/cloud/{{platform}}.png" alt="Platform-logo" class="rounded-circle ">
-            </div>
-            <div class="pipeline-id-commit-message flex-grow-1 ms-3 d-block ml-2">
-              <div class="pipeline-id">{{pipeline.id}}</div>
-              <div class="pipeline-commit text-secondary font-sec-12">commit-message</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="d-block">
-            <div class="pipeline-tag"></div>
-            {{pipeline.release_tag}}
-          </div>
-          <div class="pipeline-tag-release-on text-secondary font-sec-12">
+  <div>
+    <div *ngIf="!error; else dataNotPresent">
+      <table class="table">
+        <thead>
+          <tr class="text-secondary">
+            <th scope="col">Pipeline</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Trigger/Duration</th>
+            <th scope="col">Status</th>
+            <th scope="col">Access </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="pipData else loading">
+          <tr *ngFor="let pipeline of pipData.dashboard">
+            <td class="pipeline-init-row">
+              <div class="d-flex justify-content-left">
+                <div class="platform-icon flex-shrink-0">
+                  <img src="/assets/images/cloud/{{platform}}.png" alt="Platform-logo" class="rounded-circle ">
+                </div>
+                <div class="pipeline-id-commit-message flex-grow-1 ms-3 d-block ml-2">
+                  <div class="pipeline-id">{{pipeline.id}}</div>
+                  <div class="pipeline-commit text-secondary font-sec-12">commit-message</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="d-block">
+                <div class="pipeline-tag"></div>
+                {{pipeline.release_tag}}
+              </div>
+              <!-- <div class="pipeline-tag-release-on text-secondary font-sec-12">
             on _
-          </div>
-        </td>
-        <td>
-          <div class="d-block">
-            <div class="pipeline-date">
-              {{triggerDate(pipeline)}}
-            </div>
-            <div class="pipeline-duration text-secondary font-sec-12">
-              {{pipeDuration(pipeline)}}
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="pipeline-status">
-            <div class="rounded p-1"> <i [ngClass]=statusIcon(pipeline.status)></i>
-              {{pipeline.status}}</div>
-          </div>
-        </td>
-        <td><a href={{pipeline.web_url}} type="button" class="btn btn-sm btn-outline-primary">pipeline page</a></td>
-      </tr>
-    </tbody>
-  </table>
+          </div> -->
+            </td>
+            <td>
+              <div class="d-block">
+                <div class="pipeline-date">
+                  {{triggerDate(pipeline)}}
+                </div>
+                <div class="pipeline-duration text-secondary font-sec-12">
+                  {{pipeDuration(pipeline)}}
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="pipeline-status">
+                <div class="rounded p-1"> <i [ngClass]=statusIcon(pipeline.status)></i>
+                  {{pipeline.status}}</div>
+              </div>
+            </td>
+            <td><a href={{pipeline.web_url}} type="button" class="btn btn-sm btn-outline-primary"
+                target="_blank">pipeline page</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #dataNotPresent>
+    <div class="text-center">
+      <app-lodding-spinners class="h-100 w-auto"></app-lodding-spinners>
+      <h4 class="gradient-text mt-5 mb-1">Sorry , Pipelines not avaliable for <span>{{url[2]}} of {{url[3]}}</span></h4>
+      <a type="button" class="btn btn-link" href='/'>Go Back</a>
+    </div>
+  </ng-template>
 </div>
+<ng-template #loading>
+  <div class="text-center mx-auto">
+    <app-lodding-spinners></app-lodding-spinners>
+  </div>
+</ng-template>

@@ -31,7 +31,7 @@ const routes: Routes = [
   // { path: "nuodb-cstor", component: WorkloadsComponent },
   // { path: "overview", component: OverviewComponent },
   // { path: ":workload", component: WorkloadsComponent }
-  { path: "",redirectTo:'openebs/jiva/openshift', pathMatch: 'full'},
+  { path: "",redirectTo:'openebs/cstor/openshift', pathMatch: 'full'},
   { path: "openebs/:engine", component: PipelinesDashboardComponent ,
   children:[{
     path: ':platform',

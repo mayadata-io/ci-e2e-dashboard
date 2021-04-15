@@ -33,6 +33,7 @@ export class PipelineTableComponent implements OnInit {
   public pipData: any;
   private Data: ISubscription;
   public platform : string;
+  error : any;
   ngOnInit() {
     this.url = window.location.pathname.split('/')
     let branch:string = this.url[2]
@@ -45,9 +46,11 @@ export class PipelineTableComponent implements OnInit {
     let E = this.genbranch(branch)
     this.Data = timer(0, 10000).subscribe(x => {
       this.ApiService.getAPIData(platform,E).subscribe(res => {
-      console.log(res);
       this.pipData = res
-    })
+      // console.log("Resssssss-s-s-s-s-s-s-s : ",res);
+    },
+    err => {this.error = err}
+    )
   }) 
   }
   genbranch(branch){

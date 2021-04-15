@@ -15,7 +15,24 @@ export class PipelinesDashboardComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute) { }
   public Engine: string;
+  public Platform : string = "openshift";
+
   ngOnInit() {
     this.Engine = this.activatedRoute.snapshot.paramMap.get('engine');
+    // this.Platform = this.activatedRoute.snapshot.paramMap.get('platform');
+    let url = window.location.pathname.split('/')
+    let branch:string = url[2]
+    this.Platform = url[3]
   }
+  // public PlatformActive : string = "openshift";
+  testFunc(p:string) {
+    // console.log("\n\n\n Platform : " + this.Platform + " funcParam : "+ p );
+    // this.Platform = this.activatedRoute.snapshot.paramMap.get('platform');
+    if (this.Platform == p){
+    return 'bg-primary shadow text-white'
+    }else{
+      return ''
+    }
+  }
+
 }

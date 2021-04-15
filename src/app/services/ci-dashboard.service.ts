@@ -44,4 +44,12 @@ export class DashboardData {
        
 
     }
+    gitLabStatus(){
+        // console.log(" \n gitlab api status \n");
+        
+        let data= this.http.get<any[]>(this.apiurl + `/status`);
+        // console.log(data);
+        return data
+        
+    }
 }
