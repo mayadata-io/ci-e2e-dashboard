@@ -27,6 +27,7 @@ import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-
 import { StableReleaseComponent } from './stable-release/stable-release.component';
 import { PipelinesDashboardComponent } from './pipelines-dashboard/pipelines-dashboard.component';
 import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
+import { DoughnutGraphComponent } from './components/doughnut-graph/doughnut-graph.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PipelineTableComponent } from './components/pipeline-table/pipeline-tab
     StableReleaseComponent,
     PipelinesDashboardComponent,
     PipelineTableComponent,
+    DoughnutGraphComponent,
   ],
   imports: [
     BrowserModule,

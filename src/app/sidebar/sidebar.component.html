@@ -11,32 +11,32 @@
         <ul class="mx-4">
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor'}"
-              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/openshift']">OpenEBS/cStor</a>
+              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/konvoy']">OpenEBS/cStor</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva'}"
-              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/openshift']">OpenEBS/jiva</a>
+              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/konvoy']">OpenEBS/jiva</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor-csi'}"
-              (click)="Engine='cstor-csi'" [routerLink]="['/openebs/cstor-csi/openshift']">OpenEBs/cstor-csi</a>
+              (click)="Engine='cstor-csi'" [routerLink]="['/openebs/cstor-csi/konvoy']">OpenEBS/cstor-csi</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva-operator'}"
               (click)="Engine='jiva-operator'"
-              [routerLink]="['/openebs/jiva-operator/openshift']">OpenEBs/jiva-operator</a>
+              [routerLink]="['/openebs/jiva-operator/konvoy']">OpenEBS/jiva-operator</a>
           </li>
         </ul>
       </li>
     </ul>
   </div>
   <div class="mt-5 mx-auto sidebar-group py-1 rounded ">
-    <div class="d-flex justify-content-around storage-engine-links">
-      <div>GitLab</div>
-      <div *ngIf="status; else loadingIcon" class="badge rounded-pill btn-outline-light my-auto"><i
-          class="fas fa-circle mx-1" [ngClass]="getStatusClass(status.status)"
-          ></i>{{status.status}}</div>
-    </div>
+    <a class="d-flex justify-content-around storage-engine-links" *ngIf="status; else loadingIcon" placement="bottom"
+      ngbTooltip="{{getTimeFormat(status.updated)}}" tooltipClass="status-tooltip">
+      <div class="storage-engine-links">GitLab</div>
+      <div class="badge rounded-pill btn-outline-light my-auto"><i class="fas fa-circle mx-1"
+          [ngClass]="getStatusClass(status.status)"></i>{{status.status}}</div>
+    </a>
   </div>
 </div>
 

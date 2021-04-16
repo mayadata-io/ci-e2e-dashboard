@@ -7,10 +7,6 @@ import { Subscription, Observable, timer, from, pipe } from "rxjs";
 import * as moment from 'moment';
 import * as dateformat from 'dateformat';
 
-
-
-
-
 @Component({
   selector: 'app-pipeline-table',
   templateUrl: './pipeline-table.component.html',

@@ -45,8 +45,9 @@
             </td>
             <td>
               <div class="pipeline-status">
-                <div class="rounded p-1"> <i [ngClass]=statusIcon(pipeline.status)></i>
-                  {{pipeline.status}}</div>
+                <div class="rounded text-left">
+                <app-doughnut-graph [pipeline]="pipeline"></app-doughnut-graph>
+                </div>
               </div>
             </td>
             <td><a href={{pipeline.web_url}} type="button" class="btn btn-sm btn-outline-primary"
