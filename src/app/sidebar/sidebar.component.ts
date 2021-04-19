@@ -6,6 +6,7 @@ import { TranslateModule, TranslateService } from 'angular-intl';
 import { DashboardData } from "../services/ci-dashboard.service";
 import { ISubscription } from "rxjs/Subscription";
 import { Subscription, Observable, timer, from, pipe } from "rxjs";
+import * as moment from 'moment';
 
 
 
@@ -61,6 +62,10 @@ export class SidebarComponent implements OnInit {
     }else{
       return "text-danger"
     }
+  }
+
+  getTimeFormat(d){
+    return 'updated : '+moment.utc(d).local().calendar();
   }
 
   ngOnDestroy() {

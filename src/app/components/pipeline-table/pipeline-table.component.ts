@@ -7,10 +7,6 @@ import { Subscription, Observable, timer, from, pipe } from "rxjs";
 import * as moment from 'moment';
 import * as dateformat from 'dateformat';
 
-
-
-
-
 @Component({
   selector: 'app-pipeline-table',
   templateUrl: './pipeline-table.component.html',
@@ -47,7 +43,6 @@ export class PipelineTableComponent implements OnInit {
     this.Data = timer(0, 10000).subscribe(x => {
       this.ApiService.getAPIData(platform,E).subscribe(res => {
       this.pipData = res
-      // console.log("Resssssss-s-s-s-s-s-s-s : ",res);
     },
     err => {this.error = err}
     )
@@ -58,7 +53,9 @@ export class PipelineTableComponent implements OnInit {
     
     if (branch == 'cstor'){
       return 'openebs-cstor'
-    }else{
+    } else if(branch == 'release-branch' || branch == "lvm-localpv"){
+      return branch
+    } else{
       return `openebs-${branch}`
     }
   }

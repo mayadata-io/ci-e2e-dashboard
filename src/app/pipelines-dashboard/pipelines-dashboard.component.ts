@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { DashboardData } from "../services/ci-dashboard.service";
 import { ISubscription } from "rxjs/Subscription";
+import { platform } from 'process';
 
 
 
@@ -23,6 +24,9 @@ export class PipelinesDashboardComponent implements OnInit {
     let url = window.location.pathname.split('/')
     let branch:string = url[2]
     this.Platform = url[3]
+    if (this.Engine == "release-branch"){
+      this.Engine = "ZFS-LocalPV"
+    }
   }
   // public PlatformActive : string = "openshift";
   testFunc(p:string) {
