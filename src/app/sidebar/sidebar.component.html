@@ -26,6 +26,16 @@
               (click)="Engine='jiva-operator'"
               [routerLink]="['/openebs/jiva-operator/konvoy']">OpenEBS/jiva-operator</a>
           </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='zfs-localpv'}"
+              (click)="Engine='zfs-localpv'"
+              [routerLink]="['/openebs/release-branch/nativek8s']">OpenEBS/ZFS-LocalPV</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='lvm-localpv'}"
+              (click)="Engine='lvm-localpv'"
+              [routerLink]="['/openebs/lvm-localpv/nativek8s']">OpenEBS/LVM-LocalPV</a>
+          </li>
         </ul>
       </li>
     </ul>
