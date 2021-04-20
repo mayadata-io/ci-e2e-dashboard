@@ -26,8 +26,14 @@
             </td>
             <td>
               <div class="d-block">
-                <div class="pipeline-tag"></div>
-                {{pipeline.release_tag}}
+                <div class="pipeline-tag" *ngIf="pipeline.release_tag != 'NA' else tagNotAvaliable">
+                  {{pipeline.release_tag}}</div>
+                <ng-template #tagNotAvaliable>
+                  <div>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{pipeline.status}}
+                  </div>
+                </ng-template>
               </div>
               <!-- <div class="pipeline-tag-release-on text-secondary font-sec-12">
             on _
@@ -46,7 +52,7 @@
             <td>
               <div class="pipeline-status">
                 <div class="rounded text-left">
-                <app-doughnut-graph [pipeline]="pipeline"></app-doughnut-graph>
+                  <app-doughnut-graph [pipeline]="pipeline"></app-doughnut-graph>
                 </div>
               </div>
             </td>

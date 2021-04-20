@@ -8,6 +8,7 @@ import { OverviewComponent } from "./overview/overview.component";
 import { StableReleaseComponent } from "./stable-release/stable-release.component"
 import { PipelinesDashboardComponent } from "./pipelines-dashboard/pipelines-dashboard.component";
 import { PipelineTableComponent } from "./components/pipeline-table/pipeline-table.component";
+import { PipelineDetailComponent } from "./components/pipeline-detail/pipeline-detail.component";
 
 const routes: Routes = [
   //routes without header and footer
@@ -31,13 +32,15 @@ const routes: Routes = [
   // { path: "nuodb-cstor", component: WorkloadsComponent },
   // { path: "overview", component: OverviewComponent },
   // { path: ":workload", component: WorkloadsComponent }
-  { path: "",redirectTo:'openebs/cstor/konvoy', pathMatch: 'full'},
-  { path: "openebs/:engine", component: PipelinesDashboardComponent ,
-  children:[{
-    path: ':platform',
-    component: PipelineTableComponent
-  }]
-},
+  { path: "", redirectTo: 'openebs/cstor/konvoy', pathMatch: 'full' },
+  {
+    path: "openebs/:engine", component: PipelinesDashboardComponent,
+    children: [{
+      path: ':platform',
+      component: PipelineTableComponent
+    }]
+  },
+  { path: "openebs/:platform/:engine/pipeline/:id", component: PipelineDetailComponent }
 
 ];
 
