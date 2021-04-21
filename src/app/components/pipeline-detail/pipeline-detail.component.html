@@ -43,7 +43,7 @@
                 Total Jobs
               </div>
               <div class="count my-1 font-weight-bold">
-                20
+                {{totalJobs}}
               </div>
             </div>
             <div class="card-count success border rounded d-block text-center">
@@ -51,7 +51,7 @@
                 Success
               </div>
               <div class="count my-1 font-weight-bold">
-                20
+                {{successJobs}}
               </div>
             </div>
             <div class="card-count fail border rounded d-block text-center">
@@ -59,7 +59,7 @@
                 Failed
               </div>
               <div class="count my-1 font-weight-bold">
-                20
+                {{failedJobs}}
               </div>
             </div>
             <div class="card-count skip border rounded d-block text-center">
@@ -67,7 +67,7 @@
                 Skipped
               </div>
               <div class="count my-1 font-weight-bold">
-                20
+                {{totalJobs - (successJobs+failedJobs)}}
               </div>
             </div>
 

@@ -37,7 +37,10 @@ export class PipelineDetailComponent implements OnInit {
   pipeD: any;
   jobLogs: any;
   actJob: any;
-  actJobData:any;
+  actJobData: any;
+  totalJobs: any;
+  successJobs: any;
+  failedJobs: any;
 
   // navbarCollapsed = true;
   getPipelineData(platform: string, branch: string, id: string) {
@@ -48,12 +51,12 @@ export class PipelineDetailComponent implements OnInit {
         this.pipData = this.pipData.pipeline;
         this.sortData(this.pipData)
         if (!this.jobLogs) {
-          this.activeJob(this.platform, this.branch, this.pipData.jobs[0].id,this.pipData.jobs[0])
-          setTimeout(function() {
-            if (!this.jobLogs){
+          this.activeJob(this.platform, this.branch, this.pipData.jobs[0].id, this.pipData.jobs[0])
+          setTimeout(function () {
+            if (!this.jobLogs) {
               this.activeJob(this.platform, this.branch, this.actJob)
             }
-          }, 100);
+          }, 1000);
         }
 
       },
@@ -68,6 +71,9 @@ export class PipelineDetailComponent implements OnInit {
   sortData(D: any) {
     let stages = []
     let obj = []
+    this.successJobs = D.jobs.filter(job => job.status == 'success').length
+    this.failedJobs = D.jobs.filter(job => job.status == 'failed').length
+    this.totalJobs = D.jobs.length
     D.jobs.forEach(j => {
       if (!this.actJob) {
         this.actJob = j.id
@@ -121,7 +127,7 @@ export class PipelineDetailComponent implements OnInit {
       return `openebs-${branch}`
     }
   }
-  activeJob(p: string, b: string, id: any, job:any) {
+  activeJob(p: string, b: string, id: any, job: any) {
     var d: any
     this.actJobData = job
     let data = this.ApiService.getJobLogs(p, b, id)
@@ -130,25 +136,25 @@ export class PipelineDetailComponent implements OnInit {
     const c = new Convert();
     //  nst txt = "\u001b[38;5;196mHello\u001b[39m \u001b[48;5;226mWorld\u001b[49m";
     // console.log(c.toHtml(d, { use_classes: true }));
-      this.jobLogs = c.toHtml(d, { use_classes: true })
+    this.jobLogs = c.toHtml(d, { use_classes: true })
 
   }
 
-  statusBadge(s:string){
+  statusBadge(s: string) {
     switch (s) {
       case 'success':
         return "text-success border-success";
       case 'failed':
         return "text-danger border-danger"
-        
-    
+
+
       default:
         return "text-light border-light"
     }
   }
   // [ngClass]="statusBadge(stages.status)"
-  statusBadgeforJob(s:string){
-    switch (s){
+  statusBadgeforJob(s: string) {
+    switch (s) {
       case 'success':
         return "badge-success"
       case 'failed':
@@ -158,7 +164,7 @@ export class PipelineDetailComponent implements OnInit {
     }
   }
 
-  pipeDuration(data){
+  pipeDuration(data) {
     try {
       var startedAt = moment(data.jobs[0].started_at, 'YYYY-M-DD,HH:mm:ss');
       var finishedAt = moment(data.jobs[data.jobs.length - 1].finished_at, 'YYYY-M-DD,HH:mm:ss');
@@ -182,7 +188,7 @@ export class PipelineDetailComponent implements OnInit {
       console.log('error' + e);
     }
   }
-  triggerDate(data){
+  triggerDate(data) {
     try {
       var date = data.jobs[0].started_at
       var dateFormat = moment.utc(date).local().calendar();
@@ -192,15 +198,15 @@ export class PipelineDetailComponent implements OnInit {
       return "_";
     }
   }
-  timeConverter(t){
-      try {
-        var date = t
-        var dateFormat = moment.utc(date).local().calendar();
-        return dateFormat
-      } catch (error) {
-        console.log("error", error);
-        return "_";
-      }
+  timeConverter(t) {
+    try {
+      var date = t
+      var dateFormat = moment.utc(date).local().calendar();
+      return dateFormat
+    } catch (error) {
+      console.log("error", error);
+      return "_";
+    }
   }
 
   ngOnDestroy() {
