@@ -65,12 +65,12 @@ export class DashboardData {
         //     console.log("----Data----", res);
         //     log = res
         // })
-        const promise = this.http.get<string>(`${this.apiurl}/${platform}/${branch}/job/${id}/raw`, { headers, responseType: 'text' as 'json' }).toPromise();
+        const promise = this.http.get(`${this.apiurl}/${platform}/${branch}/job/${id}/raw`, { headers, responseType: 'text' as 'json' }).toPromise();
         // console.log(promise);
         promise.then((data) => {
             this.log = JSON.stringify(data)
             // console.log("----> Data <------",data);
-            return data
+            return this.log
         }).catch((error) => {
             console.log("Promise rejected with " + JSON.stringify(error));
         });

@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
   }
 
   getPipeline() {
-    this.statusGitlab = timer(0, 10000).subscribe(x => {
+    this.statusGitlab = timer(0, 100000).subscribe(x => {
       this.ApiService.gitLabStatus().subscribe(res => {
         this.status = res
       },

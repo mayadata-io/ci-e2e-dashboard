@@ -109,6 +109,9 @@ export class PipelineTableComponent implements OnInit {
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
   }
+  getRouterLink(){
+    return "/me/iam"
+  }
   ngOnDestroy() {
     this.Data.unsubscribe();
     if (this.mySubscription) {
