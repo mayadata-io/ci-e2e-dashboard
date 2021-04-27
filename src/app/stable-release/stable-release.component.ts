@@ -61,19 +61,19 @@ export class StableReleaseComponent implements OnInit {
       this.currentPlatform = platform;
       this.openshiftRelease = "";
       this.getData = timer(0, 10000).subscribe(x => {
-        this.DashboardDatas.getEndPointData(platform).subscribe(res => {
-          let pipelinesArray: any = res
-          let filterSkipped = pipelinesArray.dashboard.filter(res => res.status != "skipped")
-          this.openshiftRelease = filterSkipped;
-          if (this.openshiftRelease) {
-            this.pageLoaded = true;
-            if (this.index) {
-              this.getJobDetails(this.openshiftRelease[0], 0);
-              this.index = false;
-            }
+        // this.DashboardDatas.getEndPointData(platform).subscribe(res => {
+        //   let pipelinesArray: any = res
+        //   let filterSkipped = pipelinesArray.dashboard.filter(res => res.status != "skipped")
+        //   this.openshiftRelease = filterSkipped;
+        //   if (this.openshiftRelease) {
+        //     this.pageLoaded = true;
+        //     if (this.index) {
+        //       this.getJobDetails(this.openshiftRelease[0], 0);
+        //       this.index = false;
+        //     }
 
-          }
-        });
+        //   }
+        // });
       })
     } else {
       console.error('Unable to find Selected Platform');

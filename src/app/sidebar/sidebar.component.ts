@@ -28,49 +28,49 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.getPipeline();
-  }
 
   public Engine: string = 'cstor'
   public status: any;
   error: any;
 
   private statusGitlab: ISubscription;
+  ngOnInit() {
+    this.getPipeline();
+    let url = window.location.pathname.split('/')
+    console.log("url -------- > ", url);
+    if (url[2]) {
+      this.Engine = url[2]
+    }
+  }
 
   getPipeline() {
-    // console.log('\n\n\n\n ------------------- LOg \n\n\n\n');
-    this.statusGitlab = timer(0, 10000).subscribe(x => {
+    this.statusGitlab = timer(0, 100000).subscribe(x => {
       this.ApiService.gitLabStatus().subscribe(res => {
         this.status = res
-        // console.log("\n\n\n\tResssssss-s-s-s-s-s-s-s : ", res);
       },
         err => {
-          console.log("-----\n \t -------- \n", err);
-
           this.error = err
         }
       )
     })
   }
 
-  getStatusClass(s:string){
-    console.log("status : :",s);
-    
-    if (s === 'online'){
+  getStatusClass(s: string) {
+    console.log("status : :", s);
+
+    if (s === 'online') {
       return "text-success"
-    }else{
+    } else {
       return "text-danger"
     }
   }
 
-  getTimeFormat(d){
-    return 'updated : '+moment.utc(d).local().calendar();
+  getTimeFormat(d) {
+    return 'updated : ' + moment.utc(d).local().calendar();
   }
 
   ngOnDestroy() {
     this.statusGitlab.unsubscribe();
-
   }
 
 

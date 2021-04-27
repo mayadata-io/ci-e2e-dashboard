@@ -18,16 +18,22 @@
                 <div class="platform-icon flex-shrink-0">
                   <img src="/assets/images/cloud/{{platform}}.png" alt="Platform-logo" class="rounded-circle ">
                 </div>
-                <div class="pipeline-id-commit-message flex-grow-1 ms-3 d-block ml-2">
-                  <div class="pipeline-id">{{pipeline.id}}</div>
-                  <div class="pipeline-commit text-secondary font-sec-12">commit-message</div>
+                <div class="pipeline-id-commit-message flex-grow-1 my-auto d-block ml-2">
+                  <a class="pipeline-id font-size-15" href="{{pipeline.web_url}}">{{pipeline.id}}</a>
+                  <!-- <div class="pipeline-commit text-secondary font-sec-12">commit-message</div> -->
                 </div>
               </div>
             </td>
             <td>
               <div class="d-block">
-                <div class="pipeline-tag"></div>
-                {{pipeline.release_tag}}
+                <div class="pipeline-tag" *ngIf="pipeline.release_tag != 'NA' else tagNotAvaliable">
+                  {{pipeline.release_tag}}</div>
+                <ng-template #tagNotAvaliable>
+                  <div>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{pipeline.status}}
+                  </div>
+                </ng-template>
               </div>
               <!-- <div class="pipeline-tag-release-on text-secondary font-sec-12">
             on _
@@ -46,12 +52,12 @@
             <td>
               <div class="pipeline-status">
                 <div class="rounded text-left">
-                <app-doughnut-graph [pipeline]="pipeline"></app-doughnut-graph>
+                  <app-doughnut-graph [pipeline]="pipeline"></app-doughnut-graph>
                 </div>
               </div>
             </td>
             <td><a href={{pipeline.web_url}} type="button" class="btn btn-sm btn-outline-primary"
-                target="_blank">pipeline page</a></td>
+                target="_blank" routerLink='./pipeline/{{pipeline.id}}'>pipeline page</a></td>
           </tr>
         </tbody>
       </table>
