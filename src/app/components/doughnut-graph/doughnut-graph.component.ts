@@ -8,9 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DoughnutGraphComponent implements OnInit {
   @Input() pipeline: any;
+  @Input() size:any;
+
   constructor() { }
 
   ngOnInit() {
+    this.size=Number(this.size)
   }
   pipelineTooltip(data) {
     try {

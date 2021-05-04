@@ -29,6 +29,8 @@ import { PipelinesDashboardComponent } from './pipelines-dashboard/pipelines-das
 import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
 import { DoughnutGraphComponent } from './components/doughnut-graph/doughnut-graph.component';
 import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-d
     PipelineTableComponent,
     DoughnutGraphComponent,
     PipelineDetailComponent,
+    DialogComponent,
+    InfinitySpinnerComponent,
   ],
   imports: [
     BrowserModule,

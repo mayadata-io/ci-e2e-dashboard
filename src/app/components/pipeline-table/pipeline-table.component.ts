@@ -40,7 +40,7 @@ export class PipelineTableComponent implements OnInit {
 
   getPipeline(platform:string,branch:string){
     let E = this.genbranch(branch)
-    this.Data = timer(0, 10000).subscribe(x => {
+    this.Data = timer(0, 1000000).subscribe(x => {
       this.ApiService.getAPIData(platform,E).subscribe(res => {
       this.pipData = res
     },
