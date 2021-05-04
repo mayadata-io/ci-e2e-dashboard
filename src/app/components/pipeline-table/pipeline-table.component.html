@@ -1,7 +1,7 @@
 <div>
   <div>
     <div *ngIf="!error; else dataNotPresent">
-      <table class="table">
+      <table class="table" *ngIf="pipData else loading">
         <thead>
           <tr class="text-secondary">
             <th scope="col">Pipeline</th>
@@ -11,7 +11,7 @@
             <th scope="col">Access </th>
           </tr>
         </thead>
-        <tbody *ngIf="pipData else loading">
+        <tbody>
           <tr *ngFor="let pipeline of pipData.dashboard">
             <td class="pipeline-init-row">
               <div class="d-flex justify-content-left">
@@ -19,7 +19,7 @@
                   <img src="/assets/images/cloud/{{platform}}.png" alt="Platform-logo" class="rounded-circle ">
                 </div>
                 <div class="pipeline-id-commit-message flex-grow-1 my-auto d-block ml-2">
-                  <a class="pipeline-id font-size-15" href="{{pipeline.web_url}}">{{pipeline.id}}</a>
+                  <a class="pipeline-id font-size-15" routerLink="{{pipeline.id}}">{{pipeline.id}}</a>
                   <!-- <div class="pipeline-commit text-secondary font-sec-12">commit-message</div> -->
                 </div>
               </div>
@@ -56,8 +56,8 @@
                 </div>
               </div>
             </td>
-            <td><a href={{pipeline.web_url}} type="button" class="btn btn-sm btn-outline-primary"
-                target="_blank" routerLink='./pipeline/{{pipeline.id}}'>pipeline page</a></td>
+            <td><a type="button" class="btn btn-sm btn-outline-primary" routerLink="{{pipeline.id}}">pipeline page</a></td>
+            
           </tr>
         </tbody>
       </table>
@@ -76,3 +76,4 @@
     <app-lodding-spinners></app-lodding-spinners>
   </div>
 </ng-template>
+<router-outlet></router-outlet>
