@@ -122,7 +122,7 @@ export class DialogComponent implements OnInit {
 
     if (branch == 'cstor') {
       return 'openebs-cstor'
-    } else if (branch == 'release-branch' || branch == "lvm-localpv") {
+    } else if (branch == 'release-branch' || branch == "lvm-localpv"|| branch == "jiva-operator") {
       return branch
     } else {
       return `openebs-${branch}`
