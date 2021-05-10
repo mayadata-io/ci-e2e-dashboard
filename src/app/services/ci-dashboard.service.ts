@@ -1,13 +1,21 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Meta, Title } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { text } from "@angular/core/src/render3/instructions";
+import { ResponseType } from "@angular/http";
+
 
 @Injectable()
 export class DashboardData {
 
     private apiurl: string;
     host: any;
+    log: any;
     constructor(private http: HttpClient, private meta: Meta, private titleService: Title) {
         this.host = window.location.host;
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
@@ -15,9 +23,10 @@ export class DashboardData {
         } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci") {
             this.apiurl = "https://openebs.ci/api";
         } else {
-            this.apiurl = "https://openebs.ci/api";
+            this.apiurl = "https://staging.openebs.ci/api";
         }
     }
+
     getEndPointData(platform) {
         switch (platform) {
             case "packet-ultimate":
@@ -36,5 +45,35 @@ export class DashboardData {
                 console.log('Unable To Find Platform');
                 break;
         }
+    }
+    getAPIData(platform, branch) {
+        var data = this.http.get<any[]>(this.apiurl + `/${platform}/${branch}`);
+        return data;
+    }
+    gitLabStatus() {
+        let data = this.http.get<any[]>(this.apiurl + `/status`);
+        return data
+    }
+    getPipelineData(platform: string, branch: string, id: string) {
+        let data = this.http.get<any[]>(this.apiurl + `/${platform}/${branch}/pipeline/${id}`);
+        return data
+    }
+    getJobLogs(platform: string, branch: string, id: string) {
+        // var log: any
+        const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+        // await this.http.get<string>(`${this.apiurl}/${platform}/${branch}/job/${id}/raw`, { headers, responseType: 'text' as 'json' }).subscribe(res => {
+        //     console.log("----Data----", res);
+        //     log = res
+        // })
+        const promise = this.http.get(`${this.apiurl}/${platform}/${branch}/job/${id}/raw`, { headers, responseType: 'text' as 'json' }).toPromise();
+        // console.log(promise);
+        promise.then((data) => {
+            this.log = JSON.stringify(data)
+            // console.log("----> Data <------",data);
+            return this.log
+        }).catch((error) => {
+            console.log("Promise rejected with " + JSON.stringify(error));
+        });
+        return this.log
     }
 }

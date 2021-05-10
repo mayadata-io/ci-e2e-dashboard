@@ -1,48 +1,62 @@
-<div class="wrapper ">
-  <div class="text-center bg-white border-bottom py-2">
-    <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
-  </div>
-  <!-- Sidebar -->
-  <nav class="navbar navbar-expand-lg navbar-light p-md-0">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="sidebar">
-      <ul class="list-unstyled justify-content-center w-100">
-        <li *ngIf="vendor == 'false'" routerLink="/" [routerLinkActiveOptions]="{ exact : true }"
-          routerLinkActive="active-link"
-          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom">
-          <div>
-            <h5>Stable Releases</h5>
-          </div>
-        </li>
-        <li *ngIf="vendor == 'false'"
-          class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" routerLink="/development"
-          [routerLinkActiveOptions]="{ exact : true }" routerLinkActive="active-link">
-          <div>
-            <h5>Development Branch</h5>
-          </div>
-        </li>
-        <li>
-          <a *ngIf="vendor == 'true'"
-            class="item cursor-pointer rounded-left py-md-4 py-sm-1 button text-center border-bottom" target="_blank"
-            href="{{ 'SIDEBAR.DASHBOARD-URL' | translate }}">
-            <div class="text-center">
-              <img src="assets/images/company-logos/ci-e2e.png" alt="ci-e2e">
-            </div>
-            <div>
-              <h5 translate>SIDEBAR.DASHBOARD</h5>
-            </div>
-          </a>
-        </li>
-        <!-- <li class="item cursor-pointer rounded-left py-md-4 py-sm-1 button workload-item border-bottom"
-          routerLink="workload-dashboard" routerLinkActive="active-link">
-          <div class="text-center ">
-            <h5 translate>SIDEBAR.WORKLOADS</h5>
-          </div>
-        </li> -->
-      </ul>
+<div class="wrapper sidebar-style ">
+  <div class="row my-3">
+    <div class="text-center mx-auto py-2">
+      <img src="/assets/images/company-logos/dashboard-logo.png" alt="" class="p-0" height="80">
     </div>
-  </nav>
+  </div>
+  <div class="row mx-auto">
+    <ul class="list-group mx-auto w-100">
+      <li class=" px-0 sidebar-group">
+        <div class="px-4 py-3 active-sidebar-item">Storage Engines</div>
+        <ul class="mx-4">
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor'}"
+              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/konvoy']">OpenEBS/cStor</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva'}"
+              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/konvoy']">OpenEBS/jiva</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor-csi'}"
+              (click)="Engine='cstor-csi'" [routerLink]="['/openebs/cstor-csi/konvoy']">OpenEBS/cstor-csi</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva-operator'}"
+              (click)="Engine='jiva-operator'"
+              [routerLink]="['/openebs/jiva-operator/konvoy']">OpenEBS/jiva-operator</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='localpv'}"
+              (click)="Engine='localpv'"
+              [routerLink]="['/openebs/localpv/konvoy']">OpenEBS/localpv</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='release-branch'}"
+              (click)="Engine='release-branch'"
+              [routerLink]="['/openebs/release-branch/nativek8s']">OpenEBS/ZFS-LocalPV</a>
+          </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='lvm-localpv'}"
+              (click)="Engine='lvm-localpv'"
+              [routerLink]="['/openebs/lvm-localpv/nativek8s']">OpenEBS/LVM-LocalPV</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="mt-5 mx-auto sidebar-group py-1 rounded ">
+    <a class="d-flex justify-content-around storage-engine-links" *ngIf="status; else loadingIcon" placement="bottom"
+      ngbTooltip="{{getTimeFormat(status.updated)}}" tooltipClass="status-tooltip">
+      <div class="storage-engine-links">GitLab</div>
+      <div class="badge rounded-pill btn-outline-light my-auto"><i class="fas fa-circle mx-1"
+          [ngClass]="getStatusClass(status.status)"></i>{{status.status}}</div>
+    </a>
+  </div>
 </div>
+
+<ng-template #loadingIcon>
+  <div class="text-center">
+    <i class="fas fa-circle-notch text-light fa-spin"></i>
+  </div>
+</ng-template>

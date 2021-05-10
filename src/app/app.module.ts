@@ -25,6 +25,12 @@ import { WorkloadsComponent } from './workloads/workloads.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-spinners.component';
 import { StableReleaseComponent } from './stable-release/stable-release.component';
+import { PipelinesDashboardComponent } from './pipelines-dashboard/pipelines-dashboard.component';
+import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
+import { DoughnutGraphComponent } from './components/doughnut-graph/doughnut-graph.component';
+import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +45,12 @@ import { StableReleaseComponent } from './stable-release/stable-release.componen
     OverviewComponent,
     LoddingSpinnersComponent,
     StableReleaseComponent,
+    PipelinesDashboardComponent,
+    PipelineTableComponent,
+    DoughnutGraphComponent,
+    PipelineDetailComponent,
+    DialogComponent,
+    InfinitySpinnerComponent,
   ],
   imports: [
     BrowserModule,

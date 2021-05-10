@@ -1,0 +1,69 @@
+<div class="dialog  overflow-auto-y">
+  <div class="m-2">
+    <button type="button" class="btn btn-danger" (click)=onClickClose()>close</button>
+  </div>
+  <div class="d-box" *ngIf='pipeD;else loadingInfinite'>
+    <hr class="border-white">
+    <div class="row mx-2" >
+      <div class="col-md-8">
+        <div class="d-flex flex-column">
+          <h5>
+            Pipeline ID :<a type="button" class="btn btn-link p-0" href="{{pipData.web_url}}">{{pipData.id}} <i
+                class="fas fa-external-link-alt"></i></a>
+          </h5>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="d-block font-size-12">
+            <div class="triggered"><i class="far fa-clock text-secondary"></i> Triggered {{triggerDate(pipData)}}
+            </div>
+            <div class="duration"><i class="fas fa-stopwatch text-secondary"></i> {{pipeDuration(pipData)}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-right pr-5 my-2">
+        <app-doughnut-graph [pipeline]="pipData" [size]=10></app-doughnut-graph>
+      </div>
+    </div>
+
+    <hr class="border border-white">
+    <div class="row mt-1">
+      <div class="col-md-12">
+        <ul class="px-1">
+          <li *ngFor="let stage of pipeD">
+            <div class="badge badge-pill badge-light border py-1"><i [ngClass]=statusIcon(stage.status)></i>
+              <span class="font-size-12">
+                <span class="font-weight-bold">Stage:</span> {{stage.stageName}}</span>
+            </div>
+            <div class="ml-3 py-3 stage-jobs-content">
+              <ul class="p-0">
+                <li *ngFor="let job of stage.allJobs" class="font-size-12 job-row my-1 d-flex justify-content-between">
+                  <div class="job-link-line-left"></div>
+                  <div class="badge badge-pill border font-size-12 font-weight-normal job-name">
+                    <a target="_blank" *ngIf="job.github_readme !== 'NA';else githubReadmeNA"
+                      href={{job.github_readme}}>{{job.name}}</a>
+                    <ng-template #githubReadmeNA>
+                      {{job.name}}
+                    </ng-template>
+                  </div>
+                  <div class="job-link-line-right"></div>
+                  <div class="d-flex">
+                    <div ngbTooltip="{{job.status}}" placement="left"><i [ngClass]=statusIcon(job.status)></i>
+                    </div>
+                    <div class="job-link-line-right"></div>
+                    <div> <a href="{{job.web_url}}" target="_blank">
+                        <img src="/assets/images/workload-logo/gitlab-notxt.svg" alt="gitlab-logo"
+                          class="gitlab-job-image"></a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingInfinite>
+  <app-infinity-spinner></app-infinity-spinner>
+</ng-template>

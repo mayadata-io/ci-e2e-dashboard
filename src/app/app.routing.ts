@@ -6,35 +6,53 @@ import { WorkloadDashboardComponent } from "./workload-dashboard/workload-dashbo
 import { WorkloadsComponent } from "./workloads/workloads.component";
 import { OverviewComponent } from "./overview/overview.component";
 import { StableReleaseComponent } from "./stable-release/stable-release.component"
+import { PipelinesDashboardComponent } from "./pipelines-dashboard/pipelines-dashboard.component";
+import { PipelineTableComponent } from "./components/pipeline-table/pipeline-table.component";
+import { PipelineDetailComponent } from "./components/pipeline-detail/pipeline-detail.component";
+import { disableDebugTools } from "@angular/platform-browser";
+import { DialogComponent } from "./components/dialog/dialog.component";
 
 const routes: Routes = [
   //routes without header and footer
-  { path: "development", component: TableComponent },
-  { path: "", component: StableReleaseComponent },
-  { path: "workload-dashboard", component: WorkloadDashboardComponent },
-  { path: "mongo-jiva", component: WorkloadsComponent },
-  { path: "mongo-cstor", component: WorkloadsComponent },
-  { path: "grafana-cstor", component: WorkloadsComponent },
-  { path: "percona-jiva", component: WorkloadsComponent },  
-  { path: "percona-cstor", component: WorkloadsComponent },
-  { path: "prometheus-cstor", component: WorkloadsComponent },
-  { path: "prometheus-jiva", component: WorkloadsComponent },
-  { path: "cockroachdb-cstor", component: WorkloadsComponent },
-  { path: "cockroachdb-jiva", component: WorkloadsComponent },
-  { path: "wordpress-nfs", component: WorkloadsComponent },
-  { path: "logging", component: WorkloadsComponent },
-  { path: "redis-jiva", component: WorkloadsComponent },
-  { path: "redis-cstor", component: WorkloadsComponent },
-  { path: "postgresql-jiva", component: WorkloadsComponent },
-  { path: "postgresql-cstor", component: WorkloadsComponent },
-  { path: "nuodb-cstor", component: WorkloadsComponent },
-  { path: "overview", component: OverviewComponent },
-  { path: ":workload", component: WorkloadsComponent }
+  // { path: "development", component: TableComponent },
+  // { path: "workload-dashboard", component: WorkloadDashboardComponent },
+  // { path: "mongo-jiva", component: WorkloadsComponent },
+  // { path: "mongo-cstor", component: WorkloadsComponent },
+  // { path: "grafana-cstor", component: WorkloadsComponent },
+  // { path: "percona-jiva", component: WorkloadsComponent },  
+  // { path: "percona-cstor", component: WorkloadsComponent },
+  // { path: "prometheus-cstor", component: WorkloadsComponent },
+  // { path: "prometheus-jiva", component: WorkloadsComponent },
+  // { path: "cockroachdb-cstor", component: WorkloadsComponent },
+  // { path: "cockroachdb-jiva", component: WorkloadsComponent },
+  // { path: "wordpress-nfs", component: WorkloadsComponent },
+  // { path: "logging", component: WorkloadsComponent },
+  // { path: "redis-jiva", component: WorkloadsComponent },
+  // { path: "redis-cstor", component: WorkloadsComponent },
+  // { path: "postgresql-jiva", component: WorkloadsComponent },
+  // { path: "postgresql-cstor", component: WorkloadsComponent },
+  // { path: "nuodb-cstor", component: WorkloadsComponent },
+  // { path: "overview", component: OverviewComponent },
+  // { path: ":workload", component: WorkloadsComponent }
+  { path: "", redirectTo: 'openebs/cstor/konvoy', pathMatch: 'full' },
+  {
+    path: "openebs/:engine", component: PipelinesDashboardComponent,
+    children: [{
+      path: ':platform',
+      component: PipelineTableComponent,
+      children: [{
+        path: ':id',
+        component: DialogComponent,
+      }]
+    }]
+  },
+  { path: "openebs/:platform/:engine/pipeline/:id", component: PipelineDetailComponent }
+
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
 
-export class AppRoutingModule  {}
+export class AppRoutingModule { }
