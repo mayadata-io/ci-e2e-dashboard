@@ -24,27 +24,27 @@ export class SidebarComponent implements OnInit {
     this.translateService.getByFileName('VENDOR', 'default-en').subscribe(value => {
       this.vendor = value;
     });
-    // this.getPipeline();
-
   }
 
 
   public Engine: string = 'cstor'
   public status: any;
   error: any;
+  year : any;
 
   private statusGitlab: ISubscription;
   ngOnInit() {
+    this.year = this.getYear()
     this.getPipeline();
     let url = window.location.pathname.split('/')
-    console.log("url -------- > ", url);
+    // console.log("url -------- > ", url);
     if (url[2]) {
       this.Engine = url[2]
     }
   }
 
   getPipeline() {
-    this.statusGitlab = timer(0, 100000).subscribe(x => {
+    this.statusGitlab = timer(0, 10000).subscribe(x => {
       this.ApiService.gitLabStatus().subscribe(res => {
         this.status = res
       },
@@ -71,6 +71,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnDestroy() {
     this.statusGitlab.unsubscribe();
+  }
+  getYear() {
+    var d = new Date();
+    var n = d.getFullYear();
+    return n
+
   }
 
 
