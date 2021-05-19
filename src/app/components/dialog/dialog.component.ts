@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
 import { ISubscription } from "rxjs/Subscription";
 import { Subscription, Observable, timer, from, pipe } from "rxjs";
-import * as Convert from 'ansi-to-html';
 import { isBoolean } from 'util';
 import * as moment from 'moment';
 import {ActivatedRoute, Router} from '@angular/router';
