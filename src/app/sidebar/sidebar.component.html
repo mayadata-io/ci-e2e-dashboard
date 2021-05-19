@@ -28,8 +28,7 @@
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='localpv'}"
-              (click)="Engine='localpv'"
-              [routerLink]="['/openebs/localpv/konvoy']">OpenEBS/localpv</a>
+              (click)="Engine='localpv'" [routerLink]="['/openebs/localpv/konvoy']">OpenEBS/localpv</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='release-branch'}"
@@ -38,20 +37,25 @@
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='lvm-localpv'}"
-              (click)="Engine='lvm-localpv'"
-              [routerLink]="['/openebs/lvm-localpv/nativek8s']">OpenEBS/LVM-LocalPV</a>
+              (click)="Engine='lvm-localpv'" [routerLink]="['/openebs/lvm-localpv/nativek8s']">OpenEBS/LVM-LocalPV</a>
           </li>
         </ul>
       </li>
     </ul>
   </div>
   <div class="mt-5 mx-auto sidebar-group py-1 rounded ">
-    <a class="d-flex justify-content-around storage-engine-links" *ngIf="status; else loadingIcon" placement="bottom"
+    <a class="d-flex justify-content-around storage-engine-links" placement="bottom"
       ngbTooltip="{{getTimeFormat(status.updated)}}" tooltipClass="status-tooltip">
-      <div class="storage-engine-links">GitLab</div>
+
+      <div class="storage-engine-links d-block">
+        <div class="powered-by">Powered by</div> GitLab <span class="version">{{status.version}}</span>
+      </div>
       <div class="badge rounded-pill btn-outline-light my-auto"><i class="fas fa-circle mx-1"
           [ngClass]="getStatusClass(status.status)"></i>{{status.status}}</div>
     </a>
+  </div>
+  <div class="footer sidebar-group">
+    <div>Copyright © {{year}} MayaData Inc.</div>
   </div>
 </div>
 
