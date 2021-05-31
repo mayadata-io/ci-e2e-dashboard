@@ -31,6 +31,7 @@ import { DoughnutGraphComponent } from './components/doughnut-graph/doughnut-gra
 import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity
     PipelineDetailComponent,
     DialogComponent,
     InfinitySpinnerComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

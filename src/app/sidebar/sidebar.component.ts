@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  public Engine: string = 'cstor'
+  public Engine: string ;
   public status: any;
   error: any;
   year : any;
@@ -40,6 +40,8 @@ export class SidebarComponent implements OnInit {
     // console.log("url -------- > ", url);
     if (url[2]) {
       this.Engine = url[2]
+    } else if(url.includes('home')){
+      this.Engine = 'home'
     }
   }
 

@@ -1,0 +1,21 @@
+.table-layout{
+    table-layout: fixed;
+  }
+  table{
+    td{
+        vertical-align: middle;
+        font-size: 12px;
+    }
+    margin: 0px;
+    
+  }
+
+  .engine-title{
+    width: fit-content;
+    margin-top: -10px;
+    background-color: white;
+    border: 1px solid #dee2e6 ;
+    border-radius: 50px;
+    padding: 0px 10px;
+    font-size: 13px;
+  }

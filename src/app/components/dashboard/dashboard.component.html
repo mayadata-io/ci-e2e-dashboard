@@ -1,0 +1,31 @@
+<div class="wrapper bg-white h-100" style="overflow-y: auto;">
+  <div class="container-fluid">
+    <div *ngIf="recentData">
+      <div *ngFor="let recent of recentData.recent">
+        <div class="border w-100 my-3 rounded px-2">
+          <div class="engine-title">{{recent.branch}}</div>
+          <div class="d-flex flex-column">
+            <div>
+              <table class="table table-borderless table-sm table-layout">
+                <tbody>
+                  <tr *ngFor="let P of recent.pipelines">
+                    <td class="platform-icon"><img src="{{getImage(P.pipeline.project)}}" height="25px"
+                        alt="platform-icon" class="rounded-circle border"> {{getName(P.pipeline.project)}}</td>
+                    <td>{{P.pipeline.id}}</td>
+                    <td>{{timeConverter(P.pipeline.created_at)}}</td>
+                    <td>{{P.pipeline.release_tag}}</td>
+                    <td>{{P.pipeline.status}}</td>
+                    <td>
+                      <app-doughnut-graph [pipeline]="P.pipeline"></app-doughnut-graph>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
