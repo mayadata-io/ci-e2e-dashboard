@@ -4,8 +4,13 @@
 .active-sidebar-item{
   background-color: #9FA2B4;
   color: #DDE2FF;
-  border-left: 10px solid #DDE2FF;
+  // border-left: 10px solid #DDE2FF;
   font-size: 18px;
+}
+
+.act-nav{
+  color: #DDE2FF !important;
+  font-weight: bold;
 }
 
 .sidebar-group{
@@ -50,7 +55,9 @@
   font-size: 10px;
   display: block;
 }
-
+.dashboard-title{
+  font-size: 20px;
+}
 
 
 

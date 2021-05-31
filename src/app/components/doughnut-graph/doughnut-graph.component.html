@@ -1,8 +1,12 @@
 <div *ngIf='!size;else customSize'>
   <span ngbTooltip="{{ pipelineTooltip(pipeline)}}"
     placement="right" class="">
-    <i *ngIf="pipelineTooltip(pipeline) == 'running';else donutSuccessFail"
+    <i *ngIf="pipelineTooltip(pipeline) == 'running';else skipPipeline"
       class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary font-size-30'></i>
+      <ng-template #skipPipeline>
+        <i *ngIf="pipelineTooltip(pipeline) == 'skipped' || pipelineTooltip(pipeline) == 'canceled' ;else donutSuccessFail"
+      class='fa fa-ban btn-txt font-size-25'></i>
+      </ng-template>
     <ng-template #donutSuccessFail>
       <svg width="30" height="30" viewBox="0 0 42 42" class="donut">
         <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff">

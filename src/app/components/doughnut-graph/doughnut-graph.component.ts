@@ -19,6 +19,8 @@ export class DoughnutGraphComponent implements OnInit {
     try {
       if (data.status == "running") {
         return "running"
+      } else if (data.status == "skipped" || data.status == "canceled") {
+        return data.status
       } else if (data.status == "none") {
         return ""
       } else {

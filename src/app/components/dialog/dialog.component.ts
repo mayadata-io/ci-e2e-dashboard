@@ -225,7 +225,13 @@ export class DialogComponent implements OnInit {
     }
   }
   onClickClose(){
+    let url = window.location.pathname.split('/')
+    if(url.includes('home')){
+      console.log('redirect to home');
+      this.router.navigate(['/home'])
+    }else{
     this.router.navigate(['../'],{relativeTo:this.route})
+    }
   }
 
   ngOnDestroy() {
