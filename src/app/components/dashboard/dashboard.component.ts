@@ -12,24 +12,24 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ApiService: DashboardData) { }
 
-  public recentData:any =[];
+  public recentData: any = [];
 
 
   ngOnInit() {
 
     this.ApiService.getAnyEndpointData("/recent").subscribe(res => {
       console.log(res);
-      this.recentData=res
-      
+      this.recentData = res
+
     })
 
   }
-  getName(ID:string){
-    switch(ID){
+  getName(ID: string) {
+    switch (ID) {
       case "36":
-        return "Openshift"
+        return "openshift"
       case "34":
-        return "Konvoy"
+        return "konvoy"
       case "43":
         return "nativeK8s"
       default:
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getImage(projectID:string){
+  getImage(projectID: string) {
     switch (projectID) {
       case "36":
         return '/assets/images/cloud/openshift.png'
@@ -58,6 +58,36 @@ export class DashboardComponent implements OnInit {
     } catch (error) {
       console.log("error", error);
       return "_";
+    }
+  }
+
+  genDetailRouteLink(id, platform, branch) {
+    let pID = id
+    let project = this.getName(platform)
+    let sliceOpenebs = branch.replace('openebs-', '');
+
+    return `${sliceOpenebs}/${project}/${id}`
+
+  }
+
+  getBranchName(branch: string) {
+    switch (branch) {
+      case 'jiva-operator':
+        return 'Jiva (CSI)'
+      case 'openebs-jiva':
+        return 'Jiva (External Provisioner)'
+      case 'openebs-cstor-csi':
+        return 'cStor (CSI)';
+      case 'openebs-cstor':
+        return 'cStor (CSI)'
+      case 'openebs-localpv':
+        return 'Local PV hostpath'
+      case 'release-branch':
+        return 'Local PV ZFS'
+      case 'lvm-localpv':
+        return 'Local PV LVM'
+      default:
+        return 'Engine name not found'
     }
   }
 

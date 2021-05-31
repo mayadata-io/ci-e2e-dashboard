@@ -29,10 +29,11 @@
                 <div class="pipeline-tag" *ngIf="pipeline.release_tag != 'NA' else tagNotAvaliable">
                   {{pipeline.release_tag}}</div>
                 <ng-template #tagNotAvaliable>
-                  <div>
+                  <!-- <div>
                     <i class="fas fa-exclamation-triangle"></i>
                     {{pipeline.status}}
-                  </div>
+                  </div> -->
+                  _
                 </ng-template>
               </div>
               <!-- <div class="pipeline-tag-release-on text-secondary font-sec-12">
