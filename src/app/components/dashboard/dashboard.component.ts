@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
       case 'openebs-cstor-csi':
         return 'cStor (CSI)';
       case 'openebs-cstor':
-        return 'cStor (CSI)'
+        return 'cStor (External Provisioner)'
       case 'openebs-localpv':
         return 'Local PV hostpath'
       case 'release-branch':
