@@ -19,7 +19,7 @@ export class DashboardData {
     constructor(private http: HttpClient, private meta: Meta, private titleService: Title) {
         this.host = window.location.host;
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-            this.apiurl = "http://localhost:3000";
+            this.apiurl = "https://staging.openebs.ci/api";
         } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci") {
             this.apiurl = "https://openebs.ci/api";
         } else {
@@ -75,5 +75,10 @@ export class DashboardData {
             console.log("Promise rejected with " + JSON.stringify(error));
         });
         return this.log
+    }
+
+    getAnyEndpointData(endpoint:string){
+        var data = this.http.get<any[]>(this.apiurl + `${endpoint}`);
+        return data;
     }
 }
