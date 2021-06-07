@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
 import { DashboardData } from "../../services/ci-dashboard.service";
 import { ISubscription } from "rxjs/Subscription";
-import { Subscription, Observable, timer, from, pipe } from "rxjs";
+import { timer} from "rxjs";
+import { Title } from '@angular/platform-browser';
+
 
 import * as moment from 'moment';
-import * as dateformat from 'dateformat';
 
 @Component({
   selector: 'app-pipeline-table',
@@ -14,7 +15,7 @@ import * as dateformat from 'dateformat';
 })
 export class PipelineTableComponent implements OnInit {
   mySubscription: any;
-  constructor(private router: Router ,private ApiService: DashboardData,private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router ,private ApiService: DashboardData,private activatedRoute: ActivatedRoute, private titleService:Title) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -34,6 +35,7 @@ export class PipelineTableComponent implements OnInit {
     this.url = window.location.pathname.split('/')
     let branch:string = this.url[2]
     this.platform = this.url[3]
+    this.titleService.setTitle(`${this.platform} | ${branch} of OpenEBS E2E pipeline`)
     this.getPipeline(this.platform,branch)
     
   }
