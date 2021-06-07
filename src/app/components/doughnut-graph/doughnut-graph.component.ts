@@ -55,7 +55,7 @@ export class DoughnutGraphComponent implements OnInit {
   getJobPercentForPipeline(data) {
     try {
       if (data.status == "success") {
-        return "95 5";
+        return "99 1";
       }
       else if (data.status == "pending") {
         return "0 0";
@@ -67,7 +67,7 @@ export class DoughnutGraphComponent implements OnInit {
             count++;
           }
         }
-        var percentage = (count / data.jobs.length) * 100;
+        var percentage = (count / data.jobs.length) * 99;
         return `${percentage} ${100 - percentage}`
       }
       else if (data.status == "running") {

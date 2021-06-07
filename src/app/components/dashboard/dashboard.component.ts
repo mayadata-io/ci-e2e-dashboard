@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
 import * as moment from 'moment';
-
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,13 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ApiService: DashboardData) { }
+  constructor(private ApiService: DashboardData,private router: Router,private titleService: Title) {}
 
   public recentData: any = [];
 
 
   ngOnInit() {
-
+    this.titleService.setTitle('OpenEBS E2E Dashboard'); 
     this.ApiService.getAnyEndpointData("/recent").subscribe(res => {
       console.log(res);
       this.recentData = res
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit {
       case "34":
         return "konvoy"
       case "43":
-        return "nativeK8s"
+        return "nativek8s"
       default:
         break;
     }
@@ -90,5 +91,35 @@ export class DashboardComponent implements OnInit {
         return 'Engine name not found'
     }
   }
+
+  genPipelineStatus(s: string) {
+    switch (s) {
+      case 'success':
+        return 'badge badge-pill badge-success'
+      case 'failed':
+        return 'badge badge-pill badge-danger'
+      case 'canceled':
+        return 'badge badge-pill badge-secondary'
+      case 'skipped':
+        return 'badge badge-pill badge-light'
+      case 'running':
+        return 'badge badge-pill badge-primary'
+      default:
+        return 'badge badge-pill badge-dark'
+    }
+  }
+
+  gotoEnginePage(project:string,branch:string){
+    let B = (b)=>{
+      if (b.includes('openebs')){
+        return b.replace('openebs-','')
+      }
+      else return b
+    }
+    let genPath = `/openebs/${B(branch)}/${this.getName(project)}`
+    this.router.navigate([genPath])
+
+  }
+
 
 }
