@@ -1,7 +1,10 @@
-<div class="wrapper bg-white h-100" style="overflow-y: auto;">
+<div class="rounded border px-2 py-2 bg-white my-3">
+  <h5 class="card-title ml-1 m-0 p-0 my-1">OpenEBS CI Pipelines</h5>
+</div>
+
+<div class="wrapper bg-white h-100 rounded" style="overflow-y: auto;">
   <div class="p-0 m-0 d-flex flex-column">
-    <div *ngIf="recentData else loading" class="border rounded recent-pipelines-container mt-1">
-      <h5 class="card-title">Recent pipelines of OpenEBS</h5>
+    <div *ngIf="recentData else loading" class="border rounded recent-pipelines-container">
       <table class="table table-borderless table-sm px-2 table-layout mx-1">
         <thead>
           <tr>

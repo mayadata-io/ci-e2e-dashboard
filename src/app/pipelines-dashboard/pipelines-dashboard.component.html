@@ -1,7 +1,9 @@
 <div class="container">
   <div class="rounded border px-2 py-2 bg-white my-3 stop-scroll">
     <div class="row">
-      <div class="col-6 my-auto">OpenEBS-{{Engine}} Pipelines</div>
+      <div class="col-6 my-auto">
+        <h5 class="m-0 p-0">OpenEBS {{Engine}} Pipelines</h5>
+      </div>
       <div class="col-6 d-flex justify-content-around" *ngIf="Platform != 'nativek8s'">
         <!-- <div type="button" class="btn btn-outline-primary" routerLinkActive="bg-primary" [routerLink]="['./all']" >All</div>  -->
         <div type="button" class="btn btn-outline-primary"
