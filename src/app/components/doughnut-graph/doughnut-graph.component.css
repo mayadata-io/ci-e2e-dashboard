@@ -5,3 +5,12 @@
 .font-size-25{
     font-size: 25px;
 }
+::ng-deep .tooltip-inner{
+    /* background-color: red; */
+    font-size: 13px;
+
+}
+
+::ng-deep .arrow::before {
+    border-top-color: darkgreen;
+  }

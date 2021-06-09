@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
-import { ISubscription } from "rxjs/Subscription";
-import { Subscription, Observable, timer, from, pipe } from "rxjs";
-import { isBoolean } from 'util';
 import * as moment from 'moment';
-import {ActivatedRoute, Router} from '@angular/router';
-
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dialog',
@@ -18,7 +14,7 @@ export class DialogComponent implements OnInit {
 
   platform: any;
   branch: any;
-  constructor(private ApiService: DashboardData,private route: ActivatedRoute,private router: Router) { }
+  constructor(private ApiService: DashboardData, private route: ActivatedRoute, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
     let url = window.location.pathname.split('/')
@@ -26,8 +22,8 @@ export class DialogComponent implements OnInit {
     this.platform = url[3]
     this.branch = url[2]
     let id = url[4]
-    console.log(`Platform : ${this.platform} \n Branch: ${this.branch} \n ID: ${id} \n\n`);
-
+    // console.log(`Platform : ${this.platform} \n Branch: ${this.branch} \n ID: ${id} \n\n`);
+    this.titleService.setTitle(`${id} | ${this.platform} | ${this.branch} of OpenEBS E2E pipeline`)
     this.getPipelineData(this.platform, this.branch, id)
   }
   public pipData: any;
@@ -45,25 +41,25 @@ export class DialogComponent implements OnInit {
   getPipelineData(platform: string, branch: string, id: string) {
     let B = this.genbranch(branch)
     // this.Data = timer(0, 10000000).subscribe(x => {
-      this.Data = this.ApiService.getPipelineData(platform, B, id).subscribe(res => {
-        this.pipData = res
-        this.pipData = this.pipData.pipeline;
-        this.sortData(this.pipData)
-        // if (!this.jobLogs) {
-        //   this.activeJob(this.platform, this.branch, this.pipData.jobs[0].id, this.pipData.jobs[0])
-        //   setTimeout(function () {
-        //     if (!this.jobLogs) {
-        //       this.activeJob(this.platform, this.branch, this.actJob)
-        //     }
-        //   }, 1000);
-        // }
+    this.Data = this.ApiService.getPipelineData(platform, B, id).subscribe(res => {
+      this.pipData = res
+      this.pipData = this.pipData.pipeline;
+      this.sortData(this.pipData)
+      // if (!this.jobLogs) {
+      //   this.activeJob(this.platform, this.branch, this.pipData.jobs[0].id, this.pipData.jobs[0])
+      //   setTimeout(function () {
+      //     if (!this.jobLogs) {
+      //       this.activeJob(this.platform, this.branch, this.actJob)
+      //     }
+      //   }, 1000);
+      // }
 
-      },
-        err => {
-          this.error = err
-          console.log(err);
-        }
-      )
+    },
+      err => {
+        this.error = err
+        console.log(err);
+      }
+    )
     // })
 
   }
@@ -121,7 +117,7 @@ export class DialogComponent implements OnInit {
 
     if (branch == 'cstor') {
       return 'openebs-cstor'
-    } else if (branch == 'release-branch' || branch == "lvm-localpv"|| branch == "jiva-operator") {
+    } else if (branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator") {
       return branch
     } else {
       return `openebs-${branch}`
@@ -224,13 +220,13 @@ export class DialogComponent implements OnInit {
       return "_";
     }
   }
-  onClickClose(){
+  onClickClose() {
     let url = window.location.pathname.split('/')
-    if(url.includes('home')){
+    if (url.includes('home')) {
       console.log('redirect to home');
       this.router.navigate(['/home'])
-    }else{
-    this.router.navigate(['../'],{relativeTo:this.route})
+    } else {
+      this.router.navigate(['../'], { relativeTo: this.route })
     }
   }
 
