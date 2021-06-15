@@ -1,0 +1,23 @@
+<div class="container-fluid bg-white h-100" style="overflow-y: scroll;">
+  <div *ngIf="RunnersArray" class="d-flex flex-wrap p-1 mt-2" style="overflow-y: scroll;">
+    <div *ngFor="let Runner of RunnersArray" class="card m-2" style="width: 18rem;">
+      <span class="card-title card-header text-center">Name: {{Runner.name}}</span>
+      <div class="m-1 ">
+        <ul class="list-group" style="font-size: 14px;">
+          <li class="list-group-item d-flex justify-content-between">
+            <span>ID: {{Runner.id}}</span>
+            <span>status: <span class="RunnerStatus my-auto" [ngClass]="Runner.online ? 'RunnerOnline' : 'RunnerOffline'">{{Runner.status}}</span></span>
+          </li>
+          <li class="list-group-item">
+            <p class="card-text" >
+              Description:
+              <span class="d-block">{{Runner.description}}</span>
+              
+            </p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,11 @@
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
-
-import { TableComponent } from "./table/table.component";
-import { WorkloadDashboardComponent } from "./workload-dashboard/workload-dashboard.component";
-import { WorkloadsComponent } from "./workloads/workloads.component";
-import { OverviewComponent } from "./overview/overview.component";
-import { StableReleaseComponent } from "./stable-release/stable-release.component"
 import { PipelinesDashboardComponent } from "./pipelines-dashboard/pipelines-dashboard.component";
 import { PipelineTableComponent } from "./components/pipeline-table/pipeline-table.component";
 import { PipelineDetailComponent } from "./components/pipeline-detail/pipeline-detail.component";
-import { disableDebugTools } from "@angular/platform-browser";
 import { DialogComponent } from "./components/dialog/dialog.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { RunnersPageComponent } from "./components/runners-page/runners-page.component";
 
 const routes: Routes = [
   { path: "", redirectTo: 'home', pathMatch: 'full' },
@@ -33,7 +27,8 @@ const routes: Routes = [
       }]
     }]
   },
-  { path: "openebs/:platform/:engine/pipeline/:id", component: PipelineDetailComponent }
+  { path: "openebs/:platform/:engine/pipeline/:id", component: PipelineDetailComponent },
+  { path: "runners", component: RunnersPageComponent}
 
 ];
 
