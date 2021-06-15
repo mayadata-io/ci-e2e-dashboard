@@ -32,6 +32,7 @@ import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-d
 import { DialogComponent } from './components/dialog/dialog.component';
 import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RunnersPageComponent } from './components/runners-page/runners-page.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     DialogComponent,
     InfinitySpinnerComponent,
     DashboardComponent,
+    RunnersPageComponent,
   ],
   imports: [
     BrowserModule,
