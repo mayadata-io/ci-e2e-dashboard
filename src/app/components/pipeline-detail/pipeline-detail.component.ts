@@ -15,8 +15,11 @@ import * as moment from 'moment';
 })
 export class PipelineDetailComponent implements OnInit {
 
-  // Enable to use the component this line and 141 *****************
-
+  /* this Component is to view the pipeline in detail view as new Tab .
+   To Enable the component use below steps 
+  - install any ANSI to HTML convert library (ex: `ansi-to-html`)
+  - Refer the ActiveJob function which handles the job logs , uncomment the 141 line to return data
+  */
 
   platform: any;
   branch: any;
