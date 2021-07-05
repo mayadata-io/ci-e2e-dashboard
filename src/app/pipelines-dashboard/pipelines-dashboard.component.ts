@@ -24,9 +24,9 @@ export class PipelinesDashboardComponent implements OnInit {
     let url = window.location.pathname.split('/')
     let branch:string = url[2]
     this.Platform = url[3]
-    if (this.Engine == "release-branch"){
-      this.Engine = "ZFS-LocalPV"
-    }
+    // if (this.Engine == "release-branch"){
+    //   this.Engine = "ZFS-LocalPV"
+    // }
   }
   // public PlatformActive : string = "openshift";
   testFunc(p:string) {
@@ -36,6 +36,27 @@ export class PipelinesDashboardComponent implements OnInit {
     return 'bg-primary shadow text-white'
     }else{
       return ''
+    }
+  }
+
+  getBranchName(branch: string) {
+    switch (branch) {
+      case 'jiva-operator':
+        return 'Jiva (CSI)'
+      case 'jiva':
+        return 'Jiva (External Provisioner)'
+      case 'cstor-csi':
+        return 'cStor (CSI)';
+      case 'cstor':
+        return 'cStor (External Provisioner)'
+      case 'localpv':
+        return 'Local PV hostpath'
+      case 'release-branch':
+        return 'Local PV ZFS'
+      case 'lvm-localpv':
+        return 'Local PV LVM'
+      default:
+        return '_'
     }
   }
 

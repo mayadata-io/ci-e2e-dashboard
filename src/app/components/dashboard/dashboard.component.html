@@ -1,5 +1,5 @@
 <div class="rounded border px-2 py-2 bg-white my-3">
-  <h5 class="card-title ml-1 m-0 p-0 my-1">OpenEBS CI Pipelines</h5>
+  <h5 class="card-title ml-1 m-0 p-0 my-1">Overview</h5>
 </div>
 
 <div class="wrapper bg-white h-100 rounded" style="overflow-y: auto;">
@@ -13,7 +13,7 @@
             <th scope="col">Created at</th>
             <th scope="col">Release Tag</th>
             <th scope="col">Status</th>
-            <th scope="col">e2e Test</th>
+            <!-- <th scope="col">e2e Test</th> -->
           </tr>
         </thead>
       </table>
@@ -37,13 +37,13 @@
                         routerLink="{{genDetailRouteLink(P.pipeline.id,P.pipeline.project,recent.branch)}}">{{P.pipeline.id}}</a>
                     </td>
                     <td>{{timeConverter(P.pipeline.created_at)}}</td>
-                    <td class="text-center">
-                      <div class="text-size-16">{{P.pipeline.release_tag}}</div>
-                    </td>
                     <td>
+                      <div class="text-size-16 release-tag">{{P.pipeline.release_tag}}</div>
+                    </td>
+                    <!-- <td>
                       <div class="px-2 badge text-capitalize" [ngClass]='genPipelineStatus(P.pipeline.status)'>
                         {{P.pipeline.status}}</div>
-                    </td>
+                    </td> -->
                     <td>
                       <app-doughnut-graph [pipeline]="P.pipeline"></app-doughnut-graph>
                     </td>
