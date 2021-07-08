@@ -39,11 +39,7 @@
                 <li *ngFor="let job of stage.allJobs" class="font-size-12 job-row my-1 d-flex justify-content-between">
                   <div class="job-link-line-left"></div>
                   <div class="badge badge-pill border font-size-12 font-weight-normal job-name">
-                    <a target="_blank" *ngIf="job.github_readme !== 'NA';else githubReadmeNA"
-                      href={{job.github_readme}}>{{job.name}}</a>
-                    <ng-template #githubReadmeNA>
                       {{job.name}}
-                    </ng-template>
                   </div>
                   <div class="job-link-line-right"></div>
                   <div class="d-flex">

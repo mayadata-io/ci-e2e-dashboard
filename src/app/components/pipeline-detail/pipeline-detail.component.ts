@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
 import { timer } from "rxjs";
-import * as Convert from 'ansi-to-html';
-import { isBoolean } from 'util';
 import * as moment from 'moment';
 
 
@@ -14,7 +12,11 @@ import * as moment from 'moment';
 })
 export class PipelineDetailComponent implements OnInit {
 
-
+  /* this Component is to view the pipeline in detail view as new Tab .
+   To Enable the component use below steps 
+  - install any ANSI to HTML convert library (ex: `ansi-to-html`)
+  - Refer the ActiveJob function which handles the job logs , uncomment the 141 line to return data
+  */
 
   platform: any;
   branch: any;
@@ -76,7 +78,6 @@ export class PipelineDetailComponent implements OnInit {
     D.jobs.forEach(j => {
       if (!this.actJob) {
         this.actJob = j.id
-        console.log("------JobID----", this.actJob);
       }
       if (!stages.includes(j.stage)) {
         stages.push(j.stage)
@@ -93,11 +94,9 @@ export class PipelineDetailComponent implements OnInit {
       obj.push(stageObj);
     })
     this.pipeD = obj
-    console.log("\n\n\n stages \n\n\n ", obj);
   }
   stageStatusForObj(stage, jobs) {
     let stageJobs = jobs.filter(job => job.stage == stage);
-    // console.log('forStageObj',stageJobs);
     let successJ = stageJobs.filter(j => j.status == "success").length
     let failedLength = stageJobs.filter(j => j.status == "failed").length
     let canceledLength = stageJobs.filter(j => j.status == "canceled").length
@@ -130,13 +129,12 @@ export class PipelineDetailComponent implements OnInit {
     var d: any
     this.actJobData = job
     let data = this.ApiService.getJobLogs(p, b, id)
-    // console.log("\t d a t a : : - ", p,b,id, "\n\n\n\n\n ***");
     this.jobLogs = data
-    const c = new Convert();
-    //  nst txt = "\u001b[38;5;196mHello\u001b[39m \u001b[48;5;226mWorld\u001b[49m";
-    // console.log(c.toHtml(d, { use_classes: true }));
-    this.jobLogs = c.toHtml(d, { use_classes: true })
-
+    /* This code need while using this component 
+      const c = new Convert();
+      nst txt = "\u001b[38;5;196mHello\u001b[39m \u001b[48;5;226mWorld\u001b[49m";
+      this.jobLogs = c.toHtml(d, { use_classes: true })
+     */
   }
 
   statusBadge(s: string) {
@@ -151,7 +149,6 @@ export class PipelineDetailComponent implements OnInit {
         return "text-light border-light"
     }
   }
-  // [ngClass]="statusBadge(stages.status)"
   statusBadgeforJob(s: string) {
     switch (s) {
       case 'success':

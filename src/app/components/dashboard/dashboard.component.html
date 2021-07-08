@@ -1,5 +1,5 @@
 <div class="rounded border px-2 py-2 bg-white my-3">
-  <h5 class="card-title ml-1 m-0 p-0 my-1">OpenEBS CI Pipelines</h5>
+  <h5 class="card-title ml-1 m-0 p-0 my-1">Overview</h5>
 </div>
 
 <div class="wrapper bg-white h-100 rounded" style="overflow-y: auto;">
@@ -13,7 +13,6 @@
             <th scope="col">Created at</th>
             <th scope="col">Release Tag</th>
             <th scope="col">Status</th>
-            <th scope="col">e2e Test</th>
           </tr>
         </thead>
       </table>
@@ -29,20 +28,17 @@
                       <div class="d-flex">
                         <div><img src="{{getImage(P.pipeline.project)}}" height="25px" alt="platform-icon"
                             class="rounded-circle border"></div>
-                        <div class="my-auto ml-1 btn btn-link btn-sm text-secondary" (click)="gotoEnginePage(P.pipeline.project,recent.branch)">{{getName(P.pipeline.project)}}</div>
+                        <div class="my-auto ml-1 btn btn-link btn-sm text-secondary"
+                          (click)="gotoEnginePage(P.pipeline.project,recent.branch)">{{getName(P.pipeline.project)}}
+                        </div>
                       </div>
                     </td>
-
                     <td><a type="button" class="btn btn-link btn-sm"
                         routerLink="{{genDetailRouteLink(P.pipeline.id,P.pipeline.project,recent.branch)}}">{{P.pipeline.id}}</a>
                     </td>
                     <td>{{timeConverter(P.pipeline.created_at)}}</td>
-                    <td class="text-center">
-                      <div class="text-size-16">{{P.pipeline.release_tag}}</div>
-                    </td>
                     <td>
-                      <div class="px-2 badge text-capitalize" [ngClass]='genPipelineStatus(P.pipeline.status)'>
-                        {{P.pipeline.status}}</div>
+                      <div class="text-size-16 release-tag">{{P.pipeline.release_tag}}</div>
                     </td>
                     <td>
                       <app-doughnut-graph [pipeline]="P.pipeline"></app-doughnut-graph>
@@ -55,21 +51,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="border rounded infra-container mt-2">
-      <h5 class="card-title">Infrastructure Status</h5>
-      <div class="card m-2" style="width: 15rem;">
-        <div class="card-body">
-          <h5 class="card-title">GitLab</h5>
-          <h6 class="card-subtitle mb-2 text-muted">v11.11.1</h6>
-          <ul>
-            <li class="d-flux justify-content-around p-0">
-              <div>Status</div>
-              <div class="badge badge-pill">online</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 <router-outlet></router-outlet>
