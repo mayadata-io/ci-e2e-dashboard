@@ -48,9 +48,6 @@ export class KubernetsService {
             url = 'https://' + this.host + '/workloads/workloads'
         }
         return this.http.get(url).pipe(mergeMap((clusterDomain: any[]) => {
-            // clusterDomain.forEach(element => {
-            //     this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses").map(res => res));
-            // })
             clusterDomain.forEach(element => {
                 this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses"));
             })
