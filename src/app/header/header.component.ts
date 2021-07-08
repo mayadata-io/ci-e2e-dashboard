@@ -3,7 +3,7 @@ import * as $ from "jquery";
 import { Component,OnInit } from "@angular/core";
 import { FormGroup,FormControl,Validators } from "@angular/forms";
 import { AgileService } from "../services/agile.services";
-import { TranslateModule, TranslateService } from 'angular-intl';
+import {  TranslateService } from 'angular-intl';
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",

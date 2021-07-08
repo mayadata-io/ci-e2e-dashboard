@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { KubernetsService } from "../services/kubernetes.service";
 import * as $ from "jquery";
-import { Subscription, Observable, timer } from "rxjs";
+import { timer } from "rxjs";
 import { Meta, Title } from "@angular/platform-browser";
 import { allApplication } from "../model/data.model";
-import { map, concatMap } from 'rxjs/operators';
-import { ISubscription } from "rxjs/Subscription";
+import { concatMap } from 'rxjs/operators';
+import { SubscriptionLike } from "rxjs";
 @Component({
   selector: "app-workload-dashboard",
   templateUrl: "./workload-dashboard.component.html",
@@ -16,7 +16,7 @@ export class WorkloadDashboardComponent implements OnInit, OnDestroy {
 
   public openEBSVersion: any;
   public allApplications: allApplication[];
-  private timerSub: ISubscription;
+  private timerSub: SubscriptionLike;
   public showSpinner: boolean = true;
   constructor(private kubernetsServices: KubernetsService, private meta: Meta, private titleService: Title) {
     this.titleService.setTitle("workloads dashboard");

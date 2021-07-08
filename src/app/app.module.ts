@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TranslateModule, TranslateService } from 'angular-intl';
 import { AppRoutingModule } from './app.routing';

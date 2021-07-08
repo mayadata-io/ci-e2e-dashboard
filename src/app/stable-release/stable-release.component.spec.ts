@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StableReleaseComponent } from './stable-release.component';
 
@@ -6,7 +6,7 @@ describe('StableReleaseComponent', () => {
   let component: StableReleaseComponent;
   let fixture: ComponentFixture<StableReleaseComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StableReleaseComponent ]
     })

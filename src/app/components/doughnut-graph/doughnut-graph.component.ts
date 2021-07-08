@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { forEach } from '@angular/router/src/utils/collection';
-
 
 @Component({
   selector: 'app-doughnut-graph',

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
 import { personDetail, deletePerson, personDetails, getResponse, postResponse, yaml } from "../model/data.model";
 
 @Injectable()

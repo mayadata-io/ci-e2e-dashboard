@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { KubernetsService } from "../services/kubernetes.service";
-// import { jiva,cstor } from "../model/data.model";
-import { RouterLinkActive } from '@angular/router';
-import { TranslateModule, TranslateService } from 'angular-intl';
+import { TranslateService } from 'angular-intl';
 import { DashboardData } from "../services/ci-dashboard.service";
-import { ISubscription } from "rxjs/Subscription";
-import { Subscription, Observable, timer, from, pipe } from "rxjs";
+import { SubscriptionLike } from "rxjs";
+import { timer} from "rxjs";
 import * as moment from 'moment';
 
 
@@ -32,7 +30,7 @@ export class SidebarComponent implements OnInit {
   error: any;
   year : any;
 
-  private statusGitlab: ISubscription;
+  private statusGitlab: SubscriptionLike;
   ngOnInit() {
     this.year = this.getYear()
     this.getPipeline();

@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Meta, Title } from "@angular/platform-browser";
+import { Title } from "@angular/platform-browser";
 import { PersonService } from "../services/savereaddelete.service";
 import { KubernetsService } from "../services/kubernetes.service";
 import { LitmusService } from "../services/litmus.services";
 import * as $ from "jquery";
-import { Subscription, Observable, timer, from } from "rxjs";
-import "rxjs/add/observable/interval";
-import "rxjs/add/operator/takeWhile";
+import { timer, interval} from "rxjs";
+
+
 import {
   getResponse,
   postResponse,
@@ -25,21 +25,21 @@ import {
   litmuslog,
   mayaPvc
 } from "../model/data.model";
-import { ISubscription } from "rxjs/Subscription";
+import { SubscriptionLike } from "rxjs";
 @Component({
   selector: "app-workloads",
   templateUrl: "./workloads.component.html",
   styleUrls: ["./workloads.component.scss"]
 })
 export class WorkloadsComponent implements OnInit, OnDestroy {
-  private podUnsub: ISubscription;
-  private timeUnsub: ISubscription;
-  private litmustimeUnsub: ISubscription;
-  private litmusUnsub: ISubscription;
-  private routeSub: ISubscription;
-  private personalSub: ISubscription;
-  private pvcDetails: ISubscription;
-  private mayactlVolumeList: ISubscription;
+  private podUnsub: SubscriptionLike;
+  private timeUnsub: SubscriptionLike;
+  private litmustimeUnsub: SubscriptionLike;
+  private litmusUnsub: SubscriptionLike;
+  private routeSub: SubscriptionLike;
+  private personalSub: SubscriptionLike;
+  private pvcDetails: SubscriptionLike;
+  private mayactlVolumeList: SubscriptionLike;
   private jivaDetail;
   private jivas;
   public windowWidth
@@ -252,8 +252,7 @@ export class WorkloadsComponent implements OnInit, OnDestroy {
           } else if (this.countstatus > 1) {
             this.litmusLog.completesstatus = true;
 
-            Observable.interval(10000)
-              .takeWhile(() => this.countstatus)
+            interval(10000)
               .subscribe(i => {
                 this.litmusStarted = false;
                 this.litmusGoBtn = false;

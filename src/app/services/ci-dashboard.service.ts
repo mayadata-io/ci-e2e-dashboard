@@ -1,13 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map } from "rxjs/operators";
 import { Meta, Title } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { text } from "@angular/core/src/render3/instructions";
-import { ResponseType } from "@angular/http";
 
 
 @Injectable()

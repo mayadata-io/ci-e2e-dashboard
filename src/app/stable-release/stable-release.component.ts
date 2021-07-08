@@ -1,14 +1,12 @@
-import { Component, OnInit, Pipe } from '@angular/core';
-import { Subscription, Observable, timer, from, pipe } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
-import Chart from 'chart.js'
+import { Component, OnInit } from '@angular/core';
+import { timer } from "rxjs";
+import { SubscriptionLike } from "rxjs";
 import * as moment from 'moment';
 import * as dateformat from 'dateformat';
 import * as $ from 'jquery';
 import { DashboardData } from "../services/ci-dashboard.service";
 import { Meta, Title } from '@angular/platform-browser';
-import { Router } from "@angular/router";
-import { TranslateService } from 'angular-intl';
+
 @Component({
   selector: 'app-stable-release',
   templateUrl: './stable-release.component.html',
@@ -22,8 +20,8 @@ export class StableReleaseComponent implements OnInit {
     this.titleService.setTitle("CI/E2E dashboard for OpenEBS");
   }
 
-  private getData: ISubscription;
-  private selectCell: ISubscription;
+  private getData: SubscriptionLike;
+  private selectCell: SubscriptionLike;
   public openshiftRelease: any;
   pageLoaded: boolean = false;
   selectedPipeline: any;

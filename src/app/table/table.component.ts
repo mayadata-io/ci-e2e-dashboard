@@ -1,6 +1,6 @@
-import { Component, OnInit, Pipe } from '@angular/core';
-import { Subscription, Observable, timer, from } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
+import { Component, OnInit } from '@angular/core';
+import { timer} from "rxjs";
+import { SubscriptionLike } from "rxjs";
 import Chart from 'chart.js'
 import * as moment from 'moment';
 import * as dateformat from 'dateformat';
@@ -19,8 +19,8 @@ export class TableComponent implements OnInit {
   public pipelineDetailStatus: boolean = false;
   public showSpinnerTable: boolean = true;
   public showSpinnerDetails: boolean = true;
-  private selectCell: ISubscription;
-  private getData: ISubscription;
+  private selectCell: SubscriptionLike;
+  private getData: SubscriptionLike;
   public index = 1;
   public initialCount = 0;
   public name: any;

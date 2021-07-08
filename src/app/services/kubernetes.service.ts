@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
-import { Observable } from "rxjs/Observable";
-import { forkJoin } from "rxjs/observable/forkJoin";
-import 'rxjs/add/operator/map'
-import { overAllStatus, listNamespace, status, allApplication, mayaPvc } from "../model/data.model";
-import { concatMap, mergeMap } from "rxjs/operators";
+import { forkJoin } from "rxjs";
+import { overAllStatus, allApplication, mayaPvc } from "../model/data.model";
+import {  mergeMap } from "rxjs/operators";
 
 @Injectable()
 export class KubernetsService {
@@ -51,8 +48,11 @@ export class KubernetsService {
             url = 'https://' + this.host + '/workloads/workloads'
         }
         return this.http.get(url).pipe(mergeMap((clusterDomain: any[]) => {
+            // clusterDomain.forEach(element => {
+            //     this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses").map(res => res));
+            // })
             clusterDomain.forEach(element => {
-                this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses").map(res => res));
+                this.collectionOfApplication.push(this.http.get<allApplication[]>(element + "pod/statuses"));
             })
             return forkJoin(this.collectionOfApplication);
         }));
