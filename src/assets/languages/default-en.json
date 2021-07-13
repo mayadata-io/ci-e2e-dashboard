@@ -1,18 +1,58 @@
 {
   "VENDOR" : "false",
   "SIDEBAR": {
-    "HOME": "Overview",
-    "DASHBOARD": "CI/E2E Dashboard",
-    "DASHBOARD-MDAP": "Enterprise Pipelines",
-    "MDAP":"E2E pipelines for Release branches",
-    "WORKLOADS": "Example Workloads",
-    "ORGANISATION": "MayaData Inc",
-    "MDAPE2E-URL":"https://app.mayaonline.io/mdape2e",
-    "MDAPE2E-TOOLTIP":"Click here to view Enterprise Pipelines",
-    "DASHBOARD-URL": ""
+    "TITLE":"OpenEBS CI Pipelines",
+    "LINKS":{
+      "DEFAULT": "Home",
+      "GROUP-LINKS":{
+        "TITLE":"Storage Engines",
+        "LINK":"{{link_title}}"
+      }
+    },
+    "COPYRIGHT":"Copyright © {{year_num}} MayaData Inc."
   },
-  "WORKLOAD-DASHBOARD": {
-    "TITLE": "Live deployments of stateful applications",
-    "SUBTITLE": "Workloads using Openebs PVs"
+  "ROUTE":{
+    "HOME-ROUTE":{ 
+      "TITLE":"OpenEBS {{branch_title}} Pipelines",
+      "PLATFORM":"{{platform_title}}"
+    },
+    "RECENT":{
+      "TITLE": "Overview",
+      "TABLE":{
+        "HEADER":{
+          "COL-1":"Platform",
+          "COL-2":"PipelineID",
+          "COL-3":"Created at",
+          "COL-4":"Release Tag",
+          "COL-5":"Status"
+        }
+    }
+  },
+  "ENGINE":{
+    "TABLE":{
+      "HEADER":{
+        "COL-1":"Pipeline",
+        "COL-2":"Tag",
+        "COL-3":"Trigger/Duration",
+        "COL-4":"Status",
+        "COL-5":"Access"
+      },
+      "BODY":{
+      }
+    }
+  },
+  "DIALOG":{
+    "PIPELINEID": "Pipeline ID: ",
+    "TRIGGERED": "Triggered",
+    "STAGE": "Stage"
   }
+},
+"ERROR": {
+  "PIPELINE-TABLE":{
+    "NOT-FOUND":{
+      "MESSAGE": "Sorry , Pipelines not avaliable for {{platform}} of {{branch}}",
+      "GOBACK":"GO Back"
+    }
+  }
+}
 }
