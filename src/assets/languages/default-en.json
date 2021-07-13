@@ -20,22 +20,22 @@
       "TITLE": "Overview",
       "TABLE":{
         "HEADER":{
-          "COL-1":"Platform",
-          "COL-2":"PipelineID",
-          "COL-3":"Created at",
-          "COL-4":"Release Tag",
-          "COL-5":"Status"
+          "PLATFORM":"Platform",
+          "PIPELINE-ID":"PipelineID",
+          "CREATED-AT":"Created at",
+          "RELEASE-TAG":"Release Tag",
+          "STATUS":"Status"
         }
     }
   },
   "ENGINE":{
     "TABLE":{
       "HEADER":{
-        "COL-1":"Pipeline",
-        "COL-2":"Tag",
-        "COL-3":"Trigger/Duration",
-        "COL-4":"Status",
-        "COL-5":"Access"
+        "PIPELINE":"Pipeline",
+        "TAG":"Tag",
+        "TRIGGER-DURATION":"Trigger/Duration",
+        "STATUS":"Status",
+        "ACCESS":"Access"
       },
       "BODY":{
       }
