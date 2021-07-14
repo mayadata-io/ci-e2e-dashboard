@@ -4,67 +4,64 @@
       <img src="/assets/images/company-logos/openebs-icon-white.png" alt="" class="p-0" height="70">
     </div>
     <div class="my-auto text-left text-white">
-      <div class="dashboard-title">OpenEBS CI Pipelines</div>
+      <div class="dashboard-title">{{'SIDEBAR.TITLE' | translate}}</div>
     </div>
     <div></div>
   </a>
   <div class="row mx-auto">
     <ul class="list-group mx-auto w-100">
       <li class="px-0 sidebar-group px-4 py-3 active-sidebar-item">
-        <a class="storage-engine-links" (click)="Engine='home'" [routerLink]="['/home']"  [ngClass]="{'act-nav': Engine ==='home'}">Home</a>
+        <a class="storage-engine-links" (click)="Engine='home'" [routerLink]="['/home']"
+          [ngClass]="{'act-nav': Engine ==='home'}">{{'SIDEBAR.LINKS.DEFAULT' | translate}}</a>
       </li>
       <li class="px-0 sidebar-group">
-        <div class="px-4 py-3 active-sidebar-item">Storage Engines</div>
+        <div class="px-4 py-3 active-sidebar-item">{{'SIDEBAR.LINKS.GROUP-LINKS.TITLE' | translate}}</div>
         <ul class="mx-4">
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='localpv'}"
-              (click)="Engine='localpv'" [routerLink]="['/openebs/localpv/konvoy']">Local PV hostpath</a>
+              (click)="Engine='localpv'" [routerLink]="['/openebs/localpv/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Local PV hostpath' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='lvm-localpv'}"
-              (click)="Engine='lvm-localpv'" [routerLink]="['/openebs/lvm-localpv/nativek8s']">Local PV LVM</a>
+              (click)="Engine='lvm-localpv'"
+              [routerLink]="['/openebs/lvm-localpv/nativek8s']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Local PV LVM' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='release-branch'}"
-              (click)="Engine='release-branch'" [routerLink]="['/openebs/release-branch/nativek8s']">Local PV ZFS</a>
+              (click)="Engine='release-branch'"
+              [routerLink]="['/openebs/release-branch/nativek8s']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Local PV ZFS' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor-csi'}"
-              (click)="Engine='cstor-csi'" [routerLink]="['/openebs/cstor-csi/konvoy']">cStor (CSI)</a>
+              (click)="Engine='cstor-csi'"
+              [routerLink]="['/openebs/cstor-csi/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'cStor (CSI)' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor'}"
-              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/konvoy']">cStor (External Provisioner)</a>
+              (click)="Engine='cstor'" [routerLink]="['/openebs/cstor/konvoy']"> {{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'cStor (External Provisioner)' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva-operator'}"
-              (click)="Engine='jiva-operator'" [routerLink]="['/openebs/jiva-operator/konvoy']">Jiva (CSI)</a>
+              (click)="Engine='jiva-operator'"
+              [routerLink]="['/openebs/jiva-operator/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Jiva (CSI)' } }}</a>
           </li>
           <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='jiva'}"
-              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/konvoy']">Jiva (External Provisioner)</a>
+              (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Jiva (External Provisioner)' } }}</a>
           </li>
         </ul>
       </li>
     </ul>
   </div>
-  <!-- <div class="mt-5 mx-auto sidebar-group py-1 rounded ">
-    <a class="d-flex justify-content-around storage-engine-links" >
-
-      <div class="storage-engine-links d-block">
-        <div class="powered-by">Powered by</div> GitLab <span class="version">{{status.version}}</span>
-      </div>
-      <div class="badge rounded-pill btn-outline-light my-auto"><i class="fas fa-circle mx-1"
-          [ngClass]="getStatusClass(status.status)"></i>{{status.status}}</div>
-    </a>
-  </div> -->
   <div class="footer sidebar-group">
-    <div>Copyright © {{year}} MayaData Inc.</div>
+    <div>{{'SIDEBAR.COPYRIGHT'|
+      translate:{ year_num: year } }}</div>
   </div>
 </div>
-
-<ng-template #loadingIcon>
-  <div class="text-center">
-    <i class="fas fa-circle-notch text-light fa-spin"></i>
-  </div>
-</ng-template>

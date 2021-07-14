@@ -1,13 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map } from "rxjs/operators";
 import { Meta, Title } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { text } from "@angular/core/src/render3/instructions";
-import { ResponseType } from "@angular/http";
 
 
 @Injectable()
@@ -19,7 +12,7 @@ export class DashboardData {
     constructor(private http: HttpClient, private meta: Meta, private titleService: Title) {
         this.host = window.location.host;
         if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
-            this.apiurl = "https://staging.openebs.ci/api";
+            this.apiurl = "http://localhost:3000";
         } else if (this.host == "openebs.ci" || this.host == "wwww.openebs.ci") {
             this.apiurl = "https://openebs.ci/api";
         } else {

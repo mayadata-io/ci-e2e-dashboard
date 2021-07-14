@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
 import { litmusstatus,litmuslog,jobName } from "../model/data.model";
 
 @Injectable()
