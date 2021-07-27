@@ -1,13 +1,13 @@
+import { isDevMode } from '@angular/core';
+
 export class GlobalConstants {
 
     public static apiURL = function () {
-        this.host = window.location.host;
-        if ((this.host.toString().indexOf('localhost') + 1) && this.host.toString().indexOf(':')) {
+        const host = window.location.origin;
+        if (isDevMode()) {
             return 'http://localhost:3000';
-        } else if (this.host === 'openebs.ci' ) {
-            return 'https://openebs.ci/api';
         } else {
-            return 'https://staging.openebs.ci/api';
+            return host + '/api' ;
         }
     };
 }
