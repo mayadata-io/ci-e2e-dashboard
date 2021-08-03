@@ -6,8 +6,6 @@ import { personDetail, deletePerson, personDetails, getResponse, postResponse, y
 export class PersonService {
   private saveDetails: personDetail[] = [];
   private deletePersonDetails: deletePerson[] = [];
-  private personDetails: personDetails[] = [];
-  private yamls: yaml;
   private apiUrl: string;
   private rnumber = Math.floor(Math.random() * 10000000);
 
@@ -16,16 +14,16 @@ export class PersonService {
   }
 
 
-  save100PersonDetails(allDetails: any, route: string) {
-    const saveDetails: personDetail = allDetails;
+  save100PersonDetails(allDetails: personDetail, route: string) {
+    const url = `${this.apiUrl}person/${route}/save`
     return this.http.post<postResponse>(
-      this.apiUrl + "person/"+route+"/save",
-      saveDetails
+      url, allDetails
     );
   }
 
   get100personDetails(num: number, route: string) {
-    return this.http.get<getResponse>(this.apiUrl + "person/"+route+"/read/" + num);
+    const url = `${this.apiUrl}person/${route}/read/${num}`;
+    return this.http.get<getResponse>(url);
   }
   savePersonDetails(name: string, email: string, age: number) {
     const saveDetails: personDetail = {
@@ -35,7 +33,7 @@ export class PersonService {
       age: age
     };
     this.http
-      .post(this.apiUrl + "person/save", saveDetails)
+      .post(`${this.apiUrl}person/save`, saveDetails)
       .subscribe(responseData => {
         this.saveDetails.push(saveDetails);
       });
@@ -47,7 +45,7 @@ export class PersonService {
     };
     this.http
       .post<{ message: string }>(
-        this.apiUrl + "person/delete",
+        `${this.apiUrl}person/delete`,
         deletePersonDetails
       )
       .subscribe(responseData => {
@@ -56,10 +54,10 @@ export class PersonService {
   }
   getPersonDetails() {
     return this.http.get<{ message: string; posts: personDetails[] }>(
-      this.apiUrl + "person/read/" + this.rnumber
+      `${this.apiUrl}person/read/${this.rnumber}`
     );
   }
   getYamls(route: string) {
-    return this.http.get<yaml>(this.apiUrl + "workloads/yaml/" + route)
+    return this.http.get<yaml>(`${this.apiUrl}workloads/yaml/${route}`)
   }
 }

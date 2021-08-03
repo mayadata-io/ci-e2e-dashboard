@@ -78,8 +78,6 @@ export class DoughnutGraphComponent implements OnInit {
           }
         }
         let totalJobs = data.jobs.filter(j => j.status == 'success' || j.status == 'failed')
-        console.log(`filterJobs : -> ${totalJobs.length} |  ${data.jobs.length}`);
-
         var percentage = (count / totalJobs.length) * 100;
         return `${percentage} ${100 - percentage}`
       }

@@ -23,13 +23,10 @@ export class PipelineDetailComponent implements OnInit {
   constructor(private ApiService: DashboardData) { }
 
   ngOnInit() {
-    let url = window.location.pathname.split('/')
-    console.log("url", url);
-    this.platform = url[3]
-    this.branch = url[2]
-    let id = url[5]
-    console.log(`Platform : ${this.platform} \n Branch: ${this.branch} \n ID: ${id} \n\n`);
-
+    let url = window.location.pathname.split('/');
+    this.platform = url[3];
+    this.branch = url[2];
+    let id = url[5];
     this.getPipelineData(this.platform, this.branch, id)
   }
   public pipData: any;
@@ -115,8 +112,6 @@ export class PipelineDetailComponent implements OnInit {
     }
   }
   genbranch(branch) {
-    console.log("branch is ", branch);
-
     if (branch == 'cstor') {
       return 'openebs-cstor'
     } else if (branch == 'release-branch' || branch == "lvm-localpv") {
