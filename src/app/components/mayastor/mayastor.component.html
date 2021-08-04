@@ -1,0 +1,38 @@
+<p>mayastor works!</p>
+<div class="container-fluid">
+    <div>
+        Mayastor ci pipelines
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+                <th>ID</th>
+                <th>length</th>
+                <th>status</th>
+            </thead>
+            <tbody>
+                <ng-template ngFor let-pip [ngForOf]="data" let-i="index">
+                    <tr>
+                        <td>{{pip.id}}</td>
+                        <td>{{pip.totalTests}}</td>
+                        <td>{{pip.status}}</td>
+                        <td>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{pip.id}}"
+                                role="button" aria-expanded="false" aria-controls="collapseExample{{pip.id}}">
+                                Link with href
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="collapse collapse-row" id="collapseExample{{pip.id}}">
+                        <div class="d-flex flex-wrap">
+                            <div *ngFor="let test of pip.tests">
+                                <div class="card">{{test.id}}</div>
+                            </div>
+                        </div>
+                    </tr>
+                </ng-template>
+
+            </tbody>
+        </table>
+    </div>
+</div>

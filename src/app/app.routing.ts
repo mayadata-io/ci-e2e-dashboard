@@ -5,6 +5,7 @@ import { PipelineTableComponent } from './components/pipeline-table/pipeline-tab
 import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MayastorComponent } from './components/mayastor/mayastor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
       }]
     }]
   },
-  { path: 'openebs/:platform/:engine/pipeline/:id', component: PipelineDetailComponent }
+  { path: 'openebs/:platform/:engine/pipeline/:id', component: PipelineDetailComponent },
+  { path: 'mayastor', component: MayastorComponent }
 
 ];
 
