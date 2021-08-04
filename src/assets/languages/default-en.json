@@ -45,6 +45,14 @@
     "PIPELINEID": "Pipeline ID: ",
     "TRIGGERED": "Triggered",
     "STAGE": "Stage"
+  },
+  "MAYASTOR":{
+    "TITLE": "Mayastor CI pipelines",
+    "TABLE":{
+      "ID":"ID",
+      "LENGTH":"Test count",
+      "STATUS":"Status"
+    }
   }
 },
 "ERROR": {

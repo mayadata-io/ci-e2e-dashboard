@@ -1,13 +1,13 @@
 <div class="container-fluid bg-white py-2">
     <h5>
-        Mayastor ci pipelines
+        {{'ROUTE.MAYASTOR.TITLE' | translate}}
     </h5>
     <div class="bg-white rounded border ">
         <table class="table table-borderless">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">length</th>
-                <th scope="col">status</th>
+            <tr class="border-bottom">
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.ID' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.LENGTH' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.STATUS' | translate}}</th>
             </tr>
             <tbody>
                 <ng-template ngFor let-pip [ngForOf]="data" let-i="index">

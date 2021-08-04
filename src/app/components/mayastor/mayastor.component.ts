@@ -8,10 +8,12 @@ import { DashboardData } from 'src/app/services/ci-dashboard.service';
 })
 export class MayastorComponent implements OnInit {
   data: any;
-  constructor(private ApiService: DashboardData,) {
-    ApiService.getMayastorTest().subscribe(res => {
+  constructor(private ApiService: DashboardData) {
+    ApiService.getMayastorTest().subscribe((res) => {
       this.data = res;
-    }, err => { console.log('Unable to get mayastor endpoint', err); });
+    }, (err) => {
+      console.log('Unable to access mayastor endpoint', err);
+    });
   }
 
   ngOnInit(): void {

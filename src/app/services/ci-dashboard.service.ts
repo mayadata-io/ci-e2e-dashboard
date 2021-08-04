@@ -37,8 +37,7 @@ export class DashboardData {
         return data;
     }
     getMayastorTest() {
-        const data = this.http.get<any[]>('https://staging.openebs.ci/xray/mayastor'); // hardcoded with staging URL
+        const data = this.http.get<any[]>(GlobalConstants.apiURL(true) + `/mayastor`);
         return data;
-
     }
 }
