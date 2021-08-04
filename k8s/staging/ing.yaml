@@ -24,10 +24,6 @@ spec:
           serviceName: stage-openebs-ci-backend-service
           servicePort: 3000
         path: "/api/"
-      - backend:
-          serviceName: mayastor-ci-server-deployment
-          servicePort: 8080
-        path: "/mayastor/"
   tls:
   - hosts:
     - staging.openebs.ci

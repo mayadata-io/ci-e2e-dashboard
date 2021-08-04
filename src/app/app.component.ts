@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from 'angular-intl';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
