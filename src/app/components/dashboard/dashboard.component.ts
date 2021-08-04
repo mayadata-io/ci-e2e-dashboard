@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('OpenEBS E2E Dashboard'); 
     this.ApiService.getAnyEndpointData("/recent").subscribe(res => {
-      console.log(res);
       this.recentData = res
 
     })

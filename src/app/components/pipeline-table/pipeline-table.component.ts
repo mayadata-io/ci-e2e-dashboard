@@ -51,7 +51,6 @@ export class PipelineTableComponent implements OnInit {
   }) 
   }
   genbranch(branch){
-    console.log("branch is ", branch);
     
     if (branch == 'cstor'){
       return 'openebs-cstor'
