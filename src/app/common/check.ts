@@ -8,7 +8,7 @@ export class GlobalConstants {
             // Replace with localhost:3000 while using local running server
             return 'https://staging.openebs.ci';
         } else {
-            return host + '/api' ;
+            return host + '/api';
         }
     };
 }
