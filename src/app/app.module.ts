@@ -7,11 +7,6 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TranslateModule, TranslateService } from 'angular-intl';
 import { AppRoutingModule } from './app.routing';
-
-import { PersonService } from './services/savereaddelete.service';
-import { KubernetsService } from './services/kubernetes.service';
-import { LitmusService } from './services/litmus.services';
-import { AgileService } from './services/agile.services';
 import { DashboardData } from './services/ci-dashboard.service';
 
 import { AppComponent } from './app.component';
@@ -53,13 +48,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     TranslateModule.forRoot({ path: '/assets/languages/' })
   ],
   providers: [
-    PersonService,
-    KubernetsService,
-    LitmusService,
     HttpClient,
     Meta,
     Title,
-    AgileService,
     DashboardData
   ],
   bootstrap: [AppComponent],
