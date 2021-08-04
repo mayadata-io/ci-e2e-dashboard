@@ -1,15 +1,14 @@
-<p>mayastor works!</p>
-<div class="container-fluid">
-    <div>
+<div class="container-fluid bg-white py-2">
+    <h5>
         Mayastor ci pipelines
-    </div>
-    <div>
-        <table class="table">
-            <thead>
-                <th>ID</th>
-                <th>length</th>
-                <th>status</th>
-            </thead>
+    </h5>
+    <div class="bg-white rounded border ">
+        <table class="table table-borderless">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">length</th>
+                <th scope="col">status</th>
+            </tr>
             <tbody>
                 <ng-template ngFor let-pip [ngForOf]="data" let-i="index">
                     <tr>
@@ -19,16 +18,18 @@
                         <td>
                             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{pip.id}}"
                                 role="button" aria-expanded="false" aria-controls="collapseExample{{pip.id}}">
-                                Link with href
+                                expand
                             </a>
                         </td>
                     </tr>
-                    <tr class="collapse collapse-row" id="collapseExample{{pip.id}}">
-                        <div class="d-flex flex-wrap">
-                            <div *ngFor="let test of pip.tests">
-                                <div class="card">{{test.id}}</div>
+                    <tr class="collapse bg-light border-info rounded w-100 border" id="collapseExample{{pip.id}}">
+                        <td class="d-flex flex-wrap">
+                            <div *ngFor="let test of pip.tests" class="m-1 border border-info p-1">
+                                <div
+                                    [ngClass]="{'text-success':test.status=='PASSED','text-danger':test.status=='FAILED'}">
+                                    {{test.id}}</div>
                             </div>
-                        </div>
+                        </td>
                     </tr>
                 </ng-template>
 

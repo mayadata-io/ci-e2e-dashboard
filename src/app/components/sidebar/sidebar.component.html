@@ -56,6 +56,11 @@
               (click)="Engine='jiva'" [routerLink]="['/openebs/jiva/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
               translate:{ link_title: 'Jiva (External Provisioner)' } }}</a>
           </li>
+          <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='mayastor'}"
+              (click)="Engine='mayastor'" [routerLink]="['/mayastor']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Mayastor' } }}</a>
+          </li>
         </ul>
       </li>
     </ul>

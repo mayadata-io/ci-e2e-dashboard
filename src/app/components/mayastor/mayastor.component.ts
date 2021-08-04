@@ -10,9 +10,8 @@ export class MayastorComponent implements OnInit {
   data: any;
   constructor(private ApiService: DashboardData,) {
     ApiService.getMayastorTest().subscribe(res => {
-      this.data = res
-      console.log(res);
-    })
+      this.data = res;
+    }, err => { console.log('Unable to get mayastor endpoint', err); });
   }
 
   ngOnInit(): void {
