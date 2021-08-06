@@ -22,6 +22,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MayastorComponent } from './components/mayastor/mayastor.component';
+import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MayastorComponent } from './components/mayastor/mayastor.component';
     InfinitySpinnerComponent,
     DashboardComponent,
     MayastorComponent,
+    MayastorDialogComponent,
   ],
   imports: [
     BrowserModule,

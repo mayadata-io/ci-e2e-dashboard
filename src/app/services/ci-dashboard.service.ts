@@ -37,7 +37,7 @@ export class DashboardData {
         return data;
     }
     getMayastorTest() {
-        const data = this.http.get<any[]>(GlobalConstants.apiURL(true) + `/mayastor`);
+        const data = this.http.get<any[]>(GlobalConstants.apiURL(true) + `/mayastor`)
         return data;
     }
 }
