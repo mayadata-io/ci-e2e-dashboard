@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from 'src/app/services/ci-dashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Status } from 'src/app/model/enum.model';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MayastorComponent implements OnInit {
   data: any;
-  constructor(private ApiService: DashboardData,private router: Router) {
+  constructor(private ApiService: DashboardData, private router: Router) {
     ApiService.getMayastorTest().subscribe((res) => {
       this.data = res;
     }, (err) => {
@@ -19,27 +20,17 @@ export class MayastorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('maystor component :)');
   }
 
   getStatus(tests) {
-    try {
-      if (tests) {
-        const failed = tests.filter(test => test.status === 'FAILED').length;
-        if (failed !== 0) {
-          return 'FAILED';
-        } else {
-          return 'PASSED';
-        }
+    if (tests) {
+      const failed = tests.filter(test => test.status === Status.Failed).length;
+      if (failed !== 0) {
+        return Status.Failed;
+      } else {
+        return Status.Passed;
       }
-    } catch (error) {
-      return '_';
     }
-  }
-
-  goToDialog(id,data) {
-    this.router.navigate([`/${id}`], {state: data});
-
   }
 }
 
