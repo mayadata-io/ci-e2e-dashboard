@@ -50,8 +50,12 @@
     "TITLE": "Mayastor CI pipelines",
     "TABLE":{
       "ID":"ID",
+      "BRANCH": "Branch",
+      "IMAGETAG":"ImageTag",
       "LENGTH":"Test count",
-      "STATUS":"Status"
+      "STATUS":"Status",
+      "STARTED_ON":"Statred At",
+      "JENKINS_URL":"Jenkins_link"
     }
   }
 },

@@ -1,0 +1,110 @@
+.dialog{
+    position: fixed;
+    width: 500px;
+    right:0;
+    top: 0;
+    background-color: #363740;
+    opacity: 1;
+    height: 100%;
+    color: aliceblue;
+
+}
+.highlight {
+    border-bottom: 5px solid #654cf9;
+  }
+  
+  .row_color {
+    background-color: #ededed;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  i{
+      font-size: 16px;
+  }
+  .font-size-12 {
+    font-size: 12px;
+  }
+  .font-size-14 {
+    font-size: 14px;
+  }
+  .job-link-line-left {
+    margin: 0;
+    position: relative;
+    top: 10px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #dfe3e9;
+    border-top-left-radius: 10px;
+    flex: auto;
+    height: 10px;
+    max-width: 5px;
+    white-space: nowrap;
+  }
+  .job-link-line-right {
+    margin: 0;
+    position: relative;
+    top: 10px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #dfe3e9;
+    flex: auto;
+    height: 10px;
+    min-width: 10px;
+    max-width: auto;
+    white-space: nowrap;
+  }
+  .gitlab-job-image {
+    position: relative;
+    height: 25px;
+    top: -3px;
+  }
+  .stage-jobs-content {
+    border-left: 1px solid #dee2e6;
+  }
+  .stage-jobs-content:hover {
+    border-color: #62b9f3;
+  }
+  .job-name a{
+    color: white !important;
+  }
+  .job-row:hover {
+    .job-name{
+      color: #62b9f3;
+    }
+    .job-link-line-right {
+      border-top-color: #62b9f3;
+    }
+    .job-link-line-left {
+      border-top-color: #62b9f3;
+    }
+    i {
+      text-shadow: 1px 1px 60px;
+      font-weight: 900;
+    }
+    img {
+      box-shadow: 0px 250px 15px -35px rgba(0, 0, 0, 0.25);
+    }
+  }
+  
+  .btn-outline-custom:hover {
+    color: #fff;
+    background-image: linear-gradient(#1991eb, #2da1f8);
+    border-color: #1585d8;
+  }
+  
+  .btn-outline-custom {
+    color: #dfe3e9;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dfe3e9;
+  }
+  .table-pipelines-section {
+    // height: 80vh;
+    overflow-y: auto;
+  }
+  .overflow-auto-y {
+    // height: 53vh;
+    overflow-y: auto;
+  }

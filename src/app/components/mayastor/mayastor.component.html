@@ -6,34 +6,31 @@
         <table class="table table-borderless">
             <tr class="border-bottom">
                 <th scope="col">{{'ROUTE.MAYASTOR.TABLE.ID' | translate}}</th>
-                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.LENGTH' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.BRANCH' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.IMAGETAG' | translate}}</th>
                 <th scope="col">{{'ROUTE.MAYASTOR.TABLE.STATUS' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.STARTED_ON' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.JENKINS_URL' | translate}}</th>
             </tr>
             <tbody>
                 <ng-template ngFor let-pip [ngForOf]="data" let-i="index">
                     <tr>
-                        <td>{{pip.id}}</td>
-                        <td>{{pip.totalTests}}</td>
-                        <td>{{pip.status}}</td>
                         <td>
-                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{pip.id}}"
-                                role="button" aria-expanded="false" aria-controls="collapseExample{{pip.id}}">
-                                expand
-                            </a>
+                            <a class="pipeline-id font-size-15" routerLink="{{pip.issueId}}">{{pip.issueId}}</a>
                         </td>
-                    </tr>
-                    <tr class="collapse bg-light border-info rounded w-100 border" id="collapseExample{{pip.id}}">
-                        <td class="d-flex flex-wrap">
-                            <div *ngFor="let test of pip.tests" class="m-1 border border-info p-1">
-                                <div
-                                    [ngClass]="{'text-success':test.status=='PASSED','text-danger':test.status=='FAILED'}">
-                                    {{test.id}}</div>
-                            </div>
+                        <td>{{pip.branch}}</td>
+                        <td>{{pip.imageTag}}</td>
+                        <td>{{getStatus(pip.tests)}}</td>
+                        <td>{{pip.tests[0].startedOn}}</td>
+                        <td>
+                            <a target="_blank" href="{{pip.jenkinsLink}}">
+                                <img src="/assets/images/workload-logo/jenkin.png"  alt="gitlab-logo" height="25"
+                                    class="gitlab-job-image"></a>
                         </td>
                     </tr>
                 </ng-template>
-
             </tbody>
         </table>
     </div>
 </div>
+<router-outlet></router-outlet>
