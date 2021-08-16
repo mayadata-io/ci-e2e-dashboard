@@ -7,6 +7,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MayastorComponent } from './components/mayastor/mayastor.component';
 import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-dialog.component';
+import { ExternalLinkAccessComponent } from './components/external-link-access/external-link-access.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,11 +30,14 @@ const routes: Routes = [
     }]
   },
   { path: 'openebs/:platform/:engine/pipeline/:id', component: PipelineDetailComponent },
-  { path: 'mayastor', component: MayastorComponent ,
-  children: [{
-    path: ':id',
-    component: MayastorDialogComponent
-  }]}
+  {
+    path: 'mayastor', component: MayastorComponent,
+    children: [{
+      path: ':id',
+      component: MayastorDialogComponent
+    }]
+  },
+  { path: 'redirectto/:link', component: ExternalLinkAccessComponent }
 
 ];
 

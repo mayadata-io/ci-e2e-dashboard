@@ -1,0 +1,20 @@
+<div class="container-fluid ">
+    <div class="w-50 mx-auto border shadow rounded bg-white p-3">
+        <div class="warning">
+            <h5 class="message text-danger"> you're being redirected to internal Mayadata system</h5>
+            <p class="url text-secondary">{{link}}</p>
+        </div>
+        <div class="action-button d-flex justify-content-around">
+            <div class="open">
+                <a class="btn btn-primary" href="{{link}}">
+                    open
+                </a>
+            </div>
+            <div class="cancel">
+                <div class="btn btn-danger" (click)="backClicked()"> 
+                    go back
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

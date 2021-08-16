@@ -54,8 +54,8 @@
       "IMAGETAG":"ImageTag",
       "LENGTH":"Test count",
       "STATUS":"Status",
-      "STARTED_ON":"Statred At",
-      "JENKINS_URL":"Jenkins_link"
+      "STARTED_ON":"statred at",
+      "JENKINS_URL":"external ref"
     }
   }
 },

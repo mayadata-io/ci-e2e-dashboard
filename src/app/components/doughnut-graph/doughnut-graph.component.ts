@@ -8,11 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DoughnutGraphComponent implements OnInit {
   @Input() pipeline: any;
   @Input() size: any;
+  @Input() engine: any;
 
   constructor() { }
 
   ngOnInit() {
-    this.size = Number(this.size)
+    this.size = Number(this.size);
   }
   pipelineTooltip(data) {
     try {
@@ -23,9 +24,9 @@ export class DoughnutGraphComponent implements OnInit {
       } else if (data.status == "none") {
         return ""
       } else {
-        var passedJobs = this.jobStatusCount(data.jobs,'success')
-        var failedJobs = this.jobStatusCount(data.jobs,'failed')
-        var canceledJobs = this.jobStatusCount(data.jobs,'canceled')
+        const passedJobs = this.jobStatusCount(data.jobs, 'success')
+        const failedJobs = this.jobStatusCount(data.jobs, 'failed')
+        const canceledJobs = this.jobStatusCount(data.jobs, 'canceled')
         return `Success: ${passedJobs},\nFailed: ${failedJobs},\nCanceled: ${canceledJobs}`;
       }
     } catch (e) {
@@ -33,34 +34,15 @@ export class DoughnutGraphComponent implements OnInit {
     }
   }
 
-  jobStatusCount(data,status){
-    var passed = 0;
-    for (var i = 0; i < data.length; i++) {
+  jobStatusCount(data, status) {
+    let passed = 0;
+    for (let i = 0; i < data.length; i++) {
       if (data[i].status === (status)) {
         passed = passed + 1;
       }
     }
     return passed;
   }
-  // passed(data) {
-  //   var passed = 0;
-  //   for (var i = 0; i < data.length; i++) {
-  //     if (data[i].status === ("success")) {
-  //       passed = passed + 1;
-  //     }
-  //   }
-  //   return passed;
-  // }
-
-  // failed(data) {
-  //   var failed = 0;
-  //   for (var i = 0; i < data.length; i++) {
-  //     if (data[i].status === ("failed")) {
-  //       failed = failed + 1;
-  //     }
-  //   }
-  //   return failed;
-  // }
 
   getJobPercentForPipeline(data) {
     try {
@@ -128,6 +110,31 @@ export class DoughnutGraphComponent implements OnInit {
     }
     catch {
       return "0 0";
+    }
+  }
+
+  getStatusMayastor(tests) {
+    try {
+      const passedCount = tests.filter((res) => res.status === 'PASSED').length;
+      const totalTestsCount = tests.length;
+      const percentage = (passedCount / totalTestsCount) * 100;
+      if (passedCount === 0) {
+        return `0 0`;
+      }
+      return `${percentage} ${100 - percentage}`;
+    } catch (error) {
+      console.log('\t Error', error);
+      return `100 0`;
+    }
+  }
+  genMayastorTooltip(tests) {
+    try {
+      const passedCount = tests.filter((res) => res.status === 'PASSED').length;
+      const failedCount = tests.filter((res) => res.status === 'FAILED').length;
+      return `Passed: ${passedCount} , Failed: ${failedCount}`;
+    } catch (error) {
+      console.log(error);
+      return 'NA';
     }
   }
 

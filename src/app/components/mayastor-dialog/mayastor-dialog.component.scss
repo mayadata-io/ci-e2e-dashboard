@@ -1,6 +1,6 @@
 .dialog{
     position: fixed;
-    width: 500px;
+    width: 700px;
     right:0;
     top: 0;
     background-color: #363740;
@@ -32,10 +32,9 @@
   .job-link-line-left {
     margin: 0;
     position: relative;
-    top: 10px;
     border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: #dfe3e9;
+    border-top-color: #ced0d3;
     border-top-left-radius: 10px;
     flex: auto;
     height: 10px;
@@ -45,10 +44,9 @@
   .job-link-line-right {
     margin: 0;
     position: relative;
-    top: 10px;
     border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: #dfe3e9;
+    border-top-color: #ced0d3;
     flex: auto;
     height: 10px;
     min-width: 10px;
@@ -65,6 +63,12 @@
   }
   .stage-jobs-content:hover {
     border-color: #62b9f3;
+  }
+  .job-name{
+    max-width: 350px;
+    text-align: start;
+    white-space: normal;
+    border-color: rgb(158, 158, 158) !important;
   }
   .job-name a{
     color: white !important;

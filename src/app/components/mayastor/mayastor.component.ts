@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from 'src/app/services/ci-dashboard.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Status } from 'src/app/model/enum.model';
+import * as moment from 'moment';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+
 
 
 @Component({
@@ -11,15 +13,28 @@ import { Status } from 'src/app/model/enum.model';
 })
 export class MayastorComponent implements OnInit {
   data: any;
-  constructor(private ApiService: DashboardData, private router: Router) {
-    ApiService.getMayastorTest().subscribe((res) => {
-      this.data = res;
-    }, (err) => {
-      console.log('Unable to access mayastor endpoint', err);
+  mySubscription: any;
+
+  constructor(private ApiService: DashboardData, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
     });
   }
 
   ngOnInit(): void {
+
+    this.ApiService.getMayastorTest().subscribe((res) => {
+      this.data = res;
+    }, (err) => {
+      console.log('Unable to access mayastor endpoint', err);
+    });
+
   }
 
   getStatus(tests) {
@@ -31,6 +46,29 @@ export class MayastorComponent implements OnInit {
         return Status.Passed;
       }
     }
+  }
+  convertTime(value) {
+    const unixTime = value.substr(0, 10);
+    const convertedTime = moment.unix(unixTime).calendar();
+    return convertedTime;
+  }
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
+
+  goToURL(title, reference) {
+    let url: string;
+    if (title === 'Jira') {
+      const jiraUrl = 'https://mayadata.atlassian.net/browse/';
+      const issueUrl = jiraUrl + reference;
+      url = issueUrl;
+    } else if (title === 'Jenkins') {
+      url = reference;
+    }
+    const encode = encodeURIComponent(url);
+    this.router.navigateByUrl(`/redirectto/${encode}`);
   }
 }
 
