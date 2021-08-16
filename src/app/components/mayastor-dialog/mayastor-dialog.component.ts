@@ -9,10 +9,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./mayastor-dialog.component.scss']
 })
 export class MayastorDialogComponent implements OnInit {
-  public issueID: any;
+  public issueID: string;
   public testData: any;
-  passed: any;
-  failed: any;
+  public passed: number;
+  public failed: number;
   constructor(private activatedRoute: ActivatedRoute, private ApiService: DashboardData) { }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {

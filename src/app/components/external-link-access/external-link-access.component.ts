@@ -13,7 +13,7 @@ export class ExternalLinkAccessComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private _location: Location) { }
 
-  public link: any;
+  public link: string;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.link = params.link;

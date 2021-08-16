@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from 'src/app/services/ci-dashboard.service';
-import { Status } from 'src/app/model/enum.model';
+import { Platform, Status } from 'src/app/model/enum.model';
 import * as moment from 'moment';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
@@ -60,11 +60,11 @@ export class MayastorComponent implements OnInit {
 
   goToURL(title, reference) {
     let url: string;
-    if (title === 'Jira') {
-      const jiraUrl = 'https://mayadata.atlassian.net/browse/';
+    if (title === Platform.JiraTitle) {
+      const jiraUrl = Platform.JiraURL;
       const issueUrl = jiraUrl + reference;
       url = issueUrl;
-    } else if (title === 'Jenkins') {
+    } else if (title === Platform.JenkinsTitle) {
       url = reference;
     }
     const encode = encodeURIComponent(url);

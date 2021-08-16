@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Status } from 'src/app/model/enum.model';
 
 @Component({
   selector: 'app-doughnut-graph',
@@ -27,7 +28,7 @@ export class DoughnutGraphComponent implements OnInit {
         const passedJobs = this.jobStatusCount(data.jobs, 'success')
         const failedJobs = this.jobStatusCount(data.jobs, 'failed')
         const canceledJobs = this.jobStatusCount(data.jobs, 'canceled')
-        return `Success: ${passedJobs},\nFailed: ${failedJobs},\nCanceled: ${canceledJobs}`;
+        return `Success: ${passedJobs},Failed: ${failedJobs},Canceled: ${canceledJobs}`;
       }
     } catch (e) {
       return "n/a"
@@ -114,28 +115,18 @@ export class DoughnutGraphComponent implements OnInit {
   }
 
   getStatusMayastor(tests) {
-    try {
-      const passedCount = tests.filter((res) => res.status === 'PASSED').length;
-      const totalTestsCount = tests.length;
-      const percentage = (passedCount / totalTestsCount) * 100;
-      if (passedCount === 0) {
-        return `0 0`;
-      }
-      return `${percentage} ${100 - percentage}`;
-    } catch (error) {
-      console.log('\t Error', error);
-      return `100 0`;
+    const passedCount = tests.filter((res) => res.status === Status.Passed).length;
+    const totalTestsCount = tests.length;
+    const percentage = (passedCount / totalTestsCount) * 100;
+    if (passedCount === 0) {
+      return `0 0`;
     }
+    return `${percentage} ${100 - percentage}`;
   }
   genMayastorTooltip(tests) {
-    try {
-      const passedCount = tests.filter((res) => res.status === 'PASSED').length;
-      const failedCount = tests.filter((res) => res.status === 'FAILED').length;
-      return `Passed: ${passedCount} , Failed: ${failedCount}`;
-    } catch (error) {
-      console.log(error);
-      return 'NA';
-    }
+    const passedCount = tests.filter((res) => res.status === Status.Passed).length;
+    const failedCount = tests.filter((res) => res.status === Status.Failed).length;
+    return `Passed: ${passedCount} , Failed: ${failedCount}`;
   }
 
 
