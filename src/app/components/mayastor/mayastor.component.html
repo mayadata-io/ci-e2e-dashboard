@@ -16,16 +16,23 @@
                 <ng-template ngFor let-pip [ngForOf]="data" let-i="index">
                     <tr>
                         <td>
-                            <a class="pipeline-id font-size-15" routerLink="{{pip.issueId}}">{{pip.issueId}}</a>
+                            <a class="pipeline-id font-size-15" routerLink="{{pip.id}}">{{pip.id}}</a>
                         </td>
                         <td>{{pip.branch}}</td>
                         <td>{{pip.imageTag}}</td>
-                        <td>{{getStatus(pip.tests)}}</td>
-                        <td>{{pip.tests[0].startedOn}}</td>
                         <td>
-                            <a target="_blank" href="{{pip.jenkinsLink}}">
-                                <img src="/assets/images/workload-logo/jenkin.png"  alt="gitlab-logo" height="25"
-                                    class="gitlab-job-image"></a>
+                            <app-doughnut-graph [pipeline]="pip.tests" [engine]="'mayastor'"></app-doughnut-graph>
+                        </td>
+                        <td>{{convertTime(pip.tests[0].startedOn)}}</td>
+                        <td>
+                            <div class="btn btn-link" (click)="goToURL('Jenkins',pip.jenkinsLink)">
+                                <img src="/assets/images/workload-logo/jenkin.png" alt="gitlab-logo" height="25"
+                                    class="gitlab-job-image">
+                            </div>
+                            <div class="btn btn-link" (click)="goToURL('Jira',pip.id)">
+                                <img src="/assets/images/workload-logo/jira.png" alt="gitlab-logo" height="25"
+                                    class="gitlab-job-image">
+                            </div>
                         </td>
                     </tr>
                 </ng-template>

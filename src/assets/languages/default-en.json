@@ -54,10 +54,16 @@
       "IMAGETAG":"ImageTag",
       "LENGTH":"Test count",
       "STATUS":"Status",
-      "STARTED_ON":"Statred At",
-      "JENKINS_URL":"Jenkins_link"
+      "STARTED_ON":"started at",
+      "JENKINS_URL":"external ref"
     }
   }
+},
+"EXTERNAL-LINK":{
+  "MESSAGE": "you're being redirected to internal Mayadata system",
+  "OPEN":"open",
+  "GOBACK":"go back"
+
 },
 "ERROR": {
   "PIPELINE-TABLE":{

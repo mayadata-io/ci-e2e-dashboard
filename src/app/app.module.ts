@@ -23,6 +23,7 @@ import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MayastorComponent } from './components/mayastor/mayastor.component';
 import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-dialog.component';
+import { ExternalLinkAccessComponent } from './components/external-link-access/external-link-access.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-d
     DashboardComponent,
     MayastorComponent,
     MayastorDialogComponent,
+    ExternalLinkAccessComponent,
   ],
   imports: [
     BrowserModule,

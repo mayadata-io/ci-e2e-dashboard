@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from 'src/app/services/ci-dashboard.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,21 +9,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./mayastor-dialog.component.scss']
 })
 export class MayastorDialogComponent implements OnInit {
-  public issueID: Number;
+  public issueID: string;
   public testData: any;
+  public passed: number;
+  public failed: number;
   constructor(private activatedRoute: ActivatedRoute, private ApiService: DashboardData) { }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.issueID = params.id;
     });
     this.ApiService.getMayastorTest().subscribe((res) => {
-      const tests = res.filter((test) => test.issueId === this.issueID);
+      const tests = res.filter((test) => test.id === this.issueID);
       this.testData = tests[0];
+      this.passed = this.testData.tests.filter((test) => test.status === 'PASSED').length;
+      this.failed = this.testData.tests.filter((test) => test.status === 'FAILED').length;
     });
   }
   //  StatusIcon function handles the test status ;
   //  Api contains 2 types of state till now -
-  //  TODO: Need to have running ,pending and cancelled status from 
+  //  TODO: Need to have running ,pending and cancelled status from
   //  - server and accoring to state write more state checks in  below function ,
   statusIcon(status) {
     switch (status) {
