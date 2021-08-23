@@ -8,7 +8,7 @@ export enum Platform{
     JenkinsTitle = 'Jenkins',
 }
 export enum ProjectK8s{
-    Openshift = '1.18',
-    Konvoy = '1.19.7',
-    NativeK8s = '1.21',
+    Openshift = '1.18.3',
+    Konvoy = '1.21.4',
+    NativeK8s = '1.21.4',
 }
