@@ -3,6 +3,7 @@ import { DashboardData } from "../../services/ci-dashboard.service";
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { ProjectK8s } from 'src/app/model/enum.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +12,13 @@ import { Title } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ApiService: DashboardData,private router: Router,private titleService: Title) {}
+  constructor(private ApiService: DashboardData, private router: Router, private titleService: Title) { }
 
   public recentData: any = [];
 
 
   ngOnInit() {
-    this.titleService.setTitle('OpenEBS E2E Dashboard'); 
+    this.titleService.setTitle('OpenEBS E2E Dashboard');
     this.ApiService.getAnyEndpointData("/recent").subscribe(res => {
       console.log(res);
       this.recentData = res
@@ -36,7 +37,18 @@ export class DashboardComponent implements OnInit {
       default:
         break;
     }
-
+  }
+  getK8s(ID) {
+    switch (ID) {
+      case "36":
+        return ProjectK8s.Openshift
+      case "34":
+        return ProjectK8s.Konvoy
+      case "43":
+        return ProjectK8s.NativeK8s
+      default:
+        break;
+    }
   }
 
   getImage(projectID: string) {
@@ -109,10 +121,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  gotoEnginePage(project:string,branch:string){
-    let B = (b)=>{
-      if (b.includes('openebs')){
-        return b.replace('openebs-','')
+  gotoEnginePage(project: string, branch: string) {
+    let B = (b) => {
+      if (b.includes('openebs')) {
+        return b.replace('openebs-', '')
       }
       else return b
     }
