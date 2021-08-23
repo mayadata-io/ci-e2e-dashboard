@@ -9,6 +9,7 @@
         <thead>
           <tr>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.PLATFORM' | translate}}</th>
+            <th scope="col">k8s Version </th>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.PIPELINE-ID' | translate}}</th>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.CREATED-AT' | translate}}</th>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.RELEASE-TAG' | translate}}</th>
@@ -33,6 +34,7 @@
                         </div>
                       </div>
                     </td>
+                    <td>{{getK8s(P.pipeline.project)}}</td>
                     <td><a type="button" class="btn btn-link btn-sm"
                         routerLink="{{genDetailRouteLink(P.pipeline.id,P.pipeline.project,recent.branch)}}">{{P.pipeline.id}}</a>
                     </td>

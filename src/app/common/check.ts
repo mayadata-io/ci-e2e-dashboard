@@ -6,9 +6,9 @@ export class GlobalConstants {
         const host = window.location.origin;
         if (isDevMode()) {
             // return mayastor ? 'https://localhost:8080' : 'https://localhost:3000'; //Uncomment while running localServer
-            return mayastor ? 'https://staging.openebs.ci/xray' : 'staging.openebs.ci/api';
+            return mayastor ? 'https://staging.openebs.ci/xray' : 'https://openebs.ci/api';
         } else {
-            return mayastor ? `${host}/xray` : `${host}/api`;
+            return mayastor ? `${host}/xray` : `https://openebs.ci/api`;
         }
     };
 
