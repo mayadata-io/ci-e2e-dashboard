@@ -24,7 +24,8 @@
           "PIPELINE-ID":"PipelineID",
           "CREATED-AT":"Created at",
           "RELEASE-TAG":"Release Tag",
-          "STATUS":"Status"
+          "STATUS":"Status",
+          "K8SVERSION":"K8s versions"
         }
     }
   },
