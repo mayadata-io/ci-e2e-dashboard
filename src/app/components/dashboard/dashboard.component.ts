@@ -109,19 +109,19 @@ export class DashboardComponent implements OnInit {
   }
 
   gotoEnginePage(project: string, branch: string) {
-    let B = (b) => {
-      if (b.includes('openebs')) {
-        return b.replace('openebs-', '')
+    let genBranch = (branchName) => {
+      if (branchName.includes('openebs')) {
+        return branchName.replace('openebs-', '')
       }
-      else return b
+      else return branchName
     }
-    let genPath = `/openebs/${B(branch)}/${this.getName(project)}`
+    let genPath = `/openebs/${genBranch(branch)}/${this.getName(project)}`
     this.router.navigate([genPath])
 
   }
 
   validateValue(text: string) {
-    return text == 'NA' ? '_' : text;
+    return text === 'NA' ? '_' : text;
   }
 
 
