@@ -1,18 +1,77 @@
 {
   "VENDOR" : "false",
   "SIDEBAR": {
-    "HOME": "Overview",
-    "DASHBOARD": "CI/E2E Dashboard",
-    "DASHBOARD-MDAP": "Enterprise Pipelines",
-    "MDAP":"E2E pipelines for Release branches",
-    "WORKLOADS": "Example Workloads",
-    "ORGANISATION": "MayaData Inc",
-    "MDAPE2E-URL":"https://app.mayaonline.io/mdape2e",
-    "MDAPE2E-TOOLTIP":"Click here to view Enterprise Pipelines",
-    "DASHBOARD-URL": ""
+    "TITLE":"OpenEBS CI Pipelines",
+    "LINKS":{
+      "DEFAULT": "Home",
+      "GROUP-LINKS":{
+        "TITLE":"Storage Engines",
+        "LINK":"{{link_title}}"
+      }
+    },
+    "COPYRIGHT":"Copyright © {{year_num}} MayaData Inc."
   },
-  "WORKLOAD-DASHBOARD": {
-    "TITLE": "Live deployments of stateful applications",
-    "SUBTITLE": "Workloads using Openebs PVs"
+  "ROUTE":{
+    "HOME-ROUTE":{ 
+      "TITLE":"OpenEBS {{branch_title}} Pipelines",
+      "PLATFORM":"{{platform_title}}"
+    },
+    "RECENT":{
+      "TITLE": "Overview",
+      "TABLE":{
+        "HEADER":{
+          "PLATFORM":"Platform",
+          "PIPELINE-ID":"PipelineID",
+          "CREATED-AT":"Created at",
+          "RELEASE-TAG":"Release Tag",
+          "STATUS":"Status",
+          "K8SVERSION":"K8s versions"
+        }
+    }
+  },
+  "ENGINE":{
+    "TABLE":{
+      "HEADER":{
+        "PIPELINE":"Pipeline",
+        "TAG":"Tag",
+        "TRIGGER-DURATION":"Trigger/Duration",
+        "STATUS":"Status",
+        "ACCESS":"Access"
+      },
+      "BODY":{
+      }
+    }
+  },
+  "DIALOG":{
+    "PIPELINEID": "Pipeline ID: ",
+    "TRIGGERED": "Triggered",
+    "STAGE": "Stage"
+  },
+  "MAYASTOR":{
+    "TITLE": "Mayastor CI pipelines",
+    "TABLE":{
+      "ID":"ID",
+      "BRANCH": "Branch",
+      "IMAGETAG":"ImageTag",
+      "LENGTH":"Test count",
+      "STATUS":"Status",
+      "STARTED_ON":"started at",
+      "JENKINS_URL":"external ref"
+    }
   }
+},
+"EXTERNAL-LINK":{
+  "MESSAGE": "you're being redirected to internal Mayadata system",
+  "OPEN":"open",
+  "GOBACK":"go back"
+
+},
+"ERROR": {
+  "PIPELINE-TABLE":{
+    "NOT-FOUND":{
+      "MESSAGE": "Sorry , Pipelines not avaliable for {{platform}} of {{branch}}",
+      "GOBACK":"GO Back"
+    }
+  }
+}
 }

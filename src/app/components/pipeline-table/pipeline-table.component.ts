@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import { DashboardData } from "../../services/ci-dashboard.service";
-import { ISubscription } from "rxjs/Subscription";
+import { SubscriptionLike } from "rxjs";
 import { timer} from "rxjs";
 import { Title } from '@angular/platform-browser';
 
@@ -28,7 +28,7 @@ export class PipelineTableComponent implements OnInit {
    }
   public url: any;
   public pipData: any;
-  private Data: ISubscription;
+  private Data: SubscriptionLike;
   public platform : string;
   error : any;
   ngOnInit() {
@@ -51,7 +51,6 @@ export class PipelineTableComponent implements OnInit {
   }) 
   }
   genbranch(branch){
-    console.log("branch is ", branch);
     
     if (branch == 'cstor'){
       return 'openebs-cstor'

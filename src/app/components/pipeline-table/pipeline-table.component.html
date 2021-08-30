@@ -4,11 +4,11 @@
       <table class="table" *ngIf="pipData else loading">
         <thead>
           <tr class="text-secondary">
-            <th scope="col">Pipeline</th>
-            <th scope="col">Tag</th>
-            <th scope="col">Trigger/Duration</th>
-            <th scope="col">Status</th>
-            <th scope="col">Access </th>
+            <th scope="col">{{'ROUTE.ENGINE.TABLE.HEADER.PIPELINE' | translate}}</th>
+            <th scope="col">{{'ROUTE.ENGINE.TABLE.HEADER.TAG' | translate}}</th>
+            <th scope="col">{{'ROUTE.ENGINE.TABLE.HEADER.TRIGGER-DURATION' | translate}}</th>
+            <th scope="col">{{'ROUTE.ENGINE.TABLE.HEADER.STATUS' | translate}}</th>
+            <th scope="col">{{'ROUTE.ENGINE.TABLE.HEADER.ACCESS' | translate}} </th>
           </tr>
         </thead>
         <tbody>
@@ -20,7 +20,6 @@
                 </div>
                 <div class="pipeline-id-commit-message flex-grow-1 my-auto d-block ml-2">
                   <a class="pipeline-id font-size-15" routerLink="{{pipeline.id}}">{{pipeline.id}}</a>
-                  <!-- <div class="pipeline-commit text-secondary font-sec-12">commit-message</div> -->
                 </div>
               </div>
             </td>
@@ -29,16 +28,9 @@
                 <div class="pipeline-tag" *ngIf="pipeline.release_tag != 'NA' else tagNotAvaliable">
                   {{pipeline.release_tag}}</div>
                 <ng-template #tagNotAvaliable>
-                  <!-- <div>
-                    <i class="fas fa-exclamation-triangle"></i>
-                    {{pipeline.status}}
-                  </div> -->
                   _
                 </ng-template>
               </div>
-              <!-- <div class="pipeline-tag-release-on text-secondary font-sec-12">
-            on _
-          </div> -->
             </td>
             <td>
               <div class="d-block">
@@ -57,8 +49,8 @@
                 </div>
               </div>
             </td>
-            <td><a type="button" class="btn btn-sm btn-outline-primary" routerLink="{{pipeline.id}}">pipeline page</a></td>
-            
+            <td><a type="button" class="btn btn-sm btn-outline-primary" routerLink="{{pipeline.id}}">pipeline page</a>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -67,8 +59,10 @@
   <ng-template #dataNotPresent>
     <div class="text-center">
       <app-lodding-spinners class="h-100 w-auto"></app-lodding-spinners>
-      <h4 class="gradient-text mt-5 mb-1">Sorry , Pipelines not avaliable for <span>{{url[2]}} of {{url[3]}}</span></h4>
-      <a type="button" class="btn btn-link" href='/'>Go Back</a>
+      <h4 class="gradient-text mt-5 mb-1">{{'ERROR.PIPELINE-TABLE.NOT-FOUND.MESSAGE' | translate: {platform :
+        url[2],branch: url[3]} }}
+      </h4>
+      <a type="button" class="btn btn-link" href='/'>{{'ERROR.PIPELINE-TABLE.NOT-FOUND.GOBACK' | translate}}</a>
     </div>
   </ng-template>
 </div>

@@ -14,3 +14,7 @@
 ::ng-deep .arrow::before {
     border-top-color: darkgreen;
   }
+
+.doughnut-size{
+    height: 30px;
+}

@@ -1,0 +1,43 @@
+<div class="container-fluid bg-white py-2">
+    <h5>
+        {{'ROUTE.MAYASTOR.TITLE' | translate}}
+    </h5>
+    <div class="bg-white rounded border ">
+        <table class="table table-borderless">
+            <tr class="border-bottom">
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.ID' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.BRANCH' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.IMAGETAG' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.STATUS' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.STARTED_ON' | translate}}</th>
+                <th scope="col">{{'ROUTE.MAYASTOR.TABLE.JENKINS_URL' | translate}}</th>
+            </tr>
+            <tbody>
+                <ng-template ngFor let-pip [ngForOf]="data" let-i="index">
+                    <tr>
+                        <td>
+                            <a class="pipeline-id font-size-15" routerLink="{{pip.id}}">{{pip.id}}</a>
+                        </td>
+                        <td>{{pip.branch}}</td>
+                        <td>{{pip.imageTag}}</td>
+                        <td>
+                            <app-doughnut-graph [pipeline]="pip.tests" [engine]="'mayastor'"></app-doughnut-graph>
+                        </td>
+                        <td>{{convertTime(pip.tests[0].startedOn)}}</td>
+                        <td>
+                            <div class="btn btn-link" (click)="goToURL('Jenkins',pip.jenkinsLink)">
+                                <img src="/assets/images/workload-logo/jenkin.png" alt="gitlab-logo" height="25"
+                                    class="gitlab-job-image">
+                            </div>
+                            <div class="btn btn-link" (click)="goToURL('Jira',pip.id)">
+                                <img src="/assets/images/workload-logo/jira.png" alt="gitlab-logo" height="25"
+                                    class="gitlab-job-image">
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>
+<router-outlet></router-outlet>
