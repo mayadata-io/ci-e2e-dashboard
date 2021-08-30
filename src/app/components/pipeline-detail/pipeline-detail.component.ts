@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
-import { ISubscription } from "rxjs/Subscription";
-import { Subscription, Observable, timer, from, pipe } from "rxjs";
-import { isBoolean } from 'util';
+// import { timer } from "rxjs";
 import * as moment from 'moment';
-
-
 
 @Component({
   selector: 'app-pipeline-detail',
@@ -25,13 +21,10 @@ export class PipelineDetailComponent implements OnInit {
   constructor(private ApiService: DashboardData) { }
 
   ngOnInit() {
-    let url = window.location.pathname.split('/')
-    console.log("url", url);
-    this.platform = url[3]
-    this.branch = url[2]
-    let id = url[5]
-    console.log(`Platform : ${this.platform} \n Branch: ${this.branch} \n ID: ${id} \n\n`);
-
+    let url = window.location.pathname.split('/');
+    this.platform = url[3];
+    this.branch = url[2];
+    let id = url[5];
     this.getPipelineData(this.platform, this.branch, id)
   }
   public pipData: any;
@@ -48,7 +41,7 @@ export class PipelineDetailComponent implements OnInit {
   // navbarCollapsed = true;
   getPipelineData(platform: string, branch: string, id: string) {
     let B = this.genbranch(branch)
-    this.Data = timer(0, 100000).subscribe(x => {
+    // this.Data = timer(0, 100000).subscribe(x => {
       this.ApiService.getPipelineData(platform, B, id).subscribe(res => {
         this.pipData = res
         this.pipData = this.pipData.pipeline;
@@ -68,7 +61,7 @@ export class PipelineDetailComponent implements OnInit {
           console.log(err);
         }
       )
-    })
+    // })
 
   }
   sortData(D: any) {
@@ -117,8 +110,6 @@ export class PipelineDetailComponent implements OnInit {
     }
   }
   genbranch(branch) {
-    console.log("branch is ", branch);
-
     if (branch == 'cstor') {
       return 'openebs-cstor'
     } else if (branch == 'release-branch' || branch == "lvm-localpv") {

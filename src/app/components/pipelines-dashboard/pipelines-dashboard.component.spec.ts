@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { LoddingSpinnersComponent } from './lodding-spinners.component';
+import { PipelinesDashboardComponent } from './pipelines-dashboard.component';
 
-describe('LoddingSpinnersComponent', () => {
-  let component: LoddingSpinnersComponent;
-  let fixture: ComponentFixture<LoddingSpinnersComponent>;
+describe('PipelinesDashboardComponent', () => {
+  let component: PipelinesDashboardComponent;
+  let fixture: ComponentFixture<PipelinesDashboardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoddingSpinnersComponent ]
+      declarations: [ PipelinesDashboardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoddingSpinnersComponent);
+    fixture = TestBed.createComponent(PipelinesDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
