@@ -10,9 +10,10 @@
           <tr>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.PLATFORM' | translate}}</th>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.PIPELINE-ID' | translate}}</th>
+            <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.K8SVERSION' | translate}}</th>
             <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.CREATED-AT' | translate}}</th>
-            <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.RELEASE-TAG' | translate}}</th>
-            <th scope="col">{{'ROUTE.RECENT.TABLE.HEADER.STATUS' | translate}}</th>
+            <th scope="col" class="text-center">{{'ROUTE.RECENT.TABLE.HEADER.RELEASE-TAG' | translate}}</th>
+            <th scope="col" class="text-center">{{'ROUTE.RECENT.TABLE.HEADER.STATUS' | translate}}</th>
           </tr>
         </thead>
       </table>
@@ -36,11 +37,12 @@
                     <td><a type="button" class="btn btn-link btn-sm"
                         routerLink="{{genDetailRouteLink(P.pipeline.id,P.pipeline.project,recent.branch)}}">{{P.pipeline.id}}</a>
                     </td>
+                    <td>{{validateValue(P.pipeline.k8s_version)}}</td>
                     <td>{{timeConverter(P.pipeline.created_at)}}</td>
                     <td>
-                      <div class="text-size-16 release-tag">{{P.pipeline.release_tag}}</div>
+                      <div class="text-size-16 text-center release-tag">{{validateValue(P.pipeline.release_tag)}}</div>
                     </td>
-                    <td>
+                    <td class="text-center">
                       <app-doughnut-graph [pipeline]="P.pipeline"></app-doughnut-graph>
                     </td>
                   </tr>
