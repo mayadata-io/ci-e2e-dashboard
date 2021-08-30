@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardData } from "../../services/ci-dashboard.service";
-import { timer } from "rxjs";
+// import { timer } from "rxjs";
 import * as moment from 'moment';
-
-
 
 @Component({
   selector: 'app-pipeline-detail',
@@ -43,7 +41,7 @@ export class PipelineDetailComponent implements OnInit {
   // navbarCollapsed = true;
   getPipelineData(platform: string, branch: string, id: string) {
     let B = this.genbranch(branch)
-    this.Data = timer(0, 100000).subscribe(x => {
+    // this.Data = timer(0, 100000).subscribe(x => {
       this.ApiService.getPipelineData(platform, B, id).subscribe(res => {
         this.pipData = res
         this.pipData = this.pipData.pipeline;
@@ -63,7 +61,7 @@ export class PipelineDetailComponent implements OnInit {
           console.log(err);
         }
       )
-    })
+    // })
 
   }
   sortData(D: any) {

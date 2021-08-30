@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { DashboardData } from "../services/ci-dashboard.service";
-import { ISubscription } from "rxjs/Subscription";
 import { platform } from 'process';
 
 
