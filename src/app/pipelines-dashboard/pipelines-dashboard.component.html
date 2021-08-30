@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="rounded border px-2 py-2 bg-white my-3 stop-scroll">
+    <div class="row">
+      <div class="col-6 my-auto">
+        <h5 class="m-0 p-0">OpenEBS {{getBranchName(engine)}} Pipelines</h5>
+      </div>
+      <div class="col-6 d-flex justify-content-around" *ngIf="Platform != 'nativek8s'">
+        <!-- <div type="button" class="btn btn-outline-primary" routerLinkActive="bg-primary" [routerLink]="['./all']" >All</div>  -->
+        <div type="button" class="btn btn-outline-primary"
+          [routerLink]="['./openshift']" [ngClass]="testFunc('openshift')">
+          <img src="/assets/images/cloud/openshift.png" alt="Platform-logo" class="rounded-circle " height="20px"><span
+            class="mx-2">Openshift</span>
+        </div>
+        <div type="button" class="btn btn-outline-primary" [ngClass]="testFunc('konvoy')"
+          [routerLink]="['./konvoy']"><img src="/assets/images/cloud/konvoy.png"
+            alt="Platform-logo" class="rounded-circle " height="20px"><span class="mx-2">Konvoy</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pipeline-data bg-white rounded border w-100 px-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<!-- <div class="background-platform"></div> -->

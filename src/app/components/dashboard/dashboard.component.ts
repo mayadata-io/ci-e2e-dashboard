@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
       default:
         break;
     }
-
   }
 
   getImage(projectID: string) {
