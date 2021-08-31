@@ -1,0 +1,61 @@
+<div class="container-fluid  workload-container">
+  <div class="row mb-5 bg-white rounded workload-dashboard">
+    <div class="col-md-12">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="tab-content w-100">
+            <div class="container-fluid">
+              <div class="mt-4 workload-title-text">
+                <h1>Live deployments of stateful applications</h1>
+                <h2>Workloads using OpenEBS PVs</h2>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search applications.."
+                  title="Type in a name">
+              </div>
+              <app-lodding-spinners class="row spinners" *ngIf="showSpinner; else hideSipnnerTable">
+              </app-lodding-spinners>
+              <ng-template #hideSipnnerTable>
+                <div class="row">
+                  <table class="table" id="workloadAppTable">
+                    <tr class="table-head header">
+                      <th>Applications</th>
+                      <th>Group/Standalone</th>
+                      <th>Kind</th>
+                      <th>OpenEBS Version</th>
+                      <th>Status</th>
+                      <th><i class="fas fa-link"></i> Access </th>
+                    </tr>
+                    <tr class="workload-table-row" *ngFor="let app of allApplications">
+                      <td><a><img src="/assets/images/workloads-logos/{{app.name}}.png"> {{app.name}}</a></td>
+                      <td class="workload-table-row-data">{{app.group}}</td>
+                      <td class="workload-table-row-data">deploy: {{app.numberOfDeployment}} | sts:
+                        {{app.numberOfStatefulset}}
+                      </td>
+                      <td class="workload-table-row-data">{{openEBSVersion}}</td>
+                      <td>
+                        <span [ngClass]="{
+                                      'display':app.status === 'Running',
+                                      'hide':app.status !== 'Running'}" style="color:#539A49;"> <span
+                            class="badge badge-pill badge-gradient-success">Active</span>
+                        </span>
+                        <span [ngClass]="{
+                                      'display':app.status !== 'Running',
+                                      'hide':app.status === 'Running'}" style="color: #D20000;"> <span
+                            class="badge badge-pill badge-gradient-danger">Inactive</span></span>
+                      </td>
+                      <td>
+                        <a class="workload-dashboard-link" routerLink="/{{app.namespace}}"
+                          (click)="setApiUrl(app.apiurl)">Dashboard</a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- class="d-flex flex-column align-items-center" -->

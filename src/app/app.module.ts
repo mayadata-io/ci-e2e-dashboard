@@ -3,35 +3,49 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TranslateModule, TranslateService } from 'angular-intl';
 import { AppRoutingModule } from './app.routing';
+
+import { PersonService } from './services/savereaddelete.service';
+import { KubernetsService } from './services/kubernetes.service';
+import { LitmusService } from './services/litmus.services';
+import { AgileService } from './services/agile.services';
 import { DashboardData } from './services/ci-dashboard.service';
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { TableComponent } from './table/table.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { WorkloadDashboardComponent } from './workload-dashboard/workload-dashboard.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { WorkloadsComponent } from './workloads/workloads.component';
+import { OverviewComponent } from './overview/overview.component';
 import { LoddingSpinnersComponent } from './components/lodding-spinners/lodding-spinners.component';
-import { PipelinesDashboardComponent } from './components/pipelines-dashboard/pipelines-dashboard.component';
+import { StableReleaseComponent } from './stable-release/stable-release.component';
+import { PipelinesDashboardComponent } from './pipelines-dashboard/pipelines-dashboard.component';
 import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
 import { DoughnutGraphComponent } from './components/doughnut-graph/doughnut-graph.component';
 import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { InfinitySpinnerComponent } from './components/infinity-spinner/infinity-spinner.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MayastorComponent } from './components/mayastor/mayastor.component';
-import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-dialog.component';
-import { ExternalLinkAccessComponent } from './components/external-link-access/external-link-access.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     SidebarComponent,
+    TableComponent,
     ChartComponent,
+    WorkloadDashboardComponent,
     BannerComponent,
+    WorkloadsComponent,
+    OverviewComponent,
     LoddingSpinnersComponent,
+    StableReleaseComponent,
     PipelinesDashboardComponent,
     PipelineTableComponent,
     DoughnutGraphComponent,
@@ -39,9 +53,6 @@ import { ExternalLinkAccessComponent } from './components/external-link-access/e
     DialogComponent,
     InfinitySpinnerComponent,
     DashboardComponent,
-    MayastorComponent,
-    MayastorDialogComponent,
-    ExternalLinkAccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +65,13 @@ import { ExternalLinkAccessComponent } from './components/external-link-access/e
     TranslateModule.forRoot({ path: '/assets/languages/' })
   ],
   providers: [
+    PersonService,
+    KubernetsService,
+    LitmusService,
     HttpClient,
     Meta,
     Title,
+    AgileService,
     DashboardData
   ],
   bootstrap: [AppComponent],

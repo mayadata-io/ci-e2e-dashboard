@@ -1,48 +1,31 @@
-<div *ngIf="engine;else doughnutForOpenebsEngine">
-  <span ngbTooltip="{{ genMayastorTooltip(pipeline)}}" placement="right">
-    <svg viewBox="0 0 42 42" class="donut doughnut-size">
-      <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="transparent">
-      </circle>
-      <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-        stroke-width="6" stroke-dasharray="99 1" stroke-dashoffset="22.5">
-      </circle>
-      <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-        stroke-width="7" [attr.stroke-dasharray]="getStatusMayastor(pipeline)" stroke-dashoffset="22.5">
-      </circle>
-    </svg>
+<div *ngIf='!size;else customSize'>
+  <span ngbTooltip="{{ pipelineTooltip(pipeline)}}" placement="right">
+    <i *ngIf="pipelineTooltip(pipeline) == 'running';else skipPipeline"
+      class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary font-size-30'></i>
+    <ng-template #skipPipeline>
+      <i *ngIf="pipelineTooltip(pipeline) == 'skipped' || pipelineTooltip(pipeline) == 'canceled' ;else donutSuccessFail"
+        class='fa fa-ban btn-txt font-size-25'></i>
+    </ng-template>
+    <ng-template #donutSuccessFail>
+      <svg width="30" height="30" viewBox="0 0 42 42" class="donut">
+        <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff">
+        </circle>
+        <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
+          stroke-width="5" stroke-dasharray="99 1" stroke-dashoffset="22.5">
+        </circle>
+        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#4B515D"
+          stroke-width="6" [attr.stroke-dasharray]="getJobPercentForPipelineDoughnut(pipeline,'canceled')"
+          stroke-dashoffset="22.5">
+        </circle>
+        <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
+          stroke-width="7" [attr.stroke-dasharray]="getJobPercentForPipelineDoughnut(pipeline,'success')"
+          stroke-dashoffset="22.5">
+        </circle>
+
+      </svg>
+    </ng-template>
   </span>
 </div>
-
-<ng-template #doughnutForOpenebsEngine>
-  <div *ngIf='!size;else customSize'>
-    <span ngbTooltip="{{ pipelineTooltip(pipeline)}}" placement="right">
-      <i *ngIf="pipelineTooltip(pipeline) == 'running';else skipPipeline"
-        class='fa fa-circle-o-notch btn-txt fa-spin btn-outline-primary font-size-30'></i>
-      <ng-template #skipPipeline>
-        <i *ngIf="pipelineTooltip(pipeline) == 'skipped' || pipelineTooltip(pipeline) == 'canceled' ;else donutSuccessFail"
-          class='fa fa-ban btn-txt font-size-25'></i>
-      </ng-template>
-      <ng-template #donutSuccessFail>
-        <svg width="30" height="30" viewBox="0 0 42 42" class="donut">
-          <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff">
-          </circle>
-          <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ff0000"
-            stroke-width="5" stroke-dasharray="99 1" stroke-dashoffset="22.5">
-          </circle>
-          <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#4B515D"
-            stroke-width="6" [attr.stroke-dasharray]="getJobPercentForPipelineDoughnut(pipeline,'canceled')"
-            stroke-dashoffset="22.5">
-          </circle>
-          <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#009400"
-            stroke-width="7" [attr.stroke-dasharray]="getJobPercentForPipelineDoughnut(pipeline,'success')"
-            stroke-dashoffset="22.5">
-          </circle>
-
-        </svg>
-      </ng-template>
-    </span>
-  </div>
-</ng-template>
 <ng-template #customSize>
   <span ngbTooltip="{{ pipelineTooltip(pipeline)}}" placement="left" class="">
     <i *ngIf="pipelineTooltip(pipeline) == 'running';else donutSuccessFail"

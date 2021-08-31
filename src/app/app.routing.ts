@@ -1,25 +1,29 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
-import { PipelinesDashboardComponent } from './components/pipelines-dashboard/pipelines-dashboard.component';
-import { PipelineTableComponent } from './components/pipeline-table/pipeline-table.component';
-import { PipelineDetailComponent } from './components/pipeline-detail/pipeline-detail.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MayastorComponent } from './components/mayastor/mayastor.component';
-import { MayastorDialogComponent } from './components/mayastor-dialog/mayastor-dialog.component';
-import { ExternalLinkAccessComponent } from './components/external-link-access/external-link-access.component';
+
+import { TableComponent } from "./table/table.component";
+import { WorkloadDashboardComponent } from "./workload-dashboard/workload-dashboard.component";
+import { WorkloadsComponent } from "./workloads/workloads.component";
+import { OverviewComponent } from "./overview/overview.component";
+import { StableReleaseComponent } from "./stable-release/stable-release.component"
+import { PipelinesDashboardComponent } from "./pipelines-dashboard/pipelines-dashboard.component";
+import { PipelineTableComponent } from "./components/pipeline-table/pipeline-table.component";
+import { PipelineDetailComponent } from "./components/pipeline-detail/pipeline-detail.component";
+import { disableDebugTools } from "@angular/platform-browser";
+import { DialogComponent } from "./components/dialog/dialog.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: "", redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'home', component: DashboardComponent,
+    path: "home", component: DashboardComponent,
     children: [{
-      path: ':engine/:platform/:id',
-      component: DialogComponent,
+      path:':engine/:platform/:id',
+      component:DialogComponent,
     }]
   },
   {
-    path: 'openebs/:engine', component: PipelinesDashboardComponent,
+    path: "openebs/:engine", component: PipelinesDashboardComponent,
     children: [{
       path: ':platform',
       component: PipelineTableComponent,
@@ -29,20 +33,12 @@ const routes: Routes = [
       }]
     }]
   },
-  { path: 'openebs/:platform/:engine/pipeline/:id', component: PipelineDetailComponent },
-  {
-    path: 'mayastor', component: MayastorComponent,
-    children: [{
-      path: ':id',
-      component: MayastorDialogComponent
-    }]
-  },
-  { path: 'redirectto/:link', component: ExternalLinkAccessComponent }
+  { path: "openebs/:platform/:engine/pipeline/:id", component: PipelineDetailComponent }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 

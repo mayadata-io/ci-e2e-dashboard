@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslateService } from 'angular-intl';
+import { TranslateModule, TranslateService } from 'angular-intl';
 
 @Component({
   selector: 'app-root',

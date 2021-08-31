@@ -11,14 +11,15 @@ import { Title } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private ApiService: DashboardData, private router: Router, private titleService: Title) { }
+  constructor(private ApiService: DashboardData,private router: Router,private titleService: Title) {}
 
   public recentData: any = [];
 
 
   ngOnInit() {
-    this.titleService.setTitle('OpenEBS E2E Dashboard');
+    this.titleService.setTitle('OpenEBS E2E Dashboard'); 
     this.ApiService.getAnyEndpointData("/recent").subscribe(res => {
+      console.log(res);
       this.recentData = res
 
     })
@@ -108,20 +109,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  gotoEnginePage(project: string, branch: string) {
-    let genBranch = (branchName) => {
-      if (branchName.includes('openebs')) {
-        return branchName.replace('openebs-', '')
+  gotoEnginePage(project:string,branch:string){
+    let B = (b)=>{
+      if (b.includes('openebs')){
+        return b.replace('openebs-','')
       }
-      else return branchName
+      else return b
     }
-    let genPath = `/openebs/${genBranch(branch)}/${this.getName(project)}`
+    let genPath = `/openebs/${B(branch)}/${this.getName(project)}`
     this.router.navigate([genPath])
 
-  }
-
-  validateValue(text: string) {
-    return text === 'NA' ? '_' : text;
   }
 
 

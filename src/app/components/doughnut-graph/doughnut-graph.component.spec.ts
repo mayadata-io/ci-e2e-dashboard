@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DoughnutGraphComponent } from './doughnut-graph.component';
 
@@ -6,7 +6,7 @@ describe('DoughnutGraphComponent', () => {
   let component: DoughnutGraphComponent;
   let fixture: ComponentFixture<DoughnutGraphComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DoughnutGraphComponent ]
     })

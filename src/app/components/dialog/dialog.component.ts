@@ -18,9 +18,11 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     let url = window.location.pathname.split('/')
+    console.log("url", url);
     this.platform = url[3]
     this.branch = url[2]
     let id = url[4]
+    // console.log(`Platform : ${this.platform} \n Branch: ${this.branch} \n ID: ${id} \n\n`);
     this.titleService.setTitle(`${id} | ${this.platform} | ${this.branch} of OpenEBS E2E pipeline`)
     this.getPipelineData(this.platform, this.branch, id)
   }
@@ -71,6 +73,7 @@ export class DialogComponent implements OnInit {
     D.jobs.forEach(j => {
       if (!this.actJob) {
         this.actJob = j.id
+        console.log("------JobID----", this.actJob);
       }
       if (!stages.includes(j.stage)) {
         stages.push(j.stage)
@@ -87,9 +90,11 @@ export class DialogComponent implements OnInit {
       obj.push(stageObj);
     })
     this.pipeD = obj
+    console.log("\n\n\n stages \n\n\n ", obj);
   }
   stageStatusForObj(stage, jobs) {
     let stageJobs = jobs.filter(job => job.stage == stage);
+    // console.log('forStageObj',stageJobs);
     let successJ = stageJobs.filter(j => j.status == "success").length
     let failedLength = stageJobs.filter(j => j.status == "failed").length
     let canceledLength = stageJobs.filter(j => j.status == "canceled").length
@@ -108,6 +113,8 @@ export class DialogComponent implements OnInit {
     }
   }
   genbranch(branch) {
+    console.log("branch is ", branch);
+
     if (branch == 'cstor') {
       return 'openebs-cstor'
     } else if (branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator") {
@@ -216,6 +223,7 @@ export class DialogComponent implements OnInit {
   onClickClose() {
     let url = window.location.pathname.split('/')
     if (url.includes('home')) {
+      console.log('redirect to home');
       this.router.navigate(['/home'])
     } else {
       this.router.navigate(['../'], { relativeTo: this.route })
