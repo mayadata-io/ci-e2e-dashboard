@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DashboardData } from "../../services/ci-dashboard.service";
 import { SubscriptionLike } from "rxjs";
-import { timer} from "rxjs";
+import { timer } from "rxjs";
 import { Title } from '@angular/platform-browser';
 
 
@@ -15,7 +15,7 @@ import * as moment from 'moment';
 })
 export class PipelineTableComponent implements OnInit {
   mySubscription: any;
-  constructor(private router: Router ,private ApiService: DashboardData,private activatedRoute: ActivatedRoute, private titleService:Title) {
+  constructor(private router: Router, private ApiService: DashboardData, private activatedRoute: ActivatedRoute, private titleService: Title) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -25,42 +25,42 @@ export class PipelineTableComponent implements OnInit {
         this.router.navigated = false;
       }
     });
-   }
+  }
   public url: any;
   public pipData: any;
   private Data: SubscriptionLike;
-  public platform : string;
-  error : any;
+  public platform: string;
+  error: any;
   ngOnInit() {
     this.url = window.location.pathname.split('/')
-    let branch:string = this.url[2]
+    let branch: string = this.url[2]
     this.platform = this.url[3]
     this.titleService.setTitle(`${this.platform} | ${branch} of OpenEBS E2E pipeline`)
-    this.getPipeline(this.platform,branch)
-    
+    this.getPipeline(this.platform, branch)
+
   }
 
-  getPipeline(platform:string,branch:string){
+  getPipeline(platform: string, branch: string) {
     let E = this.genbranch(branch)
     this.Data = timer(0, 1000000).subscribe(x => {
-      this.ApiService.getAPIData(platform,E).subscribe(res => {
-      this.pipData = res
-    },
-    err => {this.error = err}
-    )
-  }) 
+      this.ApiService.getAPIData(platform, E).subscribe(res => {
+        this.pipData = res
+      },
+        err => { this.error = err }
+      )
+    })
   }
-  genbranch(branch){
-    
-    if (branch == 'cstor'){
+  genbranch(branch) {
+
+    if (branch == 'cstor') {
       return 'openebs-cstor'
-    } else if(branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator"){
+    } else if (branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator") {
       return branch
-    } else{
+    } else {
       return `openebs-${branch}`
     }
   }
-  triggerDate(data){
+  triggerDate(data) {
     try {
       var date = data.jobs[0].started_at
       var dateFormat = moment.utc(date).local().calendar();
@@ -70,7 +70,7 @@ export class PipelineTableComponent implements OnInit {
       return "_";
     }
   }
-  pipeDuration(data){
+  pipeDuration(data) {
     try {
       var startedAt = moment(data.jobs[0].started_at, 'YYYY-M-DD,HH:mm:ss');
       var finishedAt = moment(data.jobs[data.jobs.length - 1].finished_at, 'YYYY-M-DD,HH:mm:ss');
@@ -110,15 +110,12 @@ export class PipelineTableComponent implements OnInit {
         return "far fa-dot-circle text-warning mx-2 font-size-18";
     }
   }
-  getRouterLink(){
-    return "/me/iam"
-  }
   ngOnDestroy() {
     this.Data.unsubscribe();
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
   }
-  
+
 
 }
