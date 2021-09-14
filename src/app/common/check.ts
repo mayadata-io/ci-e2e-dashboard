@@ -8,7 +8,7 @@ export class GlobalConstants {
             return mayastor ? 'http://localhost:8080' : 'http://localhost:3000'; //Uncomment while running localServer
             // return mayastor ? 'https://staging.openebs.ci/xray' : 'staging.openebs.ci/api';
         } else {
-            return mayastor ? `${host}/xray` : `${host}/api`;
+            return mayastor ? `https://staging.openebs.ci/xray` : `${host}/api`;
         }
     };
 
