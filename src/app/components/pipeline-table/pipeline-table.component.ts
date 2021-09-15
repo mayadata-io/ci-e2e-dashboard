@@ -54,7 +54,7 @@ export class PipelineTableComponent implements OnInit {
 
     if (branch == 'cstor') {
       return 'openebs-cstor'
-    } else if (branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator") {
+    } else if (branch == 'release-branch' || branch == "lvm-localpv" || branch == "jiva-operator" || branch == "device-localpv") {
       return branch
     } else {
       return `openebs-${branch}`

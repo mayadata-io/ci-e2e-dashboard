@@ -45,6 +45,8 @@ export class PipelinesDashboardComponent implements OnInit {
         return 'Local PV ZFS'
       case 'lvm-localpv':
         return 'Local PV LVM'
+      case 'device-localpv':
+        return 'Device Local PV';
       default:
         return '_'
     }
