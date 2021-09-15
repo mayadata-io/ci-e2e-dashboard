@@ -35,6 +35,12 @@
               translate:{ link_title: 'Local PV ZFS' } }}</a>
           </li>
           <li class="storage-link-items">
+            <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='device-localpv'}"
+              (click)="Engine='device-localpv'"
+              [routerLink]="['/openebs/device-localpv/nativek8s']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
+              translate:{ link_title: 'Device Local PV' } }}</a>
+          </li>
+          <li class="storage-link-items">
             <a class="storage-engine-links" [ngClass]="{'storage-engine-link-active': Engine ==='cstor-csi'}"
               (click)="Engine='cstor-csi'"
               [routerLink]="['/openebs/cstor-csi/konvoy']">{{'SIDEBAR.LINKS.GROUP-LINKS.LINK'|
